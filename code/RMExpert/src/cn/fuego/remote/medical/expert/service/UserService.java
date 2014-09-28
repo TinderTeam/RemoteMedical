@@ -1,0 +1,23 @@
+/**   
+* @Title: UserService.java 
+* @Package cn.fuego.remote.medical.expert.service 
+* @Description: TODO
+* @author Tang Jun   
+* @date 2014-9-24 下午07:02:25 
+* @version V1.0   
+*/ 
+package cn.fuego.remote.medical.expert.service;
+
+/** 
+ * @ClassName: UserService 
+ * @Description: TODO
+ * @author Tang Jun
+ * @date 2014-9-24 下午07:02:25 
+ *  
+ */
+
+public interface UserService
+{
+	void Login(String userName,String password);
+
+}
