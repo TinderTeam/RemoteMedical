@@ -27,8 +27,8 @@
     </package>
     
 	<package name="login" extends="struts-default">
-		<action name="login" class="cn.fuego.remote.medical.expert.web.action.login.LoginAction">
-			<result type="redirect">/client/expert/dwzFrameIndex.jsp</result>
+		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
+			<result type="redirect">/client/misp/dwzFrameIndex.jsp</result>
 			<result type="chain" name="Index">
 			  <param name="actionName">ReportManage</param>
             </result>    
