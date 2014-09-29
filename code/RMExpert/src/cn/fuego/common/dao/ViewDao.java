@@ -11,6 +11,8 @@ package cn.fuego.common.dao;
 import java.util.Collection;
 import java.util.List;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 /** 
  * @ClassName: ViewDao 
  * @Description: TODO
@@ -22,7 +24,9 @@ import java.util.List;
 public interface ViewDao
 {
 	Collection getAll();
-	int getCount(List<QueryCondition> conditionList);
+	long getCount(List<QueryCondition> conditionList);
 	Collection getAll(List<QueryCondition> conditionList);
 	Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
+	PersistenceObject getUniRecord(QueryCondition condition);
+
 }

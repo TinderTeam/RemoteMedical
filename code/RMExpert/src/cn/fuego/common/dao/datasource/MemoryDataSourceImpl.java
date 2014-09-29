@@ -61,7 +61,7 @@ public class MemoryDataSourceImpl<E> implements AbstractDataSource<E>
 	 * @see cn.fuego.misp.service.datasource.AbstractDataSource#getDataCount()
 	 */
 	@Override
-	public int getDataCount()
+	public long getDataCount()
 	{
 		// TODO Auto-generated method stub
 		return allPageData.size();

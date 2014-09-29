@@ -13,6 +13,7 @@ import java.util.List;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
+import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportQueryModel;
@@ -34,7 +35,7 @@ public interface ExpertService
 	 * @param queryModel
 	 * @return
 	 */
-	TableDataModel<MedicalReportModel> getMedicalList(String userName,ReportQueryModel queryModel,PageModel page);
+	TableDataModel<ReportView> getMedicalList(String userName,ReportQueryModel queryModel,PageModel page);
 	
 
 	/**

@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.common.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
+import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.util.meta.ReflectionUtil;
 
 /** 
@@ -60,6 +62,41 @@ public abstract class AbstractViewDao implements ViewDao
 		log.info("the object calss is " + getFeaturedClass()+"the object list size is "+ objectList.size());
 
 		return objectList;
+ 
+	}
+	
+	public PersistenceObject getUniRecord(QueryCondition condition)
+	{
+		PersistenceObject record = null;
+		Session session = null;
+ 		try
+		{
+			session = HibernateUtil.getSession();
+
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			
+			if(null != condition)
+			{
+				conditionList.add(condition);
+			}
+			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			record = (PersistenceObject) c.uniqueResult();
+		} catch (RuntimeException re)
+		{
+			log.error("get UniRecord error",re);
+
+			throw re;
+		} finally
+		{
+ 			if (session != null)
+			{
+				session.close();
+			}
+		}
+		
+		log.info("the object calss is " + getFeaturedClass()+"the object is "+ record);
+
+		return record;
  
 	}
 	
@@ -117,15 +154,15 @@ public abstract class AbstractViewDao implements ViewDao
 		return objectList;
 
 	}
-	public int getCount(List<QueryCondition> conditionList)
+	public long getCount(List<QueryCondition> conditionList)
 	{
-		int count = 0;
+		long count = 0;
 		Session session = null;
  		try
 		{
 			session = HibernateUtil.getSession();
 			Criteria c = this.getCriteriaByCondition(conditionList, session);
-			count = (Integer)c.setProjection(Projections.rowCount()).uniqueResult(); 		
+			count = (Long)c.setProjection(Projections.rowCount()).uniqueResult(); 		
 		} catch (RuntimeException re)
 		{
 			log.error("getAll error",re);
@@ -156,9 +193,31 @@ public abstract class AbstractViewDao implements ViewDao
 				case INCLUDLE:
 					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
 					break;
+				case EXCLUDLE:
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					break;
 				case EQUAL:	
 					c.add(Restrictions.eq(condition.getAttrName(),valueObject));
 					break;
+				case NOT_EQUAL:	
+					c.add(Restrictions.ne(condition.getAttrName(),valueObject));
+					break;	
+				case BIGER:	
+					c.add(Restrictions.gt(condition.getAttrName(),valueObject));
+					break;	
+				case BIGER_EQ:	
+					c.add(Restrictions.ge(condition.getAttrName(),valueObject));
+					break;	
+				case LOWER:	
+					c.add(Restrictions.lt(condition.getAttrName(),valueObject));
+					break;	
+				case LOWER_EQ:	
+					c.add(Restrictions.le(condition.getAttrName(),valueObject));
+					break;	
+				case BETWEEN:	
+					Object secondValueObject = ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), condition.getSecondValue());
+					c.add(Restrictions.between(condition.getAttrName(),valueObject,secondValueObject));
+					break;	
 				default:
 				    break;
 				  

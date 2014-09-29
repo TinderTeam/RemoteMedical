@@ -89,5 +89,14 @@ public class SystemUserDaoImplTest
 		List<User> userList = (List<User>) userDao.getAll(list);
 		System.out.println(userList.size());
 	}
-
+	@Test
+	public void testGetUniResult()
+	{
+		List<QueryCondition> list = new ArrayList<QueryCondition>();
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,"userName","admin");
+ 
+		list.add(condition);
+	    userDao.getUniRecord(condition); 
+		System.out.println( "");
+	}
 }

@@ -28,19 +28,26 @@
     
 	<package name="login" extends="struts-default">
 		<action name="login" class="cn.fuego.remote.medical.expert.web.action.login.LoginAction">
-			<result type="dispatcher">/client/expert/dwzFrameIndex.jsp</result>
+			<result type="redirect">/client/expert/dwzFrameIndex.jsp</result>
+			<result type="chain" name="Index">
+			  <param name="actionName">ReportManage</param>
+            </result>    
+			
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
-		
-
-		
+		  
  
 
  	</package>
  	
- 	<package name="user" extends="default">
+ 	<package name="expert" extends="default">
   
- 
+   		<action name="ReportManage" class="cn.fuego.remote.medical.expert.web.action.report.ReportManageAction">
+			<result type="dispatcher">/client/expert/patientList.jsp</result>
+ 			
+			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+		</action>
+  
  	</package>
  	
  

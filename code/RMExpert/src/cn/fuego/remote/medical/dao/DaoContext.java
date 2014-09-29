@@ -1,5 +1,7 @@
 package cn.fuego.remote.medical.dao;
 
+import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
+import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
 import cn.fuego.remote.medical.dao.impl.SystemUserDaoImpl;
 
 
@@ -17,6 +19,9 @@ public class DaoContext
 	private static DaoContext instance;
 	private SystemUserDao systemUserDao=null;
 
+	private ReportViewDao reportViewDao = null;
+	
+	private ReportDao reportDao = null;
 
 	private DaoContext()
 	{
@@ -41,4 +46,21 @@ public class DaoContext
 		return systemUserDao;
 	}
  
+	public synchronized ReportViewDao getReportViewDao() 
+	{
+		if (null == reportViewDao)
+		{
+			reportViewDao = new ReportViewDaoImpl();
+		}
+		return reportViewDao;
+	}
+	
+	public synchronized ReportDao getReportDao() 
+	{
+		if (null == reportDao)
+		{
+			reportDao = new ReportDaoImpl();
+		}
+		return reportDao;
+	}
 }

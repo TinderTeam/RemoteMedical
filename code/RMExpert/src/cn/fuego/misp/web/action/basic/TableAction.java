@@ -21,13 +21,20 @@ import cn.fuego.common.util.validate.ValidatorUtil;
  *  
  */
 
-public class TableAction extends MISPAction
+public abstract class TableAction extends MISPAction
 {
 	private String jumpActionName;
 	private String selectedID;
 	private String[] selectedIDList;
 	private String operateType;
 
+ 
+	abstract public String create();
+	abstract public String delete();
+	abstract public String deleteList();
+	abstract public String modify();
+	abstract public String show();
+	
 	
 	public List<String> convertToPageMessage(List<String> messageList)
 	{
@@ -42,6 +49,8 @@ public class TableAction extends MISPAction
 		return resourceList;
 
 	}
+
+
 	public String getOperateType()
 	{
 		return operateType;

@@ -55,17 +55,17 @@ public class DataBaseSourceImpl<E> extends AbstractDao implements AbstractDataSo
 	public List<E> getAllPageData()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return (List<E>) this.getAll(conditionList);
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.common.service.datasource.AbstractDataSource#getDataCount()
 	 */
 	@Override
-	public int getDataCount()
+	public long getDataCount()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return this.getCount(conditionList);
 	}
 
 	/* (non-Javadoc)

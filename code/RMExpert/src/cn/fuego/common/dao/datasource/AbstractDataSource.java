@@ -24,6 +24,6 @@ public interface AbstractDataSource<E>
 	
 	public List<E> getAllPageData();
 	
-	public int getDataCount();
+	public long getDataCount();
 
 }

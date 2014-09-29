@@ -27,7 +27,7 @@ public class PageModel
 	private List<Integer> pages =new ArrayList<Integer>();
 	private int pageSize =100;  //defualt page size
 	private int currentPage = 1;
-	private int count = 0;
+	private long count = 0;
 	
  
 	
@@ -74,11 +74,11 @@ public class PageModel
 	{
 		this.currentPage = currentPage;
 	}
-	public int getCount()
+	public long getCount()
 	{
 		return count;
 	}
-	public void setCount(int count)
+	public void setCount(long count)
 	{
 		this.count = count;
 	}

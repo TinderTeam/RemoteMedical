@@ -33,42 +33,42 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class LoginAction extends MISPAction
 {
-	Log log = LogFactory.getLog(LoginAction.class);
+	private Log log = LogFactory.getLog(LoginAction.class);
 	private static final String LOGIN_FAILED = "LoginFailed";
-	private List<MenuTreeModel> menuTreeItem=null;
-	private UserModel user=null;
-	private String message; 
-	
-	
+	private List<MenuTreeModel> menuTreeItem = null;
+	private UserModel user = null;
+	private String message;
+
 	public String execute()
 	{
-		 ActionContext actionContext = ActionContext.getContext();
-	     Map<String, Object> session = actionContext.getSession();
-	       
-	     try
-	     {
-	    	 if(session.get(SessionAttrNameConst.LOGIN_USER)!=null){
- 	    		 return SUCCESS;
-	    	 }
-	    	 	    	 
-	    	 //User Login
-	    	 ServiceContext.getInstance().getUserManagerService().Login(user.getUserName(), user.getPassword());
-	    	 //Loading MenuTree
- 	     }catch(ServiceException ex)
-	     {
-	    	 message=ex.getMessage();
-	    	 log.warn(ex.getMessage(),ex);
-	    	 return this.LOGIN_FAILED;
-	     }
-	    
-		//if login success, we should put the user into session
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+
+		try
+		{
+			if (session.get(SessionAttrNameConst.LOGIN_USER) != null)
+			{
+				return SUCCESS;
+			}
+
+			// User Login
+			ServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
+			// Loading MenuTree
+		}
+		catch (ServiceException ex)
+		{
+			message = ex.getMessage();
+			log.warn(ex.getMessage(), ex);
+			return this.LOGIN_FAILED;
+		}
+
+		// if login success, we should put the user into session
 		session.put(SessionAttrNameConst.LOGIN_USER, user);
 		session.put(SessionAttrNameConst.MENU_TREE, menuTreeItem);
 		/*
-		 * This Code is Designed by Bowen. Which is means to config the basic page info. for instance, the name and the breadTrail
-		 * we mast try to do and design better on this fuction. 
+		 * This Code is Designed by Bowen. Which is means to config the basic page info. for instance, the name and the breadTrail we mast try to do and design better on this fuction.
 		 */
- 
+
 		return SUCCESS;
 	}
 

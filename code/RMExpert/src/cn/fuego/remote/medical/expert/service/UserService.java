@@ -18,6 +18,20 @@ package cn.fuego.remote.medical.expert.service;
 
 public interface UserService
 {
+	/**
+	 * 用户登录
+	 * @param userName
+	 * @param password
+	 */
 	void Login(String userName,String password);
+	
+	/**
+	 * 修改登录密码
+	 * @param userName
+	 * @param oldPwd
+	 * @param newPwd
+	 */
+	void modifyPassword(String userName,String oldPwd,String newPwd);
+	
 
 }

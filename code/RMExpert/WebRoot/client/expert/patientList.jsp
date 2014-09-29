@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <form id="pagerForm" method="post" action="demo_page1.html">
 	<input type="hidden" name="status" value="${param.status}">
 	<input type="hidden" name="keywords" value="${param.keywords}" />
@@ -108,10 +110,23 @@
 			</tr>
 		</thead>
 	<tbody>
-<tr target="sid_user" rel="1" >  <td>A1</td> <td>男</td> <td>23</td> <td>部位1</td> <td>已处理</td> <td>设备1</td> <td>2014/8/21</td> <td>B1</td>				<td>
+	    <c:forEach var="e" items="${reportList.currentPageData}"> 		
+	        <tr target="sid_user" rel="1" >
+	            <td>${e.patientName}</td>
+	            <td>${e.patientSex}</td>
+	            <td>${e.patientAge}</td>
+	            <td>${e.bodyPart}</td>
+	            <td>${e.exReportState}</td>
+	            <td>${e.modality}</td>
+	            <td>${e.exApply}</td>
+	            <td>${e.exApplyDoctor}</td>	
+	            <td>
+ 
 					<a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a>
 					<a title="诊断报告" target="navTab" href="patientDetail.jsp?id=xxx" class="btnEdit">编辑</a>
-				</td></tr>
+				</td>
+			</tr>
+		</c:forEach>
  
 
 		
@@ -120,16 +135,16 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox" name="numPerPage"  onchange="navTabPageBreak({numPerPage:this.value})">
 				<option value="20">20</option>
 				<option value="50">50</option>
 				<option value="100">100</option>
 				<option value="200">200</option>
 			</select>
-			<span>条，共35条</span>
+			<span>条，共${reportList.page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="${reportList.page.count}" numPerPage="${reportList.page.pageSize}" pageNumShown="10" currentPage="${reportList.page.currentPage}"></div>
 
 	</div>
 </div>

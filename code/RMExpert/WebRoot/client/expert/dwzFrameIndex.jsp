@@ -36,7 +36,10 @@
  
 
 <script type="text/javascript">
-$(function(){
+$(function()
+{
+    var localObj = window.location;
+    var contextPath = localObj.pathname.split("/")[1];
 	DWZ.init("dwz.frag.xml", {
 		loginUrl:"login_dialog.html", loginTitle:"登录",	// 弹出登录对话框
 //		loginUrl:"login.html",	// 跳到登录页面
@@ -131,7 +134,7 @@ setTimeout(function() {
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder treeCheck">
-							<li><a href="<%=request.getContextPath()%>/client/expert/patientList.jsp" target="navTab" rel="Home" id="home">待办事项</a></li>
+							<li><a href="<%=request.getContextPath()%>/expert/ReportManage" target="navTab" rel="Home" id="home">待办事项</a></li>
 
 						</ul>
 					</div>

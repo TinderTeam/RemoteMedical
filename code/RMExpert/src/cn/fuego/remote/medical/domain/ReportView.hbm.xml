@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="ReportView" table="view_report">
+		<id name="id" column="id" >
+			 
+		</id>
+		
+		<property name="hospitalID" column="Hs_ID" ></property>
+        <property name="serialNo" column="Ri_SerialNO" ></property>
+           
+        <property name="reportNo" column="Rs_ReportNO"></property>
+        <property name="patientID" column="Rs_PatientID"></property>
+        <property name="patientName" column="Rs_PatientName"></property>
+        <property name="patientSex" column="Rs_PatientSex"></property>
+        <property name="patientAge" column="Rs_PatientAge"></property>
+        <property name="department" column="Rs_Department"></property>
+        <property name="hospitalNo" column="Rs_HospitalNo"></property>
+        <property name="bedNo" column="Rs_BedNo"></property>
+        <property name="bodyPart" column="Rs_BodyPart"></property>
+        <property name="preView" column="Rs_PreView"></property>
+        <property name="diagnosis" column="Rs_Diagnosis"></property>
+        
+        <property name="studyContent" column="Rs_StudyContent"></property>
+        <property name="studyConclusion" column="Rs_StudyConclusion"></property>
+        <property name="exStudyContent" column="Rs_ExStudyContent"></property>
+        <property name="exStudyConclusion" column="Rs_ExStudyConclusion"></property>
+        <property name="exStudyContentCode" column="Rs_ExStyContentCode"></property>
+        
+        <property name="exStudyConclusionCode" column="Rs_ExStyConclusionCode"></property>
+        <property name="studyDate" column="Rd_StudyDate"></property>
+        <property name="reportDate" column="Rd_ReportDate"></property>
+        <property name="reviewDate" column="Rs_ReviewDate"></property>
+        <property name="operatorsPhysician" column="Rs_OperatorsPhysician"></property>
+        <property name="reportPhysician" column="Rs_ReportPhysician"></property>
+        <property name="reviewPhysician" column="Rs_ReviewPhysician"></property>
+        <property name="imageCount" column="Ri_ImageCount"></property>
+        <property name="imagePathWL" column="Rs_ImagePathWL"></property>
+        <property name="exApply" column="Rd_ExApply"></property>
+        <property name="exStartUpImg" column="Rd_ExStartUpImg"></property>
+        <property name="exEndUpImg" column="Rd_ExEndUpImg"></property>
+        <property name="exReport" column="Rd_ExReport"></property>
+        <property name="exDownReport" column="Rd_ExDownReport"></property>
+        <property name="exApplyDoctor" column="Rs_ExApplyDoctor"></property>
+        <property name="exDoctor" column="Rs_ExDoctor"></property>
+        <property name="exState" column="Rs_ExState"></property>
+        <property name="exReportState" column="Rs_ExReportState"></property>
+	</class>
+</hibernate-mapping>

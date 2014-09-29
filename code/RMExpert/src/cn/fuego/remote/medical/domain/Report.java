@@ -59,5 +59,325 @@ public class Report implements PersistenceObject
 	private String exState; //专家状态（）
 	private String exReportState; // 专家报告状态（已报告，已编写，未报告)
 	//private String 
+	public String getHospitalID()
+	{
+		return hospitalID;
+	}
+	public void setHospitalID(String hospitalID)
+	{
+		this.hospitalID = hospitalID;
+	}
+	public int getSerialNo()
+	{
+		return serialNo;
+	}
+	public void setSerialNo(int serialNo)
+	{
+		this.serialNo = serialNo;
+	}
+	public String getReportNo()
+	{
+		return reportNo;
+	}
+	public void setReportNo(String reportNo)
+	{
+		this.reportNo = reportNo;
+	}
+	public String getPatientID()
+	{
+		return patientID;
+	}
+	public void setPatientID(String patientID)
+	{
+		this.patientID = patientID;
+	}
+	public String getPatientName()
+	{
+		return patientName;
+	}
+	public void setPatientName(String patientName)
+	{
+		this.patientName = patientName;
+	}
+	public String getPatientSex()
+	{
+		return patientSex;
+	}
+	public void setPatientSex(String patientSex)
+	{
+		this.patientSex = patientSex;
+	}
+	public String getPatientAge()
+	{
+		return patientAge;
+	}
+	public void setPatientAge(String patientAge)
+	{
+		this.patientAge = patientAge;
+	}
+	public String getDepartment()
+	{
+		return department;
+	}
+	public void setDepartment(String department)
+	{
+		this.department = department;
+	}
+	public String getHospitalNo()
+	{
+		return hospitalNo;
+	}
+	public void setHospitalNo(String hospitalNo)
+	{
+		this.hospitalNo = hospitalNo;
+	}
+	public String getBedNo()
+	{
+		return bedNo;
+	}
+	public void setBedNo(String bedNo)
+	{
+		this.bedNo = bedNo;
+	}
+	public String getBodyPart()
+	{
+		return bodyPart;
+	}
+	public void setBodyPart(String bodyPart)
+	{
+		this.bodyPart = bodyPart;
+	}
+	public String getPreView()
+	{
+		return preView;
+	}
+	public void setPreView(String preView)
+	{
+		this.preView = preView;
+	}
+	public String getDiagnosis()
+	{
+		return diagnosis;
+	}
+	public void setDiagnosis(String diagnosis)
+	{
+		this.diagnosis = diagnosis;
+	}
+	public String getStudyContent()
+	{
+		return studyContent;
+	}
+	public void setStudyContent(String studyContent)
+	{
+		this.studyContent = studyContent;
+	}
+	public String getStudyConclusion()
+	{
+		return studyConclusion;
+	}
+	public void setStudyConclusion(String studyConclusion)
+	{
+		this.studyConclusion = studyConclusion;
+	}
+	public String getExStudyContent()
+	{
+		return exStudyContent;
+	}
+	public void setExStudyContent(String exStudyContent)
+	{
+		this.exStudyContent = exStudyContent;
+	}
+	public String getExStudyConclusion()
+	{
+		return exStudyConclusion;
+	}
+	public void setExStudyConclusion(String exStudyConclusion)
+	{
+		this.exStudyConclusion = exStudyConclusion;
+	}
+	public String getExStudyContentCode()
+	{
+		return exStudyContentCode;
+	}
+	public void setExStudyContentCode(String exStudyContentCode)
+	{
+		this.exStudyContentCode = exStudyContentCode;
+	}
+	public String getExStudyConclusionCode()
+	{
+		return exStudyConclusionCode;
+	}
+	public void setExStudyConclusionCode(String exStudyConclusionCode)
+	{
+		this.exStudyConclusionCode = exStudyConclusionCode;
+	}
+	public Date getStudyDate()
+	{
+		return studyDate;
+	}
+	public void setStudyDate(Date studyDate)
+	{
+		this.studyDate = studyDate;
+	}
+	public Date getReportDate()
+	{
+		return reportDate;
+	}
+	public void setReportDate(Date reportDate)
+	{
+		this.reportDate = reportDate;
+	}
+	public Date getReviewDate()
+	{
+		return reviewDate;
+	}
+	public void setReviewDate(Date reviewDate)
+	{
+		this.reviewDate = reviewDate;
+	}
+	public String getOperatorsPhysician()
+	{
+		return operatorsPhysician;
+	}
+	public void setOperatorsPhysician(String operatorsPhysician)
+	{
+		this.operatorsPhysician = operatorsPhysician;
+	}
+	public String getReportPhysician()
+	{
+		return reportPhysician;
+	}
+	public void setReportPhysician(String reportPhysician)
+	{
+		this.reportPhysician = reportPhysician;
+	}
+	public String getReviewPhysician()
+	{
+		return reviewPhysician;
+	}
+	public void setReviewPhysician(String reviewPhysician)
+	{
+		this.reviewPhysician = reviewPhysician;
+	}
+	public int getImageCount()
+	{
+		return imageCount;
+	}
+	public void setImageCount(int imageCount)
+	{
+		this.imageCount = imageCount;
+	}
+	public String getImagePathWL()
+	{
+		return imagePathWL;
+	}
+	public void setImagePathWL(String imagePathWL)
+	{
+		this.imagePathWL = imagePathWL;
+	}
+	public Date getExApply()
+	{
+		return exApply;
+	}
+	public void setExApply(Date exApply)
+	{
+		this.exApply = exApply;
+	}
+	public Date getExStartUpImg()
+	{
+		return exStartUpImg;
+	}
+	public void setExStartUpImg(Date exStartUpImg)
+	{
+		this.exStartUpImg = exStartUpImg;
+	}
+	public Date getExEndUpImg()
+	{
+		return exEndUpImg;
+	}
+	public void setExEndUpImg(Date exEndUpImg)
+	{
+		this.exEndUpImg = exEndUpImg;
+	}
+	public Date getExReport()
+	{
+		return exReport;
+	}
+	public void setExReport(Date exReport)
+	{
+		this.exReport = exReport;
+	}
+	public Date getExDownReport()
+	{
+		return exDownReport;
+	}
+	public void setExDownReport(Date exDownReport)
+	{
+		this.exDownReport = exDownReport;
+	}
+	public String getExApplyDoctor()
+	{
+		return exApplyDoctor;
+	}
+	public void setExApplyDoctor(String exApplyDoctor)
+	{
+		this.exApplyDoctor = exApplyDoctor;
+	}
+	public String getExDoctor()
+	{
+		return exDoctor;
+	}
+	public void setExDoctor(String exDoctor)
+	{
+		this.exDoctor = exDoctor;
+	}
+	public String getExState()
+	{
+		return exState;
+	}
+	public void setExState(String exState)
+	{
+		this.exState = exState;
+	}
+	public String getExReportState()
+	{
+		return exReportState;
+	}
+	public void setExReportState(String exReportState)
+	{
+		this.exReportState = exReportState;
+	}
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hospitalID == null) ? 0 : hospitalID.hashCode());
+		result = prime * result + serialNo;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Report other = (Report) obj;
+		if (hospitalID == null)
+		{
+			if (other.hospitalID != null)
+				return false;
+		}
+		else if (!hospitalID.equals(other.hospitalID))
+			return false;
+		if (serialNo != other.serialNo)
+			return false;
+		return true;
+	}
+	
+	
 
 }
