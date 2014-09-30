@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>远程诊断专家平台</title>
+<title>远程诊断管理平台</title>
 
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/azure/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -12,11 +12,11 @@
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
 
 <!--[if IE]>
-<link href="themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->
 
 <!--[if lte IE 9]>
-<script src="js/speedup.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/client/lib/dwz/js/speedup.js" type="text/javascript"></script>
 <![endif]-->
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
@@ -54,19 +54,7 @@ $(function()
 		}
 	});
 });
-// 模拟点击
-setTimeout(function() {
-	// IE
-	if(document.all) {
-		document.getElementById("home").click();
-	}
-	// 其它浏览器
-	else {
-		var e = document.createEvent("MouseEvents");
-		e.initEvent("click", true, true);
-		document.getElementById("home").dispatchEvent(e);
-	}
-}, 1000);
+
 </script>
 <!-- 进度条CSS和js-->
 
@@ -87,18 +75,25 @@ setTimeout(function() {
 		//$("#disp" ).html(percent);
 	}
   </script>
-
+<!-- 更改上传样式 -->
+<style type="text/css">
+input{ vertical-align:middle; margin:0; padding:0}
+.file-box{ position:relative;width:200px}
+.txt{ height:15px; border:1px solid #cdcdcd; width:90px;margin-left:5px;}
+.btn{ background-color:#FFF; border:1px solid #CDCDCD;height:21px; width:40px;}
+.file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:60px }
+</style>
 </head>
 
 <body scroll="no">
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="#">安健科技</a>
+				<a class="logo" href="http://www.szangell.com/">安健科技</a>
 				<ul class="nav">
                     <li>欢迎您，Dr ****!</li>
 	 
-					<li><a href="changepwd.html" target="dialog" width="600">设置</a></li>
+					<li><a href="<%=request.getContextPath()%>/client/manage/passwordModify.jsp" target="dialog" width="600">密码修改</a></li> 
  
 					<li><a href="login.html">退出</a></li>
 				</ul>
@@ -124,41 +119,103 @@ setTimeout(function() {
 				</div>
 			</div>
 			<div id="sidebar">
-				<div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
+				<div class="toggleCollapse"><h2>管理平台</h2><div></div></div>
 
 				<div class="accordion" fillSpace="sidebar">
-					 
-					 
-					<div class="accordionHeader">
-						<h2><span>Folder</span>典型页面</h2>
-					</div>
+
 					<div class="accordionContent">
-						<ul class="tree treeFolder treeCheck">
-							<li><a href="<%=request.getContextPath()%>/expert/ReportManage" target="navTab" rel="Home" id="home">待办事项</a></li>
+						<ul class="tree treeFolder">
+
+							<li><a>个人信息</a>
+								<ul>
+									<li><a href="<%=request.getContextPath()%>/client/manage/expertInfo.jsp" target="navTab" rel="expertInfo">专家信息</a></li>
+									<li><a href="<%=request.getContextPath()%>/client/manage/hospitalInfo.jsp" target="navTab" rel="hospitalInfo">医院信息</a></li>
+
+								</ul>
+							</li>
+							<li><a >用户管理</a>
+								<ul>
+									<li><a href="<%=request.getContextPath()%>/client/manage/systemUser.jsp" target="navTab" rel="systemUser">系统用户</a></li>
+									<li><a href="<%=request.getContextPath()%>/client/manage/applyModify.jsp" target="navTab" rel="applyModify">修改申请</a></li>
+									<li><a href="<%=request.getContextPath()%>/client/manage/expertManage.jsp" target="navTab" rel="expertManage">专家管理</a></li>
+									<li><a href="<%=request.getContextPath()%>/client/manage/hospitalManage.jsp" target="navTab" rel="expertManage">医院管理</a></li>
+
+								</ul>
+							</li>
+							<li><a >统计信息</a>
+								<ul>
+									<li><a href="<%=request.getContextPath()%>/client/manage/diagnoseCount.jsp" target="navTab" rel="diagnoseCount">诊断统计</a></li>
+									<li><a href="<%=request.getContextPath()%>/client/manage/costCount.jsp" target="navTab" rel="costCount">费用统计</a></li>
+								</ul>
+							</li>	
+							<li><a >日志管理</a>
+								<ul>
+									<li><a href="<%=request.getContextPath()%>/client/manage/logManage.jsp" target="navTab" rel="logManage">操作日志</a></li>
+
+								</ul>
+							</li>							
+
+									
+
 
 						</ul>
 					</div>
-					 
+
+
 				</div>
 			</div>
 		</div>
 		<div id="container">
 			<div id="navTab" class="tabsPage">
- 
 				<div class="tabsPageHeader">
 					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
 						<ul class="navTab-tab">
-							<li tabid="Home" class="selected"><a href="javascript:;"><span><span class="home_icon">首页</span></span></a></li>
+							<li tabid="main" class="main"><a href="javascript:;"><span><span class="home_icon">我的主页</span></span></a></li>
 						</ul>
 					</div>
-
+					<div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
+					<div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
+					<div class="tabsMore">more</div>
 				</div>
+				<ul class="tabsMoreList">
+					<li><a href="javascript:;">我的主页</a></li>
+				</ul>
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">
- 
+						<div class="accountInfo">
+							<div class="alertInfo">
+								<p><a href="#"  style="line-height:19px"><span>待办工作32项，消息212条</span></a></p>
+								<p><a href="#"  style="line-height:19px">2014年09月30日，星期二</a></p>
+							</div>
+							<div class="right">
+								<p style="color:red"> </p>
+							</div>
+							<p><span></span></p>
+							<p></p>
+						</div>
+						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
+							
 
+<h2></h2>
+<div class="unit"></div>
+<div class="unit"></div>
+
+<div class="divider"></div>
+<h2></h2>
+<pre style="margin:5px;line-height:1.4em">
+
+</pre>
+
+<div class="divider"></div>
+<h2><span style="color:red;"></span></h2><br/>
+<pre style="margin:5px;line-height:1.4em;">
+
+</pre>
+						</div>
 						
-			 
+						<div style="width:230px;position: absolute;top:60px;right:0" layoutH="80">
+							<iframe width="100%" height="430" class="share_self"  frameborder="0" scrolling="no" src=""></iframe>
+						</div>
 					</div>
 					
 				</div>
@@ -167,9 +224,7 @@ setTimeout(function() {
 
 	</div>
 
- 
 	<div id="footer"> &copy; 2014  <a href="http://fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
-
 
 </body>
 </html>
