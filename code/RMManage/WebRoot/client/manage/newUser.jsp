@@ -1,6 +1,8 @@
-
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    
 <div class="pageContent">
-	<form method="post" action="demo_page1.html" class="pageForm" onsubmit="return navTabSearch(this);">
+	<form method="post" action="" class="pageForm" onsubmit="">
 		<div class="pageFormContent" layoutH="58">
 			<div class="unit">
 				<label>用户编号：</label>

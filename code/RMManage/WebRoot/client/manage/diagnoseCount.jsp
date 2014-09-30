@@ -1,10 +1,5 @@
-<form id="pagerForm" method="post" action="demo_page1.html">
-	<input type="hidden" name="status" value="${param.status}">
-	<input type="hidden" name="keywords" value="${param.keywords}" />
-	<input type="hidden" name="pageNum" value="1" />
-	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
-	<input type="hidden" name="orderField" value="${param.orderField}" />
-</form>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
 
 
 <div class="pageHeader">
@@ -47,7 +42,17 @@
 				<td>
 					医院名称：<input type="text" name="" />
 				</td>
-			
+				<td>
+					报告回传时间：<input type="text" class="date" readonly="true" />
+				</td>				
+			</tr>
+			<tr>
+				<td>
+					上传时间：<input type="text" class="date" readonly="true" />
+				</td>
+				<td>
+					上传结束时间：<input type="text" class="date" readonly="true" />
+				</td>			
 			</tr>
 		</table>
 		<div class="subBar">
@@ -65,7 +70,7 @@
 			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 		</ul>
 	</div>
-	<table class="table" style="width:1500px !important;" layoutH="163">
+	<table class="table" style="width:1500px !important;" layoutH="188">
 		<thead>
 			<tr>
 				<th width="150px" align="center">检查设备</th>
@@ -79,10 +84,12 @@
 				<th width="150px" align="center">报告回传时间</th>
 				<th width="120px" align="center">专家编号</th>
 				<th width="120px" align="center">专家姓名</th>
+				<th width="120px" align="center">专家联系方式</th>
 				<th width="100px" align="center">医院编号</th>
 				<th width="150px" align="center">医院名称</th>
-				<th width="120px" align="center">专家收费</th>
-				<th width="120px" align="center">医生诊断收费</th>
+				<th width="150px" align="center">医院联系方式</th>
+				<th width="150px" align="center">上传时间</th>
+				<th width="150px" align="center">上传结束时间</th>
 				
 			</tr>
 		</thead>
@@ -99,10 +106,12 @@
 				<td>2014-09-28</td>
 				<td>200003</td>
 				<td>专家A</td>
+				<td>13833447788</td>
 				<td>3460</td>
 				<td>医院A</td>
-				<td>2000</td>
-				<td>800</td>
+				<td>027-33442870</td>
+				<td>2014-09-24</td>
+				<td>2014-09-25</td>
 			</tr>
 			
 			

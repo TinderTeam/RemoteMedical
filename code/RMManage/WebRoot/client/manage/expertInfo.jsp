@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
-
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
 <div class="pageContent">
 	<form method="post" action="demo/common/ajaxDone.html" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
@@ -10,7 +13,7 @@
 		<span style="font-size:1.2em;"><strong>个人信息</strong></span>
 		<div class="divider"></div>
 		<div style=" float:right; display:block; margin-top:5px; margin-right:420px; overflow:hidden; width:200px; height:180px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-			<div align="center"><img src ="/uploads/img/头像.jpg" height="140" width="130" ></div>
+			<div align="center"><img src ="<%=basePath%>/client/uploads/img/head.jpg" height="140" width="130" ></div>
 			<div class="divider"></div>
 <div class="file-box">
   <form action="" method="post" enctype="multipart/form-data">
@@ -114,7 +117,7 @@
 				<dl style="height:110px !important;width:100%;">
 					<dt style="text-align:left;width:10%;" >上传签名：</dt>
 					<dd style="float:left !important;padding-left:7px !important;">
-						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;"><img src ="/uploads/img/signature.png" height="50" width="150" ></div>
+						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;"><img src ="<%=basePath%>/client/uploads/img/signature.png" height="50" width="150" ></div>
 					</dd>
 					<dd><div style="padding-top:30px !important;"><input name="file1" type="file" /></div>
 					</dd>
