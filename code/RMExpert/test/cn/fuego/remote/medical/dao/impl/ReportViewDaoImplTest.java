@@ -30,7 +30,7 @@ public class ReportViewDaoImplTest
 
 	ReportViewDao viewDao = new ReportViewDaoImpl();
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll()}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll()}.
 	 */
 	@Test
 	public void testGetAll()
@@ -42,7 +42,7 @@ public class ReportViewDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getUniRecord(cn.fuego.common.dao.QueryCondition)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getUniRecord(cn.fuego.common.dao.QueryCondition)}.
 	 */
 	@Test
 	public void testGetUniRecord()
@@ -51,7 +51,7 @@ public class ReportViewDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll(java.util.List)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll(java.util.List)}.
 	 */
 	@Test
 	public void testGetAllListOfQueryCondition()
@@ -60,7 +60,7 @@ public class ReportViewDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll(java.util.List, int, int)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll(java.util.List, int, int)}.
 	 */
 	@Test
 	public void testGetAllListOfQueryConditionIntInt()
@@ -69,7 +69,7 @@ public class ReportViewDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getCount(java.util.List)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getCount(java.util.List)}.
 	 */
 	@Test
 	public void testGetCount()

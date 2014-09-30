@@ -24,7 +24,7 @@ public class LinkDaoImplTest
 {
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#create(cn.fuego.common.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#create(cn.fuego.common.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testCreate()
@@ -33,7 +33,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#update(cn.fuego.common.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#update(cn.fuego.common.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testUpdate()
@@ -42,7 +42,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#delete(cn.fuego.common.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#delete(cn.fuego.common.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testDelete()
@@ -51,7 +51,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll()}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll()}.
 	 */
 	@Test
 	public void testGetAll()
@@ -60,7 +60,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll(java.util.List)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll(java.util.List)}.
 	 */
 	@Test
 	public void testGetAllListOfQueryCondition()
@@ -69,7 +69,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getAll(java.util.List, int, int)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getAll(java.util.List, int, int)}.
 	 */
 	@Test
 	public void testGetAllListOfQueryConditionIntInt()
@@ -78,7 +78,7 @@ public class LinkDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractViewDao#getCount(java.util.List)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractViewDao#getCount(java.util.List)}.
 	 */
 	@Test
 	public void testGetCount()

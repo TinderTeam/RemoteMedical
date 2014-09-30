@@ -35,7 +35,7 @@ public class SystemUserDaoImplTest
 {
 	SystemUserDao userDao=new SystemUserDaoImpl();
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#create(cn.fuego.misp.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#create(cn.fuego.misp.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testCreate()
@@ -49,7 +49,7 @@ public class SystemUserDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#update(cn.fuego.misp.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#update(cn.fuego.misp.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testUpdate()
@@ -58,7 +58,7 @@ public class SystemUserDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#delete(cn.fuego.misp.domain.PersistenceObject)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#delete(cn.fuego.misp.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testDelete()
@@ -67,7 +67,7 @@ public class SystemUserDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#getAll()}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#getAll()}.
 	 */
 	@Test
 	public void testGetAll()
@@ -77,7 +77,7 @@ public class SystemUserDaoImplTest
 	}
 
 	/**
-	 * Test method for {@link cn.fuego.common.dao.AbstractDao#getAll(java.util.List)}.
+	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#getAll(java.util.List)}.
 	 */
 	@Test
 	public void testGetAllListOfQueryCondition()

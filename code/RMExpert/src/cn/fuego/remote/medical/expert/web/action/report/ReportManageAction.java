@@ -26,12 +26,11 @@ import cn.fuego.remote.medical.expert.service.ServiceContext;
 public class ReportManageAction extends TableAction
 {
 	private ExpertService expertService = ServiceContext.getInstance().getExpertService();
-	private TableDataModel<ReportView> reportList;
+	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
  
 	public String execute()
 	{
-		reportList = expertService.getMedicalList(null, null, new PageModel()); 
-
+		reportList.setDataSource(expertService.getMedicalList(null, null));
 		return SUCCESS;
 	}
 	/* (non-Javadoc)

@@ -2,17 +2,19 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<form id="pagerForm" method="post" action="demo_page1.html">
+<form id="pagerForm" method="post" action="expert/ReportManage">
 	<input type="hidden" name="status" value="${param.status}">
 	<input type="hidden" name="keywords" value="${param.keywords}" />
-	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="pageNum" value="3" />
 	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
 	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="reportList.page.pageSize" value="20" />
+	<input type="hidden" name="reportList.page.currentPage" value="${reportList.page.currentPage}" />
 </form>
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	<form onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
 	<div class="searchBar">
 
 		<table class="searchContent">
@@ -135,16 +137,23 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage"  onchange="navTabPageBreak({numPerPage:this.value})">
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
+	        <c:set var="page" value="${reportList.page}" scope="request"/>
+			
+			<select class="combox" name="reportList.page.currentPage"  onchange="navTabPageBreak({numPerPage:this.value})">
+				<c:forEach var="e" items="${page.pageSizeList}"> 	
+			       <c:if test="${e==page.currentPage}">
+			         <option value="${e}" selected>${e}</option>
+				  </c:if>
+                  <c:if test="${e!=page.currentPage}">
+			         <option value="${e}">${e}</option>
+				  </c:if>
+				</c:forEach>
+ 
 			</select>
-			<span>条，共${reportList.page.count}条</span>
+			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="${reportList.page.count}" numPerPage="${reportList.page.pageSize}" pageNumShown="10" currentPage="${reportList.page.currentPage}"></div>
+		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 </div>

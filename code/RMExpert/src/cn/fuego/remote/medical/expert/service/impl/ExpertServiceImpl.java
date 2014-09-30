@@ -40,17 +40,17 @@ public class ExpertServiceImpl implements ExpertService
 	 * @see cn.fuego.remote.medical.expert.service.ExpertService#getMedicalList(java.lang.String, cn.fuego.remote.medical.expert.web.model.ReportQueryModel, cn.fuego.misp.web.model.page.PageModel)
 	 */
 	@Override
-	public TableDataModel<ReportView> getMedicalList(String userName, ReportQueryModel queryModel, PageModel page)
+	public AbstractDataSource<ReportView> getMedicalList(String userName, ReportQueryModel queryModel)
 	{
 		TableDataModel<ReportView> reportTableData = new TableDataModel<ReportView>();
 		
-		reportTableData.setPage(page);
+ 
 		
 		AbstractDataSource<ReportView> dataSource = new DataBaseSourceImpl<ReportView>(ReportView.class);
-		reportTableData.setDataSource(dataSource);
+ 
 		
 		
- 		return reportTableData;
+ 		return dataSource;
 	}
 
 	/* (non-Javadoc)

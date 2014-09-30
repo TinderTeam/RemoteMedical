@@ -10,7 +10,7 @@ package cn.fuego.remote.medical.dao.impl;
 
 import java.util.Collection;
 
-import cn.fuego.common.dao.AbstractDao;
+import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.remote.medical.dao.SystemUserDao;
 import cn.fuego.remote.medical.domain.SystemUser;
