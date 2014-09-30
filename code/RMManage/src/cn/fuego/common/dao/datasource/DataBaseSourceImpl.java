@@ -11,8 +11,8 @@ package cn.fuego.common.dao.datasource;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.common.dao.AbstractDao;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.dao.impl.AbstractDao;
 
 /** 
  * @ClassName: DataBaseSourceImpl 

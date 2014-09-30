@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.remote.medical.dao.impl;
 
-import cn.fuego.common.dao.AbstractViewDao;
+import cn.fuego.common.dao.impl.AbstractViewDao;
 import cn.fuego.remote.medical.dao.ReportViewDao;
 import cn.fuego.remote.medical.domain.ReportView;
 

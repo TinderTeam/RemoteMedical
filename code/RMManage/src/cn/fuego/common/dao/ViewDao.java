@@ -27,6 +27,8 @@ public interface ViewDao
 	long getCount(List<QueryCondition> conditionList);
 	Collection getAll(List<QueryCondition> conditionList);
 	Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
+	Collection getAll(QueryCondition condition);
+
 	PersistenceObject getUniRecord(QueryCondition condition);
 
 }

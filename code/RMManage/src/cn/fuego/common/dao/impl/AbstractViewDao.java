@@ -6,7 +6,7 @@
 * @date 2014-9-27 下午06:46:11 
 * @version V1.0   
 */ 
-package cn.fuego.common.dao;
+package cn.fuego.common.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +19,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.dao.ViewDao;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.util.meta.ReflectionUtil;
@@ -99,7 +101,38 @@ public abstract class AbstractViewDao implements ViewDao
 		return record;
  
 	}
-	
+	public Collection getAll(QueryCondition condition)
+	{
+		List objectList = null;
+		Session session = null;
+ 		try
+		{
+			session = HibernateUtil.getSession();
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			
+			if(null != condition)
+			{
+				conditionList.add(condition);
+			}
+			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			objectList =c.list();
+		} catch (RuntimeException re)
+		{
+			log.error("getAll error",re);
+
+			throw re;
+		} finally
+		{
+ 			if (session != null)
+			{
+				session.close();
+			}
+		}
+		
+		log.info("the object calss is " + getFeaturedClass()+"the object list size is "+ objectList.size());
+		return objectList;
+
+	}
 	public Collection getAll(List<QueryCondition> conditionList)
 	{
 		List objectList = null;

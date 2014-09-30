@@ -6,7 +6,7 @@
 * @date 2014-9-24 上午11:49:00 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.domain;
+package cn.fuego.misp.domain;
 
 import java.util.Date;
 

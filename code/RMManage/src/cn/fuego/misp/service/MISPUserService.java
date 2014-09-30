@@ -8,6 +8,10 @@
 */ 
 package cn.fuego.misp.service;
 
+import java.util.List;
+
+import cn.fuego.misp.web.model.menu.MenuTreeModel;
+
 /** 
  * @ClassName: UserService 
  * @Description: TODO
@@ -16,7 +20,7 @@ package cn.fuego.misp.service;
  *  
  */
 
-public interface UserService
+public interface MISPUserService
 {
 	/**
 	 * 用户登录
@@ -32,6 +36,13 @@ public interface UserService
 	 * @param newPwd
 	 */
 	void modifyPassword(String userName,String oldPwd,String newPwd);
+	
+	/**
+	 * 根据用户ID 获取菜单树
+	 * @param userID
+	 * @return
+	 */
+	List<MenuTreeModel> getMenuTreeByUserID(String userID);
 	
 
 }

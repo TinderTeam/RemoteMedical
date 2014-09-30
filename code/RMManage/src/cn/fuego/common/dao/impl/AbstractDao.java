@@ -6,7 +6,7 @@
 * @date 2014-9-24 下午03:34:48 
 * @version V1.0   
 */ 
-package cn.fuego.common.dao;
+package cn.fuego.common.dao.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +20,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.util.meta.ReflectionUtil;

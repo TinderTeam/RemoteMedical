@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -125,39 +127,7 @@ input{ vertical-align:middle; margin:0; padding:0}
 
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-
-							<li><a>个人信息</a>
-								<ul>
-									<li><a href="<%=request.getContextPath()%>/client/manage/expertInfo.jsp" target="navTab" rel="expertInfo">专家信息</a></li>
-									<li><a href="<%=request.getContextPath()%>/client/manage/hospitalInfo.jsp" target="navTab" rel="hospitalInfo">医院信息</a></li>
-
-								</ul>
-							</li>
-							<li><a >用户管理</a>
-								<ul>
-									<li><a href="<%=request.getContextPath()%>/client/manage/systemUser.jsp" target="navTab" rel="systemUser">系统用户</a></li>
-									<li><a href="<%=request.getContextPath()%>/client/manage/applyModify.jsp" target="navTab" rel="applyModify">修改申请</a></li>
-									<li><a href="<%=request.getContextPath()%>/client/manage/expertManage.jsp" target="navTab" rel="expertManage">专家管理</a></li>
-									<li><a href="<%=request.getContextPath()%>/client/manage/hospitalManage.jsp" target="navTab" rel="expertManage">医院管理</a></li>
-
-								</ul>
-							</li>
-							<li><a >统计信息</a>
-								<ul>
-									<li><a href="<%=request.getContextPath()%>/client/manage/diagnoseCount.jsp" target="navTab" rel="diagnoseCount">诊断统计</a></li>
-									<li><a href="<%=request.getContextPath()%>/client/manage/costCount.jsp" target="navTab" rel="costCount">费用统计</a></li>
-								</ul>
-							</li>	
-							<li><a >日志管理</a>
-								<ul>
-									<li><a href="<%=request.getContextPath()%>/client/manage/logManage.jsp" target="navTab" rel="logManage">操作日志</a></li>
-
-								</ul>
-							</li>							
-
-									
-
-
+                           <jsp:include page="common/menu.jsp"/>
 						</ul>
 					</div>
 

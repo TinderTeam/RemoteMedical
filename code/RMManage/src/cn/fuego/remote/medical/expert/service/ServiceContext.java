@@ -1,6 +1,6 @@
 package cn.fuego.remote.medical.expert.service;
 
-import cn.fuego.misp.service.UserService;
+import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.remote.medical.expert.service.impl.ExpertServiceImpl;
 import cn.fuego.remote.medical.expert.service.impl.UserServiceImpl;
 
@@ -12,7 +12,7 @@ public class ServiceContext
 {
 	private static ServiceContext instance;
  
-	private UserService userService = null;
+	private MISPUserService userService = null;
 
 	private ExpertService expertService = null;
 	  
@@ -29,7 +29,7 @@ public class ServiceContext
 		return instance;
 	}
  
-	public  synchronized UserService getUserService() {
+	public  synchronized MISPUserService getUserService() {
 		if (null == userService)
 		{
 			userService = new UserServiceImpl();
