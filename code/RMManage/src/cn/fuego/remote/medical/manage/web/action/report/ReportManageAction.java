@@ -6,14 +6,14 @@
 * @date 2014-9-28 下午05:25:07 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.expert.web.action.report;
+package cn.fuego.remote.medical.manage.web.action.report;
 
 import cn.fuego.misp.web.action.basic.TableAction;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.ReportView;
-import cn.fuego.remote.medical.expert.service.ExpertService;
-import cn.fuego.remote.medical.expert.service.ServiceContext;
+import cn.fuego.remote.medical.manage.service.ExpertService;
+import cn.fuego.remote.medical.manage.service.ServiceContext;
 
 /** 
  * @ClassName: ReportManageAction 

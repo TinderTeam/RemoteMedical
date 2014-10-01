@@ -1,6 +1,6 @@
 package cn.fuego.misp.service;
 
-import cn.fuego.remote.medical.expert.service.impl.UserServiceImpl;
+import cn.fuego.remote.medical.manage.service.impl.UserServiceImpl;
 
 public class MISPServiceContext
 {

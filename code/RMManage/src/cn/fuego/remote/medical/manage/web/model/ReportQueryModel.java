@@ -6,7 +6,7 @@
 * @date 2014-9-25 下午11:31:12 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.expert.web.model;
+package cn.fuego.remote.medical.manage.web.model;
 
 /** 
  * @ClassName: ReportQueryModel 

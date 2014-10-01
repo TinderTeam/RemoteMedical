@@ -1,7 +1,10 @@
 package cn.fuego.remote.medical.dao;
 
+import cn.fuego.common.dao.Dao;
+import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
+import cn.fuego.remote.medical.domain.Hospital;
 
 
 
@@ -20,6 +23,7 @@ public class DaoContext
 	private ReportViewDao reportViewDao = null;
 	
 	private ReportDao reportDao = null;
+	private Dao hospitalDao = null;
 
 	private DaoContext()
 	{
@@ -53,5 +57,14 @@ public class DaoContext
 			reportDao = new ReportDaoImpl();
 		}
 		return reportDao;
+	}
+	
+	public synchronized Dao getHospitalDao() 
+	{
+		if (null == hospitalDao)
+		{
+			hospitalDao = new CommonDaoImpl(Hospital.class);
+		}
+		return hospitalDao;
 	}
 }

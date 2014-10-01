@@ -1,30 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	
+	<s:form action="user/HospitalManage" method="POST" onsubmit="return navTabSearch(this);">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					医院编号：<input type="text" name="keyword" />
+					医院编号：<input type="text" name="hospital.id" />
 				</td>
 				<td>
-					医院名称：<input type="text" name="keyword" />
+					医院名称：<input type="text" name="hospital.name" />
 				</td>
-				<td>			
-				<select class="combox" name="province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html"  >
+				<td>
+						
+				<select class="combox" name="hospital.province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html"  >
 					<option value="all">所在省市</option>
 					<option value="bj">北京</option>
 					<option value="sh">上海</option>
 				</select>
-				<select class="combox" name="city" id="w_combox_city" ref="w_combox_area" refUrl="demo/combox/area_{value}.html">
+				<select class="combox" name="hospital.city" id="w_combox_city" ref="w_combox_area" refUrl="demo/combox/area_{value}.html">
 					<option value="all">所在城市</option>
 				</select>
-				<select class="combox" name="area" id="w_combox_area">
+				<select class="combox" name="hospital.county" id="w_combox_area">
 					<option value="all">所有在区县</option>
 				</select>
 				</td>
@@ -39,14 +42,15 @@
 			</ul>
 		</div>
 	</div>
-	</form>
+	</s:form>
 </div>
 <div class="pageContent">
 	<table class="table" width="100%" layoutH="108">
 		<thead>
+		
 			<tr>
 				<th width="100" align="center">医院编号</th>
-				<th width="120" align="center">医院名称</th>
+				<th width="200" align="center">医院名称</th>
 				<th width="100" align="center">规模</th>
 				<th width="300" align="center">地点</th>
 				<th width="100" align="center">联系人</th>
@@ -55,19 +59,21 @@
 			</tr>
 		</thead>
 		<tbody>
+		<c:forEach var="e" items="${hospitalTable.currentPageData}"> 	
 			<tr target="sid_user" rel="1">
-				<td>2000023</td>
-				<td>医院a</td>
-				<td>12000</td>
-				<td>xx省xx市xx县（区）****路**号</td>
-				<td>吴先生</td>
-				<td>027-22335566</td>
+				<td>${e.id}</td>
+				<td>${e.name}</td>
+				<td>${e.rank}</td>
+				<td>${e.address}</td>
+				<td>${e.contacts}</td>
+				<td>${e.contactsPhone}</td>
 				<td>
 					
 					<a title="医院介绍" target="navTab" href="hospitalInfo.html?id=xxx" class="btnView">查看</a>
-<!-- 					<a title="拒绝" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">拒绝</a> -->
+
 				
 				</td>
+		</c:forEach>
 			</tr>
 			
 			
@@ -76,16 +82,16 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox" name="numPerPage"  onchange="navTabPageBreak({numPerPage:this.value})">
 				<option value="20">20</option>
 				<option value="50">50</option>
 				<option value="100">100</option>
 				<option value="200">200</option>
 			</select>
-			<span>条，共${totalCount}条</span>
+			<span>条，共${hospitalTable.page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="${hospitalTable.page.count}" numPerPage="${hospitalTable.page.pageSize}" pageNumShown="10" currentPage="${hospitalTable.page.currentPage}"></div>
 
 	</div>
 </div>

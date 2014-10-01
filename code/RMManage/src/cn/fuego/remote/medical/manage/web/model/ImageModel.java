@@ -6,7 +6,7 @@
 * @date 2014-9-23 下午06:30:36 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.expert.web.model;
+package cn.fuego.remote.medical.manage.web.model;
 
 /** 
  * @ClassName: ImageModel 

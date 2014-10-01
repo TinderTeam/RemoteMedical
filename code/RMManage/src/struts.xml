@@ -40,16 +40,24 @@
 
  	</package>
  	
- 	<package name="expert" extends="default">
+ 	<package name="report" extends="default">
   
-   		<action name="ReportManage" class="cn.fuego.remote.medical.expert.web.action.report.ReportManageAction">
+   		<action name="ReportManage" class="cn.fuego.remote.medical.manage.web.action.report.ReportManageAction">
 			<result type="dispatcher">/client/manage/patientList.jsp</result>
  			
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
   
  	</package>
- 	
+ 	<package name="user" extends="default">
+  
+   		<action name="HospitalManage" class="cn.fuego.remote.medical.manage.web.action.user.HospitalManageAction">
+			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>
+ 			
+			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+		</action>
+  
+ 	</package>
  
 </struts>
 

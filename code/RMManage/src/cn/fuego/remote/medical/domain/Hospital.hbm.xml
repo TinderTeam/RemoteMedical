@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="Hospital" table="hospital">
+
+	    <id name="id" column="Hs_ID" >
+			 
+		</id>
+
+		 <property name="name" column="Hs_Name"></property>
+		 <property name="province" column="Hs_Province"></property>
+		 <property name="city" column="Hs_City"></property>
+		 <property name="county" column="Hs_County"></property>
+		 <property name="address" column="Hs_Address"></property>
+		 <property name="hospitalPhone" column="Hs_HospitalPhone"></property>
+		 <property name="contactWay" column="Hs_ContactWay"></property>
+		 <property name="contacts" column="Hs_Contacts"></property>
+		 <property name="contactsPhone" column="Hs_ContactsPhone"></property>
+		 <property name="rank" column="Hs_Rank"></property>
+		 <property name="resume" column="Hs_Resume"></property>
+		 <property name="remark" column="Hs_Remark"></property>
+		 <property name="apply" column="Hd_Apply"></property>
+		 <property name="reg" column="Hd_Reg"></property>
+		 <property name="auditor" column="Hs_Auditor"></property>
+ 		 <property name="state" column="Hs_State"></property>
+ 		 <property name="authority" column="Hi_Authority"></property>
+ 		 <property name="reserve1" column="Hs_Reservel"></property>
+ 		 <property name="reserve2" column="Hs_Reserve2"></property>
+ 		 <property name="reserve3" column="Hs_Reserve3"></property>
+ 		 <property name="reserve4" column="Hs_Reserve4"></property>
+ 		 <property name="reserve5" column="Hs_Reserve5"></property>
+
+	</class>
+</hibernate-mapping>

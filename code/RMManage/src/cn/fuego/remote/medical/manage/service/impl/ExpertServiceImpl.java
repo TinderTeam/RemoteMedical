@@ -6,7 +6,7 @@
 * @date 2014-9-28 下午03:00:53 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.expert.service.impl;
+package cn.fuego.remote.medical.manage.service.impl;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.dao.ReportDao;
 import cn.fuego.remote.medical.domain.ReportView;
-import cn.fuego.remote.medical.expert.service.ExpertService;
-import cn.fuego.remote.medical.expert.web.model.ImageModel;
-import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
-import cn.fuego.remote.medical.expert.web.model.ReportQueryModel;
+import cn.fuego.remote.medical.manage.service.ExpertService;
+import cn.fuego.remote.medical.manage.web.model.ImageModel;
+import cn.fuego.remote.medical.manage.web.model.MedicalReportModel;
+import cn.fuego.remote.medical.manage.web.model.ReportQueryModel;
 
 /** 
  * @ClassName: ExpertServiceImpl 
@@ -49,7 +49,7 @@ public class ExpertServiceImpl implements ExpertService
 		AbstractDataSource<ReportView> dataSource = new DataBaseSourceImpl<ReportView>(ReportView.class);
 		reportTableData.setDataSource(dataSource);
 		
-		
+	 
  		return reportTableData;
 	}
 

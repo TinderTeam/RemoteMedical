@@ -1,32 +1,24 @@
 /**   
-* @Title: Hospital.java 
-* @Package cn.fuego.remote.medical.expert.domain 
+* @Title: HospitalQueryModel.java 
+* @Package cn.fuego.remote.medical.manage.web.model 
 * @Description: TODO
-* @author Tang Jun   
-* @date 2014-9-27 下午05:05:44 
+* @author Aether
+* @date 2014-9-30 下午11:12:05 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.domain;
+package cn.fuego.remote.medical.manage.web.model;
 
 import java.util.Date;
 
-import cn.fuego.common.domain.PersistenceObject;
-
 /** 
- * @ClassName: Hospital 
+ * @ClassName: HospitalQueryModel 
  * @Description: TODO
- * @author Tang Jun
- * @date 2014-9-27 下午05:05:44 
+ * @author Aether
+ * @date 2014-9-30 下午11:12:05 
  *  
  */
-
-public class Hospital implements PersistenceObject
+public class HospitalModel
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private String id;
 	private String name;
 	private String province;
@@ -50,7 +42,6 @@ public class Hospital implements PersistenceObject
 	private String reserve3;
 	private int reserve4;
 	private int reserve5;
-	
 	public String getId()
 	{
 		return id;
@@ -236,6 +227,5 @@ public class Hospital implements PersistenceObject
 	{
 		this.reserve5 = reserve5;
 	}
-
 	
 }
