@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.remote.medical.expert.web.model;
 
+import cn.fuego.remote.medical.domain.ImageArchiving;
+
 /** 
  * @ClassName: ImageModel 
  * @Description: TODO
@@ -18,10 +20,21 @@ package cn.fuego.remote.medical.expert.web.model;
 
 public class ImageModel
 {
+	private ImageArchiving image;
 	private String imageName;
 	private String imageUrl;
 	private String bodyPart;
 	private String fileSize;
+	
+	
+	public ImageArchiving getImage()
+	{
+		return image;
+	}
+	public void setImage(ImageArchiving image)
+	{
+		this.image = image;
+	}
 	public String getImageName()
 	{
 		return imageName;

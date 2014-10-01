@@ -16,7 +16,7 @@ import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
-import cn.fuego.remote.medical.expert.web.model.ReportQueryModel;
+import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
 
 /** 
  * @ClassName: ExpertService 
@@ -35,16 +35,15 @@ public interface ExpertService
 	 * @param queryModel
 	 * @return
 	 */
-	AbstractDataSource<ReportView> getMedicalList(String userName,ReportQueryModel queryModel);
+	AbstractDataSource<ReportView> getMedicalList(String userName,ReportFilterModel queryModel);
 	
 
 	/**
-	 * 获取报告下的图片列表
-	 * @param seralNo
-	 * @param hospitalID
+	 * 根据报告视图唯一编号，获取报告具体信息
+	 * @param reportViewID
 	 * @return
 	 */
-	List<ImageModel> getImageByMedical(String seralNo,String hospitalID);
+	MedicalReportModel getImageByMedical(String reportViewID);
 	
 	/**
 	 * 提交修改报告

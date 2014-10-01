@@ -11,7 +11,6 @@ package cn.fuego.remote.medical.expert.dao.impl;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.struts.apps.mailreader.dao.User;
@@ -19,9 +18,9 @@ import org.junit.Test;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.remote.medical.dao.SystemUserDao;
-import cn.fuego.remote.medical.dao.impl.SystemUserDaoImpl;
-import cn.fuego.remote.medical.domain.SystemUser;
+import cn.fuego.misp.dao.MISPDaoContext;
+import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.ImageArchiving;
 
 /** 
  * @ClassName: SystemUserDaoImplTest 
@@ -33,18 +32,25 @@ import cn.fuego.remote.medical.domain.SystemUser;
 
 public class SystemUserDaoImplTest
 {
-	SystemUserDao userDao=new SystemUserDaoImpl();
+	 
 	/**
 	 * Test method for {@link cn.fuego.common.dao.impl.AbstractDao#create(cn.fuego.misp.domain.PersistenceObject)}.
 	 */
 	@Test
 	public void testCreate()
 	{
-		SystemUser user = new SystemUser();
-		user.setUserName("admin1");
-		user.setPassword("2345");
-		user.setRegDate(new Date(System.currentTimeMillis()));
-		userDao.create(user);
+//		SystemUser user = new SystemUser();
+//		user.setUserName("admin1");
+//		user.setPassword("2345");
+//		user.setRegDate(new Date(System.currentTimeMillis()));
+//		MISPDaoContext.getInstance().getSystemUserDao().create(user);
+		ImageArchiving object = new ImageArchiving();
+		object.setHospitalID("aaaaa");
+		object.setImgArchName("aaa") ;
+		object.setSerialNo(2);
+		DaoContext.getInstance().getImageArchivingDao().create(object); 
+		//List<ImageArchiving> list = (List<ImageArchiving>) DaoContext.getInstance().getImageArchivingDao().getAll();
+		//System.out.println(list.size());
 		fail("Not yet implemented");
 	}
 
@@ -86,7 +92,7 @@ public class SystemUserDaoImplTest
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,"userID","1");
  
 		list.add(condition);
-		List<User> userList = (List<User>) userDao.getAll(list);
+		List<User> userList = (List<User>) MISPDaoContext.getInstance().getSystemUserDao().getAll(list);
 		System.out.println(userList.size());
 	}
 	@Test

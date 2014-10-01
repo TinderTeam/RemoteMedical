@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="ImageArchiving" table="ImageArchiving">
+		<composite-id>
+	       <key-property name="hospitalID" length="64" column="Hs_ID" ></key-property>
+           <key-property name="serialNo" column="Pi_SerialNO" ></key-property>
+           <key-property name="imgArchName" column="Ii_ImgArchName" ></key-property>
+	    </composite-id>
+		<property name="imageID" column="Is_ImageID" ></property>
+        <property name="modality" column="Is_Modality" ></property>
+           
+        <property name="imageNo" column="Ii_ImageNo"></property>
+        <property name="sOPInstanceUID" column="Is_SOPInstanceUID"></property>
+        <property name="seriesID" column="Ii_SeriesID"></property>
+        <property name="seriesDescription" column="Is_SeriesDescription"></property>
+        <property name="seriesUID" column="Is_SeriesUID"></property>
+        <property name="imageCount" column="Ii_ImageCount"></property>
+        <property name="minImageID" column="Ii_MinImageID"></property>
+        <property name="maxImageID" column="Ii_MaxImageID"></property>
+        <property name="imageSavePath" column="Is_ImageSavePath"></property>
+        <property name="bodyPart" column="Is_BodyPart"></property>
+        <property name="protocolName" column="Is_ProtocolName"></property>
+        
+        <property name="oriImgName" column="Is_OriImgName"></property>
+        <property name="imageCode" column="Is_ImageCode"></property>
+        <property name="reserve1" column="Is_Reserve1"></property>
+        <property name="reserve2" column="Is_Reserve2"></property>
+        <property name="reserve3" column="Ib_Reserver3"></property>
+        <property name="reserve4" column="Ii_Reserve4"></property>
+       
+	</class>
+</hibernate-mapping>

@@ -23,6 +23,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 
 public abstract class TableAction extends MISPAction
 {
+	public static final String SHOW_INFO = "showInfo";
 	private String jumpActionName;
 	private String selectedID;
 	private String[] selectedIDList;

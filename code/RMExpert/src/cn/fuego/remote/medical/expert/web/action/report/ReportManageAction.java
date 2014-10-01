@@ -9,11 +9,12 @@
 package cn.fuego.remote.medical.expert.web.action.report;
 
 import cn.fuego.misp.web.action.basic.TableAction;
-import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.service.ExpertService;
 import cn.fuego.remote.medical.expert.service.ServiceContext;
+import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
+import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
 
 /** 
  * @ClassName: ReportManageAction 
@@ -27,10 +28,12 @@ public class ReportManageAction extends TableAction
 {
 	private ExpertService expertService = ServiceContext.getInstance().getExpertService();
 	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
- 
+	private MedicalReportModel medicalReport = new MedicalReportModel();
+	private ReportFilterModel filter = new ReportFilterModel(); 
+	
 	public String execute()
 	{
-		reportList.setDataSource(expertService.getMedicalList(null, null));
+		reportList.setDataSource(expertService.getMedicalList(null, filter));
 		return SUCCESS;
 	}
 	/* (non-Javadoc)
@@ -39,8 +42,8 @@ public class ReportManageAction extends TableAction
 	@Override
 	public String show()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		medicalReport = expertService.getImageByMedical(this.getSelectedID());
+		return SHOW_INFO;
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#create()
@@ -89,6 +92,22 @@ public class ReportManageAction extends TableAction
 	public void setReportList(TableDataModel<ReportView> reportList)
 	{
 		this.reportList = reportList;
+	}
+	public MedicalReportModel getMedicalReport()
+	{
+		return medicalReport;
+	}
+	public void setMedicalReport(MedicalReportModel medicalReport)
+	{
+		this.medicalReport = medicalReport;
+	}
+	public ReportFilterModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(ReportFilterModel filter)
+	{
+		this.filter = filter;
 	}
 
  

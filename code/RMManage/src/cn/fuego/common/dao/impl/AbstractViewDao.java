@@ -133,6 +133,35 @@ public abstract class AbstractViewDao implements ViewDao
 		return objectList;
 
 	}
+	
+		public PersistenceObject getUniRecord(List<QueryCondition>  conditionList)
+	{
+		PersistenceObject record = null;
+		Session session = null;
+ 		try
+		{
+			session = HibernateUtil.getSession();
+ 
+			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			record = (PersistenceObject) c.uniqueResult();
+		} catch (RuntimeException re)
+		{
+			log.error("get UniRecord error",re);
+
+			throw re;
+		} finally
+		{
+ 			if (session != null)
+			{
+				session.close();
+			}
+		}
+		
+		log.info("the object calss is " + getFeaturedClass()+"the object is "+ record);
+
+		return record;
+ 
+	}
 	public Collection getAll(List<QueryCondition> conditionList)
 	{
 		List objectList = null;

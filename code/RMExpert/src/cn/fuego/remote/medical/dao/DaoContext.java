@@ -1,8 +1,11 @@
 package cn.fuego.remote.medical.dao;
 
+import cn.fuego.common.dao.Dao;
+import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
-import cn.fuego.remote.medical.dao.impl.SystemUserDaoImpl;
+import cn.fuego.remote.medical.domain.Hospital;
+import cn.fuego.remote.medical.domain.ImageArchiving;
 
 
 
@@ -17,11 +20,13 @@ import cn.fuego.remote.medical.dao.impl.SystemUserDaoImpl;
 public class DaoContext
 {
 	private static DaoContext instance;
-	private SystemUserDao systemUserDao=null;
-
+ 
 	private ReportViewDao reportViewDao = null;
 	
 	private ReportDao reportDao = null;
+	
+	private Dao imageArchivingDao = null;
+	private Dao hospitalDao = null;
 
 	private DaoContext()
 	{
@@ -37,14 +42,7 @@ public class DaoContext
 		return instance;
 	}
 
-	public synchronized SystemUserDao getSystemUserDao() 
-	{
-		if (null == systemUserDao)
-		{
-			systemUserDao = new SystemUserDaoImpl();
-		}
-		return systemUserDao;
-	}
+
  
 	public synchronized ReportViewDao getReportViewDao() 
 	{
@@ -62,5 +60,22 @@ public class DaoContext
 			reportDao = new ReportDaoImpl();
 		}
 		return reportDao;
+	}
+	public synchronized Dao getImageArchivingDao() 
+	{
+		if (null == imageArchivingDao)
+		{
+			imageArchivingDao = new CommonDaoImpl(ImageArchiving.class);
+		}
+		return imageArchivingDao;
+	}
+	
+	public synchronized Dao getHospitalDao() 
+	{
+		if (null == hospitalDao)
+		{
+			hospitalDao = new CommonDaoImpl(Hospital.class);
+		}
+		return hospitalDao;
 	}
 }

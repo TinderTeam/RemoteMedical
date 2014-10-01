@@ -30,5 +30,7 @@ public interface ViewDao
 	Collection getAll(QueryCondition condition);
 
 	PersistenceObject getUniRecord(QueryCondition condition);
+	PersistenceObject getUniRecord(List<QueryCondition> conditionList);
+
 
 }

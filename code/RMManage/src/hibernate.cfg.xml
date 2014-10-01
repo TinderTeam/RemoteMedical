@@ -8,7 +8,7 @@
 	<property name="hibernate.connection.driver_class">
 		com.mysql.jdbc.Driver
 	</property>
-	<property name="connection.url">jdbc:mysql://192.168.1.107:3306/remote_medical</property>
+	<property name="connection.url">jdbc:mysql://192.168.1.102:3306/remote_medical</property>
 	<property name="connection.username">myuser</property>
 	<property name="connection.password">1234</property>
 	<property name="dialect">
@@ -25,10 +25,10 @@
 	<mapping resource="cn/fuego/misp/domain/SystemUser.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemMenu.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemIDType.hbm.xml" />
-	<mapping resource="cn/fuego/remote/medical/domain/Report.hbm.xml" />
-	<mapping
-		resource="cn/fuego/remote/medical/domain/ReportView.hbm.xml" />
-	<mapping resource="cn/fuego/remote/medical/domain/Hospital.hbm.xml" />
+ 	<mapping resource="cn/fuego/remote/medical/domain/Report.hbm.xml" />
+  	<mapping resource="cn/fuego/remote/medical/domain/ReportView.hbm.xml" />
+  	<mapping resource="cn/fuego/remote/medical/domain/ImageArchiving.hbm.xml" />
+  	<mapping resource="cn/fuego/remote/medical/domain/Hospital.hbm.xml" />
 
 
 

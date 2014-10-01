@@ -33,6 +33,8 @@ public class MISPAction extends ActionSupport
 		
 		String[] paraList=(String[]) parameters.get(paraName);
 		String para=paraList[0];
+
+
 		return para;
 		
 	}

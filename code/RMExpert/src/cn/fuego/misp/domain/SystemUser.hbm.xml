@@ -5,7 +5,7 @@
  
 	
 <hibernate-mapping
-	package="cn.fuego.remote.medical.domain">
+	package="cn.fuego.misp.domain">
 	<class name="SystemUser" table="user">
 			<id name="userID" column="Ui_ID" >
 			<generator class="increment"/>

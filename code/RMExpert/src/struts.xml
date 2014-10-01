@@ -35,9 +35,7 @@
 			
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
-		  
  
-
  	</package>
  	
  	<package name="expert" extends="default">
@@ -45,7 +43,7 @@
    		<action name="ReportManage" class="cn.fuego.remote.medical.expert.web.action.report.ReportManageAction">
 			<result type="dispatcher">/client/expert/patientList.jsp</result>
  			
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+			<result type="dispatcher" name="showInfo">/client/expert/patientInfo.jsp</result>		    
 		</action>
   
  	</package>

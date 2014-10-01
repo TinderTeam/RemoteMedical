@@ -123,9 +123,7 @@
 	            <td>${e.exApply}</td>
 	            <td>${e.exApplyDoctor}</td>	
 	            <td>
- 
-					<a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a>
-					<a title="诊断报告" target="navTab" href="patientDetail.jsp?id=xxx" class="btnEdit">编辑</a>
+ 					<a title="诊断报告" target="navTab" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" class="btnEdit">编辑</a>
 				</td>
 			</tr>
 		</c:forEach>

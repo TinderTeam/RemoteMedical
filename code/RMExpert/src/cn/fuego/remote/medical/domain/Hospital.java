@@ -22,29 +22,35 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public class Hospital implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String name;
-	private String Province;
+	private String province;
 	private String city;
 	private String county;
-	private String Address;
-	private String HospitalPhone;
-	private String ContactWay;
-	private String Contacts;
-	private String ContactsPhone;
-	private String Rank;
-	private String Resume;
-	private String Remark;
-	private Date Apply;
-	private Date Reg;
-	private String Auditor;
-	private String State;
-	private int Authority;
-	private String Reserve1;
-	private String Reserve2;
-	private String Reserve3;
-	private int Reserve4;
-	private int Reserve5;
+	private String address;
+	private String hospitalPhone;
+	private String contactWay;
+	private String contacts;
+	private String contactsPhone;
+	private String rank;
+	private String resume;
+	private String remark;
+	private Date apply;
+	private Date reg;
+	private String auditor;
+	private String state;
+	private int authority;
+	private String reserve1;
+	private String reserve2;
+	private String reserve3;
+	private int reserve4;
+	private int reserve5;
+	
 	public String getId()
 	{
 		return id;
@@ -63,11 +69,11 @@ public class Hospital implements PersistenceObject
 	}
 	public String getProvince()
 	{
-		return Province;
+		return province;
 	}
 	public void setProvince(String province)
 	{
-		Province = province;
+		this.province = province;
 	}
 	public String getCity()
 	{
@@ -85,151 +91,151 @@ public class Hospital implements PersistenceObject
 	{
 		this.county = county;
 	}
+
 	public String getAddress()
 	{
-		return Address;
+		return address;
 	}
 	public void setAddress(String address)
 	{
-		Address = address;
+		this.address = address;
 	}
 	public String getHospitalPhone()
 	{
-		return HospitalPhone;
+		return hospitalPhone;
 	}
 	public void setHospitalPhone(String hospitalPhone)
 	{
-		HospitalPhone = hospitalPhone;
+		this.hospitalPhone = hospitalPhone;
 	}
 	public String getContactWay()
 	{
-		return ContactWay;
+		return contactWay;
 	}
 	public void setContactWay(String contactWay)
 	{
-		ContactWay = contactWay;
+		this.contactWay = contactWay;
 	}
 	public String getContacts()
 	{
-		return Contacts;
+		return contacts;
 	}
 	public void setContacts(String contacts)
 	{
-		Contacts = contacts;
+		this.contacts = contacts;
 	}
 	public String getContactsPhone()
 	{
-		return ContactsPhone;
+		return contactsPhone;
 	}
 	public void setContactsPhone(String contactsPhone)
 	{
-		ContactsPhone = contactsPhone;
+		this.contactsPhone = contactsPhone;
 	}
 	public String getRank()
 	{
-		return Rank;
+		return rank;
 	}
 	public void setRank(String rank)
 	{
-		Rank = rank;
+		this.rank = rank;
 	}
 	public String getResume()
 	{
-		return Resume;
+		return resume;
 	}
 	public void setResume(String resume)
 	{
-		Resume = resume;
+		this.resume = resume;
 	}
 	public String getRemark()
 	{
-		return Remark;
+		return remark;
 	}
 	public void setRemark(String remark)
 	{
-		Remark = remark;
+		this.remark = remark;
 	}
 	public Date getApply()
 	{
-		return Apply;
+		return apply;
 	}
 	public void setApply(Date apply)
 	{
-		Apply = apply;
+		this.apply = apply;
 	}
 	public Date getReg()
 	{
-		return Reg;
+		return reg;
 	}
 	public void setReg(Date reg)
 	{
-		Reg = reg;
+		this.reg = reg;
 	}
 	public String getAuditor()
 	{
-		return Auditor;
+		return auditor;
 	}
 	public void setAuditor(String auditor)
 	{
-		Auditor = auditor;
+		this.auditor = auditor;
 	}
 	public String getState()
 	{
-		return State;
+		return state;
 	}
 	public void setState(String state)
 	{
-		State = state;
+		this.state = state;
 	}
 	public int getAuthority()
 	{
-		return Authority;
+		return authority;
 	}
 	public void setAuthority(int authority)
 	{
-		Authority = authority;
+		this.authority = authority;
 	}
 	public String getReserve1()
 	{
-		return Reserve1;
+		return reserve1;
 	}
 	public void setReserve1(String reserve1)
 	{
-		Reserve1 = reserve1;
+		this.reserve1 = reserve1;
 	}
 	public String getReserve2()
 	{
-		return Reserve2;
+		return reserve2;
 	}
 	public void setReserve2(String reserve2)
 	{
-		Reserve2 = reserve2;
+		this.reserve2 = reserve2;
 	}
 	public String getReserve3()
 	{
-		return Reserve3;
+		return reserve3;
 	}
 	public void setReserve3(String reserve3)
 	{
-		Reserve3 = reserve3;
+		this.reserve3 = reserve3;
 	}
 	public int getReserve4()
 	{
-		return Reserve4;
+		return reserve4;
 	}
 	public void setReserve4(int reserve4)
 	{
-		Reserve4 = reserve4;
+		this.reserve4 = reserve4;
 	}
 	public int getReserve5()
 	{
-		return Reserve5;
+		return reserve5;
 	}
 	public void setReserve5(int reserve5)
 	{
-		Reserve5 = reserve5;
+		this.reserve5 = reserve5;
 	}
-	
-	
+
 	
 }

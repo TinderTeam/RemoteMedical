@@ -16,7 +16,7 @@ package cn.fuego.remote.medical.expert.web.model;
  *  
  */
 
-public class ReportQueryModel
+public class ReportFilterModel
 {
 	private String patientName;
 	private String exReportState;

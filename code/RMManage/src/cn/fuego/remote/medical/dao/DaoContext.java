@@ -5,6 +5,7 @@ import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
 import cn.fuego.remote.medical.domain.Hospital;
+import cn.fuego.remote.medical.domain.ImageArchiving;
 
 
 
@@ -23,6 +24,8 @@ public class DaoContext
 	private ReportViewDao reportViewDao = null;
 	
 	private ReportDao reportDao = null;
+	
+	private Dao imageArchivingDao = null;
 	private Dao hospitalDao = null;
 
 	private DaoContext()
@@ -57,6 +60,14 @@ public class DaoContext
 			reportDao = new ReportDaoImpl();
 		}
 		return reportDao;
+	}
+	public synchronized Dao getImageArchivingDao() 
+	{
+		if (null == imageArchivingDao)
+		{
+			imageArchivingDao = new CommonDaoImpl(ImageArchiving.class);
+		}
+		return imageArchivingDao;
 	}
 	
 	public synchronized Dao getHospitalDao() 
