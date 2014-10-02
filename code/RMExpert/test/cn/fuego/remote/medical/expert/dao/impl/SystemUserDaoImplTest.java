@@ -45,8 +45,8 @@ public class SystemUserDaoImplTest
 //		user.setRegDate(new Date(System.currentTimeMillis()));
 //		MISPDaoContext.getInstance().getSystemUserDao().create(user);
 		ImageArchiving object = new ImageArchiving();
-		object.setHospitalID("aaaaa");
-		object.setImgArchName("aaa") ;
+		object.setHospitalID("人民医院");
+		object.setImgArchName("头部") ;
 		object.setSerialNo(2);
 		DaoContext.getInstance().getImageArchivingDao().create(object); 
 		//List<ImageArchiving> list = (List<ImageArchiving>) DaoContext.getInstance().getImageArchivingDao().getAll();
@@ -78,7 +78,7 @@ public class SystemUserDaoImplTest
 	@Test
 	public void testGetAll()
 	{
-		List<User> userList = (List<User>) userDao.getAll();
+		List<User> userList = (List<User>) MISPDaoContext.getInstance().getSystemUserDao().getAll();
 		System.out.println(userList);
 	}
 
@@ -102,7 +102,7 @@ public class SystemUserDaoImplTest
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,"userName","admin");
  
 		list.add(condition);
-	    userDao.getUniRecord(condition); 
+		MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(condition); 
 		System.out.println( "");
 	}
 }

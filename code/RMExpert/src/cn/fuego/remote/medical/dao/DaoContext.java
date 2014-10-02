@@ -13,9 +13,9 @@ import cn.fuego.remote.medical.domain.ImageArchiving;
  * 
 * @ClassName: DaoContext 
 * @Description: TODO
-* @author Nan Bowen
-* @date 2014-3-23 下午11:27:41 
-* 
+* @author Tang Jun
+* @date 2014-10-1 下午02:42:31 
+*
  */
 public class DaoContext
 {

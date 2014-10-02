@@ -29,6 +29,7 @@ public class MedicalReportModel
 	
 	private List<ImageModel> imageList = new ArrayList<ImageModel>();;
 
+	private ReportTemplateModel template;
 
  
 
@@ -53,6 +54,18 @@ public class MedicalReportModel
 	public void setImageList(List<ImageModel> imageList)
 	{
 		this.imageList = imageList;
+	}
+
+
+	public ReportTemplateModel getTemplate()
+	{
+		return template;
+	}
+
+
+	public void setTemplate(ReportTemplateModel template)
+	{
+		this.template = template;
 	}
  
 

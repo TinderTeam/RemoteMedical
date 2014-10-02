@@ -8,5 +8,9 @@ public class CommonExceptionMsg
 	public static final String OLD_PASSWORD_WORD = "原始密码错误";
 	public static final String DATE_FOMATE ="日期格式错误";
 	public static final String DATA_CONVERT_ERROR ="数据格式转换错误";
+	
+	
+	public static final String OPERATE_SUCCESS ="操作成功";
+	public static final String OPERATE_FAILED ="操作失败";
 
 }

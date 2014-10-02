@@ -11,7 +11,15 @@
 
 <constant name="struts.ui.templateSuffix" value="ftl" />
     
-    <package name="default" namespace="/" extends="struts-default">
+ <package name="misp" namespace="/" extends="struts-default" abstract="true">
+ 
+         <global-results>
+            <result name="misp-done">/client/misp/common/mispDone.jsp</result>
+ 
+         </global-results>
+ </package>
+        
+    <package name="default" namespace="/" extends="misp">
         
         <global-results>
             <result name="exception-system">/client/platform/common/systemError.jsp</result>

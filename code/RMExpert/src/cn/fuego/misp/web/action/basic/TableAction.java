@@ -36,6 +36,7 @@ public abstract class TableAction extends MISPAction
 	abstract public String modify();
 	abstract public String show();
 	
+
 	
 	public List<String> convertToPageMessage(List<String> messageList)
 	{
@@ -89,6 +90,12 @@ public abstract class TableAction extends MISPAction
 	{
 		this.jumpActionName = jumpActionName;
 	}
+ 
+	public static String getShowInfo()
+	{
+		return SHOW_INFO;
+	}
+	
 	
 
 }

@@ -50,12 +50,17 @@
 		</div>
 		
 		</div>
-		
-		<div class="accordionContent" style="height:510px;width:70%;float:right">
+	   <s:form  onsubmit="return validateCallback(this,navTabAjaxDone);" action="expert/ReportManage!modify.action" method="POST" theme="simple">
+		 <div class="accordionContent" style="height:510px;width:70%;float:right">
 			<div class="panel" defH="420">
 			<h1>病症诊断区</h1>
 
 			<div class="pageFormContent"  >
+				<input type="hidden" name="medicalReport.reportView.id" value="${medicalReport.reportView.id}" />
+				<input type="hidden" name="medicalReport.reportView.hospitalID" value="${medicalReport.reportView.hospitalID}" />
+				<input type="hidden" name="medicalReport.reportView.serialNo" value="${medicalReport.reportView.serialNo}" />
+				<input type="hidden" name="medicalReport.reportView.exReportState" value="${medicalReport.reportView.exReportState}" />
+				
 				<p style="font-size:1.2em;">医生诊断</p>
 				<div class="divider"></div>
 				
@@ -82,18 +87,25 @@
 			</div>
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
 				<ul class="toolBar">
-					<li><a class="add" href="#" ><span>保存报告</span></a></li>
+					 <c:choose>
+							   <c:when test="${'已提交' == medicalReport.reportView.exReportState}">  
+	                             <s:submit class="delete" name="save" value="撤销报告" align="left" method="cancel" />
+					           </c:when>
+							   <c:otherwise>  
+							     <s:submit class="add" name="modify" value="保存报告" align="left" method="modify" />
+					             <s:submit class="edit" name="save" value="提交报告" align="left" method="submit" />
+							     <s:submit class="delete" name="save" value="转换专家" align="left" method="transfer" />
+					           </c:otherwise>
+					</c:choose>
 					
-					<li><a class="edit" href="#" ><span>发送报告</span></a></li>
 					
-					<li><a class="delete" href="#" ><span>撤销报告</span></a></li>
-					
-					<li><a class="icon" href="dialogMove.html" target="dialog" mask="true" ><span>转换专家</span></a></li>
+ 
 				</ul>
 			</div>		
 			</div>
 		
 		</div>		
+       </s:form>
 	</div>
 
 
@@ -102,72 +114,13 @@
 			<p style="font-size:1.5em;padding:7px;"><strong>诊断模板</strong></p>
 		</div>
 		<div class="accordionContent" style="height:483px">
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">A模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">B模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">C模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">D模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">E模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-			<ul class="tree treeFolder">
-				<li><a href="tabsPage.html" target="navTab">F模板库</a>
-					<ul>
-						<li><a href="#" >模板1</a></li>
-						<li><a href="#" >模板2</a></li>
-						<li><a href="#" >模板3</a></li>
-						<li><a href="#" >模板4</a></li>
-						
-					</ul>
-				</li>
-			</ul>			
+		   <ul class="tree treeFolder collapse">
+       	      <li><a href="tabsPage.html" target="navTab">${medicalReport.template.name}</a>
+       	           <c:set var="templateList" value="${medicalReport.template.childList}" scope="request"/>
+			       <jsp:include page="template.jsp"/>
+       	      </li>
+       	   </ul> 
+
 		</div>
 
 

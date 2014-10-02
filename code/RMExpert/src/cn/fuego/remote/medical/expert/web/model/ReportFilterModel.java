@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.remote.medical.expert.web.model;
 
+import cn.fuego.remote.medical.constant.ReportStatusEnum;
+
 /** 
  * @ClassName: ReportQueryModel 
  * @Description: TODO
@@ -24,6 +26,8 @@ public class ReportFilterModel
 	private String hospitalName;
 	private String startDate;
 	private String endDate;
+	
+	private ReportStatusEnum[] reportStatusList = ReportStatusEnum.values();
 	public String getPatientName()
 	{
 		return patientName;
@@ -71,6 +75,14 @@ public class ReportFilterModel
 	public void setEndDate(String endDate)
 	{
 		this.endDate = endDate;
+	}
+	public ReportStatusEnum[] getReportStatusList()
+	{
+		return reportStatusList;
+	}
+	public void setReportStatusList(ReportStatusEnum[] reportStatusList)
+	{
+		this.reportStatusList = reportStatusList;
 	}
 
 }

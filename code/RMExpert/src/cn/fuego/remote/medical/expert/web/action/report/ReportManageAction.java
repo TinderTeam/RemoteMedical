@@ -10,6 +10,7 @@ package cn.fuego.remote.medical.expert.web.action.report;
 
 import cn.fuego.misp.web.action.basic.TableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.service.ExpertService;
 import cn.fuego.remote.medical.expert.service.ServiceContext;
@@ -30,6 +31,7 @@ public class ReportManageAction extends TableAction
 	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
 	private MedicalReportModel medicalReport = new MedicalReportModel();
 	private ReportFilterModel filter = new ReportFilterModel(); 
+
 	
 	public String execute()
 	{
@@ -77,13 +79,29 @@ public class ReportManageAction extends TableAction
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#modify()
 	 */
-	@Override
+ 
 	public String modify()
 	{
-		// TODO Auto-generated method stub
-		return execute();
+		expertService.submitMedicalReport(ReportStatusEnum.SAVE, this.medicalReport);
+ 
+		 
+		return MISP_DONE_PAGE;
 	}
-	
+	public String submit()
+	{
+		expertService.submitMedicalReport(ReportStatusEnum.SUBMIT, this.medicalReport);
+		return SHOW_INFO;
+	}
+	public String cancel()
+	{
+		expertService.submitMedicalReport(ReportStatusEnum.CACAL, this.medicalReport);
+		return SHOW_INFO;
+	}
+	public String tranfer()
+	{
+		// TODO Auto-generated method stub
+		return this.SHOW_INFO;
+	}
 	
 	public TableDataModel<ReportView> getReportList()
 	{

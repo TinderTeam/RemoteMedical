@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,11 +14,11 @@
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
 
 <!--[if IE]>
-<link href="themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
 <![endif]-->
 
 <!--[if lte IE 9]>
-<script src="js/speedup.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/client/lib/dwz/js/speedup.js" type="text/javascript"></script>
 <![endif]-->
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
@@ -94,7 +96,7 @@ setTimeout(function() {
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="#">安健科技</a>
+				<a class="logo" href="http://www.szangell.com/">安健科技</a>
 				<ul class="nav">
                     <li>欢迎您，Dr ****!</li>
 	 

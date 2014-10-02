@@ -8,17 +8,23 @@
 */ 
 package cn.fuego.remote.medical.expert.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
-import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.dao.ReportDao;
@@ -29,6 +35,7 @@ import cn.fuego.remote.medical.expert.service.ExpertService;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
 
 /** 
  * @ClassName: ExpertServiceImpl 
@@ -83,6 +90,9 @@ public class ExpertServiceImpl implements ExpertService
 			imageModel.setImage(image);
 			reportModel.getImageList().add(imageModel);
 		}
+		
+		//read template information
+		reportModel.setTemplate(getReportTemplate());
 		return reportModel;
 	}
 
@@ -92,6 +102,7 @@ public class ExpertServiceImpl implements ExpertService
 	@Override
 	public void submitMedicalReport(ReportStatusEnum status, MedicalReportModel reportModel)
 	{
+		
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
@@ -110,5 +121,69 @@ public class ExpertServiceImpl implements ExpertService
 		}
 
 	}	
+	
+	private ReportTemplateModel getReportTemplate() 
+	{
+		log.info("start read template");
+		SAXReader reader = new SAXReader();
+
+		ReportTemplateModel templateModel = null;
+		Document document;
+		try
+		{
+			document = reader.read(new File("D:/Tinder/template.xml"));
+			Element root = document.getRootElement();
+			
+			templateModel = getTemplateByElement(root);
+		}
+		catch (DocumentException e)
+		{
+			log.error("read template failed",e);
+		}
+		log.info("read template done");
+
+
+		return templateModel;
+	}
+	
+ 
+	private ReportTemplateModel getTemplateByElement(Element e)
+	{
+		ReportTemplateModel template = new ReportTemplateModel();
+
+		template.setName("模板");
+		if("Report".equals(e.getName()))
+		{
+			template.setName("诊断报告");
+		}
+		if("Conclusion".equals(e.getName()))
+		{
+			template.setName("诊断结论");
+		}
+		
+		if(!ValidatorUtil.isEmpty(e.elements()))
+		{
+			List<ReportTemplateModel> childList = new ArrayList<ReportTemplateModel>();
+			for (Iterator<?> i = e.elementIterator(); i.hasNext();)
+			{
+				Element child = (Element) i.next();
+				if("name".equals(child.getName()))
+				{
+					template.setName(child.getText());
+				}
+				else
+				{
+					childList.add(getTemplateByElement(child));
+				}
+
+			}
+			template.setChildList(childList);
+
+		}
+		template.setValue(e.getText());
+
+		return template;
+	}
+	
 
 }

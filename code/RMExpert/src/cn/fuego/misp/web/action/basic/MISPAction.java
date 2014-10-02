@@ -9,6 +9,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -17,9 +18,24 @@ public class MISPAction extends ActionSupport
 {
 	private int selectedMenuID;
 	private List<MenuModel> menuHeadList;
+	private MispMessageModel operateMessage = new MispMessageModel();
+	public static final String MISP_DONE_PAGE = "misp-done";
 	
-	
-	
+	 
+
+
+	public MispMessageModel getOperateMessage()
+	{
+		return operateMessage;
+	}
+
+
+	public void setOperateMessage(MispMessageModel operateMessage)
+	{
+		this.operateMessage = operateMessage;
+	}
+
+
 	/*
 	 * Public Function 
 	 * 用来方便Ajax获取单个参数使用
@@ -101,6 +117,7 @@ public class MISPAction extends ActionSupport
 		this.menuHeadList = menuHeadList;
 	}
 
+	
 
  
 	 

@@ -20,33 +20,31 @@
 		<table class="searchContent">
 			<tr >
 				<td>
-					患者姓名：<input type="text" name="keyword" />
+					患者姓名：<input type="text" name="filter.patientName" />
 				</td>
 				<td>
 				 报告状态：
 				</td>
 				<td>
 				   
-					<select class="combox" >
-						<option value="">默认所有状态</option>
-						<option value="1">新建</option>
-						<option value="2">处理中</option>
-						<option value="2">处理完毕</option>
-						<option value="2">存档</option>
-
+					<select class="combox" name="filter.exReportState" >
+					   <option value="">默认所有状态</option>
+						<c:forEach var="e" items="${filter.reportStatusList}">
+						  <c:choose>
+						       
+							   <c:when test="${e.status == filter.exReportState}">  
+	                             <option value="${e.status}" selected="selected">${e.status}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${e.status}">${e.status}</option>
+							   </c:otherwise>
+						   </c:choose>
+						</c:forEach>
+ 
 					</select>
 				</td>
 				<td>
-				 设备类型：
-				</td>
-				<td width="100px;">
-				   
-					<select class="combox" >
-						<option value="">默认所有类型</option>
-						<option value="type1">类型1</option>
-						<option value="type2">类型2</option>
-						<option value="type2">类型3</option>
-					</select>
+					设备类型：<input type="text" name="filter.modality" />
 				</td>
 	
 				
@@ -76,13 +74,7 @@
 				 医院名称：
 				</td>
 				<td>
-				   
-					<select class="combox" >
-						<option value="">默认所有医院</option>
-						<option value="B1">B1</option>
-						<option value="B2">B2</option>
-						<option value="B3">B3</option>
-					</select>
+					医院名称：<input type="text" name="filter.hospitalName" />
 				</td>
 
 
@@ -123,7 +115,7 @@
 	            <td>${e.exApply}</td>
 	            <td>${e.exApplyDoctor}</td>	
 	            <td>
- 					<a title="诊断报告" target="navTab" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" class="btnEdit">编辑</a>
+ 					<a title="诊断报告" target="navTab" rel="report" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" class="btnEdit">编辑</a>
 				</td>
 			</tr>
 		</c:forEach>
