@@ -62,9 +62,16 @@
    		<action name="HospitalManage" class="cn.fuego.remote.medical.manage.web.action.user.HospitalManageAction">
 			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>
  			
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+			<result type="dispatcher" name="showInfo">/client/manage/hospitalInfo.jsp</result>				    
 		</action>
-  
+		
+   		<action name="ExpertManage" class="cn.fuego.remote.medical.manage.web.action.user.ExpertManageAction">
+			<result type="dispatcher">/client/manage/expertManage.jsp</result>
+ 			
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+			<result type="dispatcher" name="showInfo">/client/manage/expertInfo.jsp</result>				    
+		</action>  
  	</package>
  
 </struts>

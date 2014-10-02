@@ -25,10 +25,11 @@
 	<mapping resource="cn/fuego/misp/domain/SystemUser.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemMenu.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemIDType.hbm.xml" />
- 	<mapping resource="cn/fuego/remote/medical/domain/Report.hbm.xml" />
-  	<mapping resource="cn/fuego/remote/medical/domain/ReportView.hbm.xml" />
-  	<mapping resource="cn/fuego/remote/medical/domain/ImageArchiving.hbm.xml" />
-  	<mapping resource="cn/fuego/remote/medical/domain/Hospital.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/Report.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/ReportView.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/ImageArchiving.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/Hospital.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/Expert.hbm.xml" />
 
 
 

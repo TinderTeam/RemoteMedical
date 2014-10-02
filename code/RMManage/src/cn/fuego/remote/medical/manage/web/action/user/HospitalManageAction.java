@@ -15,12 +15,14 @@ public class HospitalManageAction extends TableAction
 	private static final long serialVersionUID = 1L;
 
 	private UserService userService = ServiceContext.getInstance().getUserService();
-	private HospitalModel hospital;
+	private HospitalModel hospitalModel;
+	private HospitalModel filter;
+
 	private TableDataModel<Hospital> hospitalTable = new  TableDataModel<Hospital>();
 	public String execute()
 	{
 
-		hospitalTable.setDataSource(userService.getHospitalList(hospital));
+		hospitalTable.setDataSource(userService.getHospitalList(filter));
 		return SUCCESS;
 	}
 	@Override
@@ -47,15 +49,18 @@ public class HospitalManageAction extends TableAction
 	@Override
 	public String modify()
 	{
-		// TODO Auto-generated method stub
-		return null;
+
+		
+		userService.modifyHospitalInfo(hospitalModel);
+		
+		return execute();
 	}
 
 	@Override
 	public String show()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		hospitalModel = userService.getHospitalByID(this.getSelectedID());
+		return SHOW_INFO;
 	}
 	public TableDataModel<Hospital> getHospitalTable()
 	{
@@ -65,13 +70,21 @@ public class HospitalManageAction extends TableAction
 	{
 		this.hospitalTable = hospitalTable;
 	}
-	public HospitalModel getHospital()
+	public HospitalModel getHospitalModel()
 	{
-		return hospital;
+		return hospitalModel;
 	}
-	public void setHospital(HospitalModel hospital)
+	public void setHospitalModel(HospitalModel hospitalModel)
 	{
-		this.hospital = hospital;
+		this.hospitalModel = hospitalModel;
 	}
-
+	public HospitalModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(HospitalModel filter)
+	{
+		this.filter = filter;
+	}
+ 
 }

@@ -4,6 +4,7 @@ import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
+import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.domain.ImageArchiving;
 
@@ -13,9 +14,9 @@ import cn.fuego.remote.medical.domain.ImageArchiving;
  * 
 * @ClassName: DaoContext 
 * @Description: TODO
-* @author Tang Jun
-* @date 2014-10-1 下午02:42:31 
-*
+* @author Nan Bowen
+* @date 2014-3-23 下午11:27:41 
+* 
  */
 public class DaoContext
 {
@@ -27,6 +28,8 @@ public class DaoContext
 	
 	private Dao imageArchivingDao = null;
 	private Dao hospitalDao = null;
+
+	private Dao expertDao= null;
 
 	private DaoContext()
 	{
@@ -77,5 +80,13 @@ public class DaoContext
 			hospitalDao = new CommonDaoImpl(Hospital.class);
 		}
 		return hospitalDao;
+	}
+	public synchronized Dao getExpertDao() 
+	{
+		if (null == expertDao)
+		{
+			expertDao = new CommonDaoImpl(Expert.class);
+		}
+		return expertDao;
 	}
 }

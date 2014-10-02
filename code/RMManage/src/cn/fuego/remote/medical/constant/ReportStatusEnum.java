@@ -33,7 +33,6 @@ public enum ReportStatusEnum
 		return status;
 	}
 
-	
 	public static ReportStatusEnum getEnumByStatus(String status)
 	{
 		for (ReportStatusEnum c : ReportStatusEnum.values())
@@ -43,7 +42,6 @@ public enum ReportStatusEnum
 				return c;
 			}
 		}
-		
 		return null;
 	}
 
