@@ -24,12 +24,12 @@
 			</c:if>
 			<c:if test="${null==menuItem.childMenuList}"> 
 				<!----无子标题--->
-				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
+				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
 									
 		    </c:if>
 		</c:if>
 		<c:if test="${menuItem.menu.parentID>=1}"> 
-				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
+				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
 		</c:if>
    </c:forEach>
  

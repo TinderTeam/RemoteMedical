@@ -12,5 +12,6 @@ public class CommonExceptionMsg
 	
 	public static final String OPERATE_SUCCESS ="操作成功";
 	public static final String OPERATE_FAILED ="操作失败";
+ 
 
 }

@@ -1,5 +1,6 @@
 package cn.fuego.misp.service;
 
+import cn.fuego.misp.service.impl.MISPOperLogServiceImpl;
 import cn.fuego.remote.medical.manage.service.impl.UserServiceImpl;
 
 public class MISPServiceContext
@@ -7,6 +8,7 @@ public class MISPServiceContext
 	private static MISPServiceContext instance;
 
 	private MISPUserService userService = null;
+	private MISPOperLogService operLogService = null;
 
 	private MISPServiceContext()
 	{
@@ -32,5 +34,13 @@ public class MISPServiceContext
 	}
 	
 
+	public synchronized MISPOperLogService getMISPOperLogService()
+	{
+		if (null == operLogService)
+		{
+			operLogService = new MISPOperLogServiceImpl();
+		}
+		return operLogService;
+	}
 
 }

@@ -17,8 +17,10 @@ import org.hibernate.service.spi.ServiceException;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
@@ -63,6 +65,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			log.info("User Login : " + userName);
 		}
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.LOGIN, null, MISPOperLogConsant.OPERATE_SUCCESS);
 
 
 	}

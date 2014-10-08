@@ -9,6 +9,7 @@
 package cn.fuego.remote.medical.expert.web.action.report;
 
 import cn.fuego.misp.web.action.basic.TableAction;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.domain.ReportView;
@@ -90,12 +91,13 @@ public class ReportManageAction extends TableAction
 	public String submit()
 	{
 		expertService.submitMedicalReport(ReportStatusEnum.SUBMIT, this.medicalReport);
-		return SHOW_INFO;
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		return MISP_DONE_PAGE;
 	}
 	public String cancel()
 	{
 		expertService.submitMedicalReport(ReportStatusEnum.CACAL, this.medicalReport);
-		return SHOW_INFO;
+		return MISP_DONE_PAGE;
 	}
 	public String tranfer()
 	{

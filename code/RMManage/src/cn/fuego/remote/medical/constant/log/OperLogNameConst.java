@@ -6,7 +6,7 @@
 * @date 2014-9-27 下午09:36:35 
 * @version V1.0   
 */ 
-package cn.fuego.remote.medical.constant;
+package cn.fuego.remote.medical.constant.log;
 
 /** 
  * @ClassName: OperLogNameConst 
@@ -18,6 +18,8 @@ package cn.fuego.remote.medical.constant;
 
 public class OperLogNameConst
 {
-	public static final String LOGIN="登录"; 
+	 
+	public static final String CANCEL_REPORT = "撤销报告";
+	public static final String SUBMIT_REPORT = "提交报告";
 
 }

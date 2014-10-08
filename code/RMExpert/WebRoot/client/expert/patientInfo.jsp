@@ -3,6 +3,14 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+
+<script type="text/javascript">
+function submitForm(url) 
+{
+ document.form1.action = "expert/ReportManage!" +url;
+ return validateCallback(document.form1,navTabAjaxDone);
+}
+</script>
 <div class="pageContent" >
 
 	<div class="accordion" style="width:82%;float:left;margin:10px 5px 0px 10px;">
@@ -50,7 +58,7 @@
 		</div>
 		
 		</div>
-	   <s:form  onsubmit="return validateCallback(this,navTabAjaxDone);" action="expert/ReportManage!modify.action" method="POST" theme="simple">
+	   <s:form name="form1" action="expert/ReportManage" method="POST" theme="simple">
 		 <div class="accordionContent" style="height:510px;width:70%;float:right">
 			<div class="panel" defH="420">
 			<h1>病症诊断区</h1>
@@ -89,12 +97,12 @@
 				<ul class="toolBar">
 					 <c:choose>
 							   <c:when test="${'已提交' == medicalReport.reportView.exReportState}">  
-	                             <s:submit class="delete" name="save" value="撤销报告" align="left" method="cancel" />
+	                             <input type="button" name="save" value="撤销报告" onclick="sumbitForm('cancel')"  align="left" />
 					           </c:when>
 							   <c:otherwise>  
-							     <s:submit class="add" name="modify" value="保存报告" align="left" method="modify" />
-					             <s:submit class="edit" name="save" value="提交报告" align="left" method="submit" />
-							     <s:submit class="delete" name="save" value="转换专家" align="left" method="transfer" />
+							    <input type="button" name="modify" value="保存报告" onclick="submitForm('modify')" align="left"   />
+					            <input type="button" name="save" value="提交报告" onclick="submitForm('submit')"  align="left"  />
+							    <input type="button" name="save" value="转换专家" onclick="submitForm('transfer')" align="left"   />
 					           </c:otherwise>
 					</c:choose>
 					

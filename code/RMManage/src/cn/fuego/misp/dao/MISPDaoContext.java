@@ -2,6 +2,7 @@ package cn.fuego.misp.dao;
 
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.CommonDaoImpl;
+import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.domain.SystemIDType;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
@@ -25,7 +26,8 @@ public class MISPDaoContext
 	private Dao systemIDTypeDao = null;
  
 	private Dao systemUserDao = null;
-	
+	private Dao operLogDao = null;
+
 
 	private MISPDaoContext()
 	{
@@ -41,11 +43,12 @@ public class MISPDaoContext
 		return instance;
 	}
  
+	
 	public synchronized Dao getSystemUserDao() 
 	{
 		if (null == systemUserDao)
 		{
-			systemUserDao = new CommonDaoImpl(SystemUser.class);
+			systemUserDao = getDaoInstanceByClass(SystemUser.class);
 		}
 		return systemUserDao;
 	}
@@ -54,7 +57,7 @@ public class MISPDaoContext
 	{
 		if (null == systemMenuDao)
 		{
-			systemMenuDao = new CommonDaoImpl(SystemMenu.class);
+			systemMenuDao = getDaoInstanceByClass(SystemMenu.class);
 		}
 		return systemMenuDao;
 	}
@@ -69,6 +72,15 @@ public class MISPDaoContext
 		}
 		return systemIDTypeDao;
 	}
+	public synchronized Dao getOperLogDao() 
+	{
+		if (null == operLogDao)
+		{
+			operLogDao = getDaoInstanceByClass(OperLog.class);
+		}
+		return operLogDao;
+	}
+	
 	private Dao getDaoInstanceByClass(Class clazz)
 	{
 		Dao dao;

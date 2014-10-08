@@ -22,6 +22,11 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public class Report implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String hospitalID; //主键，医院ID
 	private int serialNo; // 主键 报告ID
 	private String reportNo; //报告号（由Ri_SerialNO得到）

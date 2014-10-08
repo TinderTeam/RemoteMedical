@@ -34,7 +34,7 @@
         </global-exception-mappings>    
     </package>
     
-	<package name="login" extends="struts-default">
+	<package name="login" extends="default">
 		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
 			<result type="redirect">/client/misp/dwzFrameIndex.jsp</result>
 			<result type="chain" name="Index">
@@ -47,7 +47,13 @@
  
 
  	</package>
- 	
+ 		<package name="log" extends="default">
+		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
+			<result>/client/misp/log/logManage.jsp</result>
+ 
+ 		</action>
+ 
+ 	</package>
  	<package name="report" extends="default">
   
    		<action name="ReportManage" class="cn.fuego.remote.medical.manage.web.action.report.ReportManageAction">

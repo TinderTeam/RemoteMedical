@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="Expert" table="expert">
+
+	    <id name="id" column="Es_ID" >
+			 
+		</id>
+
+		 <property name="name" column="Es_Name"></property>
+		 <property name="sex" column="Es_Sex"></property>
+		 <property name="age" column="Es_Age"></property>
+		 <property name="phoneNo" column="Es_PhoneNo"></property>
+		 <property name="telephoneNo" column="Es_TelephoneNo"></property>
+		 <property name="email" column="Es_Email"></property>
+		 <property name="qq" column="Es_QQ"></property>
+		 <property name="weixin" column="Es_WeiXin"></property>
+		 <property name="resume" column="Es_Resume"></property>
+		 <property name="exPhoto" column="Es_ExPhoto"></property>
+		 <property name="jobTitle" column="Es_JobTitle"></property>
+		 <property name="workPlace" column="Es_WorkPlace"></property>
+		 <property name="province" column="Es_Province"></property>
+		 <property name="city" column="Es_City"></property>
+		 <property name="county" column="Es_County"></property>
+		 <property name="expertise" column="Es_Expertise"></property>
+		 <property name="remark" column="Es_Remark"></property>
+		 <property name="signName" column="Eb_SignName"></property>
+		 <property name="authority" column="Ei_Authority"></property>
+		 <property name="state" column="Hs_State"></property>
+		 <property name="onlineState" column="Es_OnlineState"></property>
+		 <property name="login" column="Ed_Login"></property>
+		 <property name="apply" column="Ed_Apply"></property>
+		 <property name="reg" column="Ed_Reg"></property>
+		 <property name="auditor" column="Es_Auditor"></property>
+		 <property name="ctCount" column="Ei_CTCount"></property>
+		 <property name="drCount" column="Ei_DRCount"></property>	
+		 <property name="mrCount" column="Ei_MRCount"></property>
+		 <property name="ulCount" column="Ei_ULCount"></property>
+		 <property name="otherCount" column="Ei_OtherCount"></property>	
+		 <property name="reserve1" column="Es_Reserve1"></property>	 	 
+	     <property name="reserve2" column="Es_Reserve2"></property>
+		 <property name="reserve3" column="Es_Reserve3"></property>
+		 <property name="reserve4" column="Ei_Reserve4"></property>
+		 <property name="reserve5" column="Ei_Reserve5"></property>
+
+
+	</class>
+</hibernate-mapping>

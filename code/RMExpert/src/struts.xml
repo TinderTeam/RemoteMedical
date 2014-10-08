@@ -46,6 +46,15 @@
  
  	</package>
  	
+ 	    
+	<package name="log" extends="default">
+		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
+			<result>/client/misp/log/logList.jsp</result>
+ 
+ 		</action>
+ 
+ 	</package>
+ 	
  	<package name="expert" extends="default">
   
    		<action name="ReportManage" class="cn.fuego.remote.medical.expert.web.action.report.ReportManageAction">
