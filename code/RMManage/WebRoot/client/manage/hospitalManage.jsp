@@ -18,18 +18,15 @@
 					医院名称：<input type="text" name="filter.hospital.name" />
 				</td>
 				<td>
-						
-				<select class="combox" name="filter.hospital.province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html"  >
-					<option value="all">所在省市</option>
-					<option value="bj">北京</option>
-					<option value="sh">上海</option>
-				</select>
-				<select class="combox" name="filter.hospital.city" id="w_combox_city" ref="w_combox_area" refUrl="demo/combox/area_{value}.html">
-					<option value="all">所在城市</option>
-				</select>
-				<select class="combox" name="filter.hospital.county" id="w_combox_area">
-					<option value="all">所有在区县</option>
-				</select>
+
+				<select id="cmbProvince" name="filter.hospital.province" style="margin-left:0px;"></select>
+				<select id="cmbCity" name="filter.hospital.city"></select>
+				<select id="cmbArea" name="filter.hospital.county"></select>
+
+				<script type="text/javascript">
+					addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+	
+				</script>
 				</td>
 				
 			</tr>
@@ -69,7 +66,7 @@
 				<td>${e.contactsPhone}</td>
 				<td>
 					
-					<a title="医院信息编辑" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}" class="btnView" rel="hospitalInfo">查看</a>
+					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu8">查看</a>
 
 				
 				</td>

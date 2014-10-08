@@ -73,10 +73,11 @@ $(function()
                 },1000);
             }
 			
-		})
+		});
 		//$("#disp" ).html(percent);
 	}
   </script>
+	
 <!-- 更改上传样式 -->
 <style type="text/css">
 input{ vertical-align:middle; margin:0; padding:0}
@@ -85,6 +86,9 @@ input{ vertical-align:middle; margin:0; padding:0}
 .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:21px; width:40px;}
 .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:60px }
 </style>
+
+<!-- 省市三级联动js -->
+<script  src="<%=request.getContextPath()%>/client/lib/newJS/jsAddress.js" type="text/javascript"></script>
 </head>
 
 <body scroll="no">

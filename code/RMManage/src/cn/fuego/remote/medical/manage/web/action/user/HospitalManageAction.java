@@ -12,6 +12,7 @@ public class HospitalManageAction extends TableAction
 	/**
 	 * 
 	 */
+	public static final String PARENT_PAGE="user/HospitalManage";
 	private static final long serialVersionUID = 1L;
 
 	private UserService userService = ServiceContext.getInstance().getUserService();
@@ -21,7 +22,7 @@ public class HospitalManageAction extends TableAction
 	private TableDataModel<Hospital> hospitalTable = new  TableDataModel<Hospital>();
 	public String execute()
 	{
-
+		
 		hospitalTable.setDataSource(userService.getHospitalList(filter));
 		return SUCCESS;
 	}
@@ -52,10 +53,25 @@ public class HospitalManageAction extends TableAction
 
 		
 		userService.modifyHospitalInfo(hospitalModel);
-		
-		return execute();
-	}
+		this.getOperateMessage().setCallbackType("forward");
 
+		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
+
+		return MISP_DONE_PAGE;
+	}
+	
+
+    public String cancel()
+    
+    {
+		this.getOperateMessage().setCallbackType("forward");
+
+		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
+		
+		//this.getOperateMessage().setCallbackType("closeCurrent");
+    	return MISP_DONE_PAGE;
+    	
+    }
 	@Override
 	public String show()
 	{

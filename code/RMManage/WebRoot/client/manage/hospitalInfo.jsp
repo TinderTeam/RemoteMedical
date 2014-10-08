@@ -3,11 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-
+<script type="text/javascript">
+function submitForm(url){
+    var thisForm = document.hsForm;
+	thisForm.action="user/HospitalManage!"+url;
+	return validateCallback(thisForm,navTabAjaxDone);
+}
+</script>
 
 <div class="pageContent">
-	<s:form method="post" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);" >
+	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate"  >
 		<div class="pageFormContent" layoutH="56">
+
+	
+		
+		
 			<p>
 				<label>医院编号：</label>			
 				<input type="text" name="hospitalModel.hospital.id"  alt="" size="30" readonly="true" value="${hospitalModel.hospital.id}"/>
@@ -20,51 +30,28 @@
 
 			</p>			
 			<p style="width:800px !important;">
-				<label>医院地址：</label>	
-				<select class="combox" name="hospitalModel.hospital.province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html"  >
-					<c:choose>  
-     						<c:when test="${hospitalModel.hospital.province!=null}">   
-   							 <option value="${hospitalModel.hospital.province}" selected="selected">${hospitalModel.hospital.province}</option>
-   						</c:when>  
-     
-  					    <c:otherwise>  
-  					    	<option value="all">所在省市</option> 
-                        </c:otherwise>  
-                    </c:choose>
-					<option value="bj">北京</option>
-					<option value="sh">上海</option>
-				</select>
-				<select class="combox" name="hospitalModel.hospital.city" id="w_combox_city" ref="w_combox_area" refUrl="demo/combox/area_{value}.html"  >
-					<c:choose>  
-     					<c:when test="${hospitalModel.hospital.city!=null}">   
-   							 <option value="${hospitalModel.hospital.city}" selected="selected">${hospitalModel.hospital.city}</option>
-   						</c:when>  
-     
-  					    <c:otherwise>  
-  					    	<option value="all">所在城市</option> 
-                        </c:otherwise>  
-                    </c:choose>					
-					
-				</select>
-				<select class="combox" name="hospitalModel.hospital.county" id="w_combox_area" >
-					<c:choose>  
-     					<c:when test="${hospitalModel.hospital.county!=null}">   
-   							 <option value="${hospitalModel.hospital.county}" selected="selected">${hospitalModel.hospital.county}</option>
-   						</c:when>  
-     
-  					    <c:otherwise>  
-  					    	<option value="all">所在区县</option>
-                        </c:otherwise>  
-                    </c:choose>				
-					
-				</select>			
+				<label>医院地址：</label>
+				<input type="hidden" id="currentProvince" value="${hospitalModel.hospital.province}"/>
+				<input type="hidden" id="currentCity" value="${hospitalModel.hospital.city}"/>
+				<input type="hidden" id="currentCounty" value="${hospitalModel.hospital.county}"/>
+
+				<select id="cmbProvince" name="hospitalModel.hospital.province" style="margin-left:0px;"></select>
+				<select id="cmbCity" name="hospitalModel.hospital.city"></select>
+				<select id="cmbArea" name="hospitalModel.hospital.county"></select>
+
+				<script type="text/javascript">
+					addressInit('cmbProvince', 'cmbCity', 'cmbArea', document.getElementById("currentProvince").value, document.getElementById("currentCity").value, document.getElementById("currentCounty").value);
+	
+				</script>
+
+
 				
 
 			</p>
 
 				<dl style="height:20px !important;width:100%;">
 					<dt style="text-align:left;width:10%;" >详细地址：</dt>
-					<dd style="float:left !important;padding-left:7px !important;"><textarea name="hospitalModel.hospital.address" cols="95" rows="1" >${hospitalModel.hospital.address}</textarea></dd>
+					<dd style="float:left !important;padding-left:6px !important;"><textarea name="hospitalModel.hospital.address" cols="95" rows="1" style="text-align:left;">${hospitalModel.hospital.address}</textarea></dd>
 				</dl>				
 
 
@@ -90,18 +77,18 @@
 			</p>
 				<dl style="height:110px !important;width:100%;">
 					<dt style="text-align:left;width:10%;" >医院简介：</dt>
-					<dd style="float:left !important;padding-left:7px !important;"><textarea name="hospitalModel.hospital.resume" cols="95" rows="7" >${hospitalModel.hospital.resume}</textarea></dd>
+					<dd style="float:left !important;padding-left:6px !important;"><textarea name="hospitalModel.hospital.resume" cols="95" rows="7" >${hospitalModel.hospital.resume}</textarea></dd>
 				</dl>
 				<dl style="height:110px !important;width:100%;">
 					<dt style="text-align:left;width:10%;" >医院描述：</dt>
-					<dd style="float:left !important;padding-left:7px !important;"><textarea name="hospitalModel.hospital.remark" cols="95" rows="7" >${hospitalModel.hospital.remark}</textarea></dd>
+					<dd style="float:left !important;padding-left:6px !important;"><textarea name="hospitalModel.hospital.remark" cols="95" rows="7" >${hospitalModel.hospital.remark}</textarea></dd>
 				</dl>			
 			
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:35%" >
-				<li style="padding:0px 30px 0px 10px;"><s:submit value="保 存"  /></li>
-				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>
+				<li style="padding:0px 30px 0px 10px;"><div class="buttonContent"><input type="button"  value="保 存" onclick="submitForm('modify')"/></div></li>
+				<li><div class="buttonContent"><input type="button"  value="取 消" onclick="submitForm('cancel')"/></div></li>
 			</ul>
 		</div>
 	</s:form>

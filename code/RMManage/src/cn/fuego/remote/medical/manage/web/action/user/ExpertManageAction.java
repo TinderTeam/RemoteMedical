@@ -58,8 +58,8 @@ public class ExpertManageAction extends TableAction
 	@Override
 	public String show()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		expertModel = userService.getExpertByID(this.getSelectedID());
+		return SHOW_INFO;
 	}
 
 	public UserService getUserService()

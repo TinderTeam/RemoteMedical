@@ -55,17 +55,18 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"name",filter.getHospital().getName()));
 				
 			}
-			if(!ValidatorUtil.isEmpty(filter.getHospital().getProvince()))
+			if(!ValidatorUtil.isEmpty(filter.getHospital().getProvince())&&(!filter.getHospital().getProvince().equals("所在省份")))
 			{
+				
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"province",filter.getHospital().getProvince()));
 				
 			}
-			if(!ValidatorUtil.isEmpty(filter.getHospital().getCity()))
+			if(!ValidatorUtil.isEmpty(filter.getHospital().getCity())&&(!filter.getHospital().getCity().equals("所在城市"))&&(!filter.getHospital().getCity().equals("市辖区")))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"city",filter.getHospital().getCity()));
 				
 			}
-			if(!ValidatorUtil.isEmpty(filter.getHospital().getCounty()))
+			if(!ValidatorUtil.isEmpty(filter.getHospital().getCounty())&&(!filter.getHospital().getCounty().equals("所在区县"))&&(!filter.getHospital().getCounty().equals("市辖区")))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"county",filter.getHospital().getCounty()));
 				
@@ -130,6 +131,19 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 		 
 		return dataSource;
+	}
+
+	@Override
+	public ExpertModel getExpertByID(String id)
+	{
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, "id",id);
+		
+		ExpertModel expertModel = new ExpertModel();
+		Expert expert=(Expert) DaoContext.getInstance().getExpertDao().getUniRecord(condition);
+		
+		expertModel.setExpert(expert);
+	  		
+		return expertModel;
 	}
 
  
