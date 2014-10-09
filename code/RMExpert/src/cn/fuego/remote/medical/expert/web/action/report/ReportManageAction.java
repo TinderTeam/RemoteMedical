@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.remote.medical.expert.web.action.report;
 
-import cn.fuego.misp.web.action.basic.TableAction;
+import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
@@ -26,7 +26,7 @@ import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
  *  
  */
 
-public class ReportManageAction extends TableAction
+public class ReportManageAction extends DWZTableAction
 {
 	private ExpertService expertService = ServiceContext.getInstance().getExpertService();
 	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
@@ -36,6 +36,7 @@ public class ReportManageAction extends TableAction
 	
 	public String execute()
 	{
+		reportList.setPage(this.getPage());
 		reportList.setDataSource(expertService.getMedicalList(null, filter));
 		return SUCCESS;
 	}

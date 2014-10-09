@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<form id="pagerForm" method="post" action="expert/ReportManage">
+<!--  form id="pagerForm" method="post" action="expert/ReportManage">
 	<input type="hidden" name="status" value="${param.status}">
 	<input type="hidden" name="keywords" value="${param.keywords}" />
 	<input type="hidden" name="pageNum" value="3" />
@@ -10,25 +10,30 @@
 	<input type="hidden" name="orderField" value="${param.orderField}" />
 	<input type="hidden" name="reportList.page.pageSize" value="20" />
 	<input type="hidden" name="reportList.page.currentPage" value="${reportList.page.currentPage}" />
-</form>
+</form>-->
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
+	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
+	<input type="hidden" name="status" value="${param.status}">
+	<input type="hidden" name="keywords" value="${param.keywords}" />
+	<input type="hidden" name="pageNum" value="${reportList.page.currentPage}" />
+	<input type="hidden" name="numPerPage" value="${reportList.page.pageSize}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+ 
 	<div class="searchBar">
 
 		<table class="searchContent">
 			<tr >
 				<td>
-					患者姓名：<input type="text" name="filter.patientName" />
+					患者姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
 				</td>
 				<td>
 				 报告状态：
 				</td>
 				<td>
-				   
 					<select class="combox" name="filter.exReportState" >
-					   <option value="">默认所有状态</option>
+					    <option value="ALL">默认所有状态</option>
 						<c:forEach var="e" items="${filter.reportStatusList}">
 						  <c:choose>
 						       
@@ -44,19 +49,17 @@
 					</select>
 				</td>
 				<td>
-					设备类型：<input type="text" name="filter.modality" />
+					设备类型：<input type="text" name="filter.modality" value="${filter.modality}"/>
 				</td>
 	
-				
-
 			</tr>
 			
-			<tr >
+			<tr>
 				<td class="dateRange">
 					时间段:
-					<input type="text" value="" readonly="readonly" class="date" name="dateStart">
+					<input type="text" value="" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}"/>
 					<span class="limit">-</span>
-					<input type="text" value="" readonly="readonly" class="date" name="dateEnd">
+					<input type="text" value="" readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
 				<td>
 				 时间：
@@ -64,17 +67,14 @@
 				<td>
 				   
 					<select class="combox" >
-						<option value="">默认所有时间</option>
+						<option value="ALL">默认所有时间</option>
 						<option value="today">今天</option>
 						<option value="last3">近三天</option>
 						<option value="last7">近七天</option>
 					</select>
 				</td>
 				<td>
-				 医院名称：
-				</td>
-				<td>
-					医院名称：<input type="text" name="filter.hospitalName" />
+					医院名称：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}" />
 				</td>
 
 
@@ -129,12 +129,12 @@
 			<span>显示</span>
 	        <c:set var="page" value="${reportList.page}" scope="request"/>
 			
-			<select class="combox" name="reportList.page.currentPage"  onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	
-			       <c:if test="${e==page.currentPage}">
+			       <c:if test="${e==page.pageSize}">
 			         <option value="${e}" selected>${e}</option>
 				  </c:if>
-                  <c:if test="${e!=page.currentPage}">
+                  <c:if test="${e!=page.pageSize}">
 			         <option value="${e}">${e}</option>
 				  </c:if>
 				</c:forEach>

@@ -8,75 +8,41 @@
 	<input type="hidden" name="pageNum" value="3" />
 	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
 	<input type="hidden" name="orderField" value="${param.orderField}" />
-	<input type="hidden" name="reportList.page.pageSize" value="20" />
-	<input type="hidden" name="reportList.page.currentPage" value="${reportList.page.currentPage}" />
+	<input type="hidden" name="logList.page.pageSize" value="20" />
+	<input type="hidden" name="logList.page.currentPage" value="${logList.page.currentPage}" />
 </form>
 
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
+	<form onsubmit="return navTabSearch(this);" action="log/LogManage" method="post">
 	<div class="searchBar">
 
 		<table class="searchContent">
 			<tr >
 				<td>
-					患者姓名：<input type="text" name="filter.patientName" />
+					日志编号：<input type="text" name="filter.id" />
 				</td>
+			 
+			 
 				<td>
-				 报告状态：
-				</td>
-				<td>
-				   
-					<select class="combox" name="filter.exReportState" >
-					   <option value="">默认所有状态</option>
-						<c:forEach var="e" items="${filter.reportStatusList}">
-						  <c:choose>
-						       
-							   <c:when test="${e.status == filter.exReportState}">  
-	                             <option value="${e.status}" selected="selected">${e.status}</option>
-							   </c:when>
-							   <c:otherwise>  
-							      <option value="${e.status}">${e.status}</option>
-							   </c:otherwise>
-						   </c:choose>
-						</c:forEach>
- 
-					</select>
-				</td>
-				<td>
-					设备类型：<input type="text" name="filter.modality" />
+					操作人：<input type="text" name="filter.user" />
 				</td>
 	
 				
-
+				<td>
+					操作：<input type="text" name="filter.name" />
+				</td>
+ 
 			</tr>
 			
 			<tr >
 				<td class="dateRange">
-					时间段:
-					<input type="text" value="" readonly="readonly" class="date" name="dateStart">
+					操作时间段:
+					<input type="text" value="" readonly="readonly" class="date" name="filter.startTime">
 					<span class="limit">-</span>
-					<input type="text" value="" readonly="readonly" class="date" name="dateEnd">
+					<input type="text" value="" readonly="readonly" class="date" name="filter.endTime">
 				</td>
-				<td>
-				 时间：
-				</td>
-				<td>
-				   
-					<select class="combox" >
-						<option value="">默认所有时间</option>
-						<option value="today">今天</option>
-						<option value="last3">近三天</option>
-						<option value="last7">近七天</option>
-					</select>
-				</td>
-				<td>
-				 医院名称：
-				</td>
-				<td>
-					医院名称：<input type="text" name="filter.hospitalName" />
-				</td>
-
+				 
 
 				<td><div class="buttonActive"><div class="buttonContent"><button type="submit" >查 询</button></div></div></td>
 			</tr>
@@ -94,9 +60,10 @@
 			<tr>
 				<th width="80" align="center">编号</th>
 				<th width="120" align="center">操作人</th>
-				<th width="80" align="center">操作</th>
+				<th width="80" align="center">操作名称</th>
 				<th width="100" align="center">操作结果</th>
 				<th width="150" align="center">操作时间</th>
+				<th width="150" align="center">操作</th>
 			</tr>
 		</thead>
 	<tbody>
@@ -108,7 +75,7 @@
 	            <td>${e.result}</td>
 	            <td>${e.operTime}</td>
 	            <td>
- 					<a title="诊断报告" target="navTab" rel="report" href="ReportManage!delete.action?selectedID=${e.id}&operateType=delete" class="btnEdit">删除</a>
+ 					<a title="诊断报告" target="navTab" rel="report" href="LogManage!delete.action?selectedID=${e.id}&operateType=delete" class="btnEdit">删除</a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -120,9 +87,9 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${reportList.page}" scope="request"/>
+	        <c:set var="page" value="${logList.page}" scope="request"/>
 			
-			<select class="combox" name="reportList.page.currentPage"  onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox" name="logList.page.currentPage"  onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	
 			       <c:if test="${e==page.currentPage}">
 			         <option value="${e}" selected>${e}</option>

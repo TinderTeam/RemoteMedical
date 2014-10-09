@@ -14,7 +14,6 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.action.basic.TableAction;
 import cn.fuego.misp.web.model.log.LogFilterModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
-import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 
 /** 
  * @ClassName: LogManageAction 
@@ -83,5 +82,23 @@ public class LogManageAction extends TableAction
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public TableDataModel<OperLog> getLogList()
+	{
+		return logList;
+	}
+	public void setLogList(TableDataModel<OperLog> logList)
+	{
+		this.logList = logList;
+	}
+	public LogFilterModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(LogFilterModel filter)
+	{
+		this.filter = filter;
+	}
+	
+	
 
 }

@@ -61,6 +61,7 @@ public class ReportView implements PersistenceObject
 	private Date exReport; //  专家报告时间
 	private Date exDownReport; // 本地下载报告时间
 	private String exApplyDoctor; //申请远程医生
+	
 	private String exDoctor; // 诊断专家
 	private String exState; //专家状态（）
 	private String exReportState; // 专家报告状态（已报告，已编写，未报告)

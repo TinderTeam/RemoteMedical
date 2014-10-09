@@ -32,6 +32,7 @@ import cn.fuego.remote.medical.domain.ImageArchiving;
 import cn.fuego.remote.medical.domain.Report;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.service.ExpertService;
+import cn.fuego.remote.medical.expert.service.cache.ReportTemplateCache;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
@@ -58,7 +59,43 @@ public class ExpertServiceImpl implements ExpertService
 	public AbstractDataSource<ReportView> getMedicalList(String userName, ReportFilterModel filter)
 	{
  
-		AbstractDataSource<ReportView> dataSource = new DataBaseSourceImpl<ReportView>(ReportView.class);
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		
+		if(!ValidatorUtil.isEmpty(userName))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"exDoctor",userName));	
+		}
+		
+		if(null != filter)
+		{
+			if(!ValidatorUtil.isEmpty(filter.getPatientName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"patientName",filter.getPatientName()));
+			}
+			if(!ValidatorUtil.isEmpty(filter.getModality()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"modality",filter.getModality()));
+			}
+			if(!ValidatorUtil.isEmpty(filter.getHospitalName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"hospitalName",filter.getHospitalName()));
+			}
+			
+			if(!ValidatorUtil.isEmpty(filter.getExReportState()) && !ConditionTypeEnum.ALL.equals(filter.getExReportState()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"exReportState",filter.getExReportState()));
+			}
+			
+			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"exReportState",filter.getStartDate()));
+			}
+			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"exReportState",filter.getEndDate()));
+			}
+		}
+		AbstractDataSource<ReportView> dataSource = new DataBaseSourceImpl<ReportView>(ReportView.class,conditionList);
  
 		
 		
@@ -92,7 +129,7 @@ public class ExpertServiceImpl implements ExpertService
 		}
 		
 		//read template information
-		reportModel.setTemplate(getReportTemplate());
+		reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTree());
 		return reportModel;
 	}
 
@@ -122,68 +159,7 @@ public class ExpertServiceImpl implements ExpertService
 
 	}	
 	
-	private ReportTemplateModel getReportTemplate() 
-	{
-		log.info("start read template");
-		SAXReader reader = new SAXReader();
 
-		ReportTemplateModel templateModel = null;
-		Document document;
-		try
-		{
-			document = reader.read(new File("D:/Tinder/template.xml"));
-			Element root = document.getRootElement();
-			
-			templateModel = getTemplateByElement(root);
-		}
-		catch (DocumentException e)
-		{
-			log.error("read template failed",e);
-		}
-		log.info("read template done");
-
-
-		return templateModel;
-	}
-	
- 
-	private ReportTemplateModel getTemplateByElement(Element e)
-	{
-		ReportTemplateModel template = new ReportTemplateModel();
-
-		template.setName("模板");
-		if("Report".equals(e.getName()))
-		{
-			template.setName("诊断报告");
-		}
-		if("Conclusion".equals(e.getName()))
-		{
-			template.setName("诊断结论");
-		}
-		
-		if(!ValidatorUtil.isEmpty(e.elements()))
-		{
-			List<ReportTemplateModel> childList = new ArrayList<ReportTemplateModel>();
-			for (Iterator<?> i = e.elementIterator(); i.hasNext();)
-			{
-				Element child = (Element) i.next();
-				if("name".equals(child.getName()))
-				{
-					template.setName(child.getText());
-				}
-				else
-				{
-					childList.add(getTemplateByElement(child));
-				}
-
-			}
-			template.setChildList(childList);
-
-		}
-		template.setValue(e.getText());
-
-		return template;
-	}
 	
 
 }

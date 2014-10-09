@@ -29,6 +29,7 @@ public abstract class TableAction extends MISPAction
 	private String[] selectedIDList;
 	private String operateType;
 
+
  
 	abstract public String create();
 	abstract public String delete();
@@ -95,7 +96,7 @@ public abstract class TableAction extends MISPAction
 	{
 		return SHOW_INFO;
 	}
-	
+
 	
 
 }

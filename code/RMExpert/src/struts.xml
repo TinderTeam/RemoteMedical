@@ -49,7 +49,7 @@
  	    
 	<package name="log" extends="default">
 		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
-			<result>/client/misp/log/logList.jsp</result>
+			<result>/client/misp/log/logManage.jsp</result>
  
  		</action>
  

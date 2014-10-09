@@ -31,6 +31,7 @@ public enum  ConditionTypeEnum
     // 成员变量  
     private String typeName;  
     private int typeValue;
+    public static String ALL ="ALL";
     private ConditionTypeEnum(String type,int typeValue)
     {
     	this.typeName = type;
