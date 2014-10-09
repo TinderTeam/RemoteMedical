@@ -19,8 +19,11 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.sun.corba.se.spi.copyobject.ObjectCopier;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.Dao;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.util.meta.ReflectionUtil;
@@ -40,7 +43,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	public void create(PersistenceObject object)
 	{
-		log.info("the object calss is " + getFeaturedClass()+"the object is "+object.toString());
+		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
 		try
 		{
 			HibernateUtil.add(object);
@@ -56,7 +59,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	public void update(PersistenceObject object)
 	{
-		log.info("the object calss is " + getFeaturedClass()+"the object is "+object.toString());
+		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
 
 		try
 		{
@@ -73,7 +76,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 	}
 	public void delete(PersistenceObject object)
 	{
-		log.info("the object calss is " + getFeaturedClass()+"the object is "+object.toString());
+		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
 
 		Session session = null;
 		Transaction tx = null;
@@ -85,6 +88,41 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 			Object classObj = session.load(getFeaturedClass(), object);
 
 			session.delete(classObj);
+
+			tx.commit();
+		} catch (RuntimeException re)
+		{
+			log.error("delete error",re);
+			throw re;
+
+		} finally
+		{
+			if (session != null)
+			{
+				session.close();
+			}
+		}
+	}
+	
+	public void delete(QueryCondition condition)
+	{
+		log.info("the query is " + condition.toString());
+
+		List<PersistenceObject> objectList = (List<PersistenceObject>) this.getAll(condition);
+		Session session = null;
+		Transaction tx = null;
+		try
+		{
+			session = HibernateUtil.getSession();
+			tx = session.beginTransaction();
+
+			for(PersistenceObject object : objectList)
+			{
+				Object classObj = session.load(getFeaturedClass(), object);
+
+				session.delete(classObj);
+			}
+
 
 			tx.commit();
 		} catch (RuntimeException re)

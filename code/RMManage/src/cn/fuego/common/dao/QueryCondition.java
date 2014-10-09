@@ -8,8 +8,9 @@
 */ 
 package cn.fuego.common.dao;
 
+import java.util.List;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
-import cn.fuego.common.contanst.DataTypeEnum;
 
 /** 
  * @ClassName: QueryCondition 
@@ -25,6 +26,7 @@ public class QueryCondition
 	private String attrName;
 	private String firstValue;
 	private String secondValue;
+	private List<String> listValue;
  
 	public QueryCondition(ConditionTypeEnum conditionType, String attrName, String firstValue)
 	{
@@ -33,7 +35,13 @@ public class QueryCondition
 		this.attrName = attrName;
 		this.firstValue = firstValue;
 	}
-	
+	public QueryCondition(ConditionTypeEnum conditionType, String attrName, List<String> listValue)
+	{
+		super();
+		this.conditionType = conditionType;
+		this.attrName = attrName;
+		this.listValue = listValue;
+	}
 	/**
 	 * @param conditionType
 	 * @param attrName
@@ -81,6 +89,16 @@ public class QueryCondition
 	public void setSecondValue(String secondValue)
 	{
 		this.secondValue = secondValue;
+	}
+
+	public List<String> getListValue()
+	{
+		return listValue;
+	}
+
+	public void setListValue(List<String> listValue)
+	{
+		this.listValue = listValue;
 	}
 	
 

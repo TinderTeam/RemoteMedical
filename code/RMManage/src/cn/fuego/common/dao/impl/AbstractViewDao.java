@@ -280,6 +280,15 @@ public abstract class AbstractViewDao implements ViewDao
 					Object secondValueObject = ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), condition.getSecondValue());
 					c.add(Restrictions.between(condition.getAttrName(),valueObject,secondValueObject));
 					break;	
+				case IN:
+					List<Object> listObject = new ArrayList<Object>();
+					for(String e : condition.getListValue())
+					{
+						listObject.add(ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), e));
+					}
+					c.add(Restrictions.in(condition.getAttrName(),listObject));
+					
+					break;
 				default:
 				    break;
 				  
