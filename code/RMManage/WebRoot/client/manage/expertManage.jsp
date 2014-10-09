@@ -7,7 +7,7 @@
 
 
 <div class="pageHeader">
-	<s:form action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);">
+	<s:form action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" name="exSearch">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -17,20 +17,11 @@
 				<td>
 					专家姓名：<input type="text" name="filter.expert.name" />
 				</td>
-				<td>			
-					<select class="combox" name="filter.expert.jobTitle">
-						<option value="">职称类型</option>
-						<option value="职称a">职称a</option>
-						<option value="职称b">职称b</option>
-					</select>
-				</td>
-				<td>			
-					<select class="combox" name="filter.expert.workPlace">
-						<option value="">所在医院</option>
-						<option value="医院a">医院a</option>
-						<option value="医院b">医院b</option>
-
-					</select>
+				<td>
+					职称类型：<input type="text" name="filter.expert.jobTitle" />
+				</td>				
+				<td>
+					所在医院：<input type="text" name="filter.expert.workPlace" />
 				</td>
 				
 			</tr>

@@ -8,132 +8,150 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
+
 <div class="pageContent">
-		<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate"  >
+
+		<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this);" >
 		<div class="pageFormContent" layoutH="56">
 		<div style="height:200px !important;">
 		<span style="font-size:1.2em;"><strong>个人信息</strong></span>
 		<div class="divider"></div>
 		<div style=" float:right; display:block; margin-top:5px; margin-right:420px; overflow:hidden; width:200px; height:180px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-			<div align="center"><img src ="<%=basePath%>/client/uploads/img/head.jpg" height="140" width="130" ></div>
+			<div align="center"><img src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="130" ></div>
 			<div class="divider"></div>
-<div class="file-box">
-  <form action="" method="post" enctype="multipart/form-data">
- <input type='text' name='textfield' id='textfield' class='txt' />  
- <input type='button' class='btn' value='浏览' />
-    <input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
- <input type="submit" name="submit" class="btn" value="上传" />
-  </form>
-</div>
+			<s:file name="expertModel.exPhoto" ></s:file>
 		</div>
-			<p>
-				<label>专家编号：</label>			
-				<input type="text" name="expertModel.expert.id"  alt="" size="30" readonly="true" value="${expertModel.expert.id}"/>
-			</p>			
+	
+			<dl>
+				<dt>专家编号：</dt>
+				<dd><input type="text" name="expertModel.expert.id"  alt="" size="30" readonly="true" value="${expertModel.expert.id}"/></dd>
+			</dl>
 		
-			<p>
-				<label>姓名：</label>
-				<input type="text" size="30" class="required " name="expertModel.expert.name" value="${expertModel.expert.name}"/>
-			</p>
+		
+			<dl>
+				<dt>姓名：</dt>
+				<dd><input type="text" size="30" class="required " name="expertModel.expert.name" value="${expertModel.expert.name}"/></dd>
+			</dl>
 
-			<p>
-				<label>性别：</label>
-				<select name="type" class="required combox">
-					<option value="">请选择性别</option>
-					<option value="M">男</option>
+			<dl>
+				<dt>性别：</dt>
+				<dd>
+				<select name="expertModel.expert.sex" class="required combox">
+         	<c:choose>
+                <c:when test="${expertModel.expert.sex!=NULL}">
+						<option value="${expertModel.expert.sex}">${expertModel.expert.sex}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="NULL">请选择性别</option>
+                </c:otherwise>
+         	</c:choose>	
+         			<option value="M">男</option>
 					<option value="W" >女</option>
-					<option value="O" >O</option>
+					<option value="O" >O</option>				
 				</select>
-			</p>
-			<p>
-				<label>年龄：</label>
-				<input type="text" size="30" />
-			</p>			
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt>年龄：</dt>
+				<dd><input type="text" size="30" name="expertModel.expert.age" value="${expertModel.expert.age}"/></dd>
+			</dl>			
 		</div>
 		
 		<div style="height:130px !important;">	
 		<span style="font-size:1.2em;"><strong>联系方式</strong></span>
 		<div class="divider"></div>
-			<p>
-				<label>手机号码：</label>			
-				<input type="text" name="phone" class="phone" size="30"/>
-			<p>
-			<p>
-				<label>座机号码：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>	
-			<p>
-				<label>电子邮箱：</label>			
-				<input type="text" name="email" class="required email" size="30"/>
-			</p>				
+			<dl>
+				<dt>手机号码：</dt>			
+				<dd><input type="text" name="expertModel.expert.phoneNo" class="phone" size="30"  value="${expertModel.expert.phoneNo}"/></dd>
+			</dl>
+			<dl>
+				<dt>座机号码：</dt>			
+				<dd><input type="text" name="expertModel.expert.telephoneNo"  alt="" size="30" value="${expertModel.expert.telephoneNo}"/></dd>
+			</dl>	
+			<dl>
+				<dt>电子邮箱：</dt>			
+				<dd><input type="text" name="expertModel.expert.email" class="required email" size="30" value="${expertModel.expert.email}"/></dd>
+			</dl>				
 			
-			<p>
-				<label>QQ号码：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>			
-			<p>
-				<label>微信号：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>					
+			<dl>
+				<dt>QQ号码：</dt>			
+				<dd><input type="text" name="expertModel.expert.qq"  alt="" size="30" value="${expertModel.expert.qq}"/></dd>
+			</dl>			
+			<dl>
+				<dt>微信号：</dt>			
+				<dd><input type="text" name="expertModel.expert.weixin"  alt="" size="30" value="${expertModel.expert.weixin}"/></dd>
+			</dl>					
 			</div>
 
 		<div style="height:200px !important;">	
 		<span style="font-size:1.2em;"><strong>工作信息</strong></span>
 		<div class="divider"></div>
 
-				<dl style="height:110px !important;width:100%;">
-					<dt style="text-align:left;width:10%;" >专家简介：</dt>
-					<dd style="float:left !important;padding-left:7px !important;"><textarea name="textarea1" cols="95" rows="7" ></textarea></dd>
+				<dl  class="nowrap">
+					<dt >专家简介：</dt>
+					<dd ><textarea name="expertModel.expert.resume" cols="95" rows="7" >${expertModel.expert.resume}</textarea></dd>
 				</dl>	
 
-			<p>
-				<label>职称：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>
-			<p>
-				<label>擅长专业技能：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>				
-			<p>
-				<label>工作医院：</label>			
-				<input type="text" name=""  alt="" size="30"/>
-			</p>
-			<p >
-				<select class="combox" name="province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html"  >
-					<option value="all">所在省市</option>
-					<option value="bj">北京</option>
-					<option value="sh">上海</option>
-				</select>
-				<select class="combox" name="city" id="w_combox_city" ref="w_combox_area" refUrl="demo/combox/area_{value}.html">
-					<option value="all">所在城市</option>
-				</select>
-				<select class="combox" name="area" id="w_combox_area">
-					<option value="all">所有在区县</option>
-				</select>
-			</p>
+			<dl>
+				<dt>职称：</dt>			
+				<dd><input type="text" name="expertModel.expert.jobTitle"  alt="" size="30" value="${expertModel.expert.jobTitle}"/></dd>
+			</dl>
+			<dl>
+				<dt>擅长专业技能：</dt>			
+				<dd><input type="text" name="expertModel.expert.expertise"  alt="" size="30" value="${expertModel.expert.expertise}"/></dd>
+			</dl>				
+			<dl style="width:100%;" >
+				<dt >工作医院名称：</dt>			
+				<dd><input type="text" name="expertModel.expert.workPlace"  alt="" size="30" value="${expertModel.expert.workPlace}" readonly="true"/></dd>
+			</dl>
+
+
 			
-				<dl style="height:110px !important;width:100%;">
-					<dt style="text-align:left;width:10%;" >补充描述：</dt>
-					<dd style="float:left !important;padding-left:7px !important;"><textarea name="textarea1" cols="95" rows="7" ></textarea></dd>
+			<dl style="width:100%;">
+				<dt>工作医院地点：</dt>
+				<dd style="width:70%;"><input type="hidden" id="currentEProvince" value="${expertModel.expert.province}"/>
+				<input type="hidden" id="currentECity" value="${expertModel.expert.city}"/>
+				<input type="hidden" id="currentECounty" value="${expertModel.expert.county}"/>
+
+				<select id="EeProvince" name="expertModel.expert.province" style="margin-left:0px;"></select>
+				<select id="EeCity" name="expertModel.expert.city"></select>
+				<select id="EeArea" name="expertModel.expert.county"></select>
+
+				<script type="text/javascript">
+					addressInit('EeProvince', 'EeCity', 'EeArea', document.getElementById("currentEProvince").value, document.getElementById("currentECity").value, document.getElementById("currentECounty").value);
+	
+				</script>
+				</dd>
+			</dl>
+			
+				<dl class="nowrap">
+					<dt>补充描述：</dt>
+					<dd><textarea name="expertModel.expert.remark" cols="95" rows="7" >${expertModel.expert.remark}</textarea></dd>
 				</dl>
 				<dl style="height:110px !important;width:100%;">
-					<dt style="text-align:left;width:10%;" >上传签名：</dt>
-					<dd style="float:left !important;padding-left:7px !important;">
-						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;"><img src ="<%=basePath%>/client/uploads/img/signature.png" height="50" width="150" ></div>
-					</dd>
-					<dd><div style="padding-top:30px !important;"><input name="file1" type="file" /></div>
+					<dt>上传签名：</dt>
+					<dd >
+						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+						<img src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="50" width="150" id="img1">
+						</div>	                           
+					</dd>									
+					<dd>
+					<div style="padding-top:30px !important;">
+					<s:file name="expertModel.signPic" ></s:file>
+					</div>
 					</dd>
 				</dl>
-			
-		</div>
+
+			</div>
 		
-
-
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:35%" >
-				<li style="padding:0px 30px 0px 10px;"><div class="buttonActive"><div class="buttonContent"><button type="submit">保 存</button></div></div></li>
-				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>
+
+				<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>			
+				<li><input type="button" class="mispButton primary close" value="关 闭" /></li>
+				
 			</ul>
 		</div>
 	</s:form>

@@ -8,16 +8,23 @@
 */ 
 package cn.fuego.remote.medical.manage.service.impl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.remote.medical.dao.DaoContext;
@@ -144,6 +151,66 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		expertModel.setExpert(expert);
 	  		
 		return expertModel;
+	}
+
+	@Override
+	public void saveHospitalInfo(HospitalModel hospitalModel)
+	{
+		
+		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
+	}
+
+	@Override
+	public void saveExpertInfo(ExpertModel expertModel)
+	{
+		ExpertModel old = getExpertByID(expertModel.getExpert().getId());
+		if(expertModel.getSignPic()!=null)
+		{
+			try
+			{
+				FileInputStream fin= new FileInputStream(expertModel.getSignPic());
+				Session s = HibernateUtil.getSession();
+				Blob signPic=Hibernate.getLobCreator(s).createBlob(fin, fin.available());//.createBlob(fin);
+				expertModel.getExpert().setSignName(signPic);
+			} catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			expertModel.getExpert().setSignName(old.getExpert().getSignName());
+		}
+		if(expertModel.getExPhoto()!=null)
+		{
+			try
+			{
+				FileInputStream fin= new FileInputStream(expertModel.getExPhoto());
+				Session s = HibernateUtil.getSession();
+				Blob exPhoto=Hibernate.getLobCreator(s).createBlob(fin, fin.available());//.createBlob(fin);
+				expertModel.getExpert().setExPhoto(exPhoto);
+				
+			} catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
+		else
+		{
+			expertModel.getExpert().setExPhoto(old.getExpert().getExPhoto());
+		}
+		DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
+		
 	}
 
  

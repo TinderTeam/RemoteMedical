@@ -18,6 +18,11 @@ public interface UserService extends MISPUserService
 	 AbstractDataSource<Expert> getExpertList(ExpertModel filter);
 
 	 ExpertModel getExpertByID(String id);
+
+	void saveHospitalInfo(HospitalModel hospitalModel);
+
+	void saveExpertInfo(ExpertModel expertModel);
+	
 	
 	
 	

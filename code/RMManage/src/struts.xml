@@ -69,15 +69,26 @@
 			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>
  			
 			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
-			<result type="dispatcher" name="showInfo">/client/manage/hospitalInfo.jsp</result>				    
+			<result type="dispatcher" name="showInfo">/client/manage/hospitalInfo.jsp</result>	
+			<result type="dispatcher" name="editInfo">/client/manage/hospitalInfoEdit.jsp</result>			    
 		</action>
 		
    		<action name="ExpertManage" class="cn.fuego.remote.medical.manage.web.action.user.ExpertManageAction">
 			<result type="dispatcher">/client/manage/expertManage.jsp</result>
  			
 			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
-			<result type="dispatcher" name="showInfo">/client/manage/expertInfoCheck.jsp</result>				    
-		</action>  
+			<result type="dispatcher" name="showInfo">/client/manage/expertInfoCheck.jsp</result>	
+			<result type="dispatcher" name="editInfo">/client/manage/expertInfoEdit.jsp</result>							    
+			<result name="signName" type="stream">
+				<param name="contentType">image/jpeg/png</param>
+				<param name="inputName">signNameStream</param>
+			</result>
+			<result name = "expertPhoto" type="stream">
+				<param name="contentType">image/jpeg/png</param>
+				<param name="inputName">expertStream</param>
+			</result>
+		</action> 
+ 
  	</package>
  
 </struts>

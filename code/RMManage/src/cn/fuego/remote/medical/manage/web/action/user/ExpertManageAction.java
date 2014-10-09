@@ -1,5 +1,8 @@
 package cn.fuego.remote.medical.manage.web.action.user;
 
+import java.io.InputStream;
+import java.sql.SQLException;
+
 import cn.fuego.misp.web.action.basic.TableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.Expert;
@@ -20,6 +23,9 @@ public class ExpertManageAction extends TableAction
 	private ExpertModel filter;
 	private TableDataModel<Expert> expertTable = new  TableDataModel<Expert>();
 	
+	private InputStream signNameStream;
+	private InputStream expertStream;
+	private String picid;
 	public String execute()
 	{
 
@@ -62,16 +68,37 @@ public class ExpertManageAction extends TableAction
 		return SHOW_INFO;
 	}
 
-	public UserService getUserService()
-	{
-		return userService;
-	}
+    public String infoEdit()
+    {
+    	expertModel = userService.getExpertByID(this.getSelectedID());
+    	return EDIT_INFO;
+    	
+    }
+    public String infoSave()
+    {
+    	userService.saveExpertInfo(expertModel);
+    	//this.getOperateMessage().setCallbackType("closeCurrent");
+    	return MISP_DONE_PAGE;
+    }
 
-	public void setUserService(UserService userService)
-	{
-		this.userService = userService;
-	}
+	//读取图片
+    public String getSignNameImag() throws SQLException 
+    {
+    	 
+    	signNameStream = userService.getExpertByID(picid).getExpert().getSignName().getBinaryStream();
+   
+        return "signName";
+    }
+	//读取图片
+    public String getPhotoImag() throws SQLException 
+    {
+    	 
+    	this.expertStream = userService.getExpertByID(picid).getExpert().getExPhoto().getBinaryStream();
+    	 
 
+        return "expertPhoto";
+    }
+    
 	public ExpertModel getExpertModel()
 	{
 		return expertModel;
@@ -101,5 +128,36 @@ public class ExpertManageAction extends TableAction
 	{
 		this.expertTable = expertTable;
 	}
+
+	public InputStream getSignNameStream()
+	{
+		return signNameStream;
+	}
+
+	public void setSignNameStream(InputStream signNameStream)
+	{
+		this.signNameStream = signNameStream;
+	}
+
+	public InputStream getExpertStream()
+	{
+		return expertStream;
+	}
+
+	public void setExpertStream(InputStream expertStream)
+	{
+		this.expertStream = expertStream;
+	}
+
+	public String getPicid()
+	{
+		return picid;
+	}
+
+	public void setPicid(String picid)
+	{
+		this.picid = picid;
+	}
+	
 
 }

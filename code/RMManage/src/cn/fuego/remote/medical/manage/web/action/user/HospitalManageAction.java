@@ -72,6 +72,19 @@ public class HospitalManageAction extends TableAction
     	return MISP_DONE_PAGE;
     	
     }
+     
+    public String infoEdit()
+    {
+    	
+    	hospitalModel= userService.getHospitalByID(this.getSelectedID());
+    	return EDIT_INFO;
+    }
+    public String infoSave()
+    {
+    	userService.saveHospitalInfo(hospitalModel);
+    	//this.getOperateMessage().setCallbackType("closeCurrent");
+    	return MISP_DONE_PAGE;
+    }
 	@Override
 	public String show()
 	{

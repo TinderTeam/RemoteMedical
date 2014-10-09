@@ -89,6 +89,12 @@ input{ vertical-align:middle; margin:0; padding:0}
 
 <!-- 省市三级联动js -->
 <script  src="<%=request.getContextPath()%>/client/lib/newJS/jsAddress.js" type="text/javascript"></script>
+<!-- button css -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>
+<!-- 图片上传预览js -->
+
+
+
 </head>
 
 <body scroll="no">
