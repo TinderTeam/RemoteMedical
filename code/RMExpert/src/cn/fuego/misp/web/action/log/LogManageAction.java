@@ -11,7 +11,7 @@ package cn.fuego.misp.web.action.log;
 import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.service.MISPOperLogService;
 import cn.fuego.misp.service.MISPServiceContext;
-import cn.fuego.misp.web.action.basic.TableAction;
+import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.log.LogFilterModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 
@@ -23,7 +23,7 @@ import cn.fuego.misp.web.model.page.TableDataModel;
  *  
  */
 
-public class LogManageAction extends TableAction
+public class LogManageAction extends DWZTableAction
 {
 	private MISPOperLogService service = MISPServiceContext.getInstance().getMISPOperLogService();
 	private TableDataModel<OperLog> logList = new TableDataModel<OperLog>();
@@ -49,7 +49,7 @@ public class LogManageAction extends TableAction
 	@Override
 	public String delete()
 	{
-		// TODO Auto-generated method stub
+		service.deleteLog(this.getSelectedID());
 		return null;
 	}
 
@@ -59,7 +59,7 @@ public class LogManageAction extends TableAction
 	@Override
 	public String deleteList()
 	{
-		// TODO Auto-generated method stub
+		service.deleteLog(this.getSelectedID());
 		return null;
 	}
 

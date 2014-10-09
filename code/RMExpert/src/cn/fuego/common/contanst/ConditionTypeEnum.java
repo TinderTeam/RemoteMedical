@@ -26,7 +26,8 @@ public enum  ConditionTypeEnum
 	BIGER_EQ("大于等于",6),
 	LOWER("小于",7), 
 	LOWER_EQ("小于等于",8),  
-	BETWEEN("之间",9);
+	BETWEEN("之间",9),
+	IN("属于",10);
 	
     // 成员变量  
     private String typeName;  

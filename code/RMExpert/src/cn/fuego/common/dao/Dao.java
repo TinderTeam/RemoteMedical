@@ -32,7 +32,7 @@ public interface Dao extends ViewDao
 	void update(PersistenceObject object);
  
 	void delete(PersistenceObject object);
-
-
+	
+	void delete(QueryCondition condition);
 
 }

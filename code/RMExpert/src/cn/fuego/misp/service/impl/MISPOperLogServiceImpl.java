@@ -8,8 +8,11 @@
 */ 
 package cn.fuego.misp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
@@ -71,7 +74,8 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 	@Override
 	public void deleteLog(List<String> logIDList)
 	{
-		//MISPDaoContext.getInstance().getOperLogDao().delete(object);
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "id", logIDList);
+		MISPDaoContext.getInstance().getOperLogDao().delete(condition);
 
 	}
 
@@ -81,7 +85,9 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 	@Override
 	public void deleteLog(String logID)
 	{
-		// TODO Auto-generated method stub
+		List<String> logIDList = new ArrayList<String>();
+		logIDList.add(logID);
+		deleteLog(logIDList);
 
 	}
 
