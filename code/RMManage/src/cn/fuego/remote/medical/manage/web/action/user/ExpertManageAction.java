@@ -3,14 +3,14 @@ package cn.fuego.remote.medical.manage.web.action.user;
 import java.io.InputStream;
 import java.sql.SQLException;
 
-import cn.fuego.misp.web.action.basic.TableAction;
+import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 
-public class ExpertManageAction extends TableAction
+public class ExpertManageAction extends DWZTableAction
 {
 
 	/**
@@ -28,7 +28,7 @@ public class ExpertManageAction extends TableAction
 	private String picid;
 	public String execute()
 	{
-
+		expertTable.setPage(this.getPage());
 		expertTable.setDataSource(userService.getExpertList(filter));
 		return SUCCESS;
 	}	

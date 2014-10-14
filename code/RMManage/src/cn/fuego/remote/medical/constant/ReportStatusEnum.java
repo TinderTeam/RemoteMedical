@@ -37,7 +37,7 @@ public enum ReportStatusEnum
 	{
 		for (ReportStatusEnum c : ReportStatusEnum.values())
 		{
-			if (c.status == status)
+			if (c.status.equals(status))
 			{
 				return c;
 			}

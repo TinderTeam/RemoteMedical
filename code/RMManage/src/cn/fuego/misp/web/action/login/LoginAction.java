@@ -72,7 +72,14 @@ public class LoginAction extends MISPAction
 
 		return SUCCESS;
 	}
-
+	public String logout()
+	{
+		ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		session.clear();
+		return LOGIN_FAILED;
+		
+	}
 	public UserModel getUser()
 	{
 		return user;

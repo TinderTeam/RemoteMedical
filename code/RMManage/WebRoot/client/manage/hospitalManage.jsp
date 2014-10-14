@@ -7,15 +7,19 @@
 
 <div class="pageHeader">
 	
-	<s:form action="user/HospitalManage" method="POST" onsubmit="return navTabSearch(this);">
+	<s:form  id="pagerForm" action="user/HospitalManage" method="POST" onsubmit="return navTabSearch(this);">
+	
+		<input type="hidden" name="pageNum"  />
+	    <input type="hidden" name="numPerPage"  />
+	
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					医院编号：<input type="text" name="filter.hospital.id" />
+					医院编号：<input type="text" name="filter.hospital.id" value="${filter.hospital.id}"/>
 				</td>
 				<td>
-					医院名称：<input type="text" name="filter.hospital.name" />
+					医院名称：<input type="text" name="filter.hospital.name" value="${filter.hospital.name}" />
 				</td>
 				<td style="display:none;">
 
@@ -30,7 +34,7 @@
 				</td>
 				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
-				
+			
 			</tr>
 
 		</table>
@@ -89,16 +93,23 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage"  onchange="navTabPageBreak({numPerPage:this.value})">
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
+	        <c:set var="page" value="${hospitalTable.page}" scope="request"/>
+			
+			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
+				<c:forEach var="e" items="${page.pageSizeList}"> 	
+			       <c:if test="${e==page.pageSize}">
+			         <option value="${e}" selected>${e}</option>
+				  </c:if>
+                  <c:if test="${e!=page.pageSize}">
+			         <option value="${e}">${e}</option>
+				  </c:if>
+				</c:forEach>
+ 
 			</select>
-			<span>条，共${hospitalTable.page.count}条</span>
+			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="${hospitalTable.page.count}" numPerPage="${hospitalTable.page.pageSize}" pageNumShown="10" currentPage="${hospitalTable.page.currentPage}"></div>
+		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 </div>

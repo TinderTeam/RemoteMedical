@@ -12,6 +12,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.Expert;
+import cn.fuego.remote.medical.domain.Hospital;
+
 /** 
  * @ClassName: LinkDaoImplTest 
  * @Description: TODO
@@ -29,7 +33,14 @@ public class LinkDaoImplTest
 	@Test
 	public void testCreate()
 	{
-		fail("Not yet implemented");
+		for(int i=0;i<300;i++)
+		{
+			Hospital hosp = new Hospital();
+			hosp.setId("hospital"+i);
+			hosp.setName("湘雅");
+			DaoContext.getInstance().getHospitalDao().create(hosp);	
+		}
+
 	}
 
 	/**
@@ -38,7 +49,13 @@ public class LinkDaoImplTest
 	@Test
 	public void testUpdate()
 	{
-		fail("Not yet implemented");
+		for(int i=2000;i<3000;i++)
+		{
+			Expert hosp = new Expert();
+			hosp.setId("expert"+i);
+			hosp.setName("专家"+i);
+			DaoContext.getInstance().getExpertDao().create(hosp);	
+		}
 	}
 
 	/**

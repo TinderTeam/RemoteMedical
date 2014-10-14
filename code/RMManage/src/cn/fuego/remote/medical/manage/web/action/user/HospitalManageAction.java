@@ -1,13 +1,13 @@
 package cn.fuego.remote.medical.manage.web.action.user;
 
-import cn.fuego.misp.web.action.basic.TableAction;
+import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
 
-public class HospitalManageAction extends TableAction
+public class HospitalManageAction extends DWZTableAction
 {
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class HospitalManageAction extends TableAction
 	private TableDataModel<Hospital> hospitalTable = new  TableDataModel<Hospital>();
 	public String execute()
 	{
-		
+		hospitalTable.setPage(this.getPage());
 		hospitalTable.setDataSource(userService.getHospitalList(filter));
 		return SUCCESS;
 	}

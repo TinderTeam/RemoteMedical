@@ -1,32 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <div class="pageContent">
-	<form method="post" action="" class="pageForm" onsubmit="">
+	<s:form method="post" action="user/UserManage!create.action" class="pageForm required-validate" name="newForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="pageFormContent" layoutH="58">
-			<div class="unit">
-				<label>用户编号：</label>
-				<input type="text" size="30" readonly="true" value="10000023"/>
-			</div>
-			<div class="divider"></div>
+
 			<div class="unit">
 				<label>用户名称：</label>
-				<input type="text" size="30" name="name"/>
+				<input type="text" size="30" name="filter.userName" class="required"/>
 			</div>
 			<div class="divider"></div>
 			<div class="unit">
 				<label>账户类型：</label>
-				<label class="radioButton"><input name="name" type="radio" />专家</label>
-				<label class="radioButton"><input name="name" type="radio" />医院</label>
-				<label class="radioButton"><input name="name" type="radio" />管理员</label>
-			</div>
+				<select class="combox" name="filter.accountType" >
+						 <option value="" >请必须选择一种</option>
+						 <c:forEach var="ut2" items="${filter.userTypeList}">
+						  		 <c:choose>		       
+							   		 <c:when test="${ut2.type=='超级管理员'}">  
 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   			    <option value="${ut2.type}" > ${ut2.type}</option>
+							   		  </c:otherwise>
+							   
+						   		 </c:choose>
+						  </c:forEach>								
+
+					</select>
+			</div>		
+
+		
+			<div id="errorMsg" style="color:red;"></div>
 		</div>
 		<div class="formBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确 定</button></div></div></li>
-				<li><div class="button"><div class="buttonContent"><button type="reset">重 置</button></div></div></li>
+			<ul style="margin-right:200px !important;" >
+				<li ><div class="buttonActive"><div class="buttonContent"><button type="submit">提 交</button></div></div></li>
+				<li style="padding:0px 30px 0px 10px;"><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>			
+<!--  	<li style="padding:0px 30px 0px 10px;"><s:submit method="create" value="保 存" cssClass="mispButton primary"></s:submit></li>					
+-->
 			</ul>
 		</div>
-	</form>
+	</s:form>
 </div>

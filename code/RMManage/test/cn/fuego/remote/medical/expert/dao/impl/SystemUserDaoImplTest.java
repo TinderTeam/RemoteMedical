@@ -11,6 +11,7 @@ package cn.fuego.remote.medical.expert.dao.impl;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts.apps.mailreader.dao.User;
@@ -19,8 +20,7 @@ import org.junit.Test;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.dao.MISPDaoContext;
-import cn.fuego.remote.medical.dao.DaoContext;
-import cn.fuego.remote.medical.domain.ImageArchiving;
+import cn.fuego.misp.domain.SystemUser;
 
 /** 
  * @ClassName: SystemUserDaoImplTest 
@@ -39,16 +39,22 @@ public class SystemUserDaoImplTest
 	@Test
 	public void testCreate()
 	{
-//		SystemUser user = new SystemUser();
-//		user.setUserName("admin1");
-//		user.setPassword("2345");
-//		user.setRegDate(new Date(System.currentTimeMillis()));
-//		MISPDaoContext.getInstance().getSystemUserDao().create(user);
-		ImageArchiving object = new ImageArchiving();
-		object.setHospitalID("人民医院");
-		object.setImgArchName("头部") ;
-		object.setSerialNo(2);
-		DaoContext.getInstance().getImageArchivingDao().create(object); 
+		for(int i=10;i<200;i++)
+		{
+			SystemUser user = new SystemUser();
+			
+			user.setUserName("admin"+i);
+			user.setPassword("123456");
+			user.setAccountType(1);
+			user.setRegDate(new Date(System.currentTimeMillis()));
+			MISPDaoContext.getInstance().getSystemUserDao().create(user);
+		}
+		
+//		ImageArchiving object = new ImageArchiving();
+//		object.setHospitalID("人民医院");
+//		object.setImgArchName("头部") ;
+//		object.setSerialNo(2);
+//		DaoContext.getInstance().getImageArchivingDao().create(object); 
 		//List<ImageArchiving> list = (List<ImageArchiving>) DaoContext.getInstance().getImageArchivingDao().getAll();
 		//System.out.println(list.size());
 		fail("Not yet implemented");

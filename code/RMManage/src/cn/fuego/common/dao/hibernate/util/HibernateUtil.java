@@ -1,11 +1,18 @@
 package cn.fuego.common.dao.hibernate.util;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
+
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.meta.ReflectionUtil;
 
 public final class HibernateUtil
 {
@@ -129,5 +136,66 @@ public final class HibernateUtil
 			if (s != null)
 				s.close();
 		}
+	}
+	
+	public static  Criteria getCriteriaByCondition(Class clazz , List<QueryCondition> conditionList,Session s)
+	{
+		Criteria c  = s.createCriteria(clazz);
+		if(null != conditionList)
+		{
+			for(QueryCondition condition:conditionList)
+			{
+				Object valueObject = null;
+				if(null != condition.getFirstValue())
+				{
+					valueObject = ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), condition.getFirstValue());
+				}
+				switch(condition.getOperate())
+				{
+				case INCLUDLE:
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					break;
+				case EXCLUDLE:
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					break;
+				case EQUAL:	
+					c.add(Restrictions.eq(condition.getAttrName(),valueObject));
+					break;
+				case NOT_EQUAL:	
+					c.add(Restrictions.ne(condition.getAttrName(),valueObject));
+					break;	
+				case BIGER:	
+					c.add(Restrictions.gt(condition.getAttrName(),valueObject));
+					break;	
+				case BIGER_EQ:	
+					c.add(Restrictions.ge(condition.getAttrName(),valueObject));
+					break;	
+				case LOWER:	
+					c.add(Restrictions.lt(condition.getAttrName(),valueObject));
+					break;	
+				case LOWER_EQ:	
+					c.add(Restrictions.le(condition.getAttrName(),valueObject));
+					break;	
+				case BETWEEN:	
+					Object secondValueObject = ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), condition.getSecondValue());
+					c.add(Restrictions.between(condition.getAttrName(),valueObject,secondValueObject));
+					break;	
+				case IN:
+					List<Object> listObject = new ArrayList<Object>();
+					for(String e : condition.getListValue())
+					{
+						listObject.add(ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), e));
+					}
+					c.add(Restrictions.in(condition.getAttrName(),listObject));
+					
+					break;
+				default:
+				    break;
+				  
+				}
+ 			}
+		}
+
+		return c;
 	}
 }

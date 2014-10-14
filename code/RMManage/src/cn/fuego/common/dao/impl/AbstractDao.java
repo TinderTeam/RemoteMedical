@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.common.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -107,20 +108,25 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 	public void delete(QueryCondition condition)
 	{
 		log.info("the query is " + condition.toString());
-
-		List<PersistenceObject> objectList = (List<PersistenceObject>) this.getAll(condition);
-		Session session = null;
+	
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		
+		if(null != condition)
+		{
+			conditionList.add(condition);
+		}Session session = null;
+		
+		
 		Transaction tx = null;
 		try
 		{
 			session = HibernateUtil.getSession();
 			tx = session.beginTransaction();
-
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
+			List<PersistenceObject> objectList =c.list();
 			for(PersistenceObject object : objectList)
 			{
-				Object classObj = session.load(getFeaturedClass(), object);
-
-				session.delete(classObj);
+				session.delete(object);
 			}
 
 

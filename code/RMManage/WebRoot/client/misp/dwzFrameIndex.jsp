@@ -103,11 +103,11 @@ input{ vertical-align:middle; margin:0; padding:0}
 			<div class="headerNav">
 				<a class="logo" href="http://www.szangell.com/">安健科技</a>
 				<ul class="nav">
-                    <li>欢迎您，Dr ****!</li>
+                    <li>欢迎您，用户：${loginUser.userName}!</li>
 	 
 					<li><a href="<%=request.getContextPath()%>/client/manage/passwordModify.jsp" target="dialog" width="600">密码修改</a></li> 
  
-					<li><a href="login.html">退出</a></li>
+					<li><a href="login/login!logout.action">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="azure"><div class="selected">天蓝</div></li>

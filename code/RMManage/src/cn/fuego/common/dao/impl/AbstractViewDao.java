@@ -81,7 +81,7 @@ public abstract class AbstractViewDao implements ViewDao
 			{
 				conditionList.add(condition);
 			}
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			record = (PersistenceObject) c.uniqueResult();
 		} catch (RuntimeException re)
 		{
@@ -114,7 +114,7 @@ public abstract class AbstractViewDao implements ViewDao
 			{
 				conditionList.add(condition);
 			}
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			objectList =c.list();
 		} catch (RuntimeException re)
 		{
@@ -134,7 +134,7 @@ public abstract class AbstractViewDao implements ViewDao
 
 	}
 	
-		public PersistenceObject getUniRecord(List<QueryCondition>  conditionList)
+	public PersistenceObject getUniRecord(List<QueryCondition>  conditionList)
 	{
 		PersistenceObject record = null;
 		Session session = null;
@@ -142,7 +142,7 @@ public abstract class AbstractViewDao implements ViewDao
 		{
 			session = HibernateUtil.getSession();
  
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			record = (PersistenceObject) c.uniqueResult();
 		} catch (RuntimeException re)
 		{
@@ -169,7 +169,7 @@ public abstract class AbstractViewDao implements ViewDao
  		try
 		{
 			session = HibernateUtil.getSession();
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			objectList =c.list();
 		} catch (RuntimeException re)
 		{
@@ -195,7 +195,7 @@ public abstract class AbstractViewDao implements ViewDao
  		try
 		{
 			session = HibernateUtil.getSession();
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			c.setFirstResult(startNum);  
 	        c.setMaxResults(pageSize); 
 			objectList =c.list();
@@ -223,7 +223,7 @@ public abstract class AbstractViewDao implements ViewDao
  		try
 		{
 			session = HibernateUtil.getSession();
-			Criteria c = this.getCriteriaByCondition(conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			count = (Long)c.setProjection(Projections.rowCount()).uniqueResult(); 		
 		} catch (RuntimeException re)
 		{
@@ -242,60 +242,5 @@ public abstract class AbstractViewDao implements ViewDao
 		return count;
 
 	}
-	private Criteria getCriteriaByCondition(List<QueryCondition> conditionList,Session s)
-	{
-		Criteria c  = s.createCriteria(this.getFeaturedClass());
-		if(null != conditionList)
-		{
-			for(QueryCondition condition:conditionList)
-			{
-				Object valueObject = ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), condition.getFirstValue());
-				switch(condition.getOperate())
-				{
-				case INCLUDLE:
-					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
-					break;
-				case EXCLUDLE:
-					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
-					break;
-				case EQUAL:	
-					c.add(Restrictions.eq(condition.getAttrName(),valueObject));
-					break;
-				case NOT_EQUAL:	
-					c.add(Restrictions.ne(condition.getAttrName(),valueObject));
-					break;	
-				case BIGER:	
-					c.add(Restrictions.gt(condition.getAttrName(),valueObject));
-					break;	
-				case BIGER_EQ:	
-					c.add(Restrictions.ge(condition.getAttrName(),valueObject));
-					break;	
-				case LOWER:	
-					c.add(Restrictions.lt(condition.getAttrName(),valueObject));
-					break;	
-				case LOWER_EQ:	
-					c.add(Restrictions.le(condition.getAttrName(),valueObject));
-					break;	
-				case BETWEEN:	
-					Object secondValueObject = ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), condition.getSecondValue());
-					c.add(Restrictions.between(condition.getAttrName(),valueObject,secondValueObject));
-					break;	
-				case IN:
-					List<Object> listObject = new ArrayList<Object>();
-					for(String e : condition.getListValue())
-					{
-						listObject.add(ReflectionUtil.convertToFieldObject(getFeaturedClass(), condition.getAttrName(), e));
-					}
-					c.add(Restrictions.in(condition.getAttrName(),listObject));
-					
-					break;
-				default:
-				    break;
-				  
-				}
- 			}
-		}
-
-		return c;
-	}
+ 
 }

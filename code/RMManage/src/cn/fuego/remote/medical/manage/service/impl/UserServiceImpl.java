@@ -19,20 +19,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
+import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.common.util.SystemConfigInfo;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.dao.MISPDaoContext;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
+import cn.fuego.remote.medical.manage.web.model.UserFilterModel;
 
 /** 
  * @ClassName: UserServiceImpl 
@@ -212,6 +220,69 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 		
 	}
+
+	@Override
+	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(null != filter)
+		{
+
+			if(!ValidatorUtil.isEmpty(filter.getUserName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"userName",filter.getUserName()));
+				
+			}
+			if(!ValidatorUtil.isEmpty(filter.getAccountType()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"accountType",String.valueOf(UserTypeEnum.getEnumByStatus(filter.getAccountType()).getTypeValue())));
+				
+			}
+			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"regDate",filter.getStartDate()));
+			}
+			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"regDate",filter.getEndDate()));
+			}				
+
+			
+		}		
+		
+		
+		
+		AbstractDataSource<SystemUser> dataSource = new DataBaseSourceImpl<SystemUser>(SystemUser.class,conditionList);
+ 
+		return dataSource;
+	}
+
+	@Override
+	public void createUser(String userName, String accountType)
+	{
+		SystemUser oldUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userName", userName));
+		if(null != oldUser)
+		{
+			log.error("create user failed,the user name "+ userName +" is existed." );
+			throw new ServiceException(CommonExceptionMsg.USER_EXISTED);
+		}
+		SystemUser user = new SystemUser();
+		user.setUserName(userName);
+		user.setAccountType(UserTypeEnum.getEnumByStatus(accountType).getTypeValue());
+		user.setRegDate(DateUtil.getCurrentDate());
+		user.setPassword(SystemConfigInfo.getDefaultPassword());
+		MISPDaoContext.getInstance().getSystemUserDao().create(user);
+	}
+
+	@Override
+	public void deleteUserList(List<String> userIDList)
+	{
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);
+		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
+		
+		
+	}
+	
 
  
  

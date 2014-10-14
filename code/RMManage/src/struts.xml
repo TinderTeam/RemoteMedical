@@ -41,7 +41,7 @@
 			  <param name="actionName">ReportManage</param>
             </result>    
 			
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>		    
 		</action>
 		  
  
@@ -88,6 +88,12 @@
 				<param name="inputName">expertStream</param>
 			</result>
 		</action> 
+		<action name="UserManage" class="cn.fuego.remote.medical.manage.web.action.user.UserManageAction">
+			<result type="dispatcher">/client/manage/userManage.jsp</result>
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
+			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
+		</action>
  
  	</package>
  
