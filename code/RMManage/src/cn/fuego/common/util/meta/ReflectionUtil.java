@@ -47,7 +47,7 @@ public class ReflectionUtil
 		}
 		catch(Exception e)
 		{
-			log.error("can not convert to right type.the class is " + clazz + "the field name is " + fieldName + "the value is " + value);
+			log.error("can not convert to right type.the class is " + clazz + " the field name is " + fieldName + "the value is " + value);
 			log.error("convert data failed",e);
 			throw new SystemOperateException(CommonExceptionMsg.DATA_CONVERT_ERROR);
 		}
