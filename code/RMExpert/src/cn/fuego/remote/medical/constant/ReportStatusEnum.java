@@ -20,7 +20,7 @@ public enum ReportStatusEnum
 {
 	SUBMIT("已报告"), // 提交报告
 	SAVE("已编写"), // 保存报告
-	CACAL("未报告"); // 撤销报告
+	CANCEL("未报告"); // 撤销报告
 	private String status;
 
 	private ReportStatusEnum(String status)
@@ -37,7 +37,7 @@ public enum ReportStatusEnum
 	{
 		for (ReportStatusEnum c : ReportStatusEnum.values())
 		{
-			if (c.status == status)
+			if (c.status.equals(status))
 			{
 				return c;
 			}

@@ -41,7 +41,7 @@
 			  <param name="actionName">ReportManage</param>
             </result>    
 			
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>		    
 		</action>
  
  	</package>

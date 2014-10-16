@@ -97,13 +97,19 @@ public class ReportManageAction extends DWZTableAction
 	}
 	public String cancel()
 	{
-		expertService.submitMedicalReport(ReportStatusEnum.CACAL, this.medicalReport);
+		expertService.submitMedicalReport(ReportStatusEnum.CANCEL, this.medicalReport);
 		return MISP_DONE_PAGE;
 	}
 	public String tranfer()
 	{
 		// TODO Auto-generated method stub
 		return this.SHOW_INFO;
+	}
+	public String back()
+	{
+		execute();
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		return MISP_DONE_PAGE;
 	}
 	
 	public TableDataModel<ReportView> getReportList()

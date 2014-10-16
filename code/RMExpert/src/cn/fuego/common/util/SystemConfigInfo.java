@@ -30,6 +30,10 @@ public class SystemConfigInfo
 		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.PRODUCT_NAME);
 	}
 	
+	public static String getDefaultPassword()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.USER_DEFAULT_PASSWOARD);
+	}
 	public static String getTemplatePath()
 	{
 		return  getSystemRootPath() + PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.TEMPLATE_PATH);

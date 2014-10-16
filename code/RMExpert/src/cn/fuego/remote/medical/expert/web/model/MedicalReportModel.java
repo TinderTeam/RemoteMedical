@@ -9,8 +9,11 @@
 package cn.fuego.remote.medical.expert.web.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.domain.ReportView;
 
 /** 
@@ -67,7 +70,7 @@ public class MedicalReportModel
 	{
 		this.template = template;
 	}
- 
+
 
 
 }

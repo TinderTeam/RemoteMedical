@@ -8,6 +8,10 @@
 */ 
 package cn.fuego.misp.web.model.user;
 
+import java.util.Date;
+
+import cn.fuego.remote.medical.constant.UserTypeEnum;
+
 /** 
  * @ClassName: UserModel 
  * @Description: TODO
@@ -21,7 +25,8 @@ public class UserModel
 	private int userID;
 	private String userName;
 	private String password;
-	private String accountType;
+	private int accountType;
+	private Date regDate;
 	public int getUserID()
 	{
 		return userID;
@@ -46,11 +51,20 @@ public class UserModel
 	{
 		this.password = password;
 	}
-	public String getAccountType()
+
+	public Date getRegDate()
+	{
+		return regDate;
+	}
+	public void setRegDate(Date regDate)
+	{
+		this.regDate = regDate;
+	}
+	public int getAccountType()
 	{
 		return accountType;
 	}
-	public void setAccountType(String accountType)
+	public void setAccountType(int accountType)
 	{
 		this.accountType = accountType;
 	}

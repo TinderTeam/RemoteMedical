@@ -102,7 +102,8 @@ function submitForm(url)
 							   <c:otherwise>  
 							    <input type="button" name="modify" value="保存报告" onclick="submitForm('modify')" align="left"   />
 					            <input type="button" name="save" value="提交报告" onclick="submitForm('submit')"  align="left"  />
-							    <input type="button" name="save" value="转换专家" onclick="submitForm('transfer')" align="left"   />
+							    <input type="button" name="transfer" value="转换专家" onclick="submitForm('transfer')" align="left"   />
+							    <input type="button" name="back" value="返回" onclick="submitForm('back')" align="left"   />
 					           </c:otherwise>
 					</c:choose>
 					

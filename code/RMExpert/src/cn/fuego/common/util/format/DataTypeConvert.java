@@ -8,15 +8,13 @@
 */ 
 package cn.fuego.common.util.format;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import cn.fuego.common.util.meta.ReflectionUtil;
-import cn.fuego.common.util.validate.ValidatorUtil;
 
 /** 
  * @ClassName: DataConvert 

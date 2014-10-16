@@ -20,9 +20,8 @@ public enum UserTypeEnum
 {	
 	EXPERT("专家",1),  
 	HOSPITAL("医院",2),    
-	LOW_ADMIN("普通管理员",99),
-	ADMIN("管理员",88);  
-
+	LOW_ADMIN("普通管理员",88),
+	ADMIN("超级管理员",99); 
 	private String type;
 	private int typeValue;
 	private UserTypeEnum(String type, int typeValue)
@@ -38,7 +37,17 @@ public enum UserTypeEnum
 	{
 		return typeValue;
 	}
- 
+	public static UserTypeEnum getEnumByStatus(String type)
+	{
+		for (UserTypeEnum c : UserTypeEnum.values())
+		{
+			if (c.type.equals(type))
+			{
+				return c;
+			}
+		}
+		return null;
+	}
  
 
 }

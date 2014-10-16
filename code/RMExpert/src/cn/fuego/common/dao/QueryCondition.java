@@ -28,6 +28,13 @@ public class QueryCondition
 	private String secondValue;
 	private List<String> listValue;
  
+	public QueryCondition(ConditionTypeEnum conditionType, String attrName)
+	{
+		super();
+		this.conditionType = conditionType;
+		this.attrName = attrName;
+ 	}
+	
 	public QueryCondition(ConditionTypeEnum conditionType, String attrName, String firstValue)
 	{
 		super();

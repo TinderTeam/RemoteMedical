@@ -95,6 +95,9 @@ public class ExpertServiceImpl implements ExpertService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"exReportState",filter.getEndDate()));
 			}
 		}
+		
+		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"exReportState"));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"exApply"));
 		AbstractDataSource<ReportView> dataSource = new DataBaseSourceImpl<ReportView>(ReportView.class,conditionList);
  
 		

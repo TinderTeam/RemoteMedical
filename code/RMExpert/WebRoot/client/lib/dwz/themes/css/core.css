@@ -62,7 +62,7 @@ a:hover {text-decoration:underline;}
 .tabs .tabsFooterContent { display:block; overflow:hidden; height:5px; background-position:100% -650px;}
 
 
-.tabsPage .tabsPageHeader { display:block; height:27px; border-style:solid; border-width:1px 1px 0 1px; background-position:0 -450px; background-repeat:repeat-x; position:relative;}
+.tabsPage .tabsPageHeader { display:none; height:27px; border-style:solid; border-width:1px 1px 0 1px; background-position:0 -450px; background-repeat:repeat-x; position:relative;}
 .tabsPage .tabsPageHeaderContent { display:block; overflow:hidden; height:27px; margin-right:19px; position:relative;}
 .tabsPage .tabsPageHeaderMargin { margin:0 34px 0 17px;}
 .tabsPage .tabsPageHeader ul { display:block; width:10000px; height:26px; z-index:1; position:absolute;}
@@ -183,7 +183,7 @@ a:hover {text-decoration:underline;}
 
 /* Tree */
 .tree li { clear:both; display:block; line-height:22px; cursor:pointer;}
-.tree div, .tree a, .tree span { display:inherit; height:22px; line-height:22px;}
+.tree div, .tree a, .tree span { display:inherit; height:22px; line-height:22px;width:500px;}
 .tree div { display:block; overflow:hidden;}
 .tree div div { float:left; display:block; overflow:hidden; width:22px; height:22px; border:none; background-position:0 -100px;}
 .tree a, .tree a:hover { text-decoration:none;}

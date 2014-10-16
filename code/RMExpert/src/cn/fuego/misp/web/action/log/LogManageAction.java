@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.misp.web.action.log;
 
+import java.util.Arrays;
+
 import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.service.MISPOperLogService;
 import cn.fuego.misp.service.MISPServiceContext;
@@ -40,7 +42,7 @@ public class LogManageAction extends DWZTableAction
 	public String create()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return execute();
 	}
 
 	/* (non-Javadoc)
@@ -50,7 +52,7 @@ public class LogManageAction extends DWZTableAction
 	public String delete()
 	{
 		service.deleteLog(this.getSelectedID());
-		return null;
+		return execute();
 	}
 
 	/* (non-Javadoc)
@@ -59,8 +61,8 @@ public class LogManageAction extends DWZTableAction
 	@Override
 	public String deleteList()
 	{
-		service.deleteLog(this.getSelectedID());
-		return null;
+		service.deleteLog(Arrays.asList(this.getSelectedIDList()));
+		return  execute();
 	}
 
 	/* (non-Javadoc)

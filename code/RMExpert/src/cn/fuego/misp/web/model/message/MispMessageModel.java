@@ -21,7 +21,10 @@ import cn.fuego.common.exception.CommonExceptionMsg;
 public class MispMessageModel
 {
 	public static String CLOSE_CURENT_PAGE = "closeCurrent";
-	private String statusCode = "200";
+	public static String SUCCESS_CODE = "200";
+	public static String FAILURE_CODE = "300";
+	public static String TIMEOUT_CODE = "301";
+	private String statusCode = SUCCESS_CODE;
 	private String message = CommonExceptionMsg.OPERATE_SUCCESS;
 	private String navTabId;
 	private String rel;
