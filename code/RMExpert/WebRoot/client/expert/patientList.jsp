@@ -100,13 +100,13 @@
 			<tr>
 				<th width="80" align="center">处理状态</th>
 				<th width="80" align="center">患者姓名</th>
-				<th width="120" align="center">性别</th>
+				<th width="80" align="center">性别</th>
 				<th width="80" align="center">年龄</th>
 				<th width="100" align="center">检查部位</th>
 				<th width="80" align="center">报告状态</th>
 				<th width="150" align="center">检查设备</th>
 				<th width="80" align="center">远程请求时间</th>
-				<th width="80" align="center">远程请求医院</th>
+				<th width="120" align="center">远程请求医院</th>
 				<th width="80" align="center">操作</th>
 			</tr>
 		</thead>

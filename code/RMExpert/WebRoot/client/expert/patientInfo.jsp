@@ -11,43 +11,83 @@ function submitForm(url)
  return validateCallback(document.form1,navTabAjaxDone);
 }
 </script>
+<!-- 自适应屏幕高度 -->
+<script type="text/javascript">
+
+//版面布局自适应
+ total = document.documentElement.clientHeight;
+colHeight = total-84;
+document.getElementById("accordionL").style.height=colHeight-15+"px";
+document.getElementById("contentL").style.height=colHeight-16+"px";
+document.getElementById("panelImg").style.height=colHeight-230+"px";
+document.getElementById("panelDA").style.height=colHeight-104+"px";
+document.getElementById("contentDA").style.height=colHeight-16+"px";
+document.getElementById("contentDM").style.height=colHeight-44+"px";
+//文本域宽度自适应
+textAreaWidth=document.getElementById("panelDA").clientWidth;
+partW=textAreaWidth*0.065;
+document.getElementById("dis").innerText=textAreaWidth;
+document.getElementById("text1").cols=partW;
+document.getElementById("text2").cols=partW;
+document.getElementById("text3").cols=partW;
+document.getElementById("text4").cols=partW;
+//文本域高度自适应
+textAreaHeight=document.getElementById("panelDA").clientHeight;
+partH=textAreaHeight;
+//document.getElementById("dis").innerText=textAreaHeight;
+document.getElementById("textD1").style.height=partH*0.4+"px";
+document.getElementById("text1").rows=partH*0.015;
+document.getElementById("text2").rows=partH*0.015;
+document.getElementById("textD2").style.height=partH*0.55+"px";
+document.getElementById("text3").rows=partH*0.027;
+document.getElementById("text4").rows=partH*0.027;
+</script>
+<script>
+$(function ()
+{ $(".treeMenu").popover({trigger:'hover'});
+});
+</script>
 <div class="pageContent" >
 
-	<div class="accordion" style="width:82%;float:left;margin:10px 5px 0px 10px;">
+<p id="dis" style="display:none;">
+</p>
+	<div class="accordion" style="width:82%;float:left;margin:10px 5px 0px 10px;" id="accordionL">
  
-		<div class="accordionContent" style="height:510px;width:30%;float:left;overflow:hidden;">
-		<div class="panel" defH="120" >
+		<div class="accordionContent" style="width:20%;float:left;" id="contentL" >
+		
+	<div class="panel" minH="120" >
 			<h1>病人基本信息</h1>
-			<div class="pageFormContent"  style="overflow:hidden;">
+			<div class="pageFormContent"  style="overflow:hidden;" >
 
 				<dl>
-					<dt style="text-align:center;">姓名：</dt>
+					<dt style="text-align:center;width:20%;" >姓名：</dt>
 					<dd >${medicalReport.reportView.patientName}</dd>
 				</dl>
 				
 				<dl>
-					<dt style="text-align:center;">性别：</dt>
+					<dt style="text-align:center;width:20%; ">性别：</dt>
 					<dd>${medicalReport.reportView.patientSex}</dd>
 				</dl>
 				<dl>
-					<dt style="text-align:center;">年龄：</dt>
+					<dt style="text-align:center;width:20%;">年龄：</dt>
 					<dd>${medicalReport.reportView.patientAge}</dd>
 				</dl>
 
 			</div>
 		</div>
-		<div class="panel" defH="293" >
+
+		<div class="panel" minH="293" >
 			<h1>图像下载区</h1>
-			<div class="pageFormContent" >
+			<div class="pageFormContent" id="panelImg">
 
                   <c:forEach var="e" items="${medicalReport.imageList}"> 	
-                  	 <dl style="width:100% !important;">
-						<dt style="font-size:1.2em;width:75% !important;">
+                  	 <dl style="width:96% !important;">
+						<dt style="font-size:1.2em;width:65% !important;">
 							<span style="margin:0px 5px;"><u>${e.image.imgArchName}</u></span>
 							<span style="margin:0px 5px;"><u>${e.image.bodyPart}</u></span>
 						</dt>
 					
-					    <dd style="font-size:1.2em;width:20% !important;float:right;">
+					    <dd style="font-size:1.2em;width:28% !important;float:right;">
 						
 						    <span style="margin:0px 5px;"><button type="submit" onclick="loading('100%')">下载</button></span>
 					    </dd>
@@ -59,39 +99,40 @@ function submitForm(url)
 		
 		</div>
 	   <s:form name="form1" action="expert/ReportManage" method="POST" theme="simple">
-		 <div class="accordionContent" style="height:510px;width:70%;float:right">
-			<div class="panel" defH="420">
+		 <div class="accordionContent" style="width:80%;float:right" id="contentDA">
+			<div class="panel" >
 			<h1>病症诊断区</h1>
 
-			<div class="pageFormContent"  >
+			<div class="pageFormContent"  id="panelDA" minH="420" >
 				<input type="hidden" name="medicalReport.reportView.id" value="${medicalReport.reportView.id}" />
 				<input type="hidden" name="medicalReport.reportView.hospitalID" value="${medicalReport.reportView.hospitalID}" />
 				<input type="hidden" name="medicalReport.reportView.serialNo" value="${medicalReport.reportView.serialNo}" />
 				<input type="hidden" name="medicalReport.reportView.exReportState" value="${medicalReport.reportView.exReportState}" />
 				
 				<p style="font-size:1.2em;">医生诊断</p>
-				<div class="divider"></div>
-				
-				<dl style="height:110px !important;width:50%;">
-					<dt style="text-align:left;width:80%;" >症状描述：</dt>
-					<dd><textarea name="medicalReport.reportView.studyContent" cols="45" rows="7" readonly="true">${medicalReport.reportView.studyContent}</textarea></dd>
+				<div class="divider"></div>				
+				<dl style="width:50%;">
+					<dt style="text-align:left;width:80%;" >检查所见：</dt>
+					<dd ><textarea name="medicalReport.reportView.studyContent" cols="" rows="" readonly="true" id="text1">${medicalReport.reportView.studyContent}</textarea></dd>
 				</dl>
-				<dl  style="height:110px !important;width:50%;">
-					<dt style="text-align:left;width:80%;">诊断结论：</dt>
-					<dd><textarea name="medicalReport.reportView.studyConclusion" cols="45" rows="7" readonly="true" >${medicalReport.reportView.studyConclusion}</textarea></dd>
+				<dl  style="width:50%;" >
+					<dt style="text-align:left;width:80%;">诊断意见：</dt>
+					<dd><textarea name="medicalReport.reportView.studyConclusion" cols="" rows="" readonly="true" id="text2">${medicalReport.reportView.studyConclusion}</textarea></dd>
 				</dl>
+				</div>
 
-				<p style="font-size:1.2em;margin-top:30px;">专家诊断</p>
+				<div id="textD2">
+				<p style="font-size:1.2em;">专家诊断</p>
 				<div class="divider"></div>
-				
-				<dl style="height:110px !important;width:50%;">
-					<dt style="text-align:left;width:80%;" >症状描述：</dt>
-					<dd><textarea name="medicalReport.reportView.exStudyContent" cols="45" rows="9" >${medicalReport.reportView.exStudyContent}</textarea></dd>
+				<dl style="width:50%;" id="text3dl">
+					<dt style="text-align:left;width:80%;" >检查所见：</dt>
+					<dd style="width:100%;"><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" >${medicalReport.reportView.exStudyContent}</textarea></dd>
 				</dl>
-				<dl  style="height:110px !important;width:50%;">
-					<dt style="text-align:left;width:80%;">诊断结论：</dt>
-					<dd><textarea name="medicalReport.reportView.exStudyConclusion" cols="45" rows="9"  >${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+				<dl  style="width:50%;" id="text4dl">
+					<dt style="text-align:left;width:80%;">诊断意见：</dt>
+					<dd><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" >${medicalReport.reportView.exStudyConclusion}</textarea></dd>
 				</dl>
+				</div>
 			</div>
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
 				<ul class="toolBar">
@@ -122,9 +163,12 @@ function submitForm(url)
 		<div class="accordionHeader">
 			<p style="font-size:1.5em;padding:7px;"><strong>诊断模板</strong></p>
 		</div>
-		<div class="accordionContent" style="height:483px">
+		<div class="accordionContent" id="contentDM" >
+       	      	
 		   <ul class="tree treeFolder collapse">
-       	      <li><a href="tabsPage.html" target="navTab">${medicalReport.template.name}</a>
+
+       	      <li>
+       	      <a href="tabsPage.html" target="navTab"  >${medicalReport.template.name}</a>
        	           <c:set var="templateList" value="${medicalReport.template.childList}" scope="request"/>
 			       <jsp:include page="template.jsp"/>
        	      </li>

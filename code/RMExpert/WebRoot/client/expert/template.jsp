@@ -16,7 +16,7 @@
              </c:if>
 	        <c:if test="${null==e.childList}">
 			 
-				 <li><a href="#" >${e.name}</a></li>		
+				 <li><a href="#" class="treeMenu"  data-container="body" data-toggle="popover"  data-content="这里输入模板内容!" data-original-title="${e.name}" data-placement="left">${e.name}</a></li>		
 		    </c:if>
         </ul>	
     </c:forEach>  	

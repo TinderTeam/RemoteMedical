@@ -35,7 +35,11 @@
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
- 
+<!-- 浮动窗口显示css&js -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/popover.css" rel="stylesheet" type="text/css" media="screen"/> 
+<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 $(function()
@@ -184,11 +188,12 @@ setTimeout(function() {
 			<div class="headerNav">
 				<a class="logo" href="http://www.szangell.com/">安健科技</a>
 				<ul class="nav">
-                    <li>欢迎您，Dr ****!</li>
+                    <li>欢迎您，用户：${loginUser.userName}!</li>
 	 
 					<li><a href="changepwd.html" target="dialog" width="600">设置</a></li>
  
-					<li><a href="login.html">退出</a></li>
+					<li><a href="login/login!logout.action">退出</a></li>
+
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="azure"><div class="selected">天蓝</div></li>
