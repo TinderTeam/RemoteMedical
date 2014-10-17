@@ -13,9 +13,6 @@ import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 public class ExpertManageAction extends DWZTableAction
 {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private UserService userService = ServiceContext.getInstance().getUserService();

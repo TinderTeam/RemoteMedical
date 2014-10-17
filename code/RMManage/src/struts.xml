@@ -65,18 +65,22 @@
  	</package>
  	<package name="user" extends="default">
   
+  		<action name="UserManage" class="cn.fuego.remote.medical.manage.web.action.user.UserManageAction">
+			<result type="dispatcher">/client/manage/userManage.jsp</result>
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
+			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
+		</action>
    		<action name="HospitalManage" class="cn.fuego.remote.medical.manage.web.action.user.HospitalManageAction">
 			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>
- 			
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+
 			<result type="dispatcher" name="showInfo">/client/manage/hospitalInfo.jsp</result>	
 			<result type="dispatcher" name="editInfo">/client/manage/hospitalInfoEdit.jsp</result>			    
 		</action>
 		
    		<action name="ExpertManage" class="cn.fuego.remote.medical.manage.web.action.user.ExpertManageAction">
 			<result type="dispatcher">/client/manage/expertManage.jsp</result>
- 			
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+
 			<result type="dispatcher" name="showInfo">/client/manage/expertInfoCheck.jsp</result>	
 			<result type="dispatcher" name="editInfo">/client/manage/expertInfoEdit.jsp</result>							    
 			<result name="signName" type="stream">
@@ -88,12 +92,7 @@
 				<param name="inputName">expertStream</param>
 			</result>
 		</action> 
-		<action name="UserManage" class="cn.fuego.remote.medical.manage.web.action.user.UserManageAction">
-			<result type="dispatcher">/client/manage/userManage.jsp</result>
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
-			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
-			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
-		</action>
+
  
  	</package>
  

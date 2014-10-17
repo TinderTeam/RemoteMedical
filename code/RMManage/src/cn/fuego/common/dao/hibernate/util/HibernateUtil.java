@@ -1,10 +1,16 @@
 package cn.fuego.common.dao.hibernate.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,9 +19,12 @@ import org.hibernate.criterion.Restrictions;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.meta.ReflectionUtil;
+import cn.fuego.remote.medical.manage.service.impl.UserServiceImpl;
 
 public final class HibernateUtil
 {
+	private static Log log = LogFactory.getLog(HibernateUtil.class);
+
 	private static SessionFactory sessionFactory;
 	private static ThreadLocal session = new ThreadLocal();
 
@@ -34,7 +43,7 @@ public final class HibernateUtil
 		catch(Throwable e)
 		{
 			 
-			e.printStackTrace();
+			log.error("hibernate initial failed",e);
 
 		}
 
@@ -197,5 +206,31 @@ public final class HibernateUtil
 		}
 
 		return c;
+	}
+	
+	public static Blob getBlobByFile(File file)
+	{
+		Blob blob = null;
+		Session s = null;
+		try
+		{
+			FileInputStream fin= new FileInputStream(file);
+			s = HibernateUtil.getSession();
+			blob =Hibernate.getLobCreator(s).createBlob(fin, fin.available()); 
+			 
+		} catch (Exception e)
+		{
+			log.error("convert file to blob failed",e);
+		}
+		finally
+		{
+			if (s != null)
+			{
+				s.close();
+			}
+				
+		}
+		
+		return blob;
 	}
 }

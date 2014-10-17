@@ -33,6 +33,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.domain.Expert;
@@ -54,6 +55,12 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 {
 	private Log log = LogFactory.getLog(UserServiceImpl.class);
 
+	
+	public void Login(String userName, String password)
+	{
+		
+		super.Login(userName, password);
+	}
 	@Override
 	public AbstractDataSource<Hospital> getHospitalList(HospitalModel filter)
 	{
@@ -174,44 +181,16 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		ExpertModel old = getExpertByID(expertModel.getExpert().getId());
 		if(expertModel.getSignPic()!=null)
 		{
-			try
-			{
-				FileInputStream fin= new FileInputStream(expertModel.getSignPic());
-				Session s = HibernateUtil.getSession();
-				Blob signPic=Hibernate.getLobCreator(s).createBlob(fin, fin.available());//.createBlob(fin);
-				expertModel.getExpert().setSignName(signPic);
-			} catch (FileNotFoundException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			expertModel.getExpert().setSignName(HibernateUtil.getBlobByFile(expertModel.getSignPic()));
 		}
 		else
 		{
 			expertModel.getExpert().setSignName(old.getExpert().getSignName());
 		}
+		
 		if(expertModel.getExPhoto()!=null)
 		{
-			try
-			{
-				FileInputStream fin= new FileInputStream(expertModel.getExPhoto());
-				Session s = HibernateUtil.getSession();
-				Blob exPhoto=Hibernate.getLobCreator(s).createBlob(fin, fin.available());//.createBlob(fin);
-				expertModel.getExpert().setExPhoto(exPhoto);
-				
-			} catch (FileNotFoundException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			expertModel.getExpert().setExPhoto(HibernateUtil.getBlobByFile(expertModel.getExPhoto()));
 		}	
 		else
 		{
@@ -220,6 +199,8 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 		
 	}
+
+
 
 	@Override
 	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter)
@@ -249,9 +230,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 
 			
 		}		
-		
-		
-		
+
 		AbstractDataSource<SystemUser> dataSource = new DataBaseSourceImpl<SystemUser>(SystemUser.class,conditionList);
  
 		return dataSource;
@@ -271,6 +250,24 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		user.setAccountType(UserTypeEnum.getEnumByStatus(accountType).getTypeValue());
 		user.setRegDate(DateUtil.getCurrentDate());
 		user.setPassword(SystemConfigInfo.getDefaultPassword());
+		
+		switch(UserTypeEnum.getEnumByStatus(accountType))
+		{
+		case EXPERT:
+			Expert expert = new Expert();
+			expert.setId(user.getUserName());
+			expert.setState(UserStatusEnum.CREATED.getStatus());
+			DaoContext.getInstance().getExpertDao().create(expert);
+			break;
+		case HOSPITAL:
+			Hospital hospital = new Hospital();
+			hospital.setId(user.getUserName());
+			hospital.setState(UserStatusEnum.CREATED.getStatus());
+			DaoContext.getInstance().getHospitalDao().create(hospital);
+			break;
+		default :
+		}
+
 		MISPDaoContext.getInstance().getSystemUserDao().create(user);
 	}
 
@@ -283,8 +280,5 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 	}
 	
-
  
- 
-
 }
