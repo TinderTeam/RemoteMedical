@@ -11,6 +11,8 @@ package cn.fuego.remote.medical.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.remote.medical.constant.ReportStatusEnum;
 
 /** 
  * @ClassName: ReportView 
@@ -61,10 +63,12 @@ public class ReportView implements PersistenceObject
 	private Date exReport; //  专家报告时间
 	private Date exDownReport; // 本地下载报告时间
 	private String exApplyDoctor; //申请远程医生
+	
 	private String exDoctor; // 诊断专家
 	private String exState; //专家状态（）
 	private String exReportState; // 专家报告状态（已报告，已编写，未报告)
 	
+	private String statusColor;//状态颜色
 	
 	//hosptial table
 	//医院信息
@@ -416,6 +420,35 @@ public class ReportView implements PersistenceObject
 		this.bodyPart = bodyPart;
 	}
 	
-	
+
+	public String getStatusColor()
+	{
+	  
+	    if(ReportStatusEnum.SUBMIT.getStatus().equals(this.getExReportState()))
+	    {
+	    	statusColor= "grey";
+	    }
+	    else
+	    {
+	    	  Date applyDate = this.getExApply();
+	    	  int dayNum = DateUtil.countDayNum(DateUtil.getCurrentDateTime(),applyDate);
+	    	  if(dayNum >= 1)
+	    	  {
+	    		  statusColor= "red";
+	    	  }
+	    	  else
+	    	  {
+	    		  statusColor= "green";
+	    	  }
+	    }
+		return statusColor;
+	}
+
+
+	public void setStatusColor(String dealStatus)
+	{
+		this.statusColor = dealStatus;
+	}
+ 	
  
 }

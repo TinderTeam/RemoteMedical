@@ -20,7 +20,7 @@ public enum UserStatusEnum
 {
 	CREATED("已创建"),  
 	APPLIED("已申请"),    
-	CACALED("已注销"),
+	CANCELED("已注销"),
 	REGISTERED("已注册");   
 	private String status;
 	private UserStatusEnum(String status)

@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import cn.fuego.common.dao.QueryCondition;
@@ -196,8 +197,14 @@ public final class HibernateUtil
 						listObject.add(ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), e));
 					}
 					c.add(Restrictions.in(condition.getAttrName(),listObject));
-					
+					 
 					break;
+				case DESC_ORDER:	
+					 c.addOrder(Order.desc(condition.getAttrName()));
+					break;	
+				case ASC_ORDER:	
+					c.addOrder(Order.asc(condition.getAttrName()));
+					break;	
 				default:
 				    break;
 				  

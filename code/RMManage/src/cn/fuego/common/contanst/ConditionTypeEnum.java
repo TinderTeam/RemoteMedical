@@ -27,8 +27,9 @@ public enum  ConditionTypeEnum
 	LOWER("小于",7), 
 	LOWER_EQ("小于等于",8),  
 	BETWEEN("之间",9),
-	IN("属于",10);
-	
+	IN("属于",10),
+	DESC_ORDER("降序",11),
+	ASC_ORDER("升序",12);
     // 成员变量  
     private String typeName;  
     private int typeValue;
