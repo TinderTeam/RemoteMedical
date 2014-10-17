@@ -1,80 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+<s:form  id="pagerForm" action="user/ApprovalManage" method="POST" onsubmit="return navTabSearch(this);">
+		<input type="hidden" name="pageNum"  />
+	    <input type="hidden" name="numPerPage"  />	
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					申请编号：<input type="text" name="keyword" />
+					申请人：<input type="text" name="filter.applyName" value="${filter.applyName}"/>
 				</td>
 				<td>			
-					<select class="combox" name="">
-						<option value="">申请类型</option>
-						<option value="1">专家信息修改</option>
-						<option value="2">医院信息修改</option>
-						<option value="2">医院添加专家</option>
+					<select class="combox" name="filter.applyType" >
+						 <option value="">申请类型</option>
+						 <c:forEach var="at" items="${filter.applyTypeList}">
+						  		 <c:choose>		       
+							   		 <c:when test="${at.type == filter.applyType}">  
+	                            		       <option value="${at.type}" selected='selected'> ${at.type}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   			    <option value="${at.type}" > ${at.type}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose>
+						  </c:forEach>						
 					</select>
 				</td>
-				<td>			
-					<select class="combox" name="">
-						<option value="">用户状态</option>
-						<option value="1">待审批</option>
-						<option value="2">已同意</option>
-						<option value="3">已拒绝</option>
-					</select>
+				<td class="dateRange">
+					申请时间:
+					<input type="text"  readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}"/>
+					<span class="limit">-</span>
+					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
 				
 			</tr>
-			<tr>
-				<td>
-					申请专家：<input type="text" name="keyword" />
-				</td>
-				<td>
-					申请医院：<input type="text" name="keyword" />
-				</td>				
-				<td>
-					申请时间：<input type="text" class="date" readonly="true" />
-				</td>
-				<td>
-					操作时间：<input type="text" class="date" readonly="true" />
-				</td>
-			</tr>
+
 		</table>
 		<div class="subBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查  询</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="javascript:$('#pagerForm')[0].reset();">重 置</button>	</div></div></li>
 				<!-- <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li> -->
 			</ul>
 		</div>
 	</div>
-	</form>
+	</s:form>
 </div>
 <div class="pageContent">
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" width="100%" layoutH="112">
 		<thead>
 			<tr>
 				<th width="100" align="center">申请编号</th>
 				<th width="120" align="center">申请类型</th>
-				<th width="100" align="center">申请专家</th>
-				<th width="100" align="center">申请医院</th>
-				<th width="100" align="center">用户状态</th>
+				<th width="100" align="center">申请人</th>
 				<th width="100" align="center">申请时间</th>
-				<th width="100" align="center">描述</th>
 				<th width="100" align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
+		
+		<c:forEach var="e" items="${approvalTable.currentPageData}">
+
 			<tr target="sid_user" rel="1">
-				<td>0000001</td>
-				<td>专家信息修改</td>
-				<td>专家A</td>
-				<td>医院a</td>
-				<td>待审批</td>
-				<td>2014-09-28</td>
-				<td>AAAAAAAAAAAA</td>
+				<td>${e.id}</td>
+				<td>
+						<c:forEach var="t" items="${filter.applyTypeList}">
+						  <c:choose>		       
+							   <c:when test="${t.typeValue == e.applyType}">  
+	                             ${t.type}
+							   </c:when>
+							   <c:otherwise>  
+							   	   
+							   </c:otherwise>
+							   
+						   </c:choose>
+						   </c:forEach>
+						
+ 				</td>
+				<td>${e.applyName}</td>
+
+				<td>${e.applyTime}</td>
 				<td>
 					
 					<a title="同意" target="navTab" href="demo_page4.html?id=xxx" class="btnSelect">同意</a>
@@ -84,23 +93,31 @@
 				<a class="add" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="用户申请修改成功"><span>同意</span></a> -->
 				</td>
 			</tr>
-			
+		
+		</c:forEach>			
 			
 		</tbody>
 	</table>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
+	        <c:set var="page" value="${approvalTable.page}" scope="request"/>
+			
+			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
+				<c:forEach var="e" items="${page.pageSizeList}"> 	
+			       <c:if test="${e==page.pageSize}">
+			         <option value="${e}" selected>${e}</option>
+				  </c:if>
+                  <c:if test="${e!=page.pageSize}">
+			         <option value="${e}">${e}</option>
+				  </c:if>
+				</c:forEach>
+ 
 			</select>
-			<span>条，共${totalCount}条</span>
+			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 </div>

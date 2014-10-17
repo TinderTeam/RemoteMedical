@@ -37,5 +37,19 @@ public enum ApplyTypeEnum
 	{
 		return typeValue;
 	}
+	
+	
 
+	public static ApplyTypeEnum getEnumByStatus(String type)
+	{
+		for (ApplyTypeEnum c : ApplyTypeEnum.values())
+		{
+			if (c.type.equals(type))
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+ 
 }

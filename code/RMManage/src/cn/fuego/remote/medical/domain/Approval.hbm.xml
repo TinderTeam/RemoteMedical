@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="Approval" table="approval">
+
+	    <id name="id" column="Ai_ID" >
+			 
+		</id>
+		 <property name="applyType" column="As_Type"></property>
+		 <property name="applyName" column="As_Name"></property>
+		 <property name="hospitalID" column="Hs_ID"></property>
+		 <property name="expertID" column="Es_ID"></property>
+		 <property name="status" column="As_Status"></property>		 
+		 <property name="applyTime" column="As_ApplyTime"></property>
+		 <property name="handleTime" column="Ad_HandleTime"></property>	
+		 <property name="desp" column="Ad_Desp"></property>	
+
+	</class>
+</hibernate-mapping>

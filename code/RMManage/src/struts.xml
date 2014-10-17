@@ -93,6 +93,9 @@
 			</result>
 		</action> 
 
+		<action name="ApprovalManage" class="cn.fuego.remote.medical.manage.web.action.user.ApprovalManageAction">
+			<result type="dispatcher">/client/manage/applyModify.jsp</result>
+		</action>
  
  	</package>
  

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.remote.medical.domain">
+	<class name="LinkView" table="link_view">
+
+		<composite-id>
+	       <key-property name="hospitalID" column="Hs_ID" ></key-property>
+           <key-property name="expertID" column="Es_ID"  ></key-property>
+	    </composite-id>
+        <property name="hospitalName" column="Hs_Name"></property>
+        <property name="expertName" column="Es_Name"></property>
+        <property name="linkTime" column="LinkTime"></property>
+        <property name="expertAuditor" column="Es_Auditor"></property>
+        <property name="linkState" column="LinkState"></property>	
+	
+
+	</class>
+</hibernate-mapping>
