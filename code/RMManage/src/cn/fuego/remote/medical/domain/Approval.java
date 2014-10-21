@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.remote.medical.domain;
 
+import java.util.Date;
+
 import cn.fuego.common.domain.PersistenceObject;
 
 /** 
@@ -20,13 +22,16 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public class Approval implements PersistenceObject
 {
-	private int id;
-	private int applyType;
-	private String applyName;
-	private String status;
-	private String applyTime;
-	private String handleTime;
-	private String desp;
+	private int id; //申请单号 自增长
+	private int applyType; //申请类型
+	private String applyName; //申请名称
+	private String applyUser; //申请者账号名
+	private String handleUser; //处理人账号
+	private String status;  //申请状态
+	private Date applyTime; //申请时间
+	private Date handleTime; //处理时间
+	private String desp;  //申请描述
+	
 	private String hospitalID;
 	private String expertID;
 	public int getId()
@@ -70,19 +75,20 @@ public class Approval implements PersistenceObject
 	{
 		this.status = status;
 	}
-	public String getApplyTime()
+
+	public Date getApplyTime()
 	{
 		return applyTime;
 	}
-	public void setApplyTime(String applyTime)
+	public void setApplyTime(Date applyTime)
 	{
 		this.applyTime = applyTime;
 	}
-	public String getHandleTime()
+	public Date getHandleTime()
 	{
 		return handleTime;
 	}
-	public void setHandleTime(String handleTime)
+	public void setHandleTime(Date handleTime)
 	{
 		this.handleTime = handleTime;
 	}
@@ -101,6 +107,22 @@ public class Approval implements PersistenceObject
 	public void setApplyName(String applyName)
 	{
 		this.applyName = applyName;
+	}
+	public String getApplyUser()
+	{
+		return applyUser;
+	}
+	public void setApplyUser(String applyUser)
+	{
+		this.applyUser = applyUser;
+	}
+	public String getHandleUser()
+	{
+		return handleUser;
+	}
+	public void setHandleUser(String handleUser)
+	{
+		this.handleUser = handleUser;
 	}
 	
 

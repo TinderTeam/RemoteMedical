@@ -33,6 +33,7 @@
   	<mapping resource="cn/fuego/remote/medical/domain/Hospital.hbm.xml" />
 	<mapping resource="cn/fuego/remote/medical/domain/Expert.hbm.xml" />
 	<mapping resource="cn/fuego/remote/medical/domain/Approval.hbm.xml" />
+	<mapping resource="cn/fuego/remote/medical/domain/Link.hbm.xml" />
 
 
 

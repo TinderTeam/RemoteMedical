@@ -10,6 +10,7 @@ import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.misp.web.model.user.UserModel;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,7 +24,19 @@ public class MISPAction extends ActionSupport
 	
 	 
 
-
+    public UserModel getLoginUser()
+    {
+    	ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		if(session.get(SessionAttrNameConst.LOGIN_USER) != null)
+		{
+			return (UserModel) session.get(SessionAttrNameConst.LOGIN_USER); 
+		}
+		else
+		{
+			return null;
+		}
+    }
 	public MispMessageModel getOperateMessage()
 	{
 		return operateMessage;

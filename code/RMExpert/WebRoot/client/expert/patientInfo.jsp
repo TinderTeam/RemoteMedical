@@ -109,6 +109,7 @@ $(function ()
 				<input type="hidden" name="medicalReport.reportView.serialNo" value="${medicalReport.reportView.serialNo}" />
 				<input type="hidden" name="medicalReport.reportView.exReportState" value="${medicalReport.reportView.exReportState}" />
 				
+				<div id="textD1">
 				<p style="font-size:1.2em;">医生诊断</p>
 				<div class="divider"></div>				
 				<dl style="width:50%;">

@@ -33,6 +33,9 @@ public interface UserService extends MISPUserService
 	void createUser(String userName,String accountType);
 
 	void deleteUserList(List<String> userIDList);
-		
+
+	void addExpert(String hospitalID, String expertID);
+	
+
 	
 }

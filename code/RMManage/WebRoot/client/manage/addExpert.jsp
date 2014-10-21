@@ -2,15 +2,20 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript">
+   
+   $(function () {
+		$.pdialog.resizeDialog({style: {width: 800}}, $.pdialog.getCurrent(), "");
+        });//dialog 宽度重新定义
 
-
-
+</script>
 
 <div class="pageHeader">
-	<s:form  id="pagerForm" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" name="exSearch">
+	<form id="pagerForm" method="post" action="user/ExpertManage!addExpert.action" onsubmit="return dwzSearch(this, 'dialog');">
 		<input type="hidden" name="pageNum"  />
-	    <input type="hidden" name="numPerPage"  />
+	    <input type="hidden" name="numPerPage"  />	
 	<div class="searchBar">
+		
 		<table class="searchContent">
 			<tr>
 				<td>
@@ -22,67 +27,58 @@
 				<td>
 					职称类型：<input type="text" name="filter.expert.jobTitle" value="${filter.expert.name}"/>
 				</td>				
-				<td>
-					所在医院：<input type="text" name="filter.expert.workPlace" value="${filter.expert.workPlace}"/>
-				</td>
-				<td>
-				  <s:submit  value="查 询" cssClass="mispButton primary"></s:submit> 
-				</td>
-				<td>
-				<button type="button" onclick="javascript:$(this.form)[0].reset();" class="mispButton primary">重 置</button>
-				</td>				
 			</tr>
 
-		</table>
-		
+		</table> 
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="javascript:$(this.form)[0].reset();">重 置</button></div></div></li>
+			</ul>
+		</div>
 	</div>
-	</s:form>
+	</form>
 </div>
 <div class="pageContent">
-	<div class="panelBar" >
-		<ul class="toolBar"  >
-			<li><a class="add" href="ExpertManage!addExpert.action" target="dialog" mask="true" title="添加专家" id="newE" ><span>添加专家</span></a></li>
-		</ul>
-	</div>
-	<table class="table" width="100%" layoutH="118">
+<s:form  id="expertForm"  method="POST"  name="expertForm" >
+	<table class="table" layoutH="85" targetType="dialog" width="100%">
 		<thead>
-			<tr>		
+				
+			<tr>
+			
 				<th width="100" align="center">专家编号</th>
 				<th width="120" align="center">姓名</th>
 				<th width="100" align="center">职称</th>
 				<th width="100" align="center">工作医院</th>
 				<th width="100" align="center">手机号码</th>
-				<th width="100" align="center">座机号码</th>
-				<th width="100" align="center">邮件地址</th>
-				<th width="100" align="center">查看详情</th>
+				<th width="50" align="center">添加</th>
 			</tr>
 		</thead>
 		<tbody>
+
 		<c:forEach var="e" items="${expertTable.currentPageData}"> 
 			<tr target="sid_user" rel="${e.id}">
+			
 				<td>${e.id }</td>
 				<td>${e.name}</td>
 				<td>${e.jobTitle}</td>
 				<td>${e.workPlace}</td>
 				<td>${e.phoneNo}</td>
-				<td>${e.telephoneNo}</td>
-				<td>${e.email}</td>
 				<td>
-					
-				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="expert${e.id}">查看</a>
-				
+					<a class="btnSelect" target="navTab" href="ExpertManage!addSure.action?selectedID=${e.id}" rel="Menu7" title="选择添加">选择</a>
 				</td>
 			</tr>
-		</c:forEach>	
-			
+		</c:forEach>
+
 		</tbody>
 	</table>
+</s:form>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
 	        <c:set var="page" value="${expertTable.page}" scope="request"/>
 			
-			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox"  onchange="dwzPageBreak({targetType:'dialog',rel:'',data:{numPerPage:this.value}})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	
 			       <c:if test="${e==page.pageSize}">
 			         <option value="${e}" selected>${e}</option>
@@ -93,11 +89,8 @@
 				</c:forEach>
  
 			</select>
-			<span>条，共${page.count}条</span>
+			<span>条，共${page.count}条</span>			
 		</div>
-		
-		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
-
+		<div class="pagination" targetType="dialog" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 	</div>
 </div>
-

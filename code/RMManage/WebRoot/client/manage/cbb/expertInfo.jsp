@@ -7,19 +7,40 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<input id="currentUser" value="${loginUser.userName}" style="display:none;"/>
+<input id="targetUser" value="${expertModel.expert.id}" style="display:none;"/>
+<script type="text/javascript">
+   
+    $(function () {
+            $("#up1").uploadPreview({ Img: "ImgPr1" });
+            $("#up2").uploadPreview({ Img: "ImgPr2" });
+        });//图片预览js
+        
+    var currentUser =$("#currentUser").val();
+    var targetUser =$("#targetUser").val();
+    if(currentUser!=targetUser)
+    {
+   		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
+		 $("select").prop('readonly', true);
+    }
+	
+</script> 
 
 <div class="pageContent">
 
-		<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this);" >
+	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
+		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
+		<input type="text" name="operator" value="${loginUser.userName}"  style="display:none;"/>		
+		
 		<div class="pageFormContent" layoutH="56">
 		<div style="height:200px !important;">
 		<span style="font-size:1.2em;"><strong>个人信息</strong></span>
 		<div class="divider"></div>
 		<div style=" float:right; display:block; margin-top:5px; margin-right:420px; overflow:hidden; width:200px; height:180px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-			<div align="center"><img src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="130" ></div>
+			<div align="center"><img id="ImgPr1" src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="130" ></div>
 			<div class="divider"></div>
-			<s:file name="expertModel.exPhoto" ></s:file>
+			
+			<s:file name="expertModel.exPhoto" id="up1"></s:file>
 		</div>
 	
 			<dl>
@@ -37,17 +58,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<dt>性别：</dt>
 				<dd>
 				<select name="expertModel.expert.sex" class="required combox">
-         	<c:choose>
-                <c:when test="${expertModel.expert.sex!=NULL}">
-						<option value="${expertModel.expert.sex}">${expertModel.expert.sex}</option>
-                </c:when>
-                <c:otherwise>
-                    <option value="NULL">请选择性别</option>
-                </c:otherwise>
-         	</c:choose>	
-         			<option value="M">男</option>
-					<option value="W" >女</option>
-					<option value="O" >O</option>				
+
+						 <c:forEach var="us" items="${expertModel.userSexList}">
+						  		 <c:choose>		       
+							   		 <c:when test="${us.typeValue == expertModel.expert.sex}">  
+	                            		       <option value="${us.typeValue}" selected='selected'> ${us.type}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   			    <option value="${us.typeValue}" > ${us.type}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose>
+						  </c:forEach>				
+		
 				</select>
 				</dd>
 			</dl>
@@ -103,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>				
 			<dl style="width:100%;" >
 				<dt >工作医院名称：</dt>			
-				<dd><input type="text" name="expertModel.expert.workPlace"  alt="" size="30" value="${expertModel.expert.workPlace}" readonly="true"/></dd>
+				<dd><input type="text" name="expertModel.expert.workPlace"  alt="" size="30" value="${expertModel.expert.workPlace}"/></dd>
 			</dl>
 
 
@@ -133,12 +157,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<dt>上传签名：</dt>
 					<dd >
 						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-						<img src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="50" width="150" id="img1">
+						<img id="ImgPr2" src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="50" width="150" id="img1">
 						</div>	                           
 					</dd>									
 					<dd>
 					<div style="padding-top:30px !important;">
-					<s:file name="expertModel.signPic" ></s:file>
+					<s:file name="expertModel.signPic" id="up2"></s:file>
 					</div>
 					</dd>
 				</dl>
@@ -148,9 +172,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:35%" >
+			<c:choose>
+				<c:when test="${loginUser.userName==expertModel.expert.id}">
+					<c:choose>
+						<c:when test="${expertModel.expert.state =='已创建'}">
+							<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
+						</c:when>
+						<c:otherwise>
+							<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>
+						</c:otherwise>
+					</c:choose>
+							
+					<li><input type="button" class="mispButton primary close" value="关 闭" /></li>
+				</c:when>
+				<c:otherwise>
+					<li style="padding:0px 30px 0px 10px;"><s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit></li>
+					<li style="padding:0px 30px 0px 10px;"><s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit></li>				
+				</c:otherwise>
+			</c:choose>
 
-				<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>			
-				<li><input type="button" class="mispButton primary close" value="关 闭" /></li>
 				
 			</ul>
 		</div>

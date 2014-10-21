@@ -40,16 +40,28 @@ public enum ApplyTypeEnum
 	
 	
 
-	public static ApplyTypeEnum getEnumByStatus(String type)
+	public static ApplyTypeEnum getEnumByInt(int typeInt)
 	{
 		for (ApplyTypeEnum c : ApplyTypeEnum.values())
 		{
-			if (c.type.equals(type))
+			if (typeInt == c.typeValue)
 			{
 				return c;
 			}
 		}
 		return null;
 	}
+	public static ApplyTypeEnum getEnumByStr(String typeStr)
+	{
+		for (ApplyTypeEnum c : ApplyTypeEnum.values())
+		{
+			if (typeStr.equals(c.type) )
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
+
  
 }

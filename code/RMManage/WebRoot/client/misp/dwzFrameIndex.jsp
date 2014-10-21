@@ -93,7 +93,7 @@ input{ vertical-align:middle; margin:0; padding:0}
 <link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>
 <!-- 图片上传预览js -->
 
-
+<script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
 
 </head>
 

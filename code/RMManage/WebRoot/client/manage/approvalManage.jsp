@@ -81,15 +81,16 @@
 						   </c:forEach>
 						
  				</td>
-				<td>${e.applyName}</td>
+				<td>${e.applyUser}</td>
 
 				<td>${e.applyTime}</td>
 				<td>
-					
-					<a title="同意" target="navTab" href="demo_page4.html?id=xxx" class="btnSelect">同意</a>
+
+					<a title="修改申请" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu6">查看</a>					
+<!--					<a title="同意" target="navTab" href="demo_page4.html?id=xxx" class="btnSelect">同意</a>
 					<a title="确定要拒绝该申请要求吗?" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">拒绝</a>
 				
-<!-- 				<a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要拒绝该申请要求吗?"><span>拒绝</span></a>
+ 				<a class="delete" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="确定要拒绝该申请要求吗?"><span>拒绝</span></a>
 				<a class="add" href="demo/common/ajaxDone.html?uid={sid_user}" target="ajaxTodo" title="用户申请修改成功"><span>同意</span></a> -->
 				</td>
 			</tr>

@@ -11,7 +11,7 @@
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">

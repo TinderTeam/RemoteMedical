@@ -13,6 +13,8 @@
 		</id>
 		 <property name="applyType" column="As_Type"></property>
 		 <property name="applyName" column="As_Name"></property>
+		 <property name="applyUser" column="As_ApplyUser"></property>
+		 <property name="handleUser" column="As_HandleUser"></property>
 		 <property name="hospitalID" column="Hs_ID"></property>
 		 <property name="expertID" column="Es_ID"></property>
 		 <property name="status" column="As_Status"></property>		 

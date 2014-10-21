@@ -28,7 +28,7 @@ public class UserManageAction extends DWZTableAction
 
 	
 	private UserService userService = ServiceContext.getInstance().getUserService();
-	private UserModel userModel;
+
 	private UserFilterModel filter = new UserFilterModel();
 	private TableDataModel<SystemUser> userTable = new  TableDataModel<SystemUser>();	
 	public String execute()

@@ -10,7 +10,7 @@
 <constant  name="struts.custom.i18n.resources" value="package"></constant>   
 
 <constant name="struts.ui.templateSuffix" value="ftl" />
-    
+<constant name="struts.i18n.encoding" value="UTF-8" />    
  <package name="misp" namespace="/" extends="struts-default" abstract="true">
  
          <global-results>
@@ -82,7 +82,8 @@
 			<result type="dispatcher">/client/manage/expertManage.jsp</result>
 
 			<result type="dispatcher" name="showInfo">/client/manage/expertInfoCheck.jsp</result>	
-			<result type="dispatcher" name="editInfo">/client/manage/expertInfoEdit.jsp</result>							    
+			<result type="dispatcher" name="editInfo">/client/manage/expertInfoEdit.jsp</result>
+			<result type="dispatcher" name="addExpert">/client/manage/addExpert.jsp</result>							    
 			<result name="signName" type="stream">
 				<param name="contentType">image/jpeg/png</param>
 				<param name="inputName">signNameStream</param>
@@ -94,7 +95,9 @@
 		</action> 
 
 		<action name="ApprovalManage" class="cn.fuego.remote.medical.manage.web.action.user.ApprovalManageAction">
-			<result type="dispatcher">/client/manage/applyModify.jsp</result>
+			<result type="dispatcher">/client/manage/approvalManage.jsp</result>
+			<result type="dispatcher" name="showModifyHospital">/client/manage/hospitalInfoEdit.jsp</result>
+			<result type="dispatcher" name="showModifyExpert">/client/manage/expertInfoEdit.jsp</result>
 		</action>
  
  	</package>

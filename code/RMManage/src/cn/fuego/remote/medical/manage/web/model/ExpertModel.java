@@ -2,6 +2,8 @@ package cn.fuego.remote.medical.manage.web.model;
 
 import java.io.File;
 
+import cn.fuego.remote.medical.constant.UserSexEnum;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.domain.Expert;
 
 public class ExpertModel
@@ -9,7 +11,7 @@ public class ExpertModel
 	private Expert expert;
 	private File signPic;
 	private File exPhoto;
-
+	private UserSexEnum[] userSexList = UserSexEnum.values();
 	
 	public Expert getExpert()
 	{
@@ -39,6 +41,16 @@ public class ExpertModel
 	public void setExPhoto(File exPhoto)
 	{
 		this.exPhoto = exPhoto;
+	}
+
+	public UserSexEnum[] getUserSexList()
+	{
+		return userSexList;
+	}
+
+	public void setUserSexList(UserSexEnum[] userSexList)
+	{
+		this.userSexList = userSexList;
 	}
 
 

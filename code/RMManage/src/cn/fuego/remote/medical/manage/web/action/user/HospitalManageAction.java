@@ -1,12 +1,21 @@
 package cn.fuego.remote.medical.manage.web.action.user;
 
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.Hospital;
+import cn.fuego.remote.medical.manage.service.ApprovalService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
 
+/** 
+* @ClassName: HospitalManageAction 
+* @Description: TODO
+* @author Aether
+* @date 2014-10-18 下午6:59:11 
+*  
+*/ 
 public class HospitalManageAction extends DWZTableAction
 {
 	/**
@@ -16,6 +25,7 @@ public class HospitalManageAction extends DWZTableAction
 	private static final long serialVersionUID = 1L;
 
 	private UserService userService = ServiceContext.getInstance().getUserService();
+	private ApprovalService approvalService =ServiceContext.getInstance().getApprovalService();
 	private HospitalModel hospitalModel;
 	private HospitalModel filter;
 
@@ -53,7 +63,7 @@ public class HospitalManageAction extends DWZTableAction
 
 		
 		userService.modifyHospitalInfo(hospitalModel);
-		this.getOperateMessage().setCallbackType("forward");
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
 
 		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
 
@@ -64,11 +74,10 @@ public class HospitalManageAction extends DWZTableAction
     public String cancel()
     
     {
-		this.getOperateMessage().setCallbackType("forward");
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
 
 		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
 		
-		//this.getOperateMessage().setCallbackType("closeCurrent");
     	return MISP_DONE_PAGE;
     	
     }
@@ -82,14 +91,44 @@ public class HospitalManageAction extends DWZTableAction
     public String infoSave()
     {
     	userService.saveHospitalInfo(hospitalModel);
-    	//this.getOperateMessage().setCallbackType("closeCurrent");
+    	
     	return MISP_DONE_PAGE;
+    }
+    
+    public String infoSubmit()
+    {
+ 
+		approvalService.createHospitalApply(hospitalModel);
+		
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+    	return MISP_DONE_PAGE;
+    	
     }
 	@Override
 	public String show()
 	{
 		hospitalModel = userService.getHospitalByID(this.getSelectedID());
 		return SHOW_INFO;
+	}
+	
+/* 申请修改，状态改变*/	
+	
+	public String applyAgree()
+	{
+		approvalService.handleAgree(this.getOperator(),this.getSelectedID());
+		//this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		this.getOperateMessage().setForwardUrl("user/ApprovalManage");
+		
+		return MISP_DONE_PAGE;
+	}
+	public String applyRefuse()
+	{
+		approvalService.handleRefuse(this.getOperator(),this.getSelectedID());
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		this.getOperateMessage().setForwardUrl("user/ApprovalManage");		
+		return MISP_DONE_PAGE;
+				
 	}
 	public TableDataModel<Hospital> getHospitalTable()
 	{

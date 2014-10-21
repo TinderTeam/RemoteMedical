@@ -33,11 +33,15 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.remote.medical.constant.ApplyStatusEnum;
+import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.Approval;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
+import cn.fuego.remote.medical.domain.Link;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
@@ -171,6 +175,8 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void saveHospitalInfo(HospitalModel hospitalModel)
 	{
+		HospitalModel oldInfo = getHospitalByID(hospitalModel.getHospital().getId());
+		hospitalModel.getHospital().setState(oldInfo.getHospital().getState());
 		
 		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
 	}
@@ -279,6 +285,19 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 		
 	}
-	
+	@Override
+	public void addExpert(String hospitalID, String expertID)
+	{
+		Link link=new Link();
+		link.setHospitalID(hospitalID);
+		link.setExpertID(expertID);
+		link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
+		link.setLinkTime(DateUtil.getCurrentDate());
+		DaoContext.getInstance().getLinkDao().create(link);
+		
+	}
+
+
+	 
  
 }
