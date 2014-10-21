@@ -40,7 +40,7 @@
 	</form>
 </div>
 <div class="pageContent">
-<s:form  id="expertForm"  method="POST"  name="expertForm" >
+<s:form    method="POST"  name="expertAddForm" action="user/ExpertManage" >
 	<table class="table" layoutH="85" targetType="dialog" width="100%">
 		<thead>
 				
@@ -65,7 +65,7 @@
 				<td>${e.workPlace}</td>
 				<td>${e.phoneNo}</td>
 				<td>
-					<a class="btnSelect" target="navTab" href="ExpertManage!addSure.action?selectedID=${e.id}" rel="Menu7" title="选择添加">选择</a>
+					<a class="btnSelect"  href="javascript:$.bringBack({id:'${e.id}', name:'${e.name}'})" title="添加专家">选择</a>
 				</td>
 			</tr>
 		</c:forEach>

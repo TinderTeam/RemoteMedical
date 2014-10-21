@@ -25,6 +25,7 @@ import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.web.model.ApprovalFilterModel;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
+import cn.fuego.remote.medical.manage.web.model.LinkModel;
 
 public class ApprovalServiceImpl implements ApprovalService
 {
@@ -143,7 +144,11 @@ public class ApprovalServiceImpl implements ApprovalService
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 								  
 				break;
-			case ADD_EXPERT:;
+			case ADD_EXPERT:
+				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
+				linkModel.getLink().setLinkState(LinkStatusEnum.LINK_SUCCESS.getStatusValue());
+				linkModel.getLink().setLinkTime(DateUtil.getCurrentDate());
+				DaoContext.getInstance().getLinkDao().update(linkModel.getLink());
 				break;
 			default:
 				break;

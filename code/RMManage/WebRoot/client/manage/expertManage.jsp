@@ -7,14 +7,36 @@
 
 
 <div class="pageHeader">
+	<div class="pageFormContent" style="height:30px;overflow:hidden;">
+		<s:form  name="exAdd" action="user/ExpertManage!addSure.action" method="POST" onsubmit="return validateCallback(this, navTabAjaxDone)" >
+			<dl style="width:40%;" >
+				<dt style="width:20%;">专家账号：</dt>
+				<dd style="width:70%;">
+					<input class="required" name="targetExpert.id" type="text"  readonly="readonly"/>
+					<a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">查找带回</a>	
+					<span class="info">点击查找带回</span>
+				</dd>
+			</dl>
+			<dl style="width:30%;" >
+				<dt style="width:20%;">专家名称：</dt>
+				<dd>
+					<input class="readonly" name="targetExpert.name" readonly="readonly" type="text"/>
+				</dd>
+			</dl>
+			<s:submit  value="添加专家" cssClass="mispButton primary"></s:submit> 
+		</s:form>
+<div class="divider"></div>				
+	</div>
+
 	<s:form  id="pagerForm" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" name="exSearch">
 		<input type="hidden" name="pageNum"  />
 	    <input type="hidden" name="numPerPage"  />
 	<div class="searchBar">
+		
 		<table class="searchContent">
 			<tr>
 				<td>
-					专家编号：<input type="text" name="filter.expert.id" value="${filter.expert.id}"/>
+					专家账号：<input type="text" name="filter.expert.id" value="${filter.expert.id}"/>
 				</td>
 				<td>
 					专家姓名：<input type="text" name="filter.expert.name" value="${filter.expert.name}"/>
@@ -30,7 +52,8 @@
 				</td>
 				<td>
 				<button type="button" onclick="javascript:$(this.form)[0].reset();" class="mispButton primary">重 置</button>
-				</td>				
+				</td>
+				
 			</tr>
 
 		</table>
@@ -39,12 +62,8 @@
 	</s:form>
 </div>
 <div class="pageContent">
-	<div class="panelBar" >
-		<ul class="toolBar"  >
-			<li><a class="add" href="ExpertManage!addExpert.action" target="dialog" mask="true" title="添加专家" id="newE" ><span>添加专家</span></a></li>
-		</ul>
-	</div>
-	<table class="table" width="100%" layoutH="118">
+
+	<table class="table" width="100%" layoutH="140">
 		<thead>
 			<tr>		
 				<th width="100" align="center">专家编号</th>

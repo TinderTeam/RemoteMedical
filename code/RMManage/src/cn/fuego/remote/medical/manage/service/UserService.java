@@ -5,11 +5,11 @@ import java.util.List;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPUserService;
-import cn.fuego.misp.web.model.user.UserModel;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
+import cn.fuego.remote.medical.manage.web.model.LinkModel;
 import cn.fuego.remote.medical.manage.web.model.UserFilterModel;
 
 public interface UserService extends MISPUserService
@@ -36,6 +36,6 @@ public interface UserService extends MISPUserService
 
 	void addExpert(String hospitalID, String expertID);
 	
-
+    LinkModel getLinkByID(String hospitalID, String expertID);
 	
 }

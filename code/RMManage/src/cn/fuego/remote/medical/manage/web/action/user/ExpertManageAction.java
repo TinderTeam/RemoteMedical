@@ -21,6 +21,7 @@ public class ExpertManageAction extends DWZTableAction
 	private ApprovalService approvalService =ServiceContext.getInstance().getApprovalService();
 	private ExpertModel expertModel;
 	private ExpertModel filter;
+	private Expert targetExpert;
 	private TableDataModel<Expert> expertTable = new  TableDataModel<Expert>();
 
 	private InputStream signNameStream;
@@ -134,8 +135,9 @@ public class ExpertManageAction extends DWZTableAction
     }
     public String addSure()
     {
-		userService.addExpert(this.getLoginUser().getUserName(),this.getSelectedID());
-		
+		userService.addExpert(this.getLoginUser().getUserName(),this.getTargetExpert().getId());
+		approvalService.createAddExpertApply(this.getLoginUser().getUserName(), this.getTargetExpert().getId());
+	
 		return MISP_DONE_PAGE;
     	
     }
@@ -198,6 +200,18 @@ public class ExpertManageAction extends DWZTableAction
 	{
 		this.picid = picid;
 	}
+
+	public Expert getTargetExpert()
+	{
+		return targetExpert;
+	}
+
+	public void setTargetExpert(Expert targetExpert)
+	{
+		this.targetExpert = targetExpert;
+	}
+
+
 	
 
 }

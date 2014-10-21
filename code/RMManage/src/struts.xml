@@ -98,6 +98,7 @@
 			<result type="dispatcher">/client/manage/approvalManage.jsp</result>
 			<result type="dispatcher" name="showModifyHospital">/client/manage/hospitalInfoEdit.jsp</result>
 			<result type="dispatcher" name="showModifyExpert">/client/manage/expertInfoEdit.jsp</result>
+			<result type="dispatcher" name="showAddExpert">/client/manage/linkInfo.jsp</result>
 		</action>
  
  	</package>

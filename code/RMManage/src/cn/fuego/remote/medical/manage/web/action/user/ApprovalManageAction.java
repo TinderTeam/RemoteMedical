@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ApplyTypeEnum;
 import cn.fuego.remote.medical.domain.Approval;
@@ -12,6 +13,7 @@ import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.web.model.ApprovalFilterModel;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
+import cn.fuego.remote.medical.manage.web.model.LinkModel;
 
 /** 
 * @ClassName: ApprovalManageAction 
@@ -35,6 +37,7 @@ public class ApprovalManageAction extends DWZTableAction
 	private TableDataModel<Approval> approvalTable = new  TableDataModel<Approval>();
 	private HospitalModel hospitalModel;
 	private ExpertModel expertModel;
+	private LinkModel linkModel;
 	public String execute()
 	{
 		approvalTable.setPage(this.getPage());
@@ -86,7 +89,8 @@ public class ApprovalManageAction extends DWZTableAction
 				jumpPage="showModifyHospital";
 				break;
 			case ADD_EXPERT:
-				jumpPage =SUCCESS;
+				linkModel = ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
+				jumpPage ="showAddExpert";
 				break;
 			default:
 				break;
@@ -96,6 +100,26 @@ public class ApprovalManageAction extends DWZTableAction
 		
 		return jumpPage;
 	}
+/**
+ * 
+ * @return
+ */
+	
+	public String applyAgree()
+	{
+		approvalService.handleAgree(this.getLoginUser().getUserName(),this.getSelectedID());
+
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		
+		return MISP_DONE_PAGE;
+	}
+	public String applyRefuse()
+	{
+		approvalService.handleRefuse(this.getLoginUser().getUserName(),this.getSelectedID());
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);		
+		return MISP_DONE_PAGE;
+				
+	}	
 	public Log getLog()
 	{
 		return log;
@@ -143,6 +167,20 @@ public class ApprovalManageAction extends DWZTableAction
 	public void setExpertModel(ExpertModel expertModel)
 	{
 		this.expertModel = expertModel;
+	}
+	/**
+	 * @return the linkModel
+	 */
+	public LinkModel getLinkModel()
+	{
+		return linkModel;
+	}
+	/**
+	 * @param linkModel the linkModel to set
+	 */
+	public void setLinkModel(LinkModel linkModel)
+	{
+		this.linkModel = linkModel;
 	}	
 
 	

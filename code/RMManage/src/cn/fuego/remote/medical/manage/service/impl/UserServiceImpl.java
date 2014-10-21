@@ -27,7 +27,6 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
-import cn.fuego.misp.web.model.user.UserModel;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
@@ -38,6 +37,7 @@ import cn.fuego.remote.medical.domain.Link;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
 import cn.fuego.remote.medical.manage.web.model.HospitalModel;
+import cn.fuego.remote.medical.manage.web.model.LinkModel;
 import cn.fuego.remote.medical.manage.web.model.UserFilterModel;
 
 /** 
@@ -288,6 +288,17 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		link.setLinkTime(DateUtil.getCurrentDate());
 		DaoContext.getInstance().getLinkDao().create(link);
 		
+	}
+	@Override
+	public LinkModel getLinkByID(String hospitalID, String expertID)
+	{
+		LinkModel linkModel= new LinkModel();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"hospitalID",hospitalID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"expertID",expertID));
+		Link link = (Link) DaoContext.getInstance().getLinkDao().getUniRecord(conditionList);
+		linkModel.setLink(link);
+		return linkModel ;
 	}
 
 
