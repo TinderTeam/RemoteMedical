@@ -9,7 +9,7 @@
 	<class name="Report" table="report">
 		<composite-id>
 	       <key-property name="hospitalID" column="Hs_ID" ></key-property>
-           <key-property name="serialNo" column="Ri_SerialNO" ></key-property>
+           <key-property name="serialNo" column="Pi_SerialNO" ></key-property>
 	    </composite-id>
         <property name="reportNo" column="Rs_ReportNO"></property>
         <property name="patientID" column="Rs_PatientID"></property>

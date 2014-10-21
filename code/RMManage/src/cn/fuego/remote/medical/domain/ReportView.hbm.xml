@@ -12,7 +12,7 @@
 		</id>
 		
 		<property name="hospitalID" column="Hs_ID" ></property>
-        <property name="serialNo" column="Ri_SerialNO" ></property>
+        <property name="serialNo" column="Pi_SerialNO" ></property>
            
         <property name="reportNo" column="Rs_ReportNO"></property>
         <property name="patientID" column="Rs_PatientID"></property>

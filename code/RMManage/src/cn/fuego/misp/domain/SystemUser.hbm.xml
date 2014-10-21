@@ -13,7 +13,7 @@
             <property name="userName" column="Us_Account"  not-null="true" ></property>
         
             <property name="password" column="Us_PassWord"  not-null="true" ></property>
-            <property name="accountType" column="Ui_AccountType"   ></property>
+            <property name="accountType" column="Ui_AccountType"  length='20' ></property>
             <property name="regDate" column="Ud_RegDate"  ></property>
 
 	

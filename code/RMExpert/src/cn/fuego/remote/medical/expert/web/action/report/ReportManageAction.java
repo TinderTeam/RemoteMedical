@@ -25,6 +25,7 @@ import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
  * @date 2014-9-28 下午05:25:07 
  *  
  */
+ 
 
 public class ReportManageAction extends DWZTableAction
 {
@@ -33,9 +34,10 @@ public class ReportManageAction extends DWZTableAction
 	private MedicalReportModel medicalReport = new MedicalReportModel();
 	private ReportFilterModel filter = new ReportFilterModel(); 
 
-	
+ 
 	public String execute()
 	{
+		
 		reportList.setPage(this.getPage());
 		reportList.setDataSource(expertService.getMedicalList(null, filter));
 		return SUCCESS;

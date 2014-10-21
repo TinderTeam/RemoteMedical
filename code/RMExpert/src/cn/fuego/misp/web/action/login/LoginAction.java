@@ -50,11 +50,12 @@ public class LoginAction extends MISPAction
 			{
 				return SUCCESS;
 			}
+			
 
 			// User Login
-			MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
+			user = MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
 			// Loading MenuTree
-			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(user.getUserName());
+			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(String.valueOf(user.getUserID()));
 		}
 		catch (ServiceException ex)
 		{

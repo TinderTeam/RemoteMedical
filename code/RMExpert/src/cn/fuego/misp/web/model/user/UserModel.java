@@ -69,4 +69,6 @@ public class UserModel
 		this.accountType = accountType;
 	}
 
+	
+
 }

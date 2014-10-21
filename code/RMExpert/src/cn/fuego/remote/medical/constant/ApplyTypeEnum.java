@@ -37,5 +37,31 @@ public enum ApplyTypeEnum
 	{
 		return typeValue;
 	}
+	
+	
 
+	public static ApplyTypeEnum getEnumByInt(int typeInt)
+	{
+		for (ApplyTypeEnum c : ApplyTypeEnum.values())
+		{
+			if (typeInt == c.typeValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	public static ApplyTypeEnum getEnumByStr(String typeStr)
+	{
+		for (ApplyTypeEnum c : ApplyTypeEnum.values())
+		{
+			if (typeStr.equals(c.type) )
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
+
+ 
 }

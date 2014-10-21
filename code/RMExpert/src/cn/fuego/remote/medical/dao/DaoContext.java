@@ -4,9 +4,11 @@ import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportDaoImpl;
 import cn.fuego.remote.medical.dao.impl.ReportViewDaoImpl;
+import cn.fuego.remote.medical.domain.Approval;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.domain.ImageArchiving;
+import cn.fuego.remote.medical.domain.Link;
 
 
 
@@ -31,7 +33,8 @@ public class DaoContext
 
 	private Dao expertDao= null;
 	
-
+	private Dao approvalDao =null;
+	private Dao linkDao=null;
 
 	private DaoContext()
 	{
@@ -91,6 +94,20 @@ public class DaoContext
 		}
 		return expertDao;
 	}
-
-
+	public synchronized Dao getApprovalDao() 
+	{
+		if (null == approvalDao)
+		{
+			approvalDao = new CommonDaoImpl(Approval.class);
+		}
+		return approvalDao;
+	}
+	public synchronized Dao getLinkDao() 
+	{
+		if (null == linkDao)
+		{
+			linkDao = new CommonDaoImpl(Link.class);
+		}
+		return linkDao;
+	}
 }

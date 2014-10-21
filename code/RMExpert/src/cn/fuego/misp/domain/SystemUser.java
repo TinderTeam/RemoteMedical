@@ -27,6 +27,17 @@ public class SystemUser implements PersistenceObject
 	private String password;
 	private int accountType;
 	private Date regDate;
+	
+	
+	public static String getUserIDAttr()
+	{
+		return "userID";
+	}
+	
+	public static String getUserNameAttr()
+	{
+		return "userName";
+	}
  
 	public int getUserID()
 	{

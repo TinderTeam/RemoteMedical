@@ -10,7 +10,7 @@
 <constant  name="struts.custom.i18n.resources" value="package"></constant>   
 
 <constant name="struts.ui.templateSuffix" value="ftl" />
-    
+<constant name="struts.i18n.encoding" value="UTF-8" />    
  <package name="misp" namespace="/" extends="struts-default" abstract="true">
  
          <global-results>

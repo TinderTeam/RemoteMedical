@@ -20,7 +20,6 @@ import org.hibernate.criterion.Restrictions;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.meta.ReflectionUtil;
-import cn.fuego.remote.medical.manage.service.impl.UserServiceImpl;
 
 public final class HibernateUtil
 {

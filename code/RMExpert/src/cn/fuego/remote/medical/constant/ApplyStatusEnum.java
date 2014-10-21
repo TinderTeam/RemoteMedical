@@ -18,7 +18,7 @@ package cn.fuego.remote.medical.constant;
 
 public enum ApplyStatusEnum
 {	
-	APPROVING("审批中"), 
+	APPROVING("待审批"), 
 	AGREED("已同意"),    
 	REFUSED("已拒绝");  
 	private String status;

@@ -8,17 +8,11 @@
 */ 
 package cn.fuego.remote.medical.manage.service.impl;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
 import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
@@ -33,12 +27,11 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
-import cn.fuego.remote.medical.constant.ApplyStatusEnum;
+import cn.fuego.misp.web.model.user.UserModel;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
-import cn.fuego.remote.medical.domain.Approval;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.domain.Link;
@@ -60,10 +53,10 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	private Log log = LogFactory.getLog(UserServiceImpl.class);
 
 	
-	public void Login(String userName, String password)
+	public UserModel Login(String userName, String password)
 	{
 		
-		super.Login(userName, password);
+	   return 	super.Login(userName, password);
 	}
 	@Override
 	public AbstractDataSource<Hospital> getHospitalList(HospitalModel filter)

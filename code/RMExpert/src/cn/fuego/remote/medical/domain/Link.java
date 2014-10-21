@@ -25,7 +25,7 @@ public class Link implements PersistenceObject
 	private String hospitalID;
 	private String expertID;
 	private Date linkTime;
-	private String linkState;
+	private int linkState;
 	public String getHospitalID()
 	{
 		return hospitalID;
@@ -50,14 +50,15 @@ public class Link implements PersistenceObject
 	{
 		this.linkTime = linkTime;
 	}
-	public String getLinkState()
+	public int getLinkState()
 	{
 		return linkState;
 	}
-	public void setLinkState(String linkState)
+	public void setLinkState(int linkState)
 	{
 		this.linkState = linkState;
 	}
+	 
 	
 	
 
