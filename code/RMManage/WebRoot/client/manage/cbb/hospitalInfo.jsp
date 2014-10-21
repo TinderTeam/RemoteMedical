@@ -21,7 +21,7 @@
 <div class="pageContent">
 	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
-		<input type="text" name="operator" value="${loginUser.userName}"  style="display:none;"/>
+
 		<div class="pageFormContent" layoutH="56">
 
 			<dl style="width:50%;">

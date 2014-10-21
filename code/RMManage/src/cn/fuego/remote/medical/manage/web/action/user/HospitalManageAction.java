@@ -115,7 +115,7 @@ public class HospitalManageAction extends DWZTableAction
 	
 	public String applyAgree()
 	{
-		approvalService.handleAgree(this.getOperator(),this.getSelectedID());
+		approvalService.handleAgree(this.getLoginUser().getUserName(),this.getSelectedID());
 		//this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
 		this.getOperateMessage().setForwardUrl("user/ApprovalManage");
@@ -124,7 +124,7 @@ public class HospitalManageAction extends DWZTableAction
 	}
 	public String applyRefuse()
 	{
-		approvalService.handleRefuse(this.getOperator(),this.getSelectedID());
+		approvalService.handleRefuse(this.getLoginUser().getUserName(),this.getSelectedID());
 		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
 		this.getOperateMessage().setForwardUrl("user/ApprovalManage");		
 		return MISP_DONE_PAGE;

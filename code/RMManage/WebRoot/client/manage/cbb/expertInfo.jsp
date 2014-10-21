@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
-		<input type="text" name="operator" value="${loginUser.userName}"  style="display:none;"/>		
+
 		
 		<div class="pageFormContent" layoutH="56">
 		<div style="height:200px !important;">
