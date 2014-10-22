@@ -42,11 +42,74 @@ document.getElementById("textD2").style.height=partH*0.55+"px";
 document.getElementById("text3").rows=partH*0.027;
 document.getElementById("text4").rows=partH*0.027;
 </script>
+
 <script>
 $(function ()
 { $(".treeMenu").popover({trigger:'hover'});
 });
 </script>
+
+<input type="button" value="下载测试文件" onclick="StartDown()" />
+
+
+    <script type="text/javascript" language="javascript">
+    	var downer = new FileDownloaderMgr();
+    	downer.Config["Folder"] = "D:\\temp";//设置默认下载路径。
+    	downer.LoadTo("downDiv");
+
+    	$(document).ready(function ()
+    	{
+    	    downer.Init();
+
+    	    //alert(downer.Browser.GetMacs());
+    	});
+		
+		function StartDown()
+		{
+		    alert(<%=session.getId()%>);
+			downer.AddFile("http://localhost:8080/RMExpert/DownloadImage?filePath=D:/down.pdf& sessionID=<%=session.getId()%>" );
+			downer.PostFirst();
+			//downer.AddFile("http://localhost:8080/New/RM1100.pdf");
+		 
+			downer.AddFile("http://localhost:8080/New/RM1100.pdf");
+		 
+			//downer.AddFile("http://www.lingoes.cn/download/lingoes_2.9.1_cn.exe");
+			//downer.AddFile("http://wsdl2.yunpan.cn/share.php?method=Share.download&fhash=2946b3b85abb80b3392014aad8db8aedad5921e9&xqid=19044811&fname=XproerIM.exe&fsize=2434536&nid=13636671072534451&cqid=61d5fd74b63cf66070ebe072f46ac8c4&st=015fb1af5a4c2cbe1430f8e786d4e601&e=1374829813");
+			//downer.AddFile("http://www.ncmem.com/images/ico-ftp.jpg","test.jpg");
+//			downer.AddFile("http://www.ncmem.com/images/ico-up.jpg");
+//			downer.AddFile("http://www.ncmem.com/images/ico-capture.jpg");
+//			downer.AddFile("http://www.ncmem.com/images/ico-imageuploader.gif");
+//			downer.AddFile("http://www.ncmem.com/images/ico-wordpaster.gif");
+			//downer.PostFirst();
+		 
+
+		}
+ 
+		function copyFile()
+		{
+			var obj = new ActiveXObject(downer.ActiveX["Part"]);
+			obj.CopyFile("f:\\ftp\\test.gif","f:\\ftp\\test1.gif");
+		}
+
+		function copyFolder()
+		{
+			var obj = new ActiveXObject(downer.ActiveX["Part"]);
+			obj.CopyFile("f:\\ftp\\test.gif","f:\\ftp\\ftp1");
+		}
+		
+		function moveFile()
+		{
+			var obj = new ActiveXObject(downer.ActiveX["Part"]);
+			obj.MoveFile("f:\\ftp\\test.gif","f:\\ftp\\test2.gif");
+		}
+		
+		function moveFolder()
+		{
+			var obj = new ActiveXObject(downer.ActiveX["Part"]);
+			obj.MoveFile("f:\\ftp\\test2.gif","f:\\ftp\\ftp1");
+		}
+		
+	</script>
 <div class="pageContent" >
 
 <p id="dis" style="display:none;">
@@ -78,21 +141,12 @@ $(function ()
 
 		<div class="panel" minH="293" >
 			<h1>图像下载区</h1>
+			<div id="downDiv"></div>
 			<div class="pageFormContent" id="panelImg">
 
-                  <c:forEach var="e" items="${medicalReport.imageList}"> 	
-                  	 <dl style="width:96% !important;">
-						<dt style="font-size:1.2em;width:65% !important;">
-							<span style="margin:0px 5px;"><u>${e.image.imgArchName}</u></span>
-							<span style="margin:0px 5px;"><u>${e.image.bodyPart}</u></span>
-						</dt>
-					
-					    <dd style="font-size:1.2em;width:28% !important;float:right;">
-						
-						    <span style="margin:0px 5px;"><button type="submit" onclick="loading('100%')">下载</button></span>
-					    </dd>
-
-				      </dl>	
+                  <c:forEach var="e" items="${medicalReport.imageList}"> 
+                     <input name="imageUrl" value="e.imageUrl"></input>	
+           
 	              </c:forEach>
 			</div>
 		</div>

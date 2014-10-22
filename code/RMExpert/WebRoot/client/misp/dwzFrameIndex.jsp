@@ -40,6 +40,9 @@
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
 
+<link type="text/css" href="HttpDownloader.css" rel="Stylesheet"/>
+<script type="text/javascript" src="HttpDownloader.js" charset="utf-8"></script>
+
 
 <script type="text/javascript">
 $(function()

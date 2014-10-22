@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.expert.service.impl.ExpertServiceImpl;
 
  
 /**
@@ -30,6 +34,7 @@ public class AuthenticationFilter implements Filter
 
 	private static final String LOGIN_URL_FLAG = "login";
 	private static final  String LOGIN_PAGE = "client/misp/login.jsp";
+	private Log log = LogFactory.getLog(AuthenticationFilter.class);
 
  
 
@@ -40,7 +45,9 @@ public class AuthenticationFilter implements Filter
 		 HttpServletResponse httpResponse = (HttpServletResponse)response;
 		 HttpSession  session = httpRequest.getSession();
 		 String url = httpRequest.getRequestURL().toString();
-		  
+		 String id = request.getParameter("sessionID");
+		 log.info("now session id " + id);
+		 log.info("new session id " + session.getId());
 		 //the url does not contains login url, we should check login or not
 		 if(url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0)
 		 {
