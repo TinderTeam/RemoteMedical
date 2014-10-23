@@ -88,7 +88,7 @@
 				<td>${e.email}</td>
 				<td>
 					
-				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="expert${e.id}">查看</a>
+				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 				
 				</td>
 			</tr>

@@ -86,7 +86,7 @@ public class HospitalManageAction extends DWZTableAction
     {
     	
     	hospitalModel= userService.getHospitalByID(this.getSelectedID());
-    	return EDIT_INFO;
+    	return SHOW_INFO;
     }
     public String infoSave()
     {

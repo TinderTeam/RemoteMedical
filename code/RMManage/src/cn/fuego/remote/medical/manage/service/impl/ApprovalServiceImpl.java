@@ -178,7 +178,11 @@ public class ApprovalServiceImpl implements ApprovalService
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 								  
 				break;
-			case ADD_EXPERT:;
+			case ADD_EXPERT:
+				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
+				linkModel.getLink().setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
+				linkModel.getLink().setLinkTime(DateUtil.getCurrentDate());
+				DaoContext.getInstance().getLinkDao().update(linkModel.getLink());
 				break;
 			default:
 				break;

@@ -40,10 +40,23 @@
 			<result type="chain" name="Index">
 			  <param name="actionName">ReportManage</param>
             </result>    
+			<result name="home">/client/misp/login.jsp</result>
 			
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>		    
+			<result type="chain" name="LoginFailed">
+			  <param name="actionName">login</param>
+			  <param name="method">home</param>
+				<param name="message">${message}</param>
+			</result>		    
+			<result name="validateCode" >/client/misp/login.jsp
+			</result>			
+		 
 		</action>
-		  
+		<action name="getValidateImage" class="cn.fuego.misp.web.action.login.getValidateImageAction" method="createImage">     
+            <result type="stream">    
+                 <param name="contentType">image/jpeg</param>    
+                 <param name="inputName">codeStream</param>    
+             </result>      
+		</action> 		  
  
 
  	</package>
@@ -74,15 +87,15 @@
    		<action name="HospitalManage" class="cn.fuego.remote.medical.manage.web.action.user.HospitalManageAction">
 			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>
 
-			<result type="dispatcher" name="showInfo">/client/manage/hospitalInfo.jsp</result>	
-			<result type="dispatcher" name="editInfo">/client/manage/hospitalInfoEdit.jsp</result>			    
+			<result type="dispatcher" name="showInfo">/client/manage/cbb/hospitalInfo.jsp</result>	
+		    
 		</action>
 		
    		<action name="ExpertManage" class="cn.fuego.remote.medical.manage.web.action.user.ExpertManageAction">
 			<result type="dispatcher">/client/manage/expertManage.jsp</result>
 
-			<result type="dispatcher" name="showInfo">/client/manage/expertInfoCheck.jsp</result>	
-			<result type="dispatcher" name="editInfo">/client/manage/expertInfoEdit.jsp</result>
+			<result type="dispatcher" name="showInfo">/client/manage/cbb/expertInfo.jsp</result>	
+
 			<result type="dispatcher" name="addExpert">/client/manage/addExpert.jsp</result>							    
 			<result name="signName" type="stream">
 				<param name="contentType">image/jpeg/png</param>
@@ -96,8 +109,8 @@
 
 		<action name="ApprovalManage" class="cn.fuego.remote.medical.manage.web.action.user.ApprovalManageAction">
 			<result type="dispatcher">/client/manage/approvalManage.jsp</result>
-			<result type="dispatcher" name="showModifyHospital">/client/manage/hospitalInfoEdit.jsp</result>
-			<result type="dispatcher" name="showModifyExpert">/client/manage/expertInfoEdit.jsp</result>
+			<result type="dispatcher" name="showModifyHospital">/client/manage/cbb/hospitalInfo.jsp</result>
+			<result type="dispatcher" name="showModifyExpert">/client/manage/cbb/expertInfo.jsp</result>
 			<result type="dispatcher" name="showAddExpert">/client/manage/linkInfo.jsp</result>
 		</action>
  

@@ -27,6 +27,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.misp.web.model.user.UserModel;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
@@ -92,6 +93,8 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}			
 		}
 		
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"state",UserStatusEnum.REGISTERED.getStatus()));
+	
 		AbstractDataSource<Hospital> dataSource = new DataBaseSourceImpl<Hospital>(Hospital.class,conditionList);
 		
 		 

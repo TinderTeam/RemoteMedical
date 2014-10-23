@@ -7,22 +7,21 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<input id="currentUser" value="${loginUser.userName}" style="display:none;"/>
-<input id="targetUser" value="${expertModel.expert.id}" style="display:none;"/>
+
+<input id="operateType" value="${operateType}" style="display:none;"/>
 <script type="text/javascript">
    
     $(function () {
             $("#up1").uploadPreview({ Img: "ImgPr1" });
             $("#up2").uploadPreview({ Img: "ImgPr2" });
         });//图片预览js
-        
-    var currentUser =$("#currentUser").val();
-    var targetUser =$("#targetUser").val();
-    if(currentUser!=targetUser)
+    var operateType =$("#operateType").val();
+    if(operateType=='check')
     {
    		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
-		 $("select").prop('readonly', true);
-    }
+		 //$("select").prop('disabled', true);
+    }        
+
 	
 </script> 
 
@@ -172,24 +171,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:35%" >
-			<c:choose>
-				<c:when test="${loginUser.userName==expertModel.expert.id}">
-					<c:choose>
-						<c:when test="${expertModel.expert.state =='已创建'}">
-							<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
-						</c:when>
-						<c:otherwise>
-							<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>
-						</c:otherwise>
-					</c:choose>
-							
-					<li><input type="button" class="mispButton primary close" value="关 闭" /></li>
-				</c:when>
-				<c:otherwise>
-					<li style="padding:0px 30px 0px 10px;"><s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit></li>
-					<li style="padding:0px 30px 0px 10px;"><s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit></li>				
-				</c:otherwise>
-			</c:choose>
+				<c:choose>
+					<c:when test="${operateType =='check'}">
+						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit></li>
+						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit></li>						
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${expertModel.expert.state =='已创建'}">
+								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
+							</c:when>
+							<c:otherwise>
+								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>
+							</c:otherwise>
+						
+						</c:choose>
+								<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>							
+					</c:otherwise>
+						
+				</c:choose>	
 
 				
 			</ul>

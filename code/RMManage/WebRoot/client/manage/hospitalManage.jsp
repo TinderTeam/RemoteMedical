@@ -8,7 +8,7 @@
 <div class="pageHeader">
 	
 	<s:form  id="pagerForm" action="user/HospitalManage" method="POST" onsubmit="return navTabSearch(this);">
-	
+
 		<input type="hidden" name="pageNum"  />
 	    <input type="hidden" name="numPerPage"  />
 	
@@ -46,11 +46,11 @@
 </div>
 <div class="pageContent">
 
-	<table class="table" width="100%" layoutH="118">
+	<table class="table" width="100%" layoutH="90">
 		<thead>
 		
 			<tr>
-				<th width="100" align="center">医院编号</th>
+				<th width="100" align="center">医院账号</th>
 				<th width="200" align="center">医院名称</th>
 				<th width="100" align="center">规模</th>
 				<th width="300" align="center">地点</th>
@@ -70,7 +70,7 @@
 				<td>${e.contactsPhone}</td>
 				<td>
 					
-					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu8">查看</a>
+					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 
 				
 				</td>

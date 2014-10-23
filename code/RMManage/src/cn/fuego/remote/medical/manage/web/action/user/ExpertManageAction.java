@@ -16,7 +16,7 @@ public class ExpertManageAction extends DWZTableAction
 {
 
 	private static final long serialVersionUID = 1L;
-	
+	public static final String PARENT_PAGE="user/ExpertManage";	
 	private UserService userService = ServiceContext.getInstance().getUserService();
 	private ApprovalService approvalService =ServiceContext.getInstance().getApprovalService();
 	private ExpertModel expertModel;
@@ -68,11 +68,23 @@ public class ExpertManageAction extends DWZTableAction
 		expertModel = userService.getExpertByID(this.getSelectedID());
 		return SHOW_INFO;
 	}
+	/*
+	 * 取消/返回页面不做任何参数改变
+	 */
+    public String cancel()
+    
+    {
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
 
+		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
+		
+    	return MISP_DONE_PAGE;
+    	
+    }
     public String infoEdit()
     {
     	expertModel = userService.getExpertByID(this.getSelectedID());
-    	return EDIT_INFO;
+    	return SHOW_INFO;
     	
     }
     public String infoSave()

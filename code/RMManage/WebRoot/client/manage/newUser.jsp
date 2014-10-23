@@ -15,7 +15,6 @@
 			<div class="unit">
 				<label>账户类型：</label>
 				<select class="combox" name="filter.accountType" >
-						 <option value="" >请必须选择一种</option>
 						 <c:forEach var="ut2" items="${filter.userTypeList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${ut2.type=='超级管理员'}">  
