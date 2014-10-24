@@ -180,9 +180,10 @@ public class ApprovalServiceImpl implements ApprovalService
 				break;
 			case ADD_EXPERT:
 				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
-				linkModel.getLink().setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
-				linkModel.getLink().setLinkTime(DateUtil.getCurrentDate());
-				DaoContext.getInstance().getLinkDao().update(linkModel.getLink());
+				List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"hospitalID",linkModel.getLink().getHospitalID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"expertID",linkModel.getLink().getExpertID()));				
+				DaoContext.getInstance().getLinkDao().delete(conditionList);
 				break;
 			default:
 				break;

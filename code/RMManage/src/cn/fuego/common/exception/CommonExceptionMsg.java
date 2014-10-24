@@ -13,5 +13,8 @@ public class CommonExceptionMsg
 	
 	public static final String OPERATE_SUCCESS ="操作成功";
 	public static final String OPERATE_FAILED ="操作失败";
+	
+	public static final String LINK_APPROVING = "您已添加该专家，等待审批中";
+	public static final String LINK_EXISTED = "您已关联该专家，请勿重复添加";	
 
 }

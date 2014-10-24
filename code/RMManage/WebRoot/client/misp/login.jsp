@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="login_content">
 			<div class="loginForm">
-			    <div  id="warn" style="color:red;text-align:center;font-size:1.2em;">${message}</div>
+			    <div  id="warn" style="color:red;text-align:center;font-size:1.2em;">&nbsp${message}</div>
 			    
 				<s:form action="login/login" method="POST" theme="simple" name="loginForm">
 					<p>

@@ -19,7 +19,7 @@
 		<table class="searchContent">
 			<tr>
 				<td>
-					专家编号：<input type="text" name="filter.expert.id" value="${filter.expert.id}"/>
+					专家账号：<input type="text" name="filter.expert.id" value="${filter.expert.id}"/>
 				</td>
 				<td>
 					专家姓名：<input type="text" name="filter.expert.name" value="${filter.expert.name}"/>
@@ -33,7 +33,7 @@
 		<div class="subBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="javascript:$(this.form)[0].reset();">重 置</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="resetForm(this.form);">重 置</button></div></div></li>
 			</ul>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 				
 			<tr>
 			
-				<th width="100" align="center">专家编号</th>
+				<th width="100" align="center">专家账号</th>
 				<th width="120" align="center">姓名</th>
 				<th width="100" align="center">职称</th>
 				<th width="100" align="center">工作医院</th>

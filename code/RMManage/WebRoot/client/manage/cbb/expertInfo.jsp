@@ -25,35 +25,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 </script> 
 
-<div class="pageContent">
+<div class="pageContent" >
 
 	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
-
-		
-		<div class="pageFormContent" layoutH="56">
+		<input type="text" name="accountType" value="${loginUser.accountType}"  style="display:none;"/>	
+		<input type="text" name="expertModel.expert.state" value="${expertModel.expert.state}"  style="display:none;"/>
+	<div class="pageFormContent" layoutH="66" style="padding:10px 180px 20px 180px;">
 		<div style="height:200px !important;">
 		<span style="font-size:1.2em;"><strong>个人信息</strong></span>
 		<div class="divider"></div>
-		<div style=" float:right; display:block; margin-top:5px; margin-right:420px; overflow:hidden; width:200px; height:180px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-			<div align="center"><img id="ImgPr1" src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="130" ></div>
-			<div class="divider"></div>
+		<div style="float:right; margin-top:5px; margin-right:16%;" >
+			<div style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+				<div ><img id="ImgPr1" src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="120" alt="个人1寸照片" ></div>
+
+			</div>
+			<div >
+				<s:file name="expertModel.exPhoto" id="up1"></s:file>
+			</div>
 			
-			<s:file name="expertModel.exPhoto" id="up1"></s:file>
 		</div>
 	
-			<dl>
+			<dl style="width:50%;">
 				<dt>专家编号：</dt>
-				<dd><input type="text" name="expertModel.expert.id"  alt="" size="30" readonly="true" value="${expertModel.expert.id}"/></dd>
+				<dd><input type="text" name="expertModel.expert.id"  size="30" readonly="true" value="${expertModel.expert.id}"/></dd>
 			</dl>
 		
 		
-			<dl>
+			<dl style="width:50%;">
 				<dt>姓名：</dt>
 				<dd><input type="text" size="30" class="required " name="expertModel.expert.name" value="${expertModel.expert.name}"/></dd>
 			</dl>
 
-			<dl>
+			<dl style="width:50%;">
 				<dt>性别：</dt>
 				<dd>
 				<select name="expertModel.expert.sex" class="required combox">
@@ -75,33 +79,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</dd>
 			</dl>
 			
-			<dl>
+			<dl style="width:50%;">
 				<dt>年龄：</dt>
-				<dd><input type="text" size="30" name="expertModel.expert.age" value="${expertModel.expert.age}"/></dd>
+				<dd><input type="text" size="30" name="expertModel.expert.age" value="${expertModel.expert.age}" class="digits"/></dd>
 			</dl>			
 		</div>
 		
 		<div style="height:130px !important;">	
 		<span style="font-size:1.2em;"><strong>联系方式</strong></span>
 		<div class="divider"></div>
-			<dl>
+			<dl style="width:50%;">
 				<dt>手机号码：</dt>			
 				<dd><input type="text" name="expertModel.expert.phoneNo" class="phone" size="30"  value="${expertModel.expert.phoneNo}"/></dd>
 			</dl>
-			<dl>
+			<dl style="width:50%;">
 				<dt>座机号码：</dt>			
 				<dd><input type="text" name="expertModel.expert.telephoneNo"  alt="" size="30" value="${expertModel.expert.telephoneNo}"/></dd>
 			</dl>	
-			<dl>
+			<dl style="width:50%;">
 				<dt>电子邮箱：</dt>			
-				<dd><input type="text" name="expertModel.expert.email" class="required email" size="30" value="${expertModel.expert.email}"/></dd>
+				<dd><input type="text" name="expertModel.expert.email" class="email" size="30" value="${expertModel.expert.email}"/></dd>
 			</dl>				
 			
-			<dl>
+			<dl style="width:50%;">
 				<dt>QQ号码：</dt>			
 				<dd><input type="text" name="expertModel.expert.qq"  alt="" size="30" value="${expertModel.expert.qq}"/></dd>
 			</dl>			
-			<dl>
+			<dl style="width:50%;">
 				<dt>微信号：</dt>			
 				<dd><input type="text" name="expertModel.expert.weixin"  alt="" size="30" value="${expertModel.expert.weixin}"/></dd>
 			</dl>					
@@ -113,20 +117,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<dl  class="nowrap">
 					<dt >专家简介：</dt>
-					<dd ><textarea name="expertModel.expert.resume" cols="95" rows="7" >${expertModel.expert.resume}</textarea></dd>
+					<dd ><textarea name="expertModel.expert.resume" cols="100" rows="7" >${expertModel.expert.resume}</textarea></dd>
 				</dl>	
 
-			<dl>
+			<dl style="width:50%;">
 				<dt>职称：</dt>			
-				<dd><input type="text" name="expertModel.expert.jobTitle"  alt="" size="30" value="${expertModel.expert.jobTitle}"/></dd>
+				<dd><input type="text" name="expertModel.expert.jobTitle"  class="required " alt="" size="30" value="${expertModel.expert.jobTitle}"/></dd>
 			</dl>
-			<dl>
+			<dl style="width:50%;">
 				<dt>擅长专业技能：</dt>			
 				<dd><input type="text" name="expertModel.expert.expertise"  alt="" size="30" value="${expertModel.expert.expertise}"/></dd>
 			</dl>				
-			<dl style="width:100%;" >
+			<dl  class="nowrap" >
 				<dt >工作医院名称：</dt>			
-				<dd><input type="text" name="expertModel.expert.workPlace"  alt="" size="30" value="${expertModel.expert.workPlace}"/></dd>
+				<dd><input type="text" name="expertModel.expert.workPlace"  alt="" size="98" value="${expertModel.expert.workPlace}"/></dd>
 			</dl>
 
 
@@ -150,13 +154,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 				<dl class="nowrap">
 					<dt>补充描述：</dt>
-					<dd><textarea name="expertModel.expert.remark" cols="95" rows="7" >${expertModel.expert.remark}</textarea></dd>
+					<dd><textarea name="expertModel.expert.remark" cols="100" rows="7" >${expertModel.expert.remark}</textarea></dd>
 				</dl>
 				<dl style="height:110px !important;width:100%;">
 					<dt>上传签名：</dt>
 					<dd >
-						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:170px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-						<img id="ImgPr2" src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="50" width="150" id="img1">
+						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:200px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+						<img id="ImgPr2" src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="70" width="200" id="img1">
 						</div>	                           
 					</dd>									
 					<dd>
@@ -186,7 +190,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:otherwise>
 						
 						</c:choose>
-								<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>							
+							<c:choose>
+								<c:when test="${loginUser.accountType==1}">
+									<li><input type="button" class="mispButton primary close" value="关 闭"/></li>
+								</c:when>
+								<c:otherwise>
+									<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
+								</c:otherwise>
+							</c:choose>
+								
 					</c:otherwise>
 						
 				</c:choose>	
@@ -195,5 +207,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 		</div>
 	</s:form>
+	
 </div>
 

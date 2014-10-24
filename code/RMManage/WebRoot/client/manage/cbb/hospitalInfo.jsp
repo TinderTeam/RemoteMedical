@@ -23,6 +23,7 @@
 	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		<input id="operateType" value="${operateType}" style="display:none;"/>
+		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
 		<div class="pageFormContent" layoutH="56">
 
 			<dl style="width:50%;">
@@ -31,7 +32,7 @@
 			</dl>		
 			<dl style="width:50%;">
 				<dt>医院名称：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.name"  alt="" size="50" value="${hospitalModel.hospital.name}" /></dd>
+				<dd><input type="text" name="hospitalModel.hospital.name" class="required " alt="" size="50" value="${hospitalModel.hospital.name}" /></dd>
 			</dl>			
 			<dl style="width:100%;">
 				<dt>医院地址：</dt>
@@ -105,7 +106,14 @@
 							</c:otherwise>
 						
 						</c:choose>
-								<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>							
+							<c:choose>
+								<c:when test="${loginUser.accountType==2}">
+									<li><input type="button" class="mispButton primary close" value="关 闭"/></li>
+								</c:when>
+								<c:otherwise>
+									<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
+								</c:otherwise>
+							</c:choose>							
 					</c:otherwise>
 						
 				</c:choose>			

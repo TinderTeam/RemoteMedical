@@ -6,11 +6,14 @@ import java.sql.SQLException;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
+import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.manage.service.ApprovalService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.web.model.ExpertModel;
+import cn.fuego.remote.medical.manage.web.model.LinkModel;
 
 public class ExpertManageAction extends DWZTableAction
 {
@@ -22,6 +25,7 @@ public class ExpertManageAction extends DWZTableAction
 	private ExpertModel expertModel;
 	private ExpertModel filter;
 	private Expert targetExpert;
+	private LinkModel linkModel;
 	private TableDataModel<Expert> expertTable = new  TableDataModel<Expert>();
 
 	private InputStream signNameStream;
@@ -30,7 +34,8 @@ public class ExpertManageAction extends DWZTableAction
 	public String execute()
 	{
 		expertTable.setPage(this.getPage());
-		expertTable.setDataSource(userService.getExpertList(filter));
+		expertTable.setDataSource(userService.getExpertList(filter,this.getLoginUser().getAccountType(),this.getLoginUser().getUserName()));
+	
 		return SUCCESS;
 	}	
 	
@@ -137,18 +142,34 @@ public class ExpertManageAction extends DWZTableAction
 
         return "expertPhoto";
     }
-    //添加专家
+    /**
+     * 添加专家，初始查询
+     * @return
+     */
     public String addExpert()
     {	
 		expertTable.setPage(this.getPage());
-		expertTable.setDataSource(userService.getExpertList(filter));
+		expertTable.setDataSource(userService.getExpertList(filter,UserTypeEnum.ADMIN.getTypeValue(),null));
     	return "addExpert";
     	
     }
+    /**
+     * 添加医院，确认添加
+     * @return
+     */
     public String addSure()
     {
-		userService.addExpert(this.getLoginUser().getUserName(),this.getTargetExpert().getId());
-		approvalService.createAddExpertApply(this.getLoginUser().getUserName(), this.getTargetExpert().getId());
+
+    	try
+		{
+			userService.addExpert(this.getLoginUser().getUserName(),this.getTargetExpert().getId());
+			approvalService.createAddExpertApply(this.getLoginUser().getUserName(), this.getTargetExpert().getId());
+		} catch (Exception e)
+		{
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setMessage(e.getMessage());
+			
+		}
 	
 		return MISP_DONE_PAGE;
     	
@@ -221,6 +242,16 @@ public class ExpertManageAction extends DWZTableAction
 	public void setTargetExpert(Expert targetExpert)
 	{
 		this.targetExpert = targetExpert;
+	}
+
+	public LinkModel getLinkModel()
+	{
+		return linkModel;
+	}
+
+	public void setLinkModel(LinkModel linkModel)
+	{
+		this.linkModel = linkModel;
 	}
 
 

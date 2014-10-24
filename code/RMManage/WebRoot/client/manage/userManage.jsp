@@ -3,16 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
+
 function submitForm(url){
     var thisForm = document.userForm;
 	thisForm.action="user/UserManage!"+url;
 	return validateCallback(thisForm,navTabAjax);
 }
+
 </script>
 <div class="pageHeader">
 	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="user/UserManage" method="post" name="userSearch">
 		<input type="hidden" name="pageNum"  />
-	    <input type="hidden" name="numPerPage"  />	
+	    <input type="hidden" name="numPerPage"  />
+	
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -21,12 +24,13 @@ function submitForm(url){
 				</td>
 			 -->	
 				<td>
-					用户名称：<input type="text" name="filter.userName" value="${filter.userName}"/>
+					用户名称：<input type="text" name="filter.userName" value="${filter.userName}" id="userName"/>
 				</td>				
 				<td>
-					<select class="combox" name="filter.accountType" >
+					<select  name="filter.accountType" id="mySelect">
 						 <option value="">账户类型</option>
-						 <c:forEach var="ut2" items="${filter.userTypeList}">
+
+					 <c:forEach var="ut2" items="${filter.userTypeList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${ut2.type == filter.accountType}">  
 	                            		       <option value="${ut2.type}" selected='selected'> ${ut2.type}</option>
@@ -38,8 +42,7 @@ function submitForm(url){
 							   
 						   		 </c:choose>
 						  </c:forEach>								
-								
-					 											
+				 											
 
 					</select>
 				</td>
@@ -50,15 +53,15 @@ function submitForm(url){
 					<span class="limit">-</span>
 					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
-				
+				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+				</td>
+				<td>
+
+				<button type="button" onclick="resetForm(this.form);" class="mispButton primary">重 置</button>
+				</td>				
 			</tr>
 		</table>
-		<div class="subBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查  询</button></div></div></li>
-				<!-- <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li> -->
-			</ul>
-		</div>
+
 	</div>
 	</s:form>
 </div>
@@ -69,7 +72,7 @@ function submitForm(url){
 			<li><a class="delete" href="UserManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除用户</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" width="100%" layoutH="118">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>

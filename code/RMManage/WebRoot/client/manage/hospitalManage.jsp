@@ -35,7 +35,7 @@
 				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
 				<td>
-				<button type="button" onclick="javascript:$(this.form)[0].reset();" class="mispButton primary">重 置</button>
+				<button type="button" onclick="resetForm(this.form);" class="mispButton primary">重 置</button>
 				</td>				    
 			</tr>
 

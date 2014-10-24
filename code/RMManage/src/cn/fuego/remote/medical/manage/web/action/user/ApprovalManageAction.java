@@ -101,7 +101,7 @@ public class ApprovalManageAction extends DWZTableAction
 		return jumpPage;
 	}
 /**
- * 
+ * 医院添加专家申请同意
  * @return
  */
 	
@@ -113,6 +113,10 @@ public class ApprovalManageAction extends DWZTableAction
 		
 		return MISP_DONE_PAGE;
 	}
+/**
+ * 医院添加专家申请拒绝
+ * @return
+ */
 	public String applyRefuse()
 	{
 		approvalService.handleRefuse(this.getLoginUser().getUserName(),this.getSelectedID());

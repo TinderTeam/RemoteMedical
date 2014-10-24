@@ -20,7 +20,7 @@ public interface UserService extends MISPUserService
 	 
 	 void modifyHospitalInfo(HospitalModel hospitalModel);
 	 
-	 AbstractDataSource<Expert> getExpertList(ExpertModel filter);
+	 AbstractDataSource<Expert> getExpertList(ExpertModel filter, int accountType, String userName);
 
 	 ExpertModel getExpertByID(String id);
 

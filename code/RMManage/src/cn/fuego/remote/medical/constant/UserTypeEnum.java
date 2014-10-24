@@ -37,17 +37,29 @@ public enum UserTypeEnum
 	{
 		return typeValue;
 	}
-	public static UserTypeEnum getEnumByStatus(String type)
+
+	
+	public static UserTypeEnum getEnumByInt(int typeInt)
 	{
 		for (UserTypeEnum c : UserTypeEnum.values())
 		{
-			if (c.type.equals(type))
+			if (typeInt == c.typeValue)
 			{
 				return c;
 			}
 		}
 		return null;
 	}
- 
+	public static UserTypeEnum getEnumByStr(String typeStr)
+	{
+		for (UserTypeEnum c : UserTypeEnum.values())
+		{
+			if (typeStr.equals(c.type) )
+			{
+				return c;
+			}
+		}
+		return null;
+	}	 
 
 }

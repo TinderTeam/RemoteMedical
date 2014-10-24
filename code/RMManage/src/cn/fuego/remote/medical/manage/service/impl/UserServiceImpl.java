@@ -120,34 +120,70 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 	}
 
-	@Override
-	public AbstractDataSource<Expert> getExpertList(ExpertModel filter)
+	@SuppressWarnings("unchecked")
+	public AbstractDataSource<Expert> getExpertList(ExpertModel filter, int accountType, String userName)
 	{
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		
-		if(null != filter)
-		{
-			if(!ValidatorUtil.isEmpty(filter.getExpert().getId()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"id",filter.getExpert().getId()));
-			}
-			if(!ValidatorUtil.isEmpty(filter.getExpert().getName()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"name",filter.getExpert().getName()));
-				
-			}
-			if(!ValidatorUtil.isEmpty(filter.getExpert().getJobTitle()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"jobTitle",filter.getExpert().getJobTitle()));
-				
-			}
-			if(!ValidatorUtil.isEmpty(filter.getExpert().getWorkPlace()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"workPlace",filter.getExpert().getWorkPlace()));
-				
-			}
+		
+		if(UserTypeEnum.getEnumByInt(accountType)==UserTypeEnum.HOSPITAL)
+		{	
 			
+			List<String> expertList= new ArrayList<String>();
+			List<QueryCondition> linkConditionList = new ArrayList<QueryCondition>();
+			
+			linkConditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"hospitalID", userName));
+			linkConditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"linkState",String.valueOf(LinkStatusEnum.LINK_SUCCESS.getStatusValue())));
+			List<Link> linkList = (List<Link>) DaoContext.getInstance().getLinkDao().getAll(linkConditionList);
+			
+			if(ValidatorUtil.isEmpty(linkList))
+			{
+				
+			 
+				conditionList.add(new QueryCondition(ConditionTypeEnum.FALSE,null));
+				
+			}
+			else
+			{
+				for(int i=0;i<linkList.size();i++)
+				{
+					String linkExpertID = linkList.get(i).getExpertID();
+					expertList.add(linkExpertID);
+				}
+				
+				conditionList.add(new QueryCondition(ConditionTypeEnum.IN,"id",expertList));
+				
+			}
+
 		}
+			
+ 
+		if (null != filter)
+		{
+			if (!ValidatorUtil.isEmpty(filter.getExpert().getId()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "id", filter.getExpert().getId()));
+			}
+			if (!ValidatorUtil.isEmpty(filter.getExpert().getName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "name", filter.getExpert().getName()));
+
+			}
+			if (!ValidatorUtil.isEmpty(filter.getExpert().getJobTitle()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "jobTitle", filter.getExpert().getJobTitle()));
+
+			}
+			if (!ValidatorUtil.isEmpty(filter.getExpert().getWorkPlace()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "workPlace", filter.getExpert().getWorkPlace()));
+
+			}
+
+		}
+		 
+		
+
 		
 		AbstractDataSource<Expert> dataSource = new DataBaseSourceImpl<Expert>(Expert.class,conditionList);
 		
@@ -218,7 +254,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getAccountType()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"accountType",String.valueOf(UserTypeEnum.getEnumByStatus(filter.getAccountType()).getTypeValue())));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"accountType",String.valueOf(UserTypeEnum.getEnumByStr(filter.getAccountType()).getTypeValue())));
 				
 			}
 			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
@@ -249,11 +285,11 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 		SystemUser user = new SystemUser();
 		user.setUserName(userName);
-		user.setAccountType(UserTypeEnum.getEnumByStatus(accountType).getTypeValue());
+		user.setAccountType(UserTypeEnum.getEnumByStr(accountType).getTypeValue());
 		user.setRegDate(DateUtil.getCurrentDate());
 		user.setPassword(SystemConfigInfo.getDefaultPassword());
 		
-		switch(UserTypeEnum.getEnumByStatus(accountType))
+		switch(UserTypeEnum.getEnumByStr(accountType))
 		{
 		case EXPERT:
 			Expert expert = new Expert();
@@ -276,7 +312,26 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void deleteUserList(List<String> userIDList)
 	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);
+
+		for(int i=0;i<userIDList.size();i++)
+		{  
+
+			SystemUser oldUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", userIDList.get(i)));
+			
+			switch(UserTypeEnum.getEnumByInt(oldUser.getAccountType()))
+			{
+			case EXPERT:
+                //Expert expert=(Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "id", userID));
+				DaoContext.getInstance().getExpertDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "id", oldUser.getUserName()));
+				break;
+			case HOSPITAL:
+
+				DaoContext.getInstance().getHospitalDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "id", oldUser.getUserName()));
+				break;
+			default :
+			}
+		}
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
 		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
 		
 		
@@ -284,12 +339,31 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void addExpert(String hospitalID, String expertID)
 	{
-		Link link=new Link();
-		link.setHospitalID(hospitalID);
-		link.setExpertID(expertID);
-		link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
-		link.setLinkTime(DateUtil.getCurrentDate());
-		DaoContext.getInstance().getLinkDao().create(link);
+		
+		Link oldLink=getLinkByID(hospitalID,expertID).getLink();
+		if(oldLink!=null)
+		{
+			if(oldLink.getLinkState()==LinkStatusEnum.LINK_FAILED.getStatusValue())
+			{
+				throw new ServiceException(CommonExceptionMsg.LINK_APPROVING);
+			}
+			else
+			{
+				throw new ServiceException(CommonExceptionMsg.LINK_EXISTED);
+			}
+	
+		}
+		else
+		{
+			Link link=new Link();
+			link.setHospitalID(hospitalID);
+			link.setExpertID(expertID);
+			link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
+			link.setLinkTime(DateUtil.getCurrentDate());
+			DaoContext.getInstance().getLinkDao().create(link);
+			
+		}
+
 		
 	}
 	@Override
