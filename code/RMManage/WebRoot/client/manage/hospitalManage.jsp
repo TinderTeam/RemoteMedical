@@ -70,7 +70,7 @@
 				<td>${e.contactsPhone}</td>
 				<td>
 					
-					<a title="医院信息编辑" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
+					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 
 				
 				</td>

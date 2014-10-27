@@ -13,7 +13,7 @@
     if(operateType=='check')
     {
    		 $('input,textarea',$('form[name=hsForm]')).prop('readonly',true);
-		 //$("select").prop('disabled', true);
+		 $("select").prop('disabled', true);
     }
 	
 	   

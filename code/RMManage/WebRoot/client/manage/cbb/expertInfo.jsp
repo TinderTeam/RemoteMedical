@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     if(operateType=='check')
     {
    		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
-		 //$("select").prop('disabled', true);
+		 $("select").prop('disabled', true);
     }        
 
 	
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<dl style="width:50%;">
 				<dt>性别：</dt>
 				<dd>
-				<select name="expertModel.expert.sex" class="required combox">
+				<select name="expertModel.expert.sex" >
 
 						 <c:forEach var="us" items="${expertModel.userSexList}">
 						  		 <c:choose>		       
