@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
 <script type="text/javascript">
 function submitForm(url) 
@@ -49,42 +50,102 @@ $(function ()
 });
 </script>
 
-<input type="button" value="下载测试文件" onclick="StartDown()" />
+<input id="sessionID" value="<%=session.getId()%>" />
+<input id="contextPath" value="<%=request.getContextPath()%>" />
+<script type="text/javascript">
+ 
+        var sessionID = $("#sessionID").val();
+	    var contextPath = $("#contextPath").val();
+	    var hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+	    
+	    
+        var imageURL =  new Array();
+       
+        var imageFileName =  new Array();
+        var progressID =  new Array("downSize1","downSize2","downSize3");
+       
+        var imageCnt = $("#imageCount").val();
+       
+        
+        var nowCnt = 0;
+        
+        var isStarted = false;
+        
+        for(var i=0;i<imageCnt;i++)
+        {
+            imageURL[i]= $("#url"+i).val();
+            imageFileName[i] = $("#image"+i).val();
+            progressID[i] = "downSize" + i;
+        }
+ 
+	     window.onload= function()
+	     { 
+		   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+ 
+		 };
 
-
-    <script type="text/javascript" language="javascript">
-    	var downer = new FileDownloaderMgr();
-    	downer.Config["Folder"] = "D:\\temp";//设置默认下载路径。
-    	downer.LoadTo("downDiv");
-
-    	$(document).ready(function ()
-    	{
-    	    downer.Init();
-
-    	    //alert(downer.Browser.GetMacs());
-    	});
-		
+ 
+        
 		function StartDown()
 		{
-		    alert(<%=session.getId()%>);
-			downer.AddFile("http://localhost:8080/RMExpert/DownloadImage?filePath=D:/down.pdf& sessionID=<%=session.getId()%>" );
-			downer.PostFirst();
-			//downer.AddFile("http://localhost:8080/New/RM1100.pdf");
-		 
-			downer.AddFile("http://localhost:8080/New/RM1100.pdf");
-		 
-			//downer.AddFile("http://www.lingoes.cn/download/lingoes_2.9.1_cn.exe");
-			//downer.AddFile("http://wsdl2.yunpan.cn/share.php?method=Share.download&fhash=2946b3b85abb80b3392014aad8db8aedad5921e9&xqid=19044811&fname=XproerIM.exe&fsize=2434536&nid=13636671072534451&cqid=61d5fd74b63cf66070ebe072f46ac8c4&st=015fb1af5a4c2cbe1430f8e786d4e601&e=1374829813");
-			//downer.AddFile("http://www.ncmem.com/images/ico-ftp.jpg","test.jpg");
-//			downer.AddFile("http://www.ncmem.com/images/ico-up.jpg");
-//			downer.AddFile("http://www.ncmem.com/images/ico-capture.jpg");
-//			downer.AddFile("http://www.ncmem.com/images/ico-imageuploader.gif");
-//			downer.AddFile("http://www.ncmem.com/images/ico-wordpaster.gif");
-			//downer.PostFirst();
-		 
-
+				   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+ 
+			updateProgress();
 		}
  
+ 
+		function updateProgress()
+		{
+		   if(isStarted == false)
+		   {
+		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
+			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
+			 ReYoWebDownLoad.url= hostURL+ "/" + imageURL[nowCnt];
+			 
+			 ReYoWebDownLoad.path ="d:/temp/" + imageFileName[nowCnt];
+			 ReYoWebDownLoad.ReYoStartDownload();
+			 isStarted = true;
+		   }
+ 
+		 	if (ReYoWebDownLoad.cancle)
+		    {
+		
+				alert("falied");
+				isStarted = false;
+				return;
+		    }
+		 	else
+			{
+				if (ReYoWebDownLoad.done) 
+				{
+ 
+		  			ReYoWebDownLoad.done=false;
+		  			document.getElementById(progressID[nowCnt]).value = 100;
+		  			nowCnt ++;
+		  			isStarted = false;
+		  			if(nowCnt<imageCnt)
+		  			{
+		  		   	  setTimeout("updateProgress()",1000);	
+		  			}
+		  			else
+		  			{
+		  			 nowCnt = 0;
+		  			 }
+				}
+				else
+				{
+					 
+					setTimeout("updateProgress()",100);		
+					document.getElementById(progressID[nowCnt]).value = ReYoWebDownLoad.percent;
+				}
+			}
+		
+		}
+		
 		function copyFile()
 		{
 			var obj = new ActiveXObject(downer.ActiveX["Part"]);
@@ -110,6 +171,13 @@ $(function ()
 		}
 		
 	</script>
+	
+
+<input type="button" value="下载测试文件" onclick="StartDown()" />
+<input id="downSize0" value="下载测试文件"  />
+<input id="downSize1" value="下载测试文件"  />
+<input id="downSize2" value="下载测试文件"  />
+<input id="downSize3" value="下载测试文件"  />
 <div class="pageContent" >
 
 <p id="dis" style="display:none;">
@@ -141,7 +209,30 @@ $(function ()
 
 		<div class="panel" minH="293" >
 			<h1>图像下载区</h1>
-			<div id="downDiv"></div>
+			<div class="pageFormContent"  id="panelImg"> 
+			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}'/> 
+				 
+				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
+				         
+				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" ></input>
+				         <input   id="image${status.index}"  value="${e.image.imageSavePath}" ></input>
+				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" ></input>
+				    
+	                  	 <dl style="width:96% !important;">
+							<dt style="font-size:1.2em;width:65% !important;">
+								<span style="margin:0px 5px;"><u>${e.image.imgArchName}</u></span>
+								<span style="margin:0px 5px;"><u>${e.image.bodyPart}</u></span>
+							</dt>
+						
+						    <dd style="font-size:1.2em;width:28% !important;float:right;">
+							
+							    <span style="margin:0px 5px;"><button type="submit" onclick="loading('100%')">下载</button></span>
+						    </dd>
+	
+					      </dl>	
+				 </c:forEach>
+			 </div>	      
+			<!-- div id="downDiv"></div>
 			<div class="pageFormContent" id="panelImg">
 
                   <c:forEach var="e" items="${medicalReport.imageList}"> 
@@ -149,6 +240,7 @@ $(function ()
            
 	              </c:forEach>
 			</div>
+			 -->
 		</div>
 		
 		</div>
