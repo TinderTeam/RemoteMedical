@@ -30,7 +30,7 @@ public interface UserService extends MISPUserService
 
 	AbstractDataSource<SystemUser> getUserList(UserFilterModel filter);
  
-	void createUser(String userName,String accountType);
+	void createUser(String userName,String accountType, String operator);
 
 	void deleteUserList(List<String> userIDList);
 

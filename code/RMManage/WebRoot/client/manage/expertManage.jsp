@@ -17,11 +17,11 @@
 
 <div class="pageHeader">
 	<div class="pageFormContent" style="height:30px;overflow:hidden;display:none;" id="addEx" >
-		<s:form  name="exAdd" action="user/ExpertManage!addSure.action" method="POST" onsubmit="return validateCallback(this, navTabAjaxDone)" >
+		<s:form  name="exAdd" action="user/ExpertManage" method="POST" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
 			<dl style="width:40%;" >
 				<dt style="width:20%;">专家账号：</dt>
 				<dd style="width:70%;">
-					<input class="required" name="targetExpert.id" type="text"  readonly="readonly"/>
+					<input  name="targetExpert.id" type="text"  readonly="readonly"/>
 					<a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
 					<span class="info">点击查找带回</span>
 				</dd>
@@ -32,15 +32,16 @@
 					<input class="readonly" name="targetExpert.name" readonly="readonly" type="text"/>
 				</dd>
 			</dl>
-			<s:submit  value="添加专家" cssClass="mispButton primary"></s:submit> 
-			<button type="button" onclick="resetForm(this.form);" class="mispButton primary">取 消</button>
+			<s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
+			<s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" method="execute"></s:submit> 			
+
 		</s:form>
 <div class="divider"></div>				
 	</div>
 
 	<s:form  id="pagerForm" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" name="exSearch">
-		<input type="hidden" name="pageNum"  />
-	    <input type="hidden" name="numPerPage"  />
+		<input type="hidden" name="pageNum" value="${pageNum}" />
+	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	<div class="searchBar">
 		
 		<table class="searchContent">
@@ -52,7 +53,7 @@
 					专家姓名：<input type="text" name="filter.expert.name" value="${filter.expert.name}"/>
 				</td>
 				<td>
-					职称类型：<input type="text" name="filter.expert.jobTitle" value="${filter.expert.name}"/>
+					职称类型：<input type="text" name="filter.expert.jobTitle" value="${filter.expert.jobTitle}"/>
 				</td>				
 				<td>
 					所在医院：<input type="text" name="filter.expert.workPlace" value="${filter.expert.workPlace}"/>
@@ -61,7 +62,7 @@
 				  <s:submit  value="查 询" cssClass="mispButton primary"></s:submit> 
 				</td>
 				<td>
-				<button type="button" onclick="resetForm(this.form);" class="mispButton primary">重 置</button>
+				<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form)" ></s:submit>
 				</td>
 				
 			</tr>

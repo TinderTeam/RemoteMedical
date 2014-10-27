@@ -35,7 +35,7 @@
 				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
 				<td>
-				<button type="button" onclick="resetForm(this.form)" class="mispButton primary">重 置</button>
+				<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
 				</td>				    
 			</tr>
 
@@ -74,9 +74,9 @@
 
 				
 				</td>
-		</c:forEach>
+
 			</tr>
-			
+		</c:forEach>			
 			
 		</tbody>
 	</table>

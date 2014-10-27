@@ -20,7 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
   </head>
  
-  <body onload="window.location='<%=request.getContextPath()%>/client/misp/login.jsp'">
-    
+  <body >
+    <script type="text/javascript">
+       top.location.href = "<%=request.getContextPath()%>/client/misp/login.jsp";
+    </script>
   </body>
 </html>

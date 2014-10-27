@@ -101,7 +101,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			targetUser.setPassword(newPwd);
 			MISPDaoContext.getInstance().getSystemUserDao().update(targetUser);
-			log.info(userName + "modify password success " );
+			MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.MODIFY_PASSWORD, null, MISPOperLogConsant.OPERATE_SUCCESS);
 		}
 	}
 	
