@@ -12,7 +12,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.misp.web.action.basic.MISPAction;
+import cn.fuego.misp.web.filter.AuthenticationFilter;
 
 /** 
  * @ClassName: DownloadImageAction 
@@ -24,6 +28,8 @@ import cn.fuego.misp.web.action.basic.MISPAction;
 
 public class DownloadImageAction extends MISPAction
 {
+	private Log log = LogFactory.getLog(AuthenticationFilter.class);
+
 	private String filePath;
 	private InputStream imageStream;
 	
@@ -35,8 +41,7 @@ public class DownloadImageAction extends MISPAction
 		}
 		catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("can not find the file " + filePath,e);
 		}
 		return SUCCESS;
 	}

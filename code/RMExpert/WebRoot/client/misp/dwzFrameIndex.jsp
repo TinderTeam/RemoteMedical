@@ -7,6 +7,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>远程诊断专家平台</title>
 
+
+	 <OBJECT
+	   classid="clsid:27AEE2AD-4451-4FB7-BA27-2D2CAD155E58"
+	   codebase="ReYoWebDownLoad.cab#version=1,724,0,903"
+	   id="ReYoWebDownLoad"
+	          name="ReYoWebDownLoad"
+	   width=119
+	   height=0
+	   align=center
+	   hspace=0
+	   vspace=0      
+	>
+	</OBJECT>  
+
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/azure/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
@@ -40,10 +54,11 @@
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
 
-<link type="text/css" href="HttpDownloader.css" rel="Stylesheet"/>
-<script type="text/javascript" src="HttpDownloader.js" charset="utf-8"></script>
+ 
 
-
+    
+	
+	
 <script type="text/javascript">
 $(function()
 {

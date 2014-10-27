@@ -45,10 +45,17 @@ public class AuthenticationFilter implements Filter
 		 HttpServletResponse httpResponse = (HttpServletResponse)response;
 		 HttpSession  session = httpRequest.getSession();
 		 String url = httpRequest.getRequestURL().toString();
-		 String id = request.getParameter("sessionID");
-		 log.info("now session id " + id);
-		 log.info("new session id " + session.getId());
+ 
+ 
+
+		 String id = request.getParameter("sessionID"); 
+
+		 log.info("old session id " + id); 
+		 
+ 
+		 
 		 //the url does not contains login url, we should check login or not
+			
 		 if(url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0)
 		 {
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
