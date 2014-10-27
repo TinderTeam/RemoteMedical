@@ -60,7 +60,7 @@ function resetForm(objForm){
 
     $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
     $(':select',objForm).removeAttr('selected');	  
-	self.location.reload();
+	
 
 }
 </script>

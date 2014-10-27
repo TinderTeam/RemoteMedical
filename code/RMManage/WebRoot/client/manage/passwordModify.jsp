@@ -9,15 +9,15 @@
 
 			<div class="unit">
 				<label>输入旧密码：</label>
-				<input type="password" name="pwdModel.oldPassword" size="30" minlength="4" maxlength="20" class="required" />
+				<input type="password" name="pwdModel.oldPassword" size="30" minlength="4" maxlength="12" class="required" />
 			</div>
 			<div class="unit">
 				<label>输入新密码：</label>
-				<input type="password" id="cp_newPassword" name="pwdModel.newPassword" size="30" minlength="4" maxlength="20" class="required alphanumeric"/>
+				<input type="password" id="cp_newPassword" name="pwdModel.newPassword" size="30" minlength="4" maxlength="12" class="required alphanumeric"/>
 			</div>
 			<div class="unit">
 				<label>再次确认新密码：</label>
-				<input type="password" name="rnewPassword" size="30" equalTo="#cp_newPassword" class="required alphanumeric"/>
+				<input type="password" name="rnewPassword" size="30" equalTo="#cp_newPassword" minlength="4" maxlength="12" class="required alphanumeric"/>
 			</div>
 			
 		</div>
