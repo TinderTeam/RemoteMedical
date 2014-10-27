@@ -43,8 +43,8 @@ $(function()
     var localObj = window.location;
     var contextPath = localObj.pathname.split("/")[1];
 	DWZ.init("dwz.frag.xml", {
-		loginUrl:"login_dialog.html", loginTitle:"登录",	// 弹出登录对话框
-//		loginUrl:"login.html",	// 跳到登录页面
+		//loginUrl:"login_dialog.html", loginTitle:"登录",	// 弹出登录对话框
+       		 loginUrl:"<%=request.getContextPath()%>/client/misp/login.jsp",	// 跳到登录页面
 		statusCode:{ok:200, error:300, timeout:301}, //【可选】
 		pageInfo:{pageNum:"pageNum", numPerPage:"numPerPage", orderField:"orderField", orderDirection:"orderDirection"}, //【可选】
 		keys: {statusCode:"statusCode", message:"message"}, //【可选】
@@ -60,7 +60,7 @@ function resetForm(objForm){
 
     $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
     $(':select',objForm).removeAttr('selected');	  
-	self.location.reload();
+	
 
 }
 </script>

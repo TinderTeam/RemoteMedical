@@ -12,13 +12,14 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPOperLogConsant;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.remote.medical.constant.ApplyStatusEnum;
 import cn.fuego.remote.medical.constant.ApplyTypeEnum;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.domain.Approval;
-import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.domain.Link;
 import cn.fuego.remote.medical.manage.service.ApprovalService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
@@ -69,6 +70,7 @@ public class ApprovalServiceImpl implements ApprovalService
 		hospital.getHospital().setState(UserStatusEnum.APPLIED.getStatus());
 		DaoContext.getInstance().getHospitalDao().update(hospital.getHospital());
 		createApply(ApplyTypeEnum.MODIFY_HOSPITAL,hospital.getHospital().getId(),hospital.getHospital().getId(),null);
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(hospital.getHospital().getId(), MISPOperLogConsant.MODIFY_HOSPITAL, null, MISPOperLogConsant.OPERATE_SUCCESS);		
 		 
 		
 	}
@@ -78,6 +80,7 @@ public class ApprovalServiceImpl implements ApprovalService
 		expert.getExpert().setState(UserStatusEnum.APPLIED.getStatus());
 		ServiceContext.getInstance().getUserService().saveExpertInfo(expert);
 		createApply(ApplyTypeEnum.MODIFY_EXPERT,expert.getExpert().getId(),null,expert.getExpert().getId());
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(expert.getExpert().getId(), MISPOperLogConsant.MODIFY_EXPERT, null, MISPOperLogConsant.OPERATE_SUCCESS);
 
 	}
 
@@ -104,7 +107,7 @@ public class ApprovalServiceImpl implements ApprovalService
 		link.setLinkTime(DateUtil.getCurrentDate());
 		link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
 		createApply(ApplyTypeEnum.ADD_EXPERT,hospitalID,hospitalID,expertID);
-
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(hospitalID, MISPOperLogConsant.ADD_EXPERT, expertID, MISPOperLogConsant.OPERATE_SUCCESS);
 	}
 
 	@Override
@@ -137,18 +140,20 @@ public class ApprovalServiceImpl implements ApprovalService
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.REGISTERED.getStatus());
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);
 				break;
 			case MODIFY_HOSPITAL: 
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.REGISTERED.getStatus());
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
-								  
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);				  
 				break;
 			case ADD_EXPERT:
 				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
 				linkModel.getLink().setLinkState(LinkStatusEnum.LINK_SUCCESS.getStatusValue());
 				linkModel.getLink().setLinkTime(DateUtil.getCurrentDate());
 				DaoContext.getInstance().getLinkDao().update(linkModel.getLink());
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);
 				break;
 			default:
 				break;
@@ -171,12 +176,13 @@ public class ApprovalServiceImpl implements ApprovalService
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.CREATED.getStatus());
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);
 				break;
 			case MODIFY_HOSPITAL: 
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.CREATED.getStatus());
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
-								  
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);								  
 				break;
 			case ADD_EXPERT:
 				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
@@ -184,6 +190,7 @@ public class ApprovalServiceImpl implements ApprovalService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"hospitalID",linkModel.getLink().getHospitalID()));
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"expertID",linkModel.getLink().getExpertID()));				
 				DaoContext.getInstance().getLinkDao().delete(conditionList);
+				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);
 				break;
 			default:
 				break;

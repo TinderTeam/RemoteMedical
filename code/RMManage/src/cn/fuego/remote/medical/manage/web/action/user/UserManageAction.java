@@ -43,7 +43,7 @@ public class UserManageAction extends DWZTableAction
 		
 		try
 		{
-			userService.createUser(filter.getUserName(), filter.getAccountType());
+			userService.createUser(filter.getUserName(), filter.getAccountType(),this.getLoginUser().getUserName());
 			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 		} catch (Exception e)
 		{

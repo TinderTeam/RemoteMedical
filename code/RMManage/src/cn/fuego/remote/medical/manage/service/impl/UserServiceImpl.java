@@ -24,8 +24,10 @@ import cn.fuego.common.exception.CommonExceptionMsg;
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.misp.web.model.user.UserModel;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
@@ -183,7 +185,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 		 
 		
-
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", UserStatusEnum.REGISTERED.getStatus()));
 		
 		AbstractDataSource<Expert> dataSource = new DataBaseSourceImpl<Expert>(Expert.class,conditionList);
 		
@@ -275,7 +277,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	}
 
 	@Override
-	public void createUser(String userName, String accountType)
+	public void createUser(String userName, String accountType,String operator)
 	{
 		SystemUser oldUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userName", userName));
 		if(null != oldUser)
@@ -307,6 +309,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 
 		MISPDaoContext.getInstance().getSystemUserDao().create(user);
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.CREATE_USER, userName, MISPOperLogConsant.OPERATE_SUCCESS);
 	}
 
 	@Override
@@ -339,31 +342,34 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void addExpert(String hospitalID, String expertID)
 	{
-		
-		Link oldLink=getLinkByID(hospitalID,expertID).getLink();
-		if(oldLink!=null)
+		if (!ValidatorUtil.isEmpty(expertID))
 		{
-			if(oldLink.getLinkState()==LinkStatusEnum.LINK_FAILED.getStatusValue())
-			{
-				throw new ServiceException(CommonExceptionMsg.LINK_APPROVING);
-			}
-			else
-			{
-				throw new ServiceException(CommonExceptionMsg.LINK_EXISTED);
-			}
-	
-		}
-		else
-		{
-			Link link=new Link();
-			link.setHospitalID(hospitalID);
-			link.setExpertID(expertID);
-			link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
-			link.setLinkTime(DateUtil.getCurrentDate());
-			DaoContext.getInstance().getLinkDao().create(link);
-			
-		}
 
+			Link oldLink = getLinkByID(hospitalID, expertID).getLink();
+			if (oldLink != null)
+			{
+				if (oldLink.getLinkState() == LinkStatusEnum.LINK_FAILED.getStatusValue())
+				{
+					throw new ServiceException(CommonExceptionMsg.LINK_APPROVING);
+				} else
+				{
+					throw new ServiceException(CommonExceptionMsg.LINK_EXISTED);
+				}
+
+			} else
+			{
+				Link link = new Link();
+				link.setHospitalID(hospitalID);
+				link.setExpertID(expertID);
+				link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
+				link.setLinkTime(DateUtil.getCurrentDate());
+				DaoContext.getInstance().getLinkDao().create(link);
+				
+			}
+		} else
+		{
+			throw new ServiceException(CommonExceptionMsg.INPUT_EMPTY);
+		}
 		
 	}
 	@Override

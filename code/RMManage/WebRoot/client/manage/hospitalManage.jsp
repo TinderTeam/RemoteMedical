@@ -35,7 +35,7 @@
 				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
 				<td>
-				<button type="button" onclick="resetForm(this.form);" class="mispButton primary">重 置</button>
+				<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
 				</td>				    
 			</tr>
 
@@ -56,7 +56,7 @@
 				<th width="300" align="center">地点</th>
 				<th width="100" align="center">联系人</th>
 				<th width="100" align="center">联系电话</th>
-				<th width="100" align="center">查看详情</th>
+				<th width="100" align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -70,13 +70,13 @@
 				<td>${e.contactsPhone}</td>
 				<td>
 					
-					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit" class="btnView" rel="Menu${selectedMenuID}">查看</a>
+					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 
 				
 				</td>
-		</c:forEach>
+
 			</tr>
-			
+		</c:forEach>			
 			
 		</tbody>
 	</table>

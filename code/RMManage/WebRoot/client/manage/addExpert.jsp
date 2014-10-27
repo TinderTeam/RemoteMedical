@@ -12,8 +12,8 @@
 
 <div class="pageHeader">
 	<form id="pagerForm" method="post" action="user/ExpertManage!addExpert.action" onsubmit="return dwzSearch(this, 'dialog');">
-		<input type="hidden" name="pageNum"  />
-	    <input type="hidden" name="numPerPage"  />	
+		<input type="hidden" name="pageNum" value="${pageNum}" />
+	    <input type="hidden" name="numPerPage" value="${numPerPage}" />	
 	<div class="searchBar">
 		
 		<table class="searchContent">
@@ -33,7 +33,7 @@
 		<div class="subBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="resetForm(this.form);">重 置</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div></li>
 			</ul>
 		</div>
 	</div>

@@ -5,8 +5,8 @@
 
 <div class="pageHeader">
 <s:form  id="pagerForm" action="user/ApprovalManage" method="POST" onsubmit="return navTabSearch(this);">
-		<input type="hidden" name="pageNum"  />
-	    <input type="hidden" name="numPerPage"  />	
+		<input type="hidden" name="pageNum" value="${pageNum}" />
+	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -36,11 +36,11 @@
 					<span class="limit">-</span>
 					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
-				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+				<td>
+					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
 				<td>
-
-				<button type="button" onclick="resetForm(this.form);" class="mispButton primary">重 置</button>
+					<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
 				</td>				
 			</tr>
 
