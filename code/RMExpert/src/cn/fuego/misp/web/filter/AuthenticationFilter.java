@@ -12,13 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.user.UserModel;
-import cn.fuego.remote.medical.expert.service.impl.ExpertServiceImpl;
 
  
 /**
@@ -34,9 +30,8 @@ public class AuthenticationFilter implements Filter
 
 	private static final String LOGIN_URL_FLAG = "login";
 	private static final  String LOGIN_PAGE = "client/misp/login.jsp";
-	private Log log = LogFactory.getLog(AuthenticationFilter.class);
-
- 
+	private static final  String JS_FILE = ".js";
+	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
@@ -45,23 +40,16 @@ public class AuthenticationFilter implements Filter
 		 HttpServletResponse httpResponse = (HttpServletResponse)response;
 		 HttpSession  session = httpRequest.getSession();
 		 String url = httpRequest.getRequestURL().toString();
- 
- 
-
-		 String id = request.getParameter("sessionID"); 
-
-		 log.info("old session id " + id); 
-		 
- 
-		 
+		  
 		 //the url does not contains login url, we should check login or not
-			
-		 if(url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0)
+		 if(!url.endsWith(httpRequest.getContextPath()) 
+			&& !url.endsWith(httpRequest.getContextPath()+"/")
+			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.toLowerCase().endsWith(JS_FILE))
 		 {
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
 			 if(null == loginUser || ValidatorUtil.isEmpty(loginUser.getUserName()))
 			 {
-				 httpResponse.sendRedirect(httpRequest.getContextPath()+"/"+LOGIN_PAGE);
+				 httpResponse.sendRedirect(httpRequest.getContextPath() );
 			 }
 		 }
 		 

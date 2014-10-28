@@ -40,9 +40,23 @@
 			<result type="chain" name="Index">
 			  <param name="actionName">ReportManage</param>
             </result>    
+			<result name="home">/client/misp/login.jsp</result>
 			
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>		    
+			<result type="chain" name="LoginFailed">
+			  <param name="actionName">login</param>
+			  <param name="method">home</param>
+				<param name="message">${message}</param>
+			</result>		    
+			<result name="validateCode" >/client/misp/login.jsp
+			</result>			
+		 
 		</action>
+		<action name="getValidateImage" class="cn.fuego.misp.web.action.login.getValidateImageAction" method="createImage">     
+            <result type="stream">    
+                 <param name="contentType">image/jpeg</param>    
+                 <param name="inputName">codeStream</param>    
+             </result>      
+		</action> 		  
  
  	</package>
  	

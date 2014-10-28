@@ -17,7 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MISPAction extends ActionSupport
 {
-	private String selectedMenuID;
+	private static String selectedMenuID;
 	private List<MenuModel> menuHeadList;
 	private MispMessageModel operateMessage = new MispMessageModel();
 	public static final String MISP_DONE_PAGE = "misp-done";
