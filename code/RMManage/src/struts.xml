@@ -36,7 +36,7 @@
     
 	<package name="login" extends="default">
 		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
-			<result type="redirect">/client/misp/dwzFrameIndex.jsp</result>
+			<result type="redirect">/client/misp/home.jsp</result>
 			<result type="chain" name="Index">
 			  <param name="actionName">ReportManage</param>
             </result>    
@@ -51,7 +51,7 @@
 			</result>			
 		 
 		</action>
-		<action name="getValidateImage" class="cn.fuego.misp.web.action.login.getValidateImageAction" method="createImage">     
+		<action name="ValidateImage" class="cn.fuego.misp.web.action.login.ValidateImageAction" method="createImage">     
             <result type="stream">    
                  <param name="contentType">image/jpeg</param>    
                  <param name="inputName">codeStream</param>    

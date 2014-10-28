@@ -99,8 +99,7 @@ public class LoginAction extends MISPAction
 			response.getWriter().print(validateResult);
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("validateCode failed",e);
 		} 
     
          return null;

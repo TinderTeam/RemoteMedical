@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var timenow = new Date().getTime();  
            //每次请求需要一个不同的参数，否则可能会返回同样的验证码  
         //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
-        obj.src="login/getValidateImage.action?d="+timenow;  
+        obj.src="login/ValidateImage.action?d="+timenow;  
     } 
     $(function(){
     
@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<p>
 						<label>验证码：</label>
 						<input id="ckey"  class="code" type="text" size="5" name="user.validateCode" />
-						<span><img src="login/getValidateImage.action" onclick="changeValidateCode(this)" alt="" width="75" height="24" /></span>
+						<span><img src="login/ValidateImage.action" onclick="changeValidateCode(this)" alt="" width="75" height="24" /></span>
 					</p>
 					<div class="login_bar">
 						<input  id="Bt1" class="sub" type="button" value=" " />
