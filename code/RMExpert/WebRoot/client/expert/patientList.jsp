@@ -32,7 +32,7 @@
 				 报告状态：
 				</td>
 				<td>
-					<select class="combox" name="filter.exReportState"  >
+					<select  name="filter.exReportState"  >
 					    <option value="ALL">默认所有状态</option>
 						<c:forEach var="e" items="${filter.reportStatusList}">
 						  <c:choose>
@@ -66,7 +66,7 @@
 				</td>
 				<td>
 				   
-					<select class="combox" >
+					<select >
 						<option value="ALL">默认所有时间</option>
 						<option value="today">今天</option>
 						<option value="last3">近三天</option>
@@ -80,8 +80,9 @@
 
 				<td>
 				<div class="buttonActive"><div class="buttonContent"><button type="submit" >查 询</button>	</div></div>
-				<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="javascript:$('#pagerForm')[0].reset();">重 置</button>	</div></div>
-				
+                </td>
+                <td>
+								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div>
 				</td>
 				 
 				

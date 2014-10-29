@@ -16,7 +16,7 @@ import cn.fuego.misp.web.action.basic.MISPAction;
 
 import com.opensymphony.xwork2.ActionContext;
 
-public class getValidateImageAction extends MISPAction
+public class ValidateImageAction extends MISPAction
 {
     /**
 	 * 

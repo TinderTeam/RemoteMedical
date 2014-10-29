@@ -17,176 +17,47 @@ function submitForm(url)
 
 //版面布局自适应
  total = document.documentElement.clientHeight;
-colHeight = total-84;
-document.getElementById("accordionL").style.height=colHeight-15+"px";
-document.getElementById("contentL").style.height=colHeight-16+"px";
-document.getElementById("panelImg").style.height=colHeight-230+"px";
-document.getElementById("panelDA").style.height=colHeight-104+"px";
-document.getElementById("contentDA").style.height=colHeight-16+"px";
-document.getElementById("contentDM").style.height=colHeight-44+"px";
+colHeight = total-74;//84
+$("#accordionL").height(colHeight-15+"px");
+$("#contentL").height(colHeight-16+"px");
+$("#panelImg").height(colHeight-220+"px");//230
+$("#panelDA").height(colHeight-104+"px");
+$("#contentDA").height(colHeight-16+"px");//16
+$("#contentDM").height(colHeight-44+"px");
 //文本域宽度自适应
 textAreaWidth=document.getElementById("panelDA").clientWidth;
 partW=textAreaWidth*0.065;
-document.getElementById("dis").innerText=textAreaWidth;
-document.getElementById("text1").cols=partW;
-document.getElementById("text2").cols=partW;
-document.getElementById("text3").cols=partW;
-document.getElementById("text4").cols=partW;
+//$("#dis").innerText=textAreaWidth;
+$(".textWidth").attr("cols",partW);
 //文本域高度自适应
 textAreaHeight=document.getElementById("panelDA").clientHeight;
 partH=textAreaHeight;
 //document.getElementById("dis").innerText=textAreaHeight;
-document.getElementById("textD1").style.height=partH*0.4+"px";
-document.getElementById("text1").rows=partH*0.015;
-document.getElementById("text2").rows=partH*0.015;
-document.getElementById("textD2").style.height=partH*0.55+"px";
-document.getElementById("text3").rows=partH*0.027;
-document.getElementById("text4").rows=partH*0.027;
-</script>
+$("#textD1").height(partH*0.4+"px");
+$("#text1,#text2").attr("rows",partH*0.015);
+$("#textD2").height(partH*0.55+"px");
+$("#text3,#text4").attr("rows",partH*0.027);
+//运行模板浮窗显示
+	$(function (){ $(".treeMenu").popover({trigger:'hover'});});
+</script> 
 
-<script>
-$(function ()
-{ $(".treeMenu").popover({trigger:'hover'});
-});
-</script>
 
-<input id="sessionID" value="<%=session.getId()%>" />
-<input id="contextPath" value="<%=request.getContextPath()%>" />
-<script type="text/javascript">
- 
-        var sessionID = $("#sessionID").val();
-	    var contextPath = $("#contextPath").val();
-	    var hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
-	    
-	    
-        var imageURL =  new Array();
-       
-        var imageFileName =  new Array();
-        var progressID =  new Array("downSize1","downSize2","downSize3");
-       
-        var imageCnt = $("#imageCount").val();
-       
-        
-        var nowCnt = 0;
-        
-        var isStarted = false;
-        
-        for(var i=0;i<imageCnt;i++)
-        {
-            imageURL[i]= $("#url"+i).val();
-            imageFileName[i] = $("#image"+i).val();
-            progressID[i] = "downSize" + i;
-        }
- 
-	     window.onload= function()
-	     { 
-		   sessionID = $("#sessionID").val();
-	       contextPath = $("#contextPath").val();
-	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
- 
-		 };
+<input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
+<input id="contextPath" value="<%=request.getContextPath()%>" style="display:none;"/>
 
- 
-        
-		function StartDown()
-		{
-				   sessionID = $("#sessionID").val();
-	       contextPath = $("#contextPath").val();
-	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
- 
-			updateProgress();
-		}
- 
- 
-		function updateProgress()
-		{
-		   if(isStarted == false)
-		   {
-		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
-			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
-			 ReYoWebDownLoad.url= hostURL+ "/" + imageURL[nowCnt];
-			 
-			 ReYoWebDownLoad.path ="d:/temp/" + imageFileName[nowCnt];
-			 ReYoWebDownLoad.ReYoStartDownload();
-			 isStarted = true;
-		   }
- 
-		 	if (ReYoWebDownLoad.cancle)
-		    {
-		
-				alert("falied");
-				isStarted = false;
-				return;
-		    }
-		 	else
-			{
-				if (ReYoWebDownLoad.done) 
-				{
- 
-		  			ReYoWebDownLoad.done=false;
-		  			document.getElementById(progressID[nowCnt]).value = 100;
-		  			nowCnt ++;
-		  			isStarted = false;
-		  			if(nowCnt<imageCnt)
-		  			{
-		  		   	  setTimeout("updateProgress()",1000);	
-		  			}
-		  			else
-		  			{
-		  			 nowCnt = 0;
-		  			 }
-				}
-				else
-				{
-					 
-					setTimeout("updateProgress()",100);		
-					document.getElementById(progressID[nowCnt]).value = ReYoWebDownLoad.percent;
-				}
-			}
-		
-		}
-		
-		function copyFile()
-		{
-			var obj = new ActiveXObject(downer.ActiveX["Part"]);
-			obj.CopyFile("f:\\ftp\\test.gif","f:\\ftp\\test1.gif");
-		}
-
-		function copyFolder()
-		{
-			var obj = new ActiveXObject(downer.ActiveX["Part"]);
-			obj.CopyFile("f:\\ftp\\test.gif","f:\\ftp\\ftp1");
-		}
-		
-		function moveFile()
-		{
-			var obj = new ActiveXObject(downer.ActiveX["Part"]);
-			obj.MoveFile("f:\\ftp\\test.gif","f:\\ftp\\test2.gif");
-		}
-		
-		function moveFolder()
-		{
-			var obj = new ActiveXObject(downer.ActiveX["Part"]);
-			obj.MoveFile("f:\\ftp\\test2.gif","f:\\ftp\\ftp1");
-		}
-		
-	</script>
 	
 
-<input type="button" value="下载测试文件" onclick="StartDown()" />
-<input id="downSize0" value="下载测试文件"  />
-<input id="downSize1" value="下载测试文件"  />
-<input id="downSize2" value="下载测试文件"  />
-<input id="downSize3" value="下载测试文件"  />
+<input type="button" value="删除" onclick="deleteFile('c:/target.txt');" style="display:none;" />
+
 <div class="pageContent" >
 
 <p id="dis" style="display:none;">
 </p>
-	<div class="accordion" style="width:82%;float:left;margin:10px 5px 0px 10px;" id="accordionL">
+	<div class="accordion" style="width:83%;float:left;margin:0px;" id="accordionL">
  
-		<div class="accordionContent" style="width:20%;float:left;" id="contentL" >
+		<div class="accordionContent" style="width:22%;float:left;" id="contentL" >
 		
-	<div class="panel" minH="120" >
+	<div class="panel" minH="110" >
 			<h1>病人基本信息</h1>
 			<div class="pageFormContent"  style="overflow:hidden;" >
 
@@ -207,45 +78,50 @@ $(function ()
 			</div>
 		</div>
 
-		<div class="panel" minH="293" >
+		<div class="panel" minH="270" >
 			<h1>图像下载区</h1>
 			<div class="pageFormContent"  id="panelImg"> 
-			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}'/> 
+			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
-				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" ></input>
-				         <input   id="image${status.index}"  value="${e.image.imageSavePath}" ></input>
-				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" ></input>
+				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
+				         <input   id="image${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
+				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
-	                  	 <dl style="width:96% !important;">
-							<dt style="font-size:1.2em;width:65% !important;">
-								<span style="margin:0px 5px;"><u>${e.image.imgArchName}</u></span>
-								<span style="margin:0px 5px;"><u>${e.image.bodyPart}</u></span>
+	                <dl style="width:98% !important;">
+							<dt style="font-size:1.2em;width:68% !important;">
+								<span style="margin:0px 5px;width:100%;"><u>${e.image.imgArchName}</u></span>
+								<span style="margin:0px 5px;width:100%;">部位：<u>${e.image.bodyPart}</u></span>
 							</dt>
 						
-						    <dd style="font-size:1.2em;width:28% !important;float:right;">
+						    <dd style="font-size:1.2em;width:27% !important;float:right;">
 							
-							    <span style="margin:0px 5px;"><button type="submit" onclick="loading('100%')">下载</button></span>
+							    <span style="margin:0px 5px;"><input id="downBt${status.index}" type="button" onclick="StartDown(this.id)" value="下载"/></span>
 						    </dd>
 	
-					      </dl>	
+					</dl>	
+					<dl style="width:98% !important;">
+						<dt style="width:68% !important;">
+					
+				    	<div class="progress" style="padding-top:5px" id="downSize${status.index}">
+							<span class="blue" style="width:0%;" ><span style="width:10% !important;text-align:center;" ></span></span>
+						</div>
+
+						</dt>
+						<dd style="width:27% !important;float:right;">
+							<span style="margin:0px 5px;"><input id="viewBt${status.index}" type="button" value="查看" disabled="disabled"></span>
+						</dd>					
+
+					</dl>					      
 				 </c:forEach>
 			 </div>	      
-			<!-- div id="downDiv"></div>
-			<div class="pageFormContent" id="panelImg">
 
-                  <c:forEach var="e" items="${medicalReport.imageList}"> 
-                     <input name="imageUrl" value="e.imageUrl"></input>	
-           
-	              </c:forEach>
-			</div>
-			 -->
 		</div>
 		
 		</div>
 	   <s:form name="form1" action="expert/ReportManage" method="POST" theme="simple">
-		 <div class="accordionContent" style="width:80%;float:right" id="contentDA">
+		 <div class="accordionContent" style="width:78%;float:right" id="contentDA">
 			<div class="panel" >
 			<h1>病症诊断区</h1>
 
@@ -260,11 +136,11 @@ $(function ()
 				<div class="divider"></div>				
 				<dl style="width:50%;">
 					<dt style="text-align:left;width:80%;" >检查所见：</dt>
-					<dd ><textarea name="medicalReport.reportView.studyContent" cols="" rows="" readonly="true" id="text1">${medicalReport.reportView.studyContent}</textarea></dd>
+					<dd ><textarea name="medicalReport.reportView.studyContent" cols="" rows="" readonly="true" id="text1" class="textWidth">${medicalReport.reportView.studyContent}</textarea></dd>
 				</dl>
 				<dl  style="width:50%;" >
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-					<dd><textarea name="medicalReport.reportView.studyConclusion" cols="" rows="" readonly="true" id="text2">${medicalReport.reportView.studyConclusion}</textarea></dd>
+					<dd><textarea name="medicalReport.reportView.studyConclusion" cols="" rows="" readonly="true" id="text2" class="textWidth">${medicalReport.reportView.studyConclusion}</textarea></dd>
 				</dl>
 				</div>
 
@@ -273,30 +149,28 @@ $(function ()
 				<div class="divider"></div>
 				<dl style="width:50%;" id="text3dl">
 					<dt style="text-align:left;width:80%;" >检查所见：</dt>
-					<dd style="width:100%;"><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" >${medicalReport.reportView.exStudyContent}</textarea></dd>
+					<dd style="width:100%;"><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" class="textWidth">${medicalReport.reportView.exStudyContent}</textarea></dd>
 				</dl>
 				<dl  style="width:50%;" id="text4dl">
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-					<dd><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" >${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+					<dd><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" class="textWidth">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
 				</dl>
 				</div>
 			</div>
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
-				<ul class="toolBar">
+				<ul class="toolBar" style="float:right;">
 					 <c:choose>
 							   <c:when test="${'已提交' == medicalReport.reportView.exReportState}">  
-	                             <input type="button" name="save" value="撤销报告" onclick="sumbitForm('cancel')"  align="left" />
+	                            <li> <input type="button" name="save" value="撤销报告" onclick="sumbitForm('cancel')"  /></li>
 					           </c:when>
 							   <c:otherwise>  
-							    <input type="button" name="modify" value="保存报告" onclick="submitForm('modify')" align="left"   />
-					            <input type="button" name="save" value="提交报告" onclick="submitForm('submit')"  align="left"  />
-							    <input type="button" name="transfer" value="转换专家" onclick="submitForm('transfer')" align="left"   />
-							    <input type="button" name="back" value="返回" onclick="submitForm('back')" align="left"   />
+							   <li> <input type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
+					           <li> <input type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
+							   <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('transfer')"  /></li>
+							   <li> <input type="button" name="back" value="返回" onclick="submitForm('back')"/></li>
 					           </c:otherwise>
 					</c:choose>
-					
-					
- 
+
 				</ul>
 			</div>		
 			</div>
@@ -306,7 +180,7 @@ $(function ()
 	</div>
 
 
-	<div class="accordion" style="width:16%;float:right;margin:10px 5px 10px 0px;">
+	<div class="accordion" style="width:16%;float:right;margin:0px;">
 		<div class="accordionHeader">
 			<p style="font-size:1.5em;padding:7px;"><strong>诊断模板</strong></p>
 		</div>
@@ -331,5 +205,155 @@ $(function ()
 
 
 </div>
+<script type="text/javascript">
+ 
+        var sessionID = $("#sessionID").val();
+	    var contextPath = $("#contextPath").val();
+	    var hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+        var imageURL =  new Array();
+       
+        var imageFileName =  new Array();
+        var progressID =  new Array("downSize1","downSize2","downSize3");
+       
+        var imageCnt = $("#imageCount").val();
+        var nowCnt = 0;
+        
+        var isStarted = false;
+        var isStop=true;
+        for(var i=0;i<imageCnt;i++)
+        {
+            imageURL[i]= $("#url"+i).val();
+            imageFileName[i] = $("#image"+i).val();
+            progressID[i] = "downSize" + i;
+        }
+ 
+	     window.onload= function()
+	     { 
+		   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+ 
+		 };
 
+ 
+        
+		function StartDown(id)
+		{
+
+		   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+ 
+ 			if(isStop==true)
+			{
+				$("#"+id).attr("value","取消");
+				if(isStarted == true)
+				{
+				   ReYoWebDownLoad.ReYoStartDownload();
+				}
+				
+				isStop=false;
+				updateProgress();
+			}
+			else
+			{
+			    $("#"+id).attr("value","下载");
+				ReYoWebDownLoad.ReYoStopDownload();
+				isStop=true;
+			}
+
+		}
+ 
+		function updateProgress()
+		{
+		   if(isStarted == false)
+		   {
+		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
+			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
+			 ReYoWebDownLoad.url= hostURL+ "/" + imageURL[nowCnt];
+			 //alert(ReYoWebDownLoad.url);
+			 ReYoWebDownLoad.percent = 0;
+		 	 ReYoWebDownLoad.path ="d:/temp/" + imageFileName[nowCnt];
+			 ReYoWebDownLoad.ReYoStartDownload();
+			 isStarted = true;
+		   }
+ 
+		 	if (ReYoWebDownLoad.cancle)
+		    {
+		
+				alert("本次下载已取消！");
+				isStarted = false;
+				return;
+		    }
+		 	else
+			{
+				if (ReYoWebDownLoad.done) 
+				{
+ 
+		  			ReYoWebDownLoad.done=false;
+				    $("#downBt"+nowCnt).attr("disabled",true);
+			        $("#downBt"+nowCnt).attr("value","完成");
+				    $("#viewBt"+nowCnt).attr("disabled",false);
+			        		        
+                    loading(progressID[nowCnt],100);
+ 			        //alert(nowCnt);
+		  			nowCnt ++;
+		  			isStarted = false;
+		  			if(nowCnt<imageCnt)
+		  			{
+		  		   	  setTimeout("updateProgress()",500);	
+		  			}
+		  			else
+		  			{
+		  			 nowCnt = 0;
+		  			 }
+				}
+				else
+				{
+					 if(isStop==false)
+					 {
+					 	setTimeout("updateProgress()",500);		
+						//document.getElementById(progressID[nowCnt]).value = ReYoWebDownLoad.percent;
+						loading(progressID[nowCnt],ReYoWebDownLoad.percent);
+					 }
+
+
+				}
+			}
+		
+		}
+		
+
+	function loading(progressID,percent){
+
+        var per = percent + "%";
+	    $("#"+progressID).find("span:first-child").animate({width:per},30,function(){
+
+			$(this).children().html(per);
+			
+            if(per=='100%'){
+                $(this).children().html('下载完成!');
+
+            }
+			
+		});
+	}
+	function deleteFile(target)
+	{
+      var   fso = new  ActiveXObject("Scripting.FileSystemObject");   
+      if(fso.FileExists(target))
+      {
+      	fso.DeleteFile(target);
+      	 alert("删除成功！");
+      }
+        
+      else
+      {
+      	alert("删除对象不存在！");
+      }   
+       
+		 
+	}
+	
+	</script>
 
