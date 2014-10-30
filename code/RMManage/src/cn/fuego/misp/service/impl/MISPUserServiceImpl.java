@@ -107,7 +107,7 @@ public class MISPUserServiceImpl implements MISPUserService
 	
 	public List<MenuTreeModel> getMenuTreeByUserID(String userID)
 	{
-		Set<String> menuIDList = MISPServiceContext.getInstance().MISPPrivilegeManage().getMenuIDListByUser(userID);
+		Set<String> menuIDList = MISPServiceContext.getInstance().getMISPPrivilegeManage().getMenuIDListByUser(userID);
 		
 		return SystemMenuCache.getInstance().getMenuListWithShowIDList(menuIDList);
 	}

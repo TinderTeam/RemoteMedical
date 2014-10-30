@@ -39,6 +39,24 @@ public class SystemConfigInfo
 		return  getSystemRootPath() + PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.TEMPLATE_PATH);
 		
 	}
+	
+	public static String getMessageUserID()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_USER_ID);
 
- 
+	}
+
+	public static String getMessageAccount()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_ACCOUNT);
+
+	}
+	
+	public static String getMessagePassword()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_PASSWORD);
+
+	}
+	
+
 }
