@@ -32,9 +32,9 @@
 			</dl>		
 			<dl style="width:50%;">
 				<dt>医院名称：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.name" class="required " alt="" size="50" value="${hospitalModel.hospital.name}" /></dd>
+				<dd><input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="50" value="${hospitalModel.hospital.name}" /></dd>
 			</dl>			
-			<dl style="width:100%;">
+			<dl style="width:50%;">
 				<dt>医院地址：</dt>
 				<dd style="width:70%;">
 				
@@ -55,37 +55,42 @@
 			
 			<dl style="width:50%;">
 				<dt>详细地址：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.address"  alt="" size="50" value="${hospitalModel.hospital.address}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="50" value="${hospitalModel.hospital.address}"/></dd>
 			</dl>
 
 			<dl style="width:50%;">
 				<dt>医院规模：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.rank"  alt="" size="50" value="${hospitalModel.hospital.rank}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.rank"  maxlength="32" size="50" value="${hospitalModel.hospital.rank}"/></dd>
 			</dl>			
-			<dl style="width:50%;">
-				<dt>医院电话：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.hospitalPhone"  alt="" size="50" value="${hospitalModel.hospital.hospitalPhone}"/></dd>
-			</dl>
+
 			<dl style="width:50%;">
 				<dt>联系方式：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.contactWay"  alt="" size="50" value="${hospitalModel.hospital.contactWay}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.contactWay"  maxlength="32" size="50" value="${hospitalModel.hospital.contactWay}"/></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt>联系人：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.contacts"  alt="" size="50" value="${hospitalModel.hospital.contacts}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.contacts"  maxlength="64" size="50" value="${hospitalModel.hospital.contacts}"/></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt>联系电话：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.contactsPhone"  alt="" size="50" value="${hospitalModel.hospital.contactsPhone}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.contactsPhone"  maxlength="16" size="50" value="${hospitalModel.hospital.contactsPhone}"/></dd>
 			</dl>
 			<div class="divider"></div>
+			<dl style="width:100%;height:50px;">
+				<dt >医院电话：</dt>			
+				<dd style="width:85%;">
+				<textarea name="hospitalModel.hospital.hospitalPhone"  cols="100" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.hospitalPhone}</textarea>
+				<span class="info" style="float:right;">*以英文分号隔开，不超过10个号码</span>
+				</dd>
+			</dl>
+
 				<dl class="nowrap">
 					<dt >医院简介：</dt>
-					<dd ><textarea name="hospitalModel.hospital.resume" cols="100" rows="7" >${hospitalModel.hospital.resume}</textarea></dd>
+					<dd ><textarea name="hospitalModel.hospital.resume" cols="100" rows="7" maxlength="800">${hospitalModel.hospital.resume}</textarea></dd>
 				</dl>
 				<dl class="nowrap">
 					<dt >医院描述：</dt>
-					<dd ><textarea name="hospitalModel.hospital.remark" cols="100" rows="7" >${hospitalModel.hospital.remark}</textarea></dd>
+					<dd ><textarea name="hospitalModel.hospital.remark" cols="100" rows="7" maxlength="800">${hospitalModel.hospital.remark}</textarea></dd>
 				</dl>			
 			
 		</div>
