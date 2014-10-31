@@ -15,36 +15,39 @@ function submitForm(url)
 <!-- 自适应屏幕高度 -->
 <script type="text/javascript">
 
-//版面布局自适应
- total = document.documentElement.clientHeight;
-colHeight = total-74;//84
-$("#accordionL").height(colHeight-15+"px");
-$("#contentL").height(colHeight-16+"px");
-$("#panelImg").height(colHeight-220+"px");//230
-$("#panelDA").height(colHeight-104+"px");
-$("#contentDA").height(colHeight-16+"px");//16
-$("#contentDM").height(colHeight-44+"px");
-//文本域宽度自适应
-textAreaWidth=document.getElementById("panelDA").clientWidth;
-partW=textAreaWidth*0.065;
-//$("#dis").innerText=textAreaWidth;
-$(".textWidth").attr("cols",partW);
-//文本域高度自适应
-textAreaHeight=document.getElementById("panelDA").clientHeight;
-partH=textAreaHeight;
-//document.getElementById("dis").innerText=textAreaHeight;
-$("#textD1").height(partH*0.4+"px");
-$("#text1,#text2").attr("rows",partH*0.015);
-$("#textD2").height(partH*0.55+"px");
-$("#text3,#text4").attr("rows",partH*0.027);
-//运行模板浮窗显示
-	$(function (){ $(".treeMenu").popover({trigger:'hover'});});
+	//版面布局自适应
+	total = document.documentElement.clientHeight;
+	colHeight = total - 74;//84
+	$("#accordionL").height(colHeight - 15 + "px");
+	$("#contentL").height(colHeight - 16 + "px");
+	$("#panelImg").height(colHeight - 220 + "px");//230
+	$("#panelDA").height(colHeight - 104 + "px");
+	$("#contentDA").height(colHeight - 16 + "px");//16
+	$("#contentDM").height(colHeight - 44 + "px");
+	//文本域宽度自适应
+	textAreaWidth = document.getElementById("panelDA").clientWidth;
+	partW = textAreaWidth * 0.065;
+	//$("#dis").innerText=textAreaWidth;
+	$(".textWidth").attr("cols", partW);
+	//文本域高度自适应
+	textAreaHeight = document.getElementById("panelDA").clientHeight;
+	partH = textAreaHeight;
+	//document.getElementById("dis").innerText=textAreaHeight;
+	$("#textD1").height(partH * 0.4 + "px");
+	$("#text1,#text2").attr("rows", partH * 0.015);
+	$("#textD2").height(partH * 0.55 + "px");
+	$("#text3,#text4").attr("rows", partH * 0.027);
+	//运行模板浮窗显示
+	$(function() {
+		$(".treeMenu").popover({
+			trigger : 'hover'
+		});
+	});
 </script> 
-
 
 <input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
 <input id="contextPath" value="<%=request.getContextPath()%>" style="display:none;"/>
-
+<input id="hospitalID" name="hospitalID"  value="${medicalReport.reportView.hospitalID}" style="display:none;"/>
 	
 
 <input type="button" value="删除" onclick="deleteFile('c:/target.txt');" style="display:none;" />
@@ -90,26 +93,27 @@ $("#text3,#text4").attr("rows",partH*0.027);
 				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
 	                <dl style="width:98% !important;">
-							<dt style="font-size:1.2em;width:68% !important;">
-								<span style="margin:0px 5px;width:100%;"><u>${e.image.imgArchName}</u></span>
-								<span style="margin:0px 5px;width:100%;">部位：<u>${e.image.bodyPart}</u></span>
+							<dt style="font-size:1.2em;width:70% !important;">
+								<span style="margin:0px 5px 0px 0px;width:100%;"><u>${e.image.imgArchName}</u></span>
+								<br>
+								<span style="margin:0px 5px 0px 0px;">部位：<u>${e.image.bodyPart}</u></span>
 							</dt>
 						
-						    <dd style="font-size:1.2em;width:27% !important;float:right;">
+						    <dd style="font-size:1.2em;width:25% !important;float:right;">
 							
 							    <span style="margin:0px 5px;"><input id="downBt${status.index}" type="button" onclick="StartDown(this.id)" value="下载"/></span>
 						    </dd>
 	
 					</dl>	
 					<dl style="width:98% !important;">
-						<dt style="width:68% !important;">
+						<dt style="width:70% !important;">
 					
 				    	<div class="progress" style="padding-top:5px" id="downSize${status.index}">
 							<span class="blue" style="width:0%;" ><span style="width:10% !important;text-align:center;" ></span></span>
 						</div>
 
 						</dt>
-						<dd style="width:27% !important;float:right;">
+						<dd style="width:25% !important;float:right;">
 							<span style="margin:0px 5px;"><input id="viewBt${status.index}" type="button" value="查看" disabled="disabled"></span>
 						</dd>					
 
@@ -158,16 +162,19 @@ $("#text3,#text4").attr("rows",partH*0.027);
 				</div>
 			</div>
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
-				<ul class="toolBar" style="float:right;">
+				<ul style="float:right;">
 					 <c:choose>
-							   <c:when test="${'已提交' == medicalReport.reportView.exReportState}">  
-	                            <li> <input type="button" name="save" value="撤销报告" onclick="sumbitForm('cancel')"  /></li>
+							   <c:when test="${2 == medicalReport.reportView.exReportState}">
+  
+	                            <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="cancal" value="撤销报告" onclick="submitForm('cancel')"  /></li>
+							    <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="back" value="返回" onclick="submitForm('back')"/></li>					            
 					           </c:when>
 							   <c:otherwise>  
-							   <li> <input type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
-					           <li> <input type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
-							   <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('transfer')"  /></li>
-							   <li> <input type="button" name="back" value="返回" onclick="submitForm('back')"/></li>
+							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
+					           <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
+							   <!--  <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('showTransfer')"  /></li>-->
+							   <li style="padding-bottom:5px;"><a class="mispButton primary" href="ReportManage!showTransfer.action?selectedID=${medicalReport.reportView.id}"  target="dialog" title="转换专家">转换专家</a></li>
+							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="back" value="返回" onclick="submitForm('back')"/></li>
 					           </c:otherwise>
 					</c:choose>
 

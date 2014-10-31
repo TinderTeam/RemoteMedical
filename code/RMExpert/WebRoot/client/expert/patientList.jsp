@@ -2,16 +2,6 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<!--  form id="pagerForm" method="post" action="expert/ReportManage">
-	<input type="hidden" name="status" value="${param.status}">
-	<input type="hidden" name="keywords" value="${param.keywords}" />
-	<input type="hidden" name="pageNum" value="3" />
-	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
-	<input type="hidden" name="orderField" value="${param.orderField}" />
-	<input type="hidden" name="reportList.page.pageSize" value="20" />
-	<input type="hidden" name="reportList.page.currentPage" value="${reportList.page.currentPage}" />
-</form>-->
-
 
 <div class="pageHeader">
 	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
@@ -22,18 +12,18 @@
 	<input type="hidden" name="orderField" value="${param.orderField}" />
  
 	<div class="searchBar">
-
+				<script type="text/javascript">
+				    $('#startDate,#endDate').attr('disabled',true);
+				    $('#days').attr('disabled',false);
+					//$('#days').attr('checked',checked);
+				</script>
 		<table class="searchContent">
 			<tr >
+
 				<td>
-					患者姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
-				</td>
-				<td>
-				 报告状态：
-				</td>
-				<td>
+					报告状态：
 					<select  name="filter.exReportState"  >
-					    <option value="ALL">默认所有状态</option>
+					    <option value="">默认所有状态</option>
 						<c:forEach var="e" items="${filter.reportStatusList}">
 						  <c:choose>
 						       
@@ -51,38 +41,47 @@
 				<td>
 					设备类型：<input type="text" name="filter.modality" value="${filter.modality}"/>
 				</td>
-	
-			</tr>
-			
-			<tr>
-				<td class="dateRange">
-					时间段:
-					<input type="text" value="" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}"/>
-					<span class="limit">-</span>
-					<input type="text" value="" readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
-				</td>
-				<td>
-				 时间：
-				</td>
-				<td>
-				   
-					<select >
-						<option value="ALL">默认所有时间</option>
-						<option value="today">今天</option>
-						<option value="last3">近三天</option>
-						<option value="last7">近七天</option>
-					</select>
-				</td>
 				<td>
 					医院名称：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}" />
 				</td>
-
+				<td>
+					病人姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
+				</td>					
+			</tr>
+			
+			<tr>
 
 				<td>
-				<div class="buttonActive"><div class="buttonContent"><button type="submit" >查 询</button>	</div></div>
+				 <span><input type="radio" name="r1" style="width:25px;" checked="checked" onclick="$('#startDate,#endDate').attr('disabled',true);$('#days').attr('disabled',false);"/>时间:</span>				   
+					<select name="filter.days" id="days">
+						<option value="">默认所有时间</option>
+						<c:forEach var="d" items="${filter.dayList}">
+						  <c:choose>
+						       
+							   <c:when test="${d.day == filter.days}">  
+	                             <option value="${d.day}" selected="selected">${d.day}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${d.day}">${d.day}</option>
+							   </c:otherwise>
+						   </c:choose>
+						</c:forEach>
+					</select>
+				</td>
+				<td class="dateRange">
+					<span><input type="radio" name="r1" style="width:25px;" onclick="$('#startDate,#endDate').removeAttr('disabled');$('#days').attr('disabled',true);$('#days').attr('checked',false);"/>时间段:</span>
+					<input id="startDate" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
+					<span class="limit">-</span>
+					<input id="endDate" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
+				</td>
+
+
+				<td><span style="font-size:0.2em;color:red; font-style:italic;">*选择左侧日期查找条件</span>
+				
                 </td>
                 <td>
-								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div>
+               	    <div class="buttonActive" style="padding-right:30px;"><div class="buttonContent"><button type="submit" >查 询</button>	</div></div>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div>
 				</td>
 				 
 				
@@ -133,7 +132,19 @@
 	            <td>${e.patientSex}</td>
 	            <td>${e.patientAge}</td>
 	            <td>${e.bodyPart}</td>
-	            <td>${e.exReportState}</td>
+	            <td>
+	            	<c:forEach var="t" items="${filter.reportStatusList}">
+						  <c:choose>		       
+							   <c:when test="${t.statusValue == e.exReportState}">  
+	                             ${t.status}
+							   </c:when>
+							   <c:otherwise>  
+							   	   
+							   </c:otherwise>
+							   
+						   </c:choose>
+					</c:forEach>
+	            </td>
 	            <td>${e.modality}</td>
 	            <td>${e.exApply}</td>
 	            <td>${e.exApplyDoctor}</td>	

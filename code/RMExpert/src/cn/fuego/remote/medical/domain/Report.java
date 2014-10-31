@@ -62,7 +62,7 @@ public class Report implements PersistenceObject
 	private String exApplyDoctor; //申请远程医生
 	private String exDoctor; // 诊断专家
 	private String exState; //专家状态（）
-	private String exReportState; // 专家报告状态（已报告，已编写，未报告)
+	private int exReportState; // 专家报告状态（0-未完结，1-已编写，2-已完结)
 	//private String 
 	public String getHospitalID()
 	{
@@ -344,11 +344,12 @@ public class Report implements PersistenceObject
 	{
 		this.exState = exState;
 	}
-	public String getExReportState()
+
+	public int getExReportState()
 	{
 		return exReportState;
 	}
-	public void setExReportState(String exReportState)
+	public void setExReportState(int exReportState)
 	{
 		this.exReportState = exReportState;
 	}

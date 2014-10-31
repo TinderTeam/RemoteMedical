@@ -66,7 +66,7 @@ public class ReportView implements PersistenceObject
 	
 	private String exDoctor; // 诊断专家
 	private String exState; //专家状态（）
-	private String exReportState; // 专家报告状态（已报告，已编写，未报告)
+	private int exReportState; // 专家报告状态（0-未完结，1-已编写，2-已完结)
 	
 	private String statusColor;//状态颜色
 	
@@ -363,11 +363,12 @@ public class ReportView implements PersistenceObject
 	{
 		this.exState = exState;
 	}
-	public String getExReportState()
+
+	public int getExReportState()
 	{
 		return exReportState;
 	}
-	public void setExReportState(String exReportState)
+	public void setExReportState(int exReportState)
 	{
 		this.exReportState = exReportState;
 	}

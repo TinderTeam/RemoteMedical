@@ -50,11 +50,11 @@
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
 <!-- 浮动窗口显示css&js -->
-<link href="<%=request.getContextPath()%>/client/lib/newCSS/popover.css" rel="stylesheet" type="text/css" media="screen"/> 
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/BS.css" rel="stylesheet" type="text/css" media="screen"/> 
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
-
- 
+<!-- 统一按钮样式 -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>  
 
     
 	
@@ -100,96 +100,7 @@ function resetForm(objForm){
     $(':select',objForm).removeAttr('selected');
     }
 </script>
-<!-- 进度条CSS和js-->
 
-
-  <!-- label 样式 -->
-<style type="text/css">
-
-.label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
-  font-weight: bold;
-  line-height: 1;
-  color: #ffffff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: .25em;
-}
-
-.label[href]:hover,
-.label[href]:focus {
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.label:empty {
-  display: none;
-}
-
-.btn .label {
-  position: relative;
-  top: -1px;
-}
-
-.label-default {
-  background-color: #999999;
-}
-
-.label-default[href]:hover,
-.label-default[href]:focus {
-  background-color: #808080;
-}
-
-.label-primary {
-  background-color: #428bca;
-}
-
-.label-primary[href]:hover,
-.label-primary[href]:focus {
-  background-color: #3071a9;
-}
-
-.label-success {
-  background-color: #5cb85c;
-}
-
-.label-success[href]:hover,
-.label-success[href]:focus {
-  background-color: #449d44;
-}
-
-.label-info {
-  background-color: #5bc0de;
-}
-
-.label-info[href]:hover,
-.label-info[href]:focus {
-  background-color: #31b0d5;
-}
-
-.label-warning {
-  background-color: #f0ad4e;
-}
-
-.label-warning[href]:hover,
-.label-warning[href]:focus {
-  background-color: #ec971f;
-}
-
-.label-danger {
-  background-color: #d9534f;
-}
-
-.label-danger[href]:hover,
-.label-danger[href]:focus {
-  background-color: #c9302c;
-}
-
-</style>
 </head>
 
 <body scroll="no">

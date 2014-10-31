@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.remote.medical.expert.web.model;
 
+import cn.fuego.remote.medical.constant.DayNumEnum;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
 
 /** 
@@ -26,6 +27,8 @@ public class ReportFilterModel
 	private String hospitalName;
 	private String startDate;
 	private String endDate;
+	private String days;
+	private DayNumEnum[] dayList = DayNumEnum.values();
 	
 	private ReportStatusEnum[] reportStatusList = ReportStatusEnum.values();
 	public String getPatientName()
@@ -83,6 +86,22 @@ public class ReportFilterModel
 	public void setReportStatusList(ReportStatusEnum[] reportStatusList)
 	{
 		this.reportStatusList = reportStatusList;
+	}
+	public DayNumEnum[] getDayList()
+	{
+		return dayList;
+	}
+	public void setDayList(DayNumEnum[] dayList)
+	{
+		this.dayList = dayList;
+	}
+	public String getDays()
+	{
+		return days;
+	}
+	public void setDays(String days)
+	{
+		this.days = days;
 	}
 
 }

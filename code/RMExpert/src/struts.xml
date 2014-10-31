@@ -74,7 +74,8 @@
    		<action name="ReportManage" class="cn.fuego.remote.medical.expert.web.action.report.ReportManageAction">
 			<result type="dispatcher">/client/expert/patientList.jsp</result>
  			
-			<result type="dispatcher" name="showInfo">/client/expert/patientInfo.jsp</result>		    
+			<result type="dispatcher" name="showInfo">/client/expert/patientInfo.jsp</result>	
+			<result type="dispatcher" name="showTransfer">/client/expert/transferExpert.jsp</result>	    
 		</action>
        	<action name="DownloadImage" class="cn.fuego.remote.medical.expert.web.action.download.DownloadImageAction">
 				<result type="stream">

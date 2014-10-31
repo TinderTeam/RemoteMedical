@@ -13,10 +13,13 @@ import java.util.List;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
+import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.ReportView;
+import cn.fuego.remote.medical.expert.web.model.ExpertModel;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
+
 
 /** 
  * @ClassName: ExpertService 
@@ -51,5 +54,9 @@ public interface ExpertService
 	 * @param report
 	 */
 	void submitMedicalReport(ReportStatusEnum status,MedicalReportModel report);
+	
+	AbstractDataSource<Expert> getExpertList(ExpertModel ExpertFilter,  String userName,String reportViewID);
+	
+	void transferExpert(String expertID,String reportViewID);
 
 }
