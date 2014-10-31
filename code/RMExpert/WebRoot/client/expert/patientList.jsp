@@ -105,7 +105,7 @@
 				<th width="100" align="center">检查部位</th>
 				<th width="80" align="center">报告状态</th>
 				<th width="150" align="center">检查设备</th>
-				<th width="80" align="center">远程请求时间</th>
+				<th width="100" align="center">远程请求时间</th>
 				<th width="120" align="center">远程请求医院</th>
 				<th width="80" align="center">操作</th>
 			</tr>
