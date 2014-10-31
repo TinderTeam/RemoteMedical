@@ -26,6 +26,10 @@ import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
+import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.Expert;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -39,7 +43,7 @@ public class MISPUserServiceImpl implements MISPUserService
 {
 	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
 
-	private SystemUser getSystemUserByUserName(String userName)
+	protected SystemUser getSystemUserByUserName(String userName)
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));
 		 
@@ -52,12 +56,14 @@ public class MISPUserServiceImpl implements MISPUserService
 	public UserModel Login(String userName, String password)
 	{
 		SystemUser targetUser = this.getSystemUserByUserName(userName);
+		
 		if (null == targetUser )
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
+			throw new ServiceException(CommonExceptionMsg.USER_NOT_EXISTED);
 		}
+
 		else if (!targetUser.getPassword().equals(password))
 		{
 			log.warn("the password is wrong");
@@ -67,7 +73,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			log.info("User Login : " + userName);
 		}
-		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.LOGIN, null, MISPOperLogConsant.OPERATE_SUCCESS);
+
 
 
 		UserModel userModel = new UserModel();

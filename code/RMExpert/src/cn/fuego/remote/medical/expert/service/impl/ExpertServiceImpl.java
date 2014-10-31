@@ -22,6 +22,7 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.remote.medical.constant.DayNumEnum;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
@@ -175,10 +176,12 @@ public class ExpertServiceImpl implements ExpertService
 			    if(status==ReportStatusEnum.CANCEL)
 			    {
 			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经被撤销！";
+			    	MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.CANCEL_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS);
 			    }
 			    else
 			    {
 			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经回传，请注意查收！";
+			    	MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.SUBMIT_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS);
 			    }
 			    String[] a =hospital.getHospitalPhone().split(";");//通知电话列表所用字段
 			    if(!ValidatorUtil.isEmpty(a))

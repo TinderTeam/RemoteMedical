@@ -31,4 +31,7 @@ public class MISPOperLogConsant
 	public static final String APPLY_CHECK="申请审批";
 	public static final String APPLY_AGREE="同意";
 	public static final String APPLY_REFUSE="拒绝";
+	
+	public static final String SUBMIT_REPORT="提交报告";
+	public static final String CANCEL_REPORT="撤销报告";
 }

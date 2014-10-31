@@ -9,7 +9,8 @@ public class CommonExceptionMsg
 	public static final String OLD_PASSWORD_WORD = "原始密码错误";
 	public static final String DATE_FOMATE ="日期格式错误";
 	public static final String DATA_CONVERT_ERROR ="数据格式转换错误";
-	
+	public static final String NOT_ALLOWED="您没有权限登录";
+	public static final String NOT_REGISTED="您还没有注册成功";
 	
 	public static final String OPERATE_SUCCESS ="操作成功";
 	public static final String OPERATE_FAILED ="操作失败";
@@ -17,5 +18,7 @@ public class CommonExceptionMsg
 	public static final String LINK_APPROVING = "您已添加该专家，等待审批中";
 	public static final String LINK_EXISTED = "您已关联该专家，请勿重复添加";
 	public static final String INPUT_EMPTY="输入不能为空";
-
+    public static final String NOT_IN_EXPERT="您不在专家列表中";
+	public static final String EX_IMG_TOO_BIG="个人照片尺寸太大，请重新上传";
+	public static final String SIGN_IMG_TOO_BIG="签名照尺寸太大，请重新上传";
 }
