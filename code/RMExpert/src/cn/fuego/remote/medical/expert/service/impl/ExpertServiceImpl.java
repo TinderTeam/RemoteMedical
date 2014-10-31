@@ -9,6 +9,7 @@
 package cn.fuego.remote.medical.expert.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.remote.medical.constant.DayNumEnum;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
@@ -28,6 +30,7 @@ import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.dao.ReportDao;
 import cn.fuego.remote.medical.domain.Expert;
+import cn.fuego.remote.medical.domain.Hospital;
 import cn.fuego.remote.medical.domain.ImageArchiving;
 import cn.fuego.remote.medical.domain.Link;
 import cn.fuego.remote.medical.domain.Report;
@@ -59,7 +62,7 @@ public class ExpertServiceImpl implements ExpertService
 	private Log log = LogFactory.getLog(ExpertServiceImpl.class);
 
 	private ReportDao repertDao = DaoContext.getInstance().getReportDao();
-	
+
 	/* (non-Javadoc)
 	 * @see cn.fuego.remote.medical.expert.service.ExpertService#getMedicalList(java.lang.String, cn.fuego.remote.medical.expert.web.model.ReportQueryModel, cn.fuego.misp.web.model.page.PageModel)
 	 */
@@ -160,8 +163,36 @@ public class ExpertServiceImpl implements ExpertService
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
 		Report report = (Report) repertDao.getUniRecord(conditionList);
+		//根据医院ID获取医院的信息（电话列表）
+		QueryCondition hsCondition =new QueryCondition(ConditionTypeEnum.EQUAL, "id",reportModel.getReportView().getHospitalID());
+		Hospital hospital= (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(hsCondition);
 		if(null != report)
-		{
+		{	
+			if(status==ReportStatusEnum.CANCEL||status==ReportStatusEnum.SUBMIT)//撤销报告或提交报告需要短信通知
+			{
+				List<String> phoneNumList = new ArrayList<String>();
+			    String content = "";
+			    if(status==ReportStatusEnum.CANCEL)
+			    {
+			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经被撤销！";
+			    }
+			    else
+			    {
+			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经回传，请注意查收！";
+			    }
+			    String[] a =hospital.getHospitalPhone().split(";");//通知电话列表所用字段
+			    if(!ValidatorUtil.isEmpty(a))
+			    {
+				    phoneNumList = Arrays.asList(a);
+				    MISPServiceContext.getInstance().getMISPShortMessageService().sendMessage(phoneNumList, content);
+			    }
+			    else
+			    {
+			    	log.warn("hospital phone is empty, the hospitalID is"+reportModel.getReportView().getHospitalID());
+			    }
+				
+			}
+
 			report.setExStudyContent(reportModel.getReportView().getExStudyContent());
 			report.setExStudyConclusion(reportModel.getReportView().getExStudyConclusion());
 			report.setExReportState(status.getStatusValue());

@@ -425,7 +425,7 @@ public class ReportView implements PersistenceObject
 	public String getStatusColor()
 	{
 	  
-	    if(ReportStatusEnum.SUBMIT.getStatus().equals(this.getExReportState()))
+	    if(ReportStatusEnum.SUBMIT.getStatusValue()==this.getExReportState())
 	    {
 	    	statusColor= "grey";
 	    }

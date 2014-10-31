@@ -129,7 +129,7 @@
 	        	<td>
  	        		<c:choose>
  	        			<c:when test="${e.statusColor=='red'}">
- 	        			<span class="label label-danger" >请及时处理</span>
+ 	        			<span class="label label-danger" >请尽快处理</span>
  	        			</c:when>
  	        			
  	        			<c:when test="${e.statusColor=='grey'}">
