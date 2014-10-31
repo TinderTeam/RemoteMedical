@@ -61,7 +61,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.USER_NOT_EXISTED);
+			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
 		}
 
 		else if (!targetUser.getPassword().equals(password))
