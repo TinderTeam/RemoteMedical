@@ -24,7 +24,7 @@
 						$("#ck1").attr("checked",false);
 						$("#days").attr("disabled",true);
 					}else
-					{	 $("#ck1").attr("checked",true);
+					{	 $("#ck1").attr("checked","checked");
 						 $("#startDate,#endDate").attr("disabled",true);
 				   		 $("#days").attr("disabled",false);
 					}
