@@ -154,7 +154,7 @@ public class ExpertManageAction extends DWZTableAction
     	
     }
     /**
-     * 添加医院，确认添加
+     * 添加专家，确认添加
      * @return
      */
     public String addSure()

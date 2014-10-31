@@ -58,10 +58,8 @@ $(function()
 });
 function resetForm(objForm){
 
-    $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
-    $(':select',objForm).removeAttr('selected');	  
-	
-
+    $(":input",objForm).not(":button, :submit, :reset, :hidden").val('').removeAttr("selected");
+    //$(':select',objForm).removeAttr('selected');//IE报错，jQuery冲突	  
 }
 </script>
 

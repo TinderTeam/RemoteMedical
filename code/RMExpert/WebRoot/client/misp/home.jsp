@@ -96,8 +96,7 @@ $(function()
 
 function resetForm(objForm){
 
-    $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
-    $(':select',objForm).removeAttr('selected');
+    $(":input",objForm).not(":button, :submit, :reset, :hidden").val('').removeAttr("selected");
     }
 </script>
 
