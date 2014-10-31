@@ -8,7 +8,10 @@
 */ 
 package cn.fuego.remote.medical.manage.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -221,7 +224,16 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		ExpertModel old = getExpertByID(expertModel.getExpert().getId());
 		if(expertModel.getSignPic()!=null)
 		{
-			expertModel.getExpert().setSignName(HibernateUtil.getBlobByFile(expertModel.getSignPic()));
+			if(expertModel.getSignPic().length()<1024*65)
+			{
+				expertModel.getExpert().setSignName(HibernateUtil.getBlobByFile(expertModel.getSignPic()));
+			}
+			else
+			{
+				throw new ServiceException(CommonExceptionMsg.SIGN_IMG_TOO_BIG);
+			}
+
+			
 		}
 		else
 		{
@@ -230,7 +242,15 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 		if(expertModel.getExPhoto()!=null)
 		{
-			expertModel.getExpert().setExPhoto(HibernateUtil.getBlobByFile(expertModel.getExPhoto()));
+			if(expertModel.getExPhoto().length()<1024*65)
+			{
+				expertModel.getExpert().setExPhoto(HibernateUtil.getBlobByFile(expertModel.getExPhoto()));
+			}
+			else
+			{
+				throw new ServiceException(CommonExceptionMsg.EX_IMG_TOO_BIG);
+			}
+			
 		}	
 		else
 		{
@@ -243,9 +263,11 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 
 
 	@Override
-	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter)
+	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException
 	{
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+
+		     
 		if(null != filter)
 		{
 
@@ -265,7 +287,11 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"regDate",filter.getEndDate()));
+				SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd"); 
+				Calendar endDate=Calendar.getInstance(); 
+				endDate.setTime(df.parse(filter.getEndDate())); 
+				endDate.add(Calendar.DATE, 1);
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"regDate",df.format(endDate.getTime())));
 			}				
 
 			

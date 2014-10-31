@@ -3,6 +3,9 @@ package cn.fuego.remote.medical.manage.web.action.user;
 import java.io.InputStream;
 import java.sql.SQLException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
@@ -19,7 +22,9 @@ public class ExpertManageAction extends DWZTableAction
 {
 
 	private static final long serialVersionUID = 1L;
+	private Log log = LogFactory.getLog(UserManageAction.class);
 	public static final String PARENT_PAGE="user/ExpertManage";	
+	
 	private UserService userService = ServiceContext.getInstance().getUserService();
 	private ApprovalService approvalService =ServiceContext.getInstance().getApprovalService();
 	private ExpertModel expertModel;
@@ -94,7 +99,15 @@ public class ExpertManageAction extends DWZTableAction
     }
     public String infoSave()
     {
-    	userService.saveExpertInfo(expertModel);
+    	try
+		{
+			userService.saveExpertInfo(expertModel);
+		} catch (Exception e)
+		{
+			log.error("save user failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setMessage(e.getMessage());
+		}
     	//this.getOperateMessage().setCallbackType("closeCurrent");
     	return MISP_DONE_PAGE;
     }

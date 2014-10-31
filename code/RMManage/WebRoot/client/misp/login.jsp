@@ -26,8 +26,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
     
      	$("#Bt1").click(function(){
-        //alert('OK');
-      	   $.ajax(
+        //alert($.trim($("#uaseName").val()).length);
+        if ($.trim($("#userName").val()).length<=0)
+        {
+        	$("#warn").html("用户名输入不能为空！");
+        }else if($.trim($("#userPwd").val()).length<=0)
+        {
+        	$("#warn").html("密码输入不能为空！");
+        }else if($.trim($("#ckey").val()).length<=0)
+        {
+        	$("#warn").html("验证码输入不能为空！");
+        }
+        else{
+         $.ajax(
               {
                   type:"POST",
                   url:"login/login!validateCode.action",
@@ -45,6 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   }
 
               });
+        }                
+
      	});//Bt1 click function
      }); //function
           
@@ -82,15 +95,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:form action="login/login" method="POST" theme="simple" name="loginForm">
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="user.userName" size="16" class="login_input" />
+						<input id="userName" type="text" name="user.userName" size="16" class="login_input  " style="width:140px !important;"/>
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" name="user.password" size="16" class="login_input" />
+						<input id="userPwd" type="password" name="user.password" size="16" class="login_input" style="width:140px !important;"/>
 					</p>
 					<p>
 						<label>验证码：</label>
-						<input id="ckey"  class="code" type="text" size="5" name="user.validateCode" />
+						<input id="ckey"  class="code" type="text" size="4" name="user.validateCode" />
 						<span><img src="login/ValidateImage.action" onclick="changeValidateCode(this)" alt="" width="75" height="24" /></span>
 					</p>
 					<div class="login_bar">

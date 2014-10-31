@@ -1,5 +1,6 @@
 package cn.fuego.remote.medical.manage.web.action.user;
 
+import java.text.ParseException;
 import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
@@ -34,7 +35,14 @@ public class UserManageAction extends DWZTableAction
 	public String execute()
 	{
 		userTable.setPage(this.getPage());
-		userTable.setDataSource(userService.getUserList(filter));
+		try
+		{
+			userTable.setDataSource(userService.getUserList(filter));
+		} catch (ParseException e)
+		{
+			// TODO Auto-generated catch block
+			log.error("excute user failed",e);
+		}
 		return SUCCESS;
 	}
 	@Override

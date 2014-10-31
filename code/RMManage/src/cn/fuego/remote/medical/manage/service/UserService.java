@@ -1,5 +1,6 @@
 package cn.fuego.remote.medical.manage.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
@@ -28,7 +29,7 @@ public interface UserService extends MISPUserService
 
 	void saveExpertInfo(ExpertModel expertModel);
 
-	AbstractDataSource<SystemUser> getUserList(UserFilterModel filter);
+	AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException ;
  
 	void createUser(String userName,String accountType, String operator);
 

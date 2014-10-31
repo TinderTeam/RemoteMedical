@@ -37,13 +37,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="divider"></div>
 		<div style="float:right; margin-top:5px; margin-right:16%;" >
 			<div style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-				<div ><img id="ImgPr1" src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="120" alt="个人1寸照片" ></div>
+				<div ><img id="ImgPr1" src ="user/ExpertManage!getPhotoImag.action?picid=${expertModel.expert.id}" height="140" width="120" alt="个人照片" ></div>
 
 			</div>
 			<div >
 				<s:file name="expertModel.exPhoto" id="up1"></s:file>
 			</div>
-			
+			<span class="info">上传图片大小不得超过65KB</span> 
 		</div>
 	
 			<dl style="width:50%;">
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<dl style="width:50%;">
 				<dt>年龄：</dt>
-				<dd><input type="text" size="30" name="expertModel.expert.age" value="${expertModel.expert.age}" class="digits"/></dd>
+				<dd><input type="text" size="30" name="expertModel.expert.age" value="${expertModel.expert.age}" class="digits" maxlength="3"/></dd>
 			</dl>			
 		</div>
 		
@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>
 			<dl style="width:50%;">
 				<dt>座机号码：</dt>			
-				<dd><input type="text" name="expertModel.expert.telephoneNo"  alt="" size="30" value="${expertModel.expert.telephoneNo}"/></dd>
+				<dd><input type="text" name="expertModel.expert.telephoneNo"  class="telephone" size="30" value="${expertModel.expert.telephoneNo}"/></dd>
 			</dl>	
 			<dl style="width:50%;">
 				<dt>电子邮箱：</dt>			
@@ -103,11 +103,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<dl style="width:50%;">
 				<dt>QQ号码：</dt>			
-				<dd><input type="text" name="expertModel.expert.qq"  alt="" size="30" value="${expertModel.expert.qq}"/></dd>
+				<dd><input type="text" name="expertModel.expert.qq" class="QQ"  size="30" value="${expertModel.expert.qq}"/></dd>
 			</dl>			
 			<dl style="width:50%;">
 				<dt>微信号：</dt>			
-				<dd><input type="text" name="expertModel.expert.weixin"  alt="" size="30" value="${expertModel.expert.weixin}"/></dd>
+				<dd><input type="text" name="expertModel.expert.weixin"  class="alphanumeric"  size="30" value="${expertModel.expert.weixin}"/></dd>
 			</dl>					
 			</div>
 
@@ -117,12 +117,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<dl  class="nowrap">
 					<dt >专家简介：</dt>
-					<dd ><textarea name="expertModel.expert.resume" cols="100" rows="7" >${expertModel.expert.resume}</textarea></dd>
+					<dd ><textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="800">${expertModel.expert.resume}</textarea></dd>
 				</dl>	
 
 			<dl style="width:50%;">
 				<dt>职称：</dt>			
-				<dd><input type="text" name="expertModel.expert.jobTitle"  class="required " alt="" size="30" value="${expertModel.expert.jobTitle}"/></dd>
+				<dd><input type="text" name="expertModel.expert.jobTitle"  alt="" size="30" value="${expertModel.expert.jobTitle}"/></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt>擅长专业技能：</dt>			
@@ -154,14 +154,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 				<dl class="nowrap">
 					<dt>补充描述：</dt>
-					<dd><textarea name="expertModel.expert.remark" cols="100" rows="7" >${expertModel.expert.remark}</textarea></dd>
+					<dd><textarea name="expertModel.expert.remark" cols="100" rows="7" maxlength="800">${expertModel.expert.remark}</textarea></dd>
 				</dl>
 				<dl style="height:110px !important;width:100%;">
 					<dt>上传签名：</dt>
 					<dd >
 						<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:200px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-						<img id="ImgPr2" src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="70" width="200" id="img1">
-						</div>	                           
+						<img id="ImgPr2" src ="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="70" width="200" id="img1" alt="签名照片">
+						</div>	
+						<span class="info">上传图片大小不得超过65KB</span>                           
 					</dd>									
 					<dd>
 					<div style="padding-top:30px !important;">

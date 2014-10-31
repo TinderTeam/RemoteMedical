@@ -26,6 +26,10 @@ import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
+import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.Expert;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -39,7 +43,7 @@ public class MISPUserServiceImpl implements MISPUserService
 {
 	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
 
-	private SystemUser getSystemUserByUserName(String userName)
+	protected SystemUser getSystemUserByUserName(String userName)
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));
 		 
