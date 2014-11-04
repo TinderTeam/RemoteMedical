@@ -114,7 +114,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 	</div>
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" style="width:1600px;" layoutH="138">
 		<thead>
 			<tr>
 				<th width="150px" align="center">检查设备</th>
@@ -134,7 +134,7 @@
 				
 				<th width="100px" align="center">医院编号</th>
 				<th width="150px" align="center">医院名称</th>
-				<th style="over-flow:hidden;width:50px !important;" align="center">医院联系方式</th>
+				<th  width="150px" align="center">医院联系方式</th>
 				<th width="150px" align="center">上传时间</th>
 				<th width="150px" align="center">上传结束时间</th>
 				
@@ -172,9 +172,8 @@
 	            
 	            <td>${e.hospitalID}</td>
 	            <td >${e.hospitalName}</td>
-	            <td style="over-flow:hidden;width:50px !important;">
-	           
-	            	<a href="#" class="phoneLink"  data-container="body" data-toggle="popover"  data-content=" ${e.hospitalContactWay}" data-original-title="联系电话" data-placement="left">${e.hospitalContactWay}</a>		
+	            <td >
+	               	<a style="color:blue !important;" title="医院联系电话" target="dialog" href="<%=request.getContextPath()%>/client/manage/diagnoseDetail.jsp?hospitalContactWay=${e.hospitalContactWay}"  rel="Menu${selectedMenuID}" mask="true" >查  看</a>		
 	            </td>
 	           
 	            <td>${e.exStartUpImg}</td>
