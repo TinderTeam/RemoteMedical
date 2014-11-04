@@ -70,10 +70,10 @@
  	<package name="report" extends="default">
   
    		<action name="ReportManage" class="cn.fuego.remote.medical.manage.web.action.report.ReportManageAction">
-			<result type="dispatcher">/client/manage/patientList.jsp</result>
+			<result type="dispatcher">/client/manage/diagnoseCount.jsp</result>
+ 			<result type="dispatcher" name="cost">/client/manage/costCount.jsp</result>
  			
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
-		</action>
+ 		</action>
  
  	</package>
  	<package name="user" extends="default">

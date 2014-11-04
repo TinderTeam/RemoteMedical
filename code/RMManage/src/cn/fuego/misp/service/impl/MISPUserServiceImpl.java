@@ -43,7 +43,7 @@ public class MISPUserServiceImpl implements MISPUserService
 {
 	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
 
-	protected SystemUser getSystemUserByUserName(String userName)
+	public SystemUser getSystemUserByUserName(String userName)
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));
 		 

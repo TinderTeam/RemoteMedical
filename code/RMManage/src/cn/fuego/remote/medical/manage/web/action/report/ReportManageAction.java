@@ -8,12 +8,12 @@
 */ 
 package cn.fuego.remote.medical.manage.web.action.report;
 
-import cn.fuego.misp.web.action.basic.TableAction;
-import cn.fuego.misp.web.model.page.PageModel;
+import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.manage.service.ExpertService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
+import cn.fuego.remote.medical.manage.web.model.ReportFilterModel;
 
 /** 
  * @ClassName: ReportManageAction 
@@ -23,16 +23,24 @@ import cn.fuego.remote.medical.manage.service.ServiceContext;
  *  
  */
 
-public class ReportManageAction extends TableAction
+public class ReportManageAction extends DWZTableAction
 {
 	private ExpertService expertService = ServiceContext.getInstance().getExpertService();
-	private TableDataModel<ReportView> reportList;
+	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
+ 	private ReportFilterModel filter = new ReportFilterModel(); 
  
 	public String execute()
 	{
-		reportList = expertService.getMedicalList(null, null, new PageModel()); 
-
+		
+		reportList.setPage(this.getPage());
+		reportList.setDataSource(expertService.getMedicalList(this.getLoginUser().getUserName(), filter));
 		return SUCCESS;
+	}
+	
+	public String costCount()
+	{
+		execute();
+		return "cost";
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#show()

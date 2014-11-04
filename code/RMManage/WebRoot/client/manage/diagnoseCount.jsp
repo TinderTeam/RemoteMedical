@@ -1,76 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="demo_page1.html" method="post">
+	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="report/ReportManage" method="post">
+	<input type="hidden" name="status" value="${param.status}">
+	<input type="hidden" name="keywords" value="${param.keywords}" />
+	<input type="hidden" name="pageNum" value="${reportList.page.currentPage}" />
+	<input type="hidden" name="numPerPage" value="${reportList.page.pageSize}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+ 
 	<div class="searchBar">
+				<script type="text/javascript">
+
+					//$('#days').attr('checked',checked);
+					var range1= $("#startDate").val();
+					var range2= $("#endDate").val();
+					//alert(range1);
+					if((range1!='')||(range2!=''))
+					{
+						$("#ck2").attr("checked",true);
+						$("#ck1").attr("checked",false);
+						$("#days").attr("disabled",true);
+					}else
+					{	 $("#ck1").attr("checked","checked");
+						 $("#startDate,#endDate").attr("disabled",true);
+				   		 $("#days").attr("disabled",false);
+					}
+
+				</script>
 		<table class="searchContent">
-			<tr>
-				<td>
-					检查设备：<input type="text" name="" />
-				</td>		
-				<td>
-					病人姓名：<input type="text" name="" />
-				</td>				
-				<td>
-					检查部位：<input type="text" name="" />
-				</td>
+			<tr >
 
 				<td>
 					报告状态：
-					
-					<select  name="" >
-						<option value="">默认所有状态</option>
-						<option value="1">新建</option>
-						<option value="2">处理中</option>
-						<option value="3">处理完毕</option>
-						<option value="4">存档</option>
-
+					<select  name="filter.exReportState"  >
+					    <option value="">默认所有状态</option>
+						<c:forEach var="e" items="${filter.reportStatusList}">
+						  <c:choose>
+						       
+							   <c:when test="${e.status == filter.exReportState}">  
+	                             <option value="${e.status}" selected="selected">${e.status}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${e.status}">${e.status}</option>
+							   </c:otherwise>
+						   </c:choose>
+						</c:forEach>
+ 
 					</select>
-	
+				</td>
+				<td>
+					设备类型：<input type="text" name="filter.modality" value="${filter.modality}"/>
+				</td>
+				<td>
+					医院名称：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}" />
+				</td>
+				<td>
+					病人姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
+				</td>					
+			</tr>
+			
+			<tr>
+
+				<td>
+				 <span><input id="ck1" type="radio" name="r1" style="width:25px;"  onclick="$('#startDate,#endDate').attr('disabled',true);$('#days').attr('disabled',false);$('#startDate,#endDate').val('');"/>时间:</span>				   
+					<select name="filter.days" id="days">
+						<option value="">默认所有时间</option>
+						<c:forEach var="d" items="${filter.dayList}">
+						  <c:choose>
+						       
+							   <c:when test="${d.day == filter.days}">  
+	                             <option value="${d.day}" selected="selected">${d.day}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${d.day}">${d.day}</option>
+							   </c:otherwise>
+						   </c:choose>
+						</c:forEach>
+					</select>
+				</td>
+				<td class="dateRange">
+					<span><input id="ck2" type="radio" name="r1" style="width:25px;" onclick="$('#startDate,#endDate').removeAttr('disabled');$('#days').attr('disabled',true);$('#days').attr('checked',false);$('#days').val('');"/>时间段:</span>
+					<input id="startDate" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
+					<span class="limit">-</span>
+					<input id="endDate" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
 				</td>
 
-			</tr>
-			<tr>
-				<td>
-					医生名称：<input type="text" name="" />
-				</td>		
-				<td>
-					专家名称：<input type="text" name="" />
-				</td>				
-				<td>
-					医院名称：<input type="text" name="" />
+
+				<td><span style="font-size:0.8em;color:red; font-style:italic;">*选择左侧日期查找条件</span>
+				
+                </td>
+                <td>
+               	    <div class="buttonActive" style="padding-right:30px;"><div class="buttonContent"><button type="submit" >查 询</button>	</div></div>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div>
 				</td>
-				<td>
-					报告回传时间：<input type="text" class="date" readonly="true" />
-				</td>				
-			</tr>
-			<tr>
-				<td>
-					上传时间：<input type="text" class="date" readonly="true" />
-				</td>
-				<td>
-					上传结束时间：<input type="text" class="date" readonly="true" />
-				</td>			
+				 
+				
 			</tr>
 		</table>
-		<div class="subBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查  询</button></div></div></li>
-				<!-- <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li> -->
-			</ul>
-		</div>
+
 	</div>
 	</form>
 </div>
 <div class="pageContent">
 	<div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
-		</ul>
 	</div>
-	<table class="table" style="width:1500px !important;" layoutH="188">
+	<table class="table" width="100%" layoutH="138">
 		<thead>
 			<tr>
 				<th width="150px" align="center">检查设备</th>
@@ -94,25 +132,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr target="sid_user" rel="1">
-				<td>心电图机</td>
-				<td>0000001</td>
-				<td>AAA</td>
-				<td>男</td>
-				<td>33</td>
-				<td>心、胸、肺</td>
-				<td>医生A</td>
-				<td>处理中</td>
-				<td>2014-09-28</td>
-				<td>200003</td>
-				<td>专家A</td>
-				<td>13833447788</td>
-				<td>3460</td>
-				<td>医院A</td>
-				<td>027-33442870</td>
-				<td>2014-09-24</td>
-				<td>2014-09-25</td>
+		 <c:forEach var="e" items="${reportList.currentPageData}"> 		
+	        <tr target="sid_user" rel="1"  >
+                <td>${e.modality}</td>
+                <td>${e.patientID}</td>
+	            <td>${e.patientName}</td>
+	            <td>${e.patientSex}</td>
+	            <td>${e.patientAge}</td>
+	            <td>${e.bodyPart}</td>
+	            <td>${e.exApplyDoctor}</td>	
+	            <td>
+	            	<c:forEach var="t" items="${filter.reportStatusList}">
+						  <c:choose>		       
+							   <c:when test="${t.statusValue == e.exReportState}">  
+	                             ${t.status}
+							   </c:when>
+							   <c:otherwise>  
+							   	   
+							   </c:otherwise>
+							   
+						   </c:choose>
+					</c:forEach>
+	            </td>
+	            <td>${e.exReport}</td>
+	            <td>${e.exDoctor}</td>
+	            <td>${e.expertName}</td>
+	            <td>${e.hospitalID}</td>
+	            <td>${e.expertPhoneNo}</td>
+	            <td>${e.hospitalName}</td>
+	            <td>${e.exStartUpImg}</td>
+	            <td>${e.exEndUpImg}</td>
+	         
 			</tr>
+		</c:forEach>
 			
 			
 		</tbody>
@@ -120,16 +172,23 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
+	        <c:set var="page" value="${reportList.page}" scope="request"/>
+			
+			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
+				<c:forEach var="e" items="${page.pageSizeList}"> 	
+			       <c:if test="${e==page.pageSize}">
+			         <option value="${e}" selected>${e}</option>
+				  </c:if>
+                  <c:if test="${e!=page.pageSize}">
+			         <option value="${e}">${e}</option>
+				  </c:if>
+				</c:forEach>
+ 
 			</select>
-			<span>条，共${totalCount}条</span>
+			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 </div>
