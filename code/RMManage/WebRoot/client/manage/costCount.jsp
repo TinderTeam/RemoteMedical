@@ -153,10 +153,13 @@
 					</c:forEach>
 	            </td>
 	            <td>${e.exReport}</td>
+	            
 	            <td>${e.exDoctor}</td>
 	            <td>${e.expertName}</td>
+	            
 	            <td>${e.hospitalID}</td>
 	            <td>${e.hospitalName}</td>
+	            
 	            <td>${e.expertCost}</td>
 	            <td>${e.hospitalCost}</td>
 	   

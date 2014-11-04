@@ -35,8 +35,16 @@
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
- 
+<!-- 浮动窗口显示css&js -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/BS.css" rel="stylesheet" type="text/css" media="screen"/> 
+<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
+<!-- 统一按钮样式 -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>  
 
+    
+	
+	
 <script type="text/javascript">
 $(function()
 {

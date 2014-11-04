@@ -50,5 +50,12 @@
         <property name="exDoctor" column="Rs_ExDoctor"></property>
         <property name="exState" column="Rs_ExState"></property>
         <property name="exReportState" column="Rs_ExReportState"></property>
+        
+        <property name="hospitalName" column="Hs_Name"></property>
+        <property name="hospitalContactWay" column="Hs_HospitalPhone"></property>
+        <property name="modality" column="Ps_Modality"></property>
+        <property name="expertName" column="Es_Name"></property>
+        <property name="expertPhoneNo" column="Es_PhoneNo"></property>
+ 
 	</class>
 </hibernate-mapping>

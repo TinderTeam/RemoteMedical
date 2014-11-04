@@ -10,6 +10,7 @@ package cn.fuego.misp.service;
 
 import java.util.List;
 
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
 
@@ -24,7 +25,13 @@ import cn.fuego.misp.web.model.user.UserModel;
 public interface MISPUserService
 {
 	
- 
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public SystemUser getSystemUserByUserName(String userName);
+
 	/**
 	 * 用户登录
 	 * @param userName

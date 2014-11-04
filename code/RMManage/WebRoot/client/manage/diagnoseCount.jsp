@@ -29,8 +29,13 @@
 						 $("#startDate,#endDate").attr("disabled",true);
 				   		 $("#days").attr("disabled",false);
 					}
-
+	$(function() {
+		$(".phoneLink").popover({
+			trigger : 'hover'
+		});
+	});
 				</script>
+				
 		<table class="searchContent">
 			<tr >
 
@@ -55,6 +60,7 @@
 				<td>
 					设备类型：<input type="text" name="filter.modality" value="${filter.modality}"/>
 				</td>
+			
 				<td>
 					医院名称：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}" />
 				</td>
@@ -119,19 +125,23 @@
 				<th width="150px" align="center">检查部位</th>
 				<th width="120px" align="center">申请医生</th>
 				<th width="120px" align="center">报告状态</th>
+				
 				<th width="150px" align="center">报告回传时间</th>
+				
 				<th width="120px" align="center">专家编号</th>
 				<th width="120px" align="center">专家姓名</th>
 				<th width="120px" align="center">专家联系方式</th>
+				
 				<th width="100px" align="center">医院编号</th>
 				<th width="150px" align="center">医院名称</th>
-				<th width="150px" align="center">医院联系方式</th>
+				<th style="over-flow:hidden;width:50px !important;" align="center">医院联系方式</th>
 				<th width="150px" align="center">上传时间</th>
 				<th width="150px" align="center">上传结束时间</th>
 				
 			</tr>
 		</thead>
 		<tbody>
+		 
 		 <c:forEach var="e" items="${reportList.currentPageData}"> 		
 	        <tr target="sid_user" rel="1"  >
                 <td>${e.modality}</td>
@@ -155,11 +165,18 @@
 					</c:forEach>
 	            </td>
 	            <td>${e.exReport}</td>
+	            
 	            <td>${e.exDoctor}</td>
 	            <td>${e.expertName}</td>
-	            <td>${e.hospitalID}</td>
 	            <td>${e.expertPhoneNo}</td>
-	            <td>${e.hospitalName}</td>
+	            
+	            <td>${e.hospitalID}</td>
+	            <td >${e.hospitalName}</td>
+	            <td style="over-flow:hidden;width:50px !important;">
+	           
+	            	<a href="#" class="phoneLink"  data-container="body" data-toggle="popover"  data-content=" ${e.hospitalContactWay}" data-original-title="联系电话" data-placement="left">${e.hospitalContactWay}</a>		
+	            </td>
+	           
 	            <td>${e.exStartUpImg}</td>
 	            <td>${e.exEndUpImg}</td>
 	         

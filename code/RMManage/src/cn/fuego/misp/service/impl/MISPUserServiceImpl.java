@@ -65,7 +65,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		else if (!targetUser.getPassword().equals(password))
 		{
 			log.warn("the password is wrong");
-			log.info(password);
+
 			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
 		}
 		else

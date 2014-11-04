@@ -82,6 +82,25 @@ public class ReportView implements PersistenceObject
 	//expert table
 	private String expertName;
 	private String expertPhoneNo;
+	
+	
+	/**
+	 * 计算专家费用
+	 * @return
+	 */
+	public String getExpertCost()
+	{
+		return "";
+	}
+	
+	/**
+	 * 计算医院费用
+	 * @return
+	 */
+	public String getHospitalCost()
+	{
+		return "";
+	}
  
 	public String getId()
 	{
