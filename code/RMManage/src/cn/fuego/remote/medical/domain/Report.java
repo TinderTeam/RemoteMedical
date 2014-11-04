@@ -383,6 +383,31 @@ public class Report implements PersistenceObject
 			return false;
 		return true;
 	}
+	@Override
+	public String toString()
+	{
+		return "Report [hospitalID=" + hospitalID + ", serialNo=" + serialNo
+				+ ", reportNo=" + reportNo + ", patientID=" + patientID
+				+ ", patientName=" + patientName + ", patientSex=" + patientSex
+				+ ", patientAge=" + patientAge + ", department=" + department
+				+ ", hospitalNo=" + hospitalNo + ", bedNo=" + bedNo
+				+ ", bodyPart=" + bodyPart + ", preView=" + preView
+				+ ", diagnosis=" + diagnosis + ", studyContent=" + studyContent
+				+ ", studyConclusion=" + studyConclusion + ", exStudyContent="
+				+ exStudyContent + ", exStudyConclusion=" + exStudyConclusion
+				+ ", exStudyContentCode=" + exStudyContentCode
+				+ ", exStudyConclusionCode=" + exStudyConclusionCode
+				+ ", studyDate=" + studyDate + ", reportDate=" + reportDate
+				+ ", reviewDate=" + reviewDate + ", operatorsPhysician="
+				+ operatorsPhysician + ", reportPhysician=" + reportPhysician
+				+ ", reviewPhysician=" + reviewPhysician + ", imageCount="
+				+ imageCount + ", imagePathWL=" + imagePathWL + ", exApply="
+				+ exApply + ", exStartUpImg=" + exStartUpImg + ", exEndUpImg="
+				+ exEndUpImg + ", exReport=" + exReport + ", exDownReport="
+				+ exDownReport + ", exApplyDoctor=" + exApplyDoctor
+				+ ", exDoctor=" + exDoctor + ", exState=" + exState
+				+ ", exReportState=" + exReportState + "]";
+	}
 	
 	
 

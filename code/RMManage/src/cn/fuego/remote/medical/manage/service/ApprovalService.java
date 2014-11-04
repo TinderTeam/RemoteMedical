@@ -12,14 +12,13 @@ public interface ApprovalService
 
 	AbstractDataSource<Approval> getApprovalList(ApprovalFilterModel filter);
 
+	Approval getApprovalByID(String approvalID);
+
+	
 	void createHospitalApply(HospitalModel hospital);
 	void createExpertApply(ExpertModel expert);
 
 	void createAddExpertApply(String hospitalID,String expertID);
-
-	Approval getApprovalByID(String approvalID);
-
-	HospitalModel modifyHospitalByID(String hospitalID);
 
 	void handleAgree(String handleUser,String approvalID);
 

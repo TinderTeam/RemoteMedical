@@ -78,9 +78,9 @@ public class ApprovalServiceImpl implements ApprovalService
 	public void createExpertApply(ExpertModel expert)
 	{
 		expert.getExpert().setState(UserStatusEnum.APPLIED.getStatus());
-		ServiceContext.getInstance().getUserService().saveExpertInfo(expert);
+		ServiceContext.getInstance().getUserService().saveExpertInfo(expert,expert.getExpert().getId());
 		createApply(ApplyTypeEnum.MODIFY_EXPERT,expert.getExpert().getId(),null,expert.getExpert().getId());
-		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(expert.getExpert().getId(), MISPOperLogConsant.MODIFY_EXPERT, null, MISPOperLogConsant.OPERATE_SUCCESS);
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(expert.getExpert().getId(), MISPOperLogConsant.MODIFY_APPLY, null, MISPOperLogConsant.OPERATE_SUCCESS);
 
 	}
 
@@ -117,14 +117,7 @@ public class ApprovalServiceImpl implements ApprovalService
 		Approval approval =(Approval) DaoContext.getInstance().getApprovalDao().getUniRecord(condition);
 		return approval;
 	}
-
-	@Override
-	public HospitalModel modifyHospitalByID(String hospitalID)
-	{
-		QueryCondition condition =new QueryCondition(ConditionTypeEnum.EQUAL,"id",hospitalID);
-		HospitalModel hospitalModel =(HospitalModel) DaoContext.getInstance().getHospitalDao().getUniRecord(condition);
-		return hospitalModel;
-	}
+ 
 
 	@Override
 	public void handleAgree(String handleUser,String approvalID)

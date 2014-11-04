@@ -89,5 +89,13 @@ public class LinkView  implements PersistenceObject
 	{
 		this.expertAuditor = expertAuditor;
 	}
+	@Override
+	public String toString()
+	{
+		return "LinkView [hospitalID=" + hospitalID + ", expertID=" + expertID
+				+ ", hospitalName=" + hospitalName + ", expertName="
+				+ expertName + ", expertAuditor=" + expertAuditor
+				+ ", linkTime=" + linkTime + ", linkState=" + linkState + "]";
+	}
 	
 }

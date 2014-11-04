@@ -74,7 +74,7 @@ public class UserManageAction extends DWZTableAction
 	@Override
 	public String deleteList()
 	{
-		userService.deleteUserList(Arrays.asList(this.getSelectedIDList()));
+		userService.deleteUserList(Arrays.asList(this.getSelectedIDList()),this.getLoginUser().getUserName());
 		return  MISP_DONE_PAGE;
 
 	}

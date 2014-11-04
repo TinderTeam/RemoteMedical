@@ -118,12 +118,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		return hospitalModel;
 	}
 
-	@Override
-	public void modifyHospitalInfo(HospitalModel hospitalModel)
-	{
-		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
-		
-	}
+
 
 	@SuppressWarnings("unchecked")
 	public AbstractDataSource<Expert> getExpertList(ExpertModel filter, int accountType, String userName)
@@ -208,18 +203,27 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	  		
 		return expertModel;
 	}
-
 	@Override
-	public void saveHospitalInfo(HospitalModel hospitalModel)
+	public void modifyHospitalInfo(HospitalModel hospitalModel,String operator)
+	{
+		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
+		
+		
+	}
+	@Override
+	public void saveHospitalInfo(HospitalModel hospitalModel,String operator)
 	{
 		HospitalModel oldInfo = getHospitalByID(hospitalModel.getHospital().getId());
 		hospitalModel.getHospital().setState(oldInfo.getHospital().getState());
 		
 		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
+		
 	}
 
 	@Override
-	public void saveExpertInfo(ExpertModel expertModel)
+	public void saveExpertInfo(ExpertModel expertModel,String operator)
 	{
 		ExpertModel old = getExpertByID(expertModel.getExpert().getId());
 		if(expertModel.getSignPic()!=null)
@@ -257,6 +261,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			expertModel.getExpert().setExPhoto(old.getExpert().getExPhoto());
 		}
 		DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_EXPERT, expertModel.getExpert().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
 		
 	}
 
@@ -339,7 +344,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	}
 
 	@Override
-	public void deleteUserList(List<String> userIDList)
+	public void deleteUserList(List<String> userIDList,String operator)
 	{
 
 		for(int i=0;i<userIDList.size();i++)
@@ -362,11 +367,13 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
 		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.DELETE_USER, userIDList.toString(), MISPOperLogConsant.OPERATE_SUCCESS);
+
 		
 		
 	}
 	@Override
-	public void addExpert(String hospitalID, String expertID)
+	public void addExpert(String hospitalID, String expertID,String operator)
 	{
 		if (!ValidatorUtil.isEmpty(expertID))
 		{
@@ -396,6 +403,9 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		{
 			throw new ServiceException(CommonExceptionMsg.INPUT_EMPTY);
 		}
+		
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.ADD_EXPERT,hospitalID+","+expertID, MISPOperLogConsant.OPERATE_SUCCESS);
+
 		
 	}
 	@Override

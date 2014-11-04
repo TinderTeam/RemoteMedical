@@ -359,5 +359,25 @@ public class Expert implements PersistenceObject
 	{
 		this.reserve5 = reserve5;
 	}
+	@Override
+	public String toString()
+	{
+		return "Expert [id=" + id + ", name=" + name + ", sex=" + sex
+				+ ", age=" + age + ", phoneNo=" + phoneNo + ", telephoneNo="
+				+ telephoneNo + ", email=" + email + ", qq=" + qq + ", weixin="
+				+ weixin + ", resume=" + resume + ", exPhoto=" + exPhoto
+				+ ", jobTitle=" + jobTitle + ", workPlace=" + workPlace
+				+ ", province=" + province + ", city=" + city + ", county="
+				+ county + ", expertise=" + expertise + ", remark=" + remark
+				+ ", signName=" + signName + ", authority=" + authority
+				+ ", state=" + state + ", onlineState=" + onlineState
+				+ ", login=" + login + ", apply=" + apply + ", reg=" + reg
+				+ ", auditor=" + auditor + ", ctCount=" + ctCount
+				+ ", drCount=" + drCount + ", mrCount=" + mrCount
+				+ ", ulCount=" + ulCount + ", otherCount=" + otherCount
+				+ ", reserve1=" + reserve1 + ", reserve2=" + reserve2
+				+ ", reserve3=" + reserve3 + ", reserve4=" + reserve4
+				+ ", reserve5=" + reserve5 + "]";
+	}
 	
 }

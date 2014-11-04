@@ -124,6 +124,16 @@ public class Approval implements PersistenceObject
 	{
 		this.handleUser = handleUser;
 	}
+	@Override
+	public String toString()
+	{
+		return "Approval [id=" + id + ", applyType=" + applyType
+				+ ", applyName=" + applyName + ", applyUser=" + applyUser
+				+ ", handleUser=" + handleUser + ", status=" + status
+				+ ", applyTime=" + applyTime + ", handleTime=" + handleTime
+				+ ", desp=" + desp + ", hospitalID=" + hospitalID
+				+ ", expertID=" + expertID + "]";
+	}
 	
 
 }

@@ -19,24 +19,27 @@ public interface UserService extends MISPUserService
 	 
 	 HospitalModel getHospitalByID(String id);
 	 
-	 void modifyHospitalInfo(HospitalModel hospitalModel);
+
 	 
 	 AbstractDataSource<Expert> getExpertList(ExpertModel filter, int accountType, String userName);
-
+	 AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException ;
+	 
 	 ExpertModel getExpertByID(String id);
+	 LinkModel getLinkByID(String hospitalID, String expertID);
+		
+	 
+	void modifyHospitalInfo(HospitalModel hospitalModel,String operator);
+	
+	void saveHospitalInfo(HospitalModel hospitalModel,String operator);
 
-	void saveHospitalInfo(HospitalModel hospitalModel);
+	void saveExpertInfo(ExpertModel expertModel,String operator);
 
-	void saveExpertInfo(ExpertModel expertModel);
-
-	AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException ;
- 
+	
 	void createUser(String userName,String accountType, String operator);
 
-	void deleteUserList(List<String> userIDList);
+	void deleteUserList(List<String> userIDList,String operator);
 
-	void addExpert(String hospitalID, String expertID);
+	public void addExpert(String hospitalID, String expertID,String operator);
 	
-    LinkModel getLinkByID(String hospitalID, String expertID);
-	
+   
 }

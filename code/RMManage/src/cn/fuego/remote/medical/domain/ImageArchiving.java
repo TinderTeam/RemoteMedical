@@ -260,6 +260,22 @@ public class ImageArchiving implements PersistenceObject
 			return false;
 		return true;
 	}
+	@Override
+	public String toString()
+	{
+		return "ImageArchiving [hospitalID=" + hospitalID + ", serialNo="
+				+ serialNo + ", imgArchName=" + imgArchName + ", imageID="
+				+ imageID + ", modality=" + modality + ", imageNo=" + imageNo
+				+ ", sOPInstanceUID=" + sOPInstanceUID + ", seriesID="
+				+ seriesID + ", seriesDescription=" + seriesDescription
+				+ ", seriesUID=" + seriesUID + ", imageCount=" + imageCount
+				+ ", minImageID=" + minImageID + ", maxImageID=" + maxImageID
+				+ ", imageSavePath=" + imageSavePath + ", bodyPart=" + bodyPart
+				+ ", protocolName=" + protocolName + ", oriImgName="
+				+ oriImgName + ", imageCode=" + imageCode + ", reserve1="
+				+ reserve1 + ", reserve2=" + reserve2 + ", reserve3="
+				+ reserve3 + ", reserve4=" + reserve4 + "]";
+	}
 	
 	
 }

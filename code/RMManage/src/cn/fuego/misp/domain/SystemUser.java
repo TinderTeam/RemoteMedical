@@ -79,6 +79,16 @@ public class SystemUser implements PersistenceObject
 	{
 		this.regDate = regDate;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "SystemUser [userID=" + userID + ", userName=" + userName
+				+ ", password=" + password + ", accountType=" + accountType
+				+ ", regDate=" + regDate + "]";
+	}
+	
+	
 	
 
 }

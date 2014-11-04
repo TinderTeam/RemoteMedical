@@ -58,6 +58,21 @@ public class Link implements PersistenceObject
 	{
 		this.linkState = linkState;
 	}
+	/**
+	 * @param hospitalID
+	 * @param expertID
+	 * @param linkTime
+	 * @param linkState
+	 */
+	private Link(String hospitalID, String expertID, Date linkTime,
+			int linkState)
+	{
+		super();
+		this.hospitalID = hospitalID;
+		this.expertID = expertID;
+		this.linkTime = linkTime;
+		this.linkState = linkState;
+	}
 	 
 	
 	

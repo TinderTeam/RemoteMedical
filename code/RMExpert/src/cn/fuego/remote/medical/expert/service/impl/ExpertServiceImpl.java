@@ -159,7 +159,7 @@ public class ExpertServiceImpl implements ExpertService
 	@Override
 	public void submitMedicalReport(ReportStatusEnum status, MedicalReportModel reportModel)
 	{
-		
+		log.info("submit report.");
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
@@ -167,6 +167,8 @@ public class ExpertServiceImpl implements ExpertService
 		//根据医院ID获取医院的信息（电话列表）
 		QueryCondition hsCondition =new QueryCondition(ConditionTypeEnum.EQUAL, "id",reportModel.getReportView().getHospitalID());
 		Hospital hospital= (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(hsCondition);
+		
+		String operate = "";
 		if(null != report)
 		{	
 			if(status==ReportStatusEnum.CANCEL||status==ReportStatusEnum.SUBMIT)//撤销报告或提交报告需要短信通知
@@ -176,12 +178,13 @@ public class ExpertServiceImpl implements ExpertService
 			    if(status==ReportStatusEnum.CANCEL)
 			    {
 			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经被撤销！";
-			    	MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.CANCEL_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS);
+			    	operate = MISPOperLogConsant.CANCEL_REPORT;
 			    }
 			    else
 			    {
 			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经回传，请注意查收！";
-			    	MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.SUBMIT_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS);
+			    	
+			    	operate = MISPOperLogConsant.SUBMIT_REPORT;
 			    }
 			    String[] a =hospital.getHospitalPhone().split(";");//通知电话列表所用字段
 			    if(!ValidatorUtil.isEmpty(a))
@@ -195,11 +198,18 @@ public class ExpertServiceImpl implements ExpertService
 			    }
 				
 			}
+			else
+			{
+		    	operate = MISPOperLogConsant.SAVE_REPORT;
+
+			}
 
 			report.setExStudyContent(reportModel.getReportView().getExStudyContent());
 			report.setExStudyConclusion(reportModel.getReportView().getExStudyConclusion());
 			report.setExReportState(status.getStatusValue());
 			repertDao.update(report);
+			MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), operate, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS); 
+			
 
 		}
 		else
@@ -300,6 +310,8 @@ public class ExpertServiceImpl implements ExpertService
 		{
 			log.error("can not find the report.the reportView is " + reportView);
 		}
+		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.TRANS_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS); 
+		
 		
 	}	
 

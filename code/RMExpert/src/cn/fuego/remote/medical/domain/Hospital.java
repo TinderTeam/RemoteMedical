@@ -236,6 +236,20 @@ public class Hospital implements PersistenceObject
 	{
 		this.reserve5 = reserve5;
 	}
+	@Override
+	public String toString()
+	{
+		return "Hospital [id=" + id + ", name=" + name + ", province="
+				+ province + ", city=" + city + ", county=" + county
+				+ ", address=" + address + ", hospitalPhone=" + hospitalPhone
+				+ ", contactWay=" + contactWay + ", contacts=" + contacts
+				+ ", contactsPhone=" + contactsPhone + ", rank=" + rank
+				+ ", resume=" + resume + ", remark=" + remark + ", apply="
+				+ apply + ", reg=" + reg + ", auditor=" + auditor + ", state="
+				+ state + ", authority=" + authority + ", reserve1=" + reserve1
+				+ ", reserve2=" + reserve2 + ", reserve3=" + reserve3
+				+ ", reserve4=" + reserve4 + ", reserve5=" + reserve5 + "]";
+	}
 
 	
 }
