@@ -21,6 +21,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import cn.fuego.common.util.SystemConfigInfo;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPShortMessageService;
 
 /**
@@ -52,8 +53,16 @@ public class MXShortMessageServiceImpl implements MISPShortMessageService
 
 		String phoneStr = "";
 		for (String e : phoneNumList)
-		{
-			phoneStr += e + ";";
+		{	if(!ValidatorUtil.isEmpty(e))
+			{
+				e.trim();
+				phoneStr += e + ";";
+			}
+			else
+			{
+				log.warn("Exist empty phoneNumber");
+			}
+			
 		}
 		url += "&Phones=" + phoneStr;
 		url += "&Content=" + content;
