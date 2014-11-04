@@ -100,6 +100,16 @@ public class ReportManageAction extends DWZTableAction
 		this.reportList = reportList;
 	}
 
+	public ReportFilterModel getFilter()
+	{
+		return filter;
+	}
+
+	public void setFilter(ReportFilterModel filter)
+	{
+		this.filter = filter;
+	}
+
  
 
 
