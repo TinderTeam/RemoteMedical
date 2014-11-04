@@ -1,6 +1,6 @@
-﻿# Host: 127.0.0.1  (Version: 5.1.70-community)
-# Date: 2014-11-01 09:19:32
-# Generator: MySQL-Front 5.3  (Build 4.156)
+﻿# Host: localhost  (Version: 5.6.21)
+# Date: 2014-11-04 11:53:44
+# Generator: MySQL-Front 5.3  (Build 4.123)
 
 /*!40101 SET NAMES utf8 */;
 
@@ -8,7 +8,6 @@
 # Structure for table "approval"
 #
 
-DROP TABLE IF EXISTS `approval`;
 CREATE TABLE `approval` (
   `Ai_ID` int(11) NOT NULL,
   `As_Type` int(11) DEFAULT NULL,
@@ -34,7 +33,6 @@ INSERT INTO `approval` VALUES (0,1,'专家信息修改',NULL,'E001','已同意',
 # Structure for table "expert"
 #
 
-DROP TABLE IF EXISTS `expert`;
 CREATE TABLE `expert` (
   `Es_ID` varchar(64) NOT NULL,
   `Es_Name` varchar(64) DEFAULT NULL,
@@ -89,7 +87,6 @@ INSERT INTO `expert` VALUES ('E001','ss','M','','','','tangjun@qq.com','','','',
 # Structure for table "hospital"
 #
 
-DROP TABLE IF EXISTS `hospital`;
 CREATE TABLE `hospital` (
   `Hs_ID` varchar(64) NOT NULL,
   `Hs_Name` varchar(64) DEFAULT NULL,
@@ -131,7 +128,6 @@ INSERT INTO `hospital` VALUES ('H002','人民医院','北京','市辖区','东�
 # Structure for table "imagearchiving"
 #
 
-DROP TABLE IF EXISTS `imagearchiving`;
 CREATE TABLE `imagearchiving` (
   `Hs_ID` varchar(64) NOT NULL,
   `Pi_SerialNO` int(11) NOT NULL,
@@ -168,7 +164,6 @@ INSERT INTO `imagearchiving` VALUES ('h001',2,'DX.a18926.1.1.dcm','a18926','DX',
 # Structure for table "link"
 #
 
-DROP TABLE IF EXISTS `link`;
 CREATE TABLE `link` (
   `Hs_ID` varchar(64) NOT NULL,
   `Hs_Name` varchar(64) DEFAULT NULL,
@@ -190,7 +185,6 @@ INSERT INTO `link` VALUES ('H002',NULL,'E001',NULL,'2014-10-30 15:16:17',NULL,1)
 # Structure for table "misp_oper_log"
 #
 
-DROP TABLE IF EXISTS `misp_oper_log`;
 CREATE TABLE `misp_oper_log` (
   `id` int(11) NOT NULL,
   `USER` varchar(255) NOT NULL,
@@ -206,13 +200,12 @@ CREATE TABLE `misp_oper_log` (
 # Data for table "misp_oper_log"
 #
 
-INSERT INTO `misp_oper_log` VALUES (1,'E001','登录',NULL,'成功',NULL,'2014-10-31 17:46:57'),(6,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:54:11'),(7,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:54:14'),(8,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 17:54:36'),(9,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 17:54:46'),(10,'admin','登录',NULL,'成功',NULL,'2014-10-31 17:55:26'),(11,'E001','登录',NULL,'成功',NULL,'2014-10-31 17:57:28'),(12,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:57:35'),(13,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 18:00:41'),(14,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:01:07'),(15,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:07:32'),(16,'E002','登录',NULL,'成功',NULL,'2014-10-31 18:12:11'),(17,'E002','撤销报告','报告编号2','成功',NULL,'2014-10-31 18:14:34'),(18,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:15:08'),(19,'E001','登录',NULL,'成功',NULL,'2014-10-31 18:18:36'),(20,'H002','登录',NULL,'成功',NULL,'2014-10-31 18:20:35'),(21,'admin','登录',NULL,'成功',NULL,'2014-10-31 21:00:21'),(22,'admin','创建用户','E005','成功',NULL,'2014-10-31 21:00:40'),(23,'E004','登录',NULL,'成功',NULL,'2014-10-31 21:04:15'),(24,'admin','登录',NULL,'成功',NULL,'2014-10-31 21:28:27'),(25,'H002','登录',NULL,'成功',NULL,'2014-10-31 21:28:49'),(26,'H002','登录',NULL,'成功',NULL,'2014-10-31 22:55:37'),(27,'E003','登录',NULL,'成功',NULL,'2014-10-31 23:02:07'),(28,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:06:01'),(29,'H003','登录',NULL,'成功',NULL,'2014-10-31 23:42:04'),(30,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:45:26'),(31,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:55:03');
+INSERT INTO `misp_oper_log` VALUES (1,'E001','登录',NULL,'成功',NULL,'2014-10-31 17:46:57'),(6,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:54:11'),(7,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:54:14'),(8,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 17:54:36'),(9,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 17:54:46'),(10,'admin','登录',NULL,'成功',NULL,'2014-10-31 17:55:26'),(11,'E001','登录',NULL,'成功',NULL,'2014-10-31 17:57:28'),(12,'E001','撤销报告',NULL,'成功',NULL,'2014-10-31 17:57:35'),(13,'E001','提交报告',NULL,'成功',NULL,'2014-10-31 18:00:41'),(14,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:01:07'),(15,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:07:32'),(16,'E002','登录',NULL,'成功',NULL,'2014-10-31 18:12:11'),(17,'E002','撤销报告','报告编号2','成功',NULL,'2014-10-31 18:14:34'),(18,'admin','登录',NULL,'成功',NULL,'2014-10-31 18:15:08'),(19,'E001','登录',NULL,'成功',NULL,'2014-10-31 18:18:36'),(20,'H002','登录',NULL,'成功',NULL,'2014-10-31 18:20:35'),(21,'admin','登录',NULL,'成功',NULL,'2014-10-31 21:00:21'),(22,'admin','创建用户','E005','成功',NULL,'2014-10-31 21:00:40'),(23,'E004','登录',NULL,'成功',NULL,'2014-10-31 21:04:15'),(24,'admin','登录',NULL,'成功',NULL,'2014-10-31 21:28:27'),(25,'H002','登录',NULL,'成功',NULL,'2014-10-31 21:28:49'),(26,'H002','登录',NULL,'成功',NULL,'2014-10-31 22:55:37'),(27,'E003','登录',NULL,'成功',NULL,'2014-10-31 23:02:07'),(28,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:06:01'),(29,'H003','登录',NULL,'成功',NULL,'2014-10-31 23:42:04'),(30,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:45:26'),(31,'H002','登录',NULL,'成功',NULL,'2014-10-31 23:55:03'),(32,'admin','登录',NULL,'成功',NULL,'2014-11-04 11:37:37');
 
 #
 # Structure for table "misp_privilege"
 #
 
-DROP TABLE IF EXISTS `misp_privilege`;
 CREATE TABLE `misp_privilege` (
   `ID` int(11) NOT NULL,
   `master_type` varchar(20) NOT NULL,
@@ -233,7 +226,6 @@ INSERT INTO `misp_privilege` VALUES (1,'ROLE','1','MENU','1',''),(2,'ROLE','1','
 # Structure for table "misp_system_id_type"
 #
 
-DROP TABLE IF EXISTS `misp_system_id_type`;
 CREATE TABLE `misp_system_id_type` (
   `NAME` varchar(20) NOT NULL,
   `STEP` int(11) NOT NULL,
@@ -254,7 +246,6 @@ CREATE TABLE `misp_system_id_type` (
 # Structure for table "misp_system_menu"
 #
 
-DROP TABLE IF EXISTS `misp_system_menu`;
 CREATE TABLE `misp_system_menu` (
   `MENU_ID` varchar(20) NOT NULL,
   `NAME` varchar(50) NOT NULL,
@@ -273,13 +264,12 @@ CREATE TABLE `misp_system_menu` (
 # Data for table "misp_system_menu"
 #
 
-INSERT INTO `misp_system_menu` VALUES ('1','个人信息','个人信息',NULL,NULL,NULL,NULL,NULL,'0','1'),('10','诊断统计','诊断统计',NULL,NULL,NULL,NULL,'manage/diagnoseCount.jsp','9','10'),('11','费用统计','费用统计',NULL,NULL,NULL,NULL,'manage/costCount.jsp','9','11'),('12','日志管理','日志管理',NULL,NULL,NULL,NULL,NULL,'0','12'),('13','操作日志','操作日志',NULL,NULL,NULL,NULL,'log/LogManage','12','13'),('2','专家信息','专家信息',NULL,NULL,NULL,NULL,'ExpertManage!infoEdit.action','1','2'),('3','医院信息','医院信息',NULL,NULL,NULL,NULL,'HospitalManage!infoEdit.action','1','3'),('4','用户管理','用户管理',NULL,NULL,NULL,NULL,NULL,'0','4'),('5','系统用户','系统用户',NULL,NULL,NULL,NULL,'user/UserManage','4','5'),('6','修改申请','修改申请',NULL,NULL,NULL,NULL,'user/ApprovalManage','4','6'),('7','专家管理','专家管理',NULL,NULL,NULL,NULL,'user/ExpertManage','4','7'),('8','医院管理','医院管理',NULL,NULL,NULL,NULL,'user/HospitalManage','4','8'),('9','统计信息','统计信息',NULL,NULL,NULL,NULL,NULL,'0','9');
+INSERT INTO `misp_system_menu` VALUES ('1','个人信息','个人信息',NULL,NULL,NULL,NULL,NULL,'0','1'),('10','诊断统计','诊断统计',NULL,NULL,NULL,NULL,'report/ReportManage','9','10'),('11','费用统计','费用统计',NULL,NULL,NULL,NULL,'report/ReportManage!costCount.action','9','11'),('12','日志管理','日志管理',NULL,NULL,NULL,NULL,NULL,'0','12'),('13','操作日志','操作日志',NULL,NULL,NULL,NULL,'log/LogManage','12','13'),('2','专家信息','专家信息',NULL,NULL,NULL,NULL,'ExpertManage!infoEdit.action','1','2'),('3','医院信息','医院信息',NULL,NULL,NULL,NULL,'HospitalManage!infoEdit.action','1','3'),('4','用户管理','用户管理',NULL,NULL,NULL,NULL,NULL,'0','4'),('5','系统用户','系统用户',NULL,NULL,NULL,NULL,'user/UserManage','4','5'),('6','修改申请','修改申请',NULL,NULL,NULL,NULL,'user/ApprovalManage','4','6'),('7','专家管理','专家管理',NULL,NULL,NULL,NULL,'user/ExpertManage','4','7'),('8','医院管理','医院管理',NULL,NULL,NULL,NULL,'user/HospitalManage','4','8'),('9','统计信息','统计信息',NULL,NULL,NULL,NULL,NULL,'0','9');
 
 #
 # Structure for table "patient"
 #
 
-DROP TABLE IF EXISTS `patient`;
 CREATE TABLE `patient` (
   `Pi_SerialNO` int(32) NOT NULL,
   `Hs_ID` varchar(64) NOT NULL,
@@ -323,7 +313,6 @@ INSERT INTO `patient` VALUES (1,'h001','a18926','李四','LI SI','M','1983-11-23
 # Structure for table "report"
 #
 
-DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
   `Hs_ID` varchar(255) NOT NULL,
   `Pi_SerialNO` int(11) NOT NULL,
@@ -368,15 +357,12 @@ CREATE TABLE `report` (
 # Data for table "report"
 #
 
-/*!40000 ALTER TABLE `report` DISABLE KEYS */;
 INSERT INTO `report` VALUES ('H002',1,NULL,NULL,'张飞',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,'2014-10-31 00:00:00',NULL,NULL,NULL,NULL,NULL,'E001','',2),('H002',2,NULL,NULL,'赵云',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,'2014-10-23 00:00:00',NULL,NULL,NULL,NULL,NULL,'E002',NULL,0),('H002',3,NULL,NULL,'关羽',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,'2014-10-27 00:00:00',NULL,NULL,NULL,NULL,NULL,'E003',NULL,0),('H003',4,NULL,NULL,'黄忠',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'没有名字叫我怎么写？？？？！！','同左！',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,NULL,'2014-10-30 00:00:00',NULL,NULL,NULL,NULL,NULL,'E001',NULL,2);
-/*!40000 ALTER TABLE `report` ENABLE KEYS */;
 
 #
 # Structure for table "user"
 #
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Ui_ID` int(32) NOT NULL,
   `Us_Account` varchar(16) DEFAULT NULL,
@@ -393,6 +379,5 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` VALUES (1,'admin','1234',99,NULL,NULL),(3,'E001','1234',1,NULL,'2014-10-20 21:56:38'),(4,'E002','1234',1,NULL,'2014-10-30 11:48:03'),(5,'E003','1234',1,NULL,'2014-10-30 11:48:13'),(6,'E004','1234',1,NULL,'2014-10-30 11:48:28'),(7,'H002','1234',2,NULL,'2014-10-30 13:56:26'),(8,'H003','1234',2,NULL,'2014-10-30 13:56:43'),(9,'E005','1234',1,NULL,'2014-10-31 21:00:40');
 
-DROP VIEW IF EXISTS `view_report`;
 CREATE VIEW `view_report` AS 
-  select concat(`pacs`.`report`.`Hs_ID`,`pacs`.`report`.`Pi_SerialNO`) AS `id`,`pacs`.`report`.`Hs_ID` AS `Hs_ID`,`pacs`.`report`.`Pi_SerialNO` AS `Pi_SerialNO`,`pacs`.`report`.`Rs_ReportNO` AS `Rs_ReportNO`,`pacs`.`report`.`Rs_PatientID` AS `Rs_PatientID`,`pacs`.`report`.`Rs_PatientName` AS `Rs_PatientName`,`pacs`.`report`.`Rs_PatientSex` AS `Rs_PatientSex`,`pacs`.`report`.`Rs_PatientAge` AS `Rs_PatientAge`,`pacs`.`report`.`Rs_Department` AS `Rs_Department`,`pacs`.`report`.`Rs_HospitalNo` AS `Rs_HospitalNo`,`pacs`.`report`.`Rs_BedNo` AS `Rs_BedNo`,`pacs`.`report`.`Rs_BodyPart` AS `Rs_BodyPart`,`pacs`.`report`.`Rs_PreView` AS `Rs_PreView`,`pacs`.`report`.`Rs_Diagnosis` AS `Rs_Diagnosis`,`pacs`.`report`.`Rs_StudyContent` AS `Rs_StudyContent`,`pacs`.`report`.`Rs_StudyConclusion` AS `Rs_StudyConclusion`,`pacs`.`report`.`Rs_ExStudyContent` AS `Rs_ExStudyContent`,`pacs`.`report`.`Rs_ExStudyConclusion` AS `Rs_ExStudyConclusion`,`pacs`.`report`.`Rs_ExStyContentCode` AS `Rs_ExStyContentCode`,`pacs`.`report`.`Rs_ExStyConclusionCode` AS `Rs_ExStyConclusionCode`,`pacs`.`report`.`Rd_StudyDate` AS `Rd_StudyDate`,`pacs`.`report`.`Rd_ReportDate` AS `Rd_ReportDate`,`pacs`.`report`.`Rs_ReviewDate` AS `Rs_ReviewDate`,`pacs`.`report`.`Rs_OperatorsPhysician` AS `Rs_OperatorsPhysician`,`pacs`.`report`.`Rs_ReportPhysician` AS `Rs_ReportPhysician`,`pacs`.`report`.`Rs_ReviewPhysician` AS `Rs_ReviewPhysician`,`pacs`.`report`.`Ri_ImageCount` AS `Ri_ImageCount`,`pacs`.`report`.`Rs_ImagePathWL` AS `Rs_ImagePathWL`,`pacs`.`report`.`Rd_ExApply` AS `Rd_ExApply`,`pacs`.`report`.`Rd_ExStartUpImg` AS `Rd_ExStartUpImg`,`pacs`.`report`.`Rd_ExEndUpImg` AS `Rd_ExEndUpImg`,`pacs`.`report`.`Rd_ExReport` AS `Rd_ExReport`,`pacs`.`report`.`Rd_ExDownReport` AS `Rd_ExDownReport`,`pacs`.`report`.`Rs_ExApplyDoctor` AS `Rs_ExApplyDoctor`,`pacs`.`report`.`Rs_ExDoctor` AS `Rs_ExDoctor`,`pacs`.`report`.`Rs_ExState` AS `Rs_ExState`,`pacs`.`report`.`Rs_ExReportState` AS `Rs_ExReportState` from `pacs`.`report`;
+  select concat(`report`.`Hs_ID`,`report`.`Pi_SerialNO`) AS `id`,`report`.`Hs_ID` AS `Hs_ID`,`report`.`Pi_SerialNO` AS `Pi_SerialNO`,`report`.`Rs_ReportNO` AS `Rs_ReportNO`,`report`.`Rs_PatientID` AS `Rs_PatientID`,`report`.`Rs_PatientName` AS `Rs_PatientName`,`report`.`Rs_PatientSex` AS `Rs_PatientSex`,`report`.`Rs_PatientAge` AS `Rs_PatientAge`,`report`.`Rs_Department` AS `Rs_Department`,`report`.`Rs_HospitalNo` AS `Rs_HospitalNo`,`report`.`Rs_BedNo` AS `Rs_BedNo`,`report`.`Rs_BodyPart` AS `Rs_BodyPart`,`report`.`Rs_PreView` AS `Rs_PreView`,`report`.`Rs_Diagnosis` AS `Rs_Diagnosis`,`report`.`Rs_StudyContent` AS `Rs_StudyContent`,`report`.`Rs_StudyConclusion` AS `Rs_StudyConclusion`,`report`.`Rs_ExStudyContent` AS `Rs_ExStudyContent`,`report`.`Rs_ExStudyConclusion` AS `Rs_ExStudyConclusion`,`report`.`Rs_ExStyContentCode` AS `Rs_ExStyContentCode`,`report`.`Rs_ExStyConclusionCode` AS `Rs_ExStyConclusionCode`,`report`.`Rd_StudyDate` AS `Rd_StudyDate`,`report`.`Rd_ReportDate` AS `Rd_ReportDate`,`report`.`Rs_ReviewDate` AS `Rs_ReviewDate`,`report`.`Rs_OperatorsPhysician` AS `Rs_OperatorsPhysician`,`report`.`Rs_ReportPhysician` AS `Rs_ReportPhysician`,`report`.`Rs_ReviewPhysician` AS `Rs_ReviewPhysician`,`report`.`Ri_ImageCount` AS `Ri_ImageCount`,`report`.`Rs_ImagePathWL` AS `Rs_ImagePathWL`,`report`.`Rd_ExApply` AS `Rd_ExApply`,`report`.`Rd_ExStartUpImg` AS `Rd_ExStartUpImg`,`report`.`Rd_ExEndUpImg` AS `Rd_ExEndUpImg`,`report`.`Rd_ExReport` AS `Rd_ExReport`,`report`.`Rd_ExDownReport` AS `Rd_ExDownReport`,`report`.`Rs_ExApplyDoctor` AS `Rs_ExApplyDoctor`,`report`.`Rs_ExDoctor` AS `Rs_ExDoctor`,`report`.`Rs_ExState` AS `Rs_ExState`,`report`.`Rs_ExReportState` AS `Rs_ExReportState` from `report`;
