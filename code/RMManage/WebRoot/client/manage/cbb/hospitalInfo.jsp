@@ -72,14 +72,14 @@
 				<dd><input type="text" name="hospitalModel.hospital.contacts"  maxlength="64" size="50" value="${hospitalModel.hospital.contacts}"/></dd>
 			</dl>
 			<dl style="width:50%;">
-				<dt>联系电话：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.contactsPhone"  maxlength="16" size="50" value="${hospitalModel.hospital.contactsPhone}"/></dd>
+				<dt>医院电话：</dt>			
+				<dd><input type="text" name="hospitalModel.hospital.hospitalPhone"  maxlength="16" size="50" value="${hospitalModel.hospital.contactsPhone}"/></dd>
 			</dl>
 			<div class="divider"></div>
 			<dl style="width:100%;height:50px;">
-				<dt >医院电话：</dt>			
+				<dt >联系电话：</dt>			
 				<dd style="width:85%;">
-				<textarea name="hospitalModel.hospital.hospitalPhone"  cols="100" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.hospitalPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.hospitalPhone}</textarea>
 				<span class="info" style="float:right;">*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>

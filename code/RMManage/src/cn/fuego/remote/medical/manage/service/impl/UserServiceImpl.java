@@ -98,7 +98,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}			
 		}
 		
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"state",UserStatusEnum.REGISTERED.getStatus()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"state",String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 	
 		AbstractDataSource<Hospital> dataSource = new DataBaseSourceImpl<Hospital>(Hospital.class,conditionList);
 		
@@ -183,7 +183,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 		 
 		
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", UserStatusEnum.REGISTERED.getStatus()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 		
 		AbstractDataSource<Expert> dataSource = new DataBaseSourceImpl<Expert>(Expert.class,conditionList);
 		
@@ -327,13 +327,13 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		case EXPERT:
 			Expert expert = new Expert();
 			expert.setId(user.getUserName());
-			expert.setState(UserStatusEnum.CREATED.getStatus());
+			expert.setState(UserStatusEnum.CREATED.getIntValue());
 			DaoContext.getInstance().getExpertDao().create(expert);
 			break;
 		case HOSPITAL:
 			Hospital hospital = new Hospital();
 			hospital.setId(user.getUserName());
-			hospital.setState(UserStatusEnum.CREATED.getStatus());
+			hospital.setState(UserStatusEnum.CREATED.getIntValue());
 			DaoContext.getInstance().getHospitalDao().create(hospital);
 			break;
 		default :
@@ -391,9 +391,14 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 
 			} else
 			{
+				ExpertModel expert = this.getExpertByID(expertID);
+				HospitalModel hopital = this.getHospitalByID(expertID);
 				Link link = new Link();
 				link.setHospitalID(hospitalID);
 				link.setExpertID(expertID);
+				link.setExpertName(expert.getExpert().getName());
+				link.setHospitalName(hopital.getHospital().getName());
+				
 				link.setLinkState(LinkStatusEnum.LINK_FAILED.getStatusValue());
 				link.setLinkTime(DateUtil.getCurrentDate());
 				DaoContext.getInstance().getLinkDao().create(link);

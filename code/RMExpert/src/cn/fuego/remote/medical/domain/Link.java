@@ -24,8 +24,37 @@ public class Link implements PersistenceObject
 {
 	private String hospitalID;
 	private String expertID;
+	private String hospitalName;
+	private String expertName;
 	private Date linkTime;
+	private String auditor;
 	private int linkState;
+	
+	
+	public String getHospitalName()
+	{
+		return hospitalName;
+	}
+	public void setHospitalName(String hospitalName)
+	{
+		this.hospitalName = hospitalName;
+	}
+	public String getExpertName()
+	{
+		return expertName;
+	}
+	public void setExpertName(String expertName)
+	{
+		this.expertName = expertName;
+	}
+	public String getAuditor()
+	{
+		return auditor;
+	}
+	public void setAuditor(String auditor)
+	{
+		auditor = auditor;
+	}
 	public String getHospitalID()
 	{
 		return hospitalID;

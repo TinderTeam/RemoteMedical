@@ -28,7 +28,7 @@ public class Hospital implements PersistenceObject
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private String name;
+	private String name = "";
 	private String province;
 	private String city;
 	private String county;
@@ -43,13 +43,13 @@ public class Hospital implements PersistenceObject
 	private Date apply;
 	private Date reg;
 	private String auditor;
-	private String state;
-	private int authority;
+	private Integer state;
+	private Integer authority;
 	private String reserve1;
 	private String reserve2;
-	private String reserve3;
-	private int reserve4;
-	private int reserve5;
+	private Integer reserve3;
+	private Integer reserve4;
+ 
 	
 	public String getId()
 	{
@@ -180,11 +180,11 @@ public class Hospital implements PersistenceObject
 	{
 		this.auditor = auditor;
 	}
-	public String getState()
+	public Integer getState()
 	{
 		return state;
 	}
-	public void setState(String state)
+	public void setState(Integer state)
 	{
 		this.state = state;
 	}
@@ -212,29 +212,21 @@ public class Hospital implements PersistenceObject
 	{
 		this.reserve2 = reserve2;
 	}
-	public String getReserve3()
+	public Integer getReserve3()
 	{
 		return reserve3;
 	}
-	public void setReserve3(String reserve3)
+	public void setReserve3(Integer reserve3)
 	{
 		this.reserve3 = reserve3;
 	}
-	public int getReserve4()
+	public Integer getReserve4()
 	{
 		return reserve4;
 	}
-	public void setReserve4(int reserve4)
+	public void setReserve4(Integer reserve4)
 	{
 		this.reserve4 = reserve4;
-	}
-	public int getReserve5()
-	{
-		return reserve5;
-	}
-	public void setReserve5(int reserve5)
-	{
-		this.reserve5 = reserve5;
 	}
 	@Override
 	public String toString()
@@ -248,8 +240,9 @@ public class Hospital implements PersistenceObject
 				+ apply + ", reg=" + reg + ", auditor=" + auditor + ", state="
 				+ state + ", authority=" + authority + ", reserve1=" + reserve1
 				+ ", reserve2=" + reserve2 + ", reserve3=" + reserve3
-				+ ", reserve4=" + reserve4 + ", reserve5=" + reserve5 + "]";
+				+ ", reserve4=" + reserve4 + "]";
 	}
+ 
 
 	
 }

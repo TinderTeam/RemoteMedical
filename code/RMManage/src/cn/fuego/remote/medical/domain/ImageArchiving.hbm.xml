@@ -8,31 +8,40 @@
 	package="cn.fuego.remote.medical.domain">
 	<class name="ImageArchiving" table="ImageArchiving">
 		<composite-id>
-	       <key-property name="hospitalID" length="64" column="Hs_ID" ></key-property>
-           <key-property name="serialNo" column="Pi_SerialNO" ></key-property>
-           <key-property name="imgArchName" column="Is_ImageAchName" ></key-property>
+           <key-property name="serialNo" column="Pi_SerialNO"  length="32" ></key-property>	     
+           <key-property name="hospitalID" length="64" column="Hs_ID" ></key-property>
+
+           <key-property name="imgArchName" column="Is_ImageAchName"  length="255" ></key-property>
 	    </composite-id>
-		<property name="imageID" column="Is_ImageID" ></property>
-        <property name="modality" column="Is_Modality" ></property>
+		<property name="imageID" column="Is_ImageID"   length="64" ></property>
+        <property name="modality" column="Is_Modality"  length="16" ></property>
            
-        <property name="imageNo" column="Ii_ImageNo"></property>
-        <property name="sOPInstanceUID" column="Is_SOPInstanceUID"></property>
+        <property name="imageNo" column="Ii_ImageNO" ></property>
+        <property name="sOPInstanceUID" column="Is_SOPInstanceUID"  length="100" ></property>
         <property name="seriesID" column="Ii_SeriesID"></property>
         <property name="seriesDescription" column="Is_SeriesDescription"></property>
-        <property name="seriesUID" column="Is_SeriesUID"></property>
-        <property name="imageCount" column="Ii_ImageCount"></property>
-        <property name="minImageID" column="Ii_MinImageID"></property>
-        <property name="maxImageID" column="Ii_MaxImageID"></property>
+        <property name="seriesUID" column="Is_SeriesUID"  length="100" ></property>
+        <property name="imageCount" >
+          <column name="Ii_ImageCount" sql-type="smallint"></column>
+        </property>
+        <property name="minImageID">
+           <column name="Ii_MinImageID" sql-type="smallint"></column>
+        </property>
+        <property name="maxImageID" >
+            <column name="Ii_MaxImageID" sql-type="smallint"></column>
+        </property>
         <property name="imageSavePath" column="Is_ImageSavePath"></property>
-        <property name="bodyPart" column="Is_BodyPart"></property>
-        <property name="protocolName" column="Is_ProtocolName"></property>
+        <property name="bodyPart" column="Is_BodyPart"  length="64" ></property>
+        <property name="protocolName" column="Is_ProtocalName"  length="64" ></property>
         
-        <property name="oriImgName" column="Is_OriImgName"></property>
+        <property name="oriImgName" column="Is_OriImgName" not-null="true"></property>
         <property name="imageCode" column="Is_ImageCode"></property>
-        <property name="reserve1" column="Is_Reserve1"></property>
-        <property name="reserve2" column="Is_Reserve2"></property>
-        <property name="reserve3" column="Ib_Reserve3"></property>
-        <property name="reserve4" column="Ii_Reserve4"></property>
+        <property name="reserve1" column="Is_Reserve1"  length="64" ></property>
+        <property name="reserve2" column="Is_Reserve2"  length="128" ></property>
+        <property name="reserve3" column="Ii_Reserve3"></property>
+        <property name="reserve4" >
+           <column name="Ii_Reserve4" sql-type="smallint" ></column>
+        </property>
        
 	</class>
 </hibernate-mapping>

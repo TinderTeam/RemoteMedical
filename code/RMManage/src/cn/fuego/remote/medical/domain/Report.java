@@ -52,7 +52,7 @@ public class Report implements PersistenceObject
 	private String operatorsPhysician; // 检查医生	 
 	private String reportPhysician; // 报告医生
 	private String reviewPhysician; // 审核医生
-	private int imageCount; // 图像数目
+	private Integer imageCount; // 图像数目
 	private String imagePathWL; // 报告缩略图像路径
 	private Date exApply; // 申请远程日期
 	private Date exStartUpImg; // 开始上传图像时间
@@ -63,6 +63,98 @@ public class Report implements PersistenceObject
 	private String exDoctor; // 诊断专家
 	private String exState; //专家状态（）
 	private int exReportState; // 专家报告状态（0-未完结，1-已编写，2-已完结)
+	
+	private Date exGetReport;
+	private String modality;
+	private String expertDoctorName;
+	private String positive;
+	private String reserve1;
+	private String reserve2;
+	private String reserve3;
+	private String reserve4;
+	private Integer reserve5;
+	private Integer reserve6;
+ 
+	public Date getExGetReport()
+	{
+		return exGetReport;
+	}
+	public void setExGetReport(Date exGetReport)
+	{
+		this.exGetReport = exGetReport;
+	}
+	public String getModality()
+	{
+		return modality;
+	}
+	public void setModality(String modality)
+	{
+		this.modality = modality;
+	}
+	public String getExpertDoctorName()
+	{
+		return expertDoctorName;
+	}
+	public void setExpertDoctorName(String expertDoctorName)
+	{
+		this.expertDoctorName = expertDoctorName;
+	}
+	public String getPositive()
+	{
+		return positive;
+	}
+	public void setPositive(String positive)
+	{
+		this.positive = positive;
+	}
+	public String getReserve1()
+	{
+		return reserve1;
+	}
+	public void setReserve1(String reserve1)
+	{
+		this.reserve1 = reserve1;
+	}
+	public String getReserve2()
+	{
+		return reserve2;
+	}
+	public void setReserve2(String reserve2)
+	{
+		this.reserve2 = reserve2;
+	}
+	public String getReserve3()
+	{
+		return reserve3;
+	}
+	public void setReserve3(String reserve3)
+	{
+		this.reserve3 = reserve3;
+	}
+	public String getReserve4()
+	{
+		return reserve4;
+	}
+	public void setReserve4(String reserve4)
+	{
+		this.reserve4 = reserve4;
+	}
+	public Integer getReserve5()
+	{
+		return reserve5;
+	}
+	public void setReserve5(Integer reserve5)
+	{
+		this.reserve5 = reserve5;
+	}
+	public Integer getReserve6()
+	{
+		return reserve6;
+	}
+	public void setReserve6(Integer reserve6)
+	{
+		this.reserve6 = reserve6;
+	}
 	//private String 
 	public String getHospitalID()
 	{
@@ -264,11 +356,11 @@ public class Report implements PersistenceObject
 	{
 		this.reviewPhysician = reviewPhysician;
 	}
-	public int getImageCount()
+	public Integer getImageCount()
 	{
 		return imageCount;
 	}
-	public void setImageCount(int imageCount)
+	public void setImageCount(Integer imageCount)
 	{
 		this.imageCount = imageCount;
 	}

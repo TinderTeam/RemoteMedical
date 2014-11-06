@@ -8,32 +8,38 @@
 	package="cn.fuego.remote.medical.domain">
 	<class name="Hospital" table="hospital">
 
-	    <id name="id" column="Hs_ID" >
+	    <id name="id" column="Hs_ID" length="64" >
 			 
 		</id>
 
-		 <property name="name" column="Hs_Name"></property>
-		 <property name="province" column="Hs_Province"></property>
-		 <property name="city" column="Hs_City"></property>
-		 <property name="county" column="Hs_County"></property>
-		 <property name="address" column="Hs_Address"></property>
-		 <property name="hospitalPhone" column="Hs_HospitalPhone"></property>
-		 <property name="contactWay" column="Hs_ContactWay"></property>
-		 <property name="contacts" column="Hs_Contacts"></property>
-		 <property name="contactsPhone" column="Hs_ContactsPhone"></property>
-		 <property name="rank" column="Hs_Rank"></property>
-		 <property name="resume" column="Hs_Resume"></property>
-		 <property name="remark" column="Hs_Remark"></property>
+		 <property name="name" column="Hs_Name" length="64" ></property>
+		 <property name="province" column="Hs_Province" length="64" ></property>
+		 <property name="city" column="Hs_City" length="32" ></property>
+		 <property name="county" column="Hs_County" length="32"></property>
+		 <property name="address" column="Hs_Address"  ></property>
+		 <property name="hospitalPhone" column="Hs_HospitalPhone" length="16"></property>
+		 <property name="contactWay" column="Hs_ContactWay"  length="32"></property>
+		 <property name="contacts" column="Hs_Contacts" length="64"></property>
+		 <property name="contactsPhone" column="Hs_ContactsPhone" length="255"></property>
+		 <property name="rank" column="Hs_Rank" length="32"></property>
+		 <property name="resume"   >
+		   <column name="Hs_Resume" sql-type="text"></column>
+		 </property>
+		 <property name="remark" type="text" >
+		   	<column name="Hs_Remark" sql-type="text"></column>
+		 </property>
 		 <property name="apply" column="Hd_Apply"></property>
 		 <property name="reg" column="Hd_Reg"></property>
-		 <property name="auditor" column="Hs_Auditor"></property>
- 		 <property name="state" column="Hs_State"></property>
- 		 <property name="authority" column="Hi_Authority"></property>
- 		 <property name="reserve1" column="Hs_Reservel"></property>
- 		 <property name="reserve2" column="Hs_Reserve2"></property>
- 		 <property name="reserve3" column="Hs_Reserve3"></property>
- 		 <property name="reserve4" column="Hs_Reserve4"></property>
- 		 <property name="reserve5" column="Hs_Reserve5"></property>
+		 <property name="auditor" column="Hs_Auditor" length="64"></property>
+ 		 <property name="state" column="Hs_State" length="128"></property>
+ 		 <property name="authority" column="Hi_Authority" ></property>
+ 		 <property name="reserve1" column="Hs_Reserve1" length="64"></property>
+ 		 <property name="reserve2" column="Hs_Reserve2" length="128"></property>
+ 		 <property name="reserve3" column="Hi_Reserve3"></property>
+ 		 <property name="reserve4"  >
+ 		 	<column name="Hi_Reserve4" sql-type="smallint"></column>
+ 		 </property>
+ 
 
 	</class>
 </hibernate-mapping>

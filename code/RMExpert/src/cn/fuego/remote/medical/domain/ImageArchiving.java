@@ -28,7 +28,7 @@ public class ImageArchiving implements PersistenceObject
 	private String modality; //设备类型
 	private Integer  imageNo; //图像号	
 	private String sOPInstanceUID; //图像UID	
-	private String seriesID; //序列号
+	private Integer seriesID; //序列号
 	private String seriesDescription; //序列描述 	
 	private String seriesUID; //序列UID
 	private Integer imageCount; //图像数
@@ -43,7 +43,7 @@ public class ImageArchiving implements PersistenceObject
 	
 	private String reserve1;
 	private String reserve2;
-	private String reserve3;
+	private Integer reserve3;
 	private Integer reserve4;
  
 	public String getHospitalID()
@@ -102,11 +102,11 @@ public class ImageArchiving implements PersistenceObject
 	{
 		this.sOPInstanceUID = sOPInstanceUID;
 	}
-	public String getSeriesID()
+	public Integer getSeriesID()
 	{
 		return seriesID;
 	}
-	public void setSeriesID(String seriesID)
+	public void setSeriesID(Integer seriesID)
 	{
 		this.seriesID = seriesID;
 	}
@@ -206,11 +206,11 @@ public class ImageArchiving implements PersistenceObject
 	{
 		this.reserve2 = reserve2;
 	}
-	public String getReserve3()
+	public Integer getReserve3()
 	{
 		return reserve3;
 	}
-	public void setReserve3(String reserve3)
+	public void setReserve3(Integer reserve3)
 	{
 		this.reserve3 = reserve3;
 	}

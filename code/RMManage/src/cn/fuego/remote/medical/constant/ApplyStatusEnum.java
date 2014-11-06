@@ -31,6 +31,6 @@ public enum ApplyStatusEnum
 	{
 		return status;
 	}
+	
  
-
 }

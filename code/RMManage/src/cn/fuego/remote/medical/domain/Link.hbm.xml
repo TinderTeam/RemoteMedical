@@ -9,12 +9,21 @@
 	<class name="Link" table="link">
 
 		<composite-id>
+		   <key-property name="expertID" column="Es_ID" length="64" ></key-property>
+		
 	       <key-property name="hospitalID" column="Hs_ID" length="64" ></key-property>
-           <key-property name="expertID" column="Es_ID" length="64" ></key-property>
 	    </composite-id>
+	    
+	     <property name="expertName" column="Hs_Name" length="64" not-null="true"></property>
+	    
+	     <property name="hospitalName" column="Es_Name" length="64" not-null="true"></property>
+	     <property name="linkTime" column="LinkTime"  ></property>
+		 <property name="auditor" column="Auditor" length="64"></property>
 
-		 <property name="linkTime" column="LinkTime"></property>
-		 <property name="linkState" column="LinkState"></property>
+
+		 <property name="linkState"  not-null="true">
+		  <column name="LinkState" sql-type="smallint"></column>
+		 </property>
 
 
 	</class>

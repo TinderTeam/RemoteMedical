@@ -28,7 +28,7 @@ public class Expert implements PersistenceObject
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private String name;
+	private String name = "";
 	private String sex;
 	private String age;
 	private String phoneNo;
@@ -47,9 +47,9 @@ public class Expert implements PersistenceObject
 	private String expertise;
 	private String remark;
 	private Blob signName;
-	private String authority;
-	private String state;
-	private String onlineState;
+	private Integer authority;
+	private Integer state;
+	private Integer onlineState;
 	
 	private Date login;
 	private Date apply;
@@ -60,15 +60,12 @@ public class Expert implements PersistenceObject
 	private Integer ctCount;
 	private Integer drCount;
 	private Integer mrCount;
-	private Integer ulCount;
-	
-	
-	private Integer otherCount;
+ 
 	private String reserve1;
 	private String reserve2;
-	private String reserve3;
-	private int reserve4;
-	private int reserve5;
+	private Integer reserve3;
+	private Integer reserve4;
+ 
 	public String getId()
 	{
 		return id;
@@ -222,27 +219,27 @@ public class Expert implements PersistenceObject
 	{
 		this.signName = signName;
 	}
-	public String getAuthority()
+	public Integer getAuthority()
 	{
 		return authority;
 	}
-	public void setAuthority(String authority)
+	public void setAuthority(Integer authority)
 	{
 		this.authority = authority;
 	}
-	public String getState()
+	public Integer getState()
 	{
 		return state;
 	}
-	public void setState(String state)
+	public void setState(Integer state)
 	{
 		this.state = state;
 	}
-	public String getOnlineState()
+	public Integer getOnlineState()
 	{
 		return onlineState;
 	}
-	public void setOnlineState(String onlineState)
+	public void setOnlineState(Integer onlineState)
 	{
 		this.onlineState = onlineState;
 	}
@@ -290,14 +287,7 @@ public class Expert implements PersistenceObject
 	{
 		return mrCount;
 	}
-	public Integer getUlCount()
-	{
-		return ulCount;
-	}
-	public Integer getOtherCount()
-	{
-		return otherCount;
-	}
+ 
 	public void setCtCount(Integer ctCount)
 	{
 		this.ctCount = ctCount;
@@ -310,14 +300,7 @@ public class Expert implements PersistenceObject
 	{
 		this.mrCount = mrCount;
 	}
-	public void setUlCount(Integer ulCount)
-	{
-		this.ulCount = ulCount;
-	}
-	public void setOtherCount(Integer otherCount)
-	{
-		this.otherCount = otherCount;
-	}
+ 
 	
 	public String getReserve1()
 	{
@@ -335,29 +318,22 @@ public class Expert implements PersistenceObject
 	{
 		this.reserve2 = reserve2;
 	}
-	public String getReserve3()
+ 
+	public Integer getReserve3()
 	{
 		return reserve3;
 	}
-	public void setReserve3(String reserve3)
+	public void setReserve3(Integer reserve3)
 	{
 		this.reserve3 = reserve3;
 	}
-	public int getReserve4()
+	public Integer getReserve4()
 	{
 		return reserve4;
 	}
-	public void setReserve4(int reserve4)
+	public void setReserve4(Integer reserve4)
 	{
 		this.reserve4 = reserve4;
-	}
-	public int getReserve5()
-	{
-		return reserve5;
-	}
-	public void setReserve5(int reserve5)
-	{
-		this.reserve5 = reserve5;
 	}
 	@Override
 	public String toString()
@@ -374,10 +350,9 @@ public class Expert implements PersistenceObject
 				+ ", login=" + login + ", apply=" + apply + ", reg=" + reg
 				+ ", auditor=" + auditor + ", ctCount=" + ctCount
 				+ ", drCount=" + drCount + ", mrCount=" + mrCount
-				+ ", ulCount=" + ulCount + ", otherCount=" + otherCount
 				+ ", reserve1=" + reserve1 + ", reserve2=" + reserve2
-				+ ", reserve3=" + reserve3 + ", reserve4=" + reserve4
-				+ ", reserve5=" + reserve5 + "]";
+				+ ", reserve3=" + reserve3 + ", reserve4=" + reserve4 + "]";
 	}
+ 
 	
 }

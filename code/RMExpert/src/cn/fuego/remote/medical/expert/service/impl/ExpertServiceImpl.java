@@ -186,7 +186,7 @@ public class ExpertServiceImpl implements ExpertService
 			    	
 			    	operate = MISPOperLogConsant.SUBMIT_REPORT;
 			    }
-			    String[] a =hospital.getHospitalPhone().split(";");//通知电话列表所用字段
+			    String[] a =hospital.getContactsPhone().split(";");//通知电话列表所用字段
 			    if(!ValidatorUtil.isEmpty(a))
 			    {
 				    phoneNumList = Arrays.asList(a);

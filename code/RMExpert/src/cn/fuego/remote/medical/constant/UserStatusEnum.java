@@ -18,18 +18,55 @@ package cn.fuego.remote.medical.constant;
 
 public enum UserStatusEnum
 {
-	CREATED("已创建"),  
-	APPLIED("已申请"),    
-	CANCELED("已注销"),
-	REGISTERED("已注册");   
-	private String status;
-	private UserStatusEnum(String status)
+	CREATED("已创建",0),  
+	APPLIED("已申请",1),    
+	CANCELED("已注销",2),
+	REGISTERED("已注册",3);   
+	private String strValue;
+	private int intValue;
+	private UserStatusEnum(String strValue, int intValue)
 	{
-		this.status = status;
+		this.strValue = strValue;
+		this.intValue = intValue;
 	}
-	public String getStatus()
+ 
+
+	
+	public String getStrValue()
 	{
-		return status;
+		return strValue;
+	}
+
+
+
+	public int getIntValue()
+	{
+		return intValue;
+	}
+
+
+
+	public static UserStatusEnum getEnumByInt(int intValue)
+	{
+		for (UserStatusEnum c : UserStatusEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	public static UserStatusEnum getEnumByStr(String strValue)
+	{
+		for (UserStatusEnum c : UserStatusEnum.values())
+		{
+			if (strValue.equals(c.strValue) )
+			{
+				return c;
+			}
+		}
+		return null;
 	}
  
 }
