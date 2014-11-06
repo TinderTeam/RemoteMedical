@@ -50,7 +50,7 @@
 	</s:form>
 </div>
 <div class="pageContent">
-	<table class="table" style="width:100%;" layoutH="90">
+	<table class="table" style="width:100%;" layoutH="88">
 		<thead>
 			<tr>
 				<th width="100" align="center">申请编号</th>

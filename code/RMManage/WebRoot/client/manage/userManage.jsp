@@ -72,7 +72,8 @@ function submitForm(url){
 			<li><a class="delete" href="UserManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除用户</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="118">
+	<s:form  id="userForm"  method="POST"  name="userForm" >
+	<table class="table" width="100%" layoutH="115">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
@@ -82,7 +83,7 @@ function submitForm(url){
 				<th width="30%" align="center">注册时间</th>
 			</tr>
 		</thead>
-		<s:form  id="userForm"  method="POST"  name="userForm" >
+		
 		<tbody>
 		
 		<c:forEach var="e" items="${userTable.currentPageData}"> 
@@ -110,8 +111,9 @@ function submitForm(url){
 		</c:forEach>	
 	
 		</tbody>
-		</s:form>
+		
 	</table>
+	</s:form>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>

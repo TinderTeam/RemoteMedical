@@ -74,7 +74,7 @@
 </div>
 <div class="pageContent">
 
-	<table class="table" width="100%" layoutH="90" id="exTable">
+	<table class="table" width="100%" layoutH="88" id="exTable">
 		<thead>
 			<tr>		
 				<th width="100" align="center">专家账号</th>
