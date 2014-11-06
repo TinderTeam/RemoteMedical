@@ -15,18 +15,18 @@
 				<script type="text/javascript">
 
 					//$('#days').attr('checked',checked);
-					var range1= $("#startDate").val();
-					var range2= $("#endDate").val();
+					var range1= $("#startDate4").val();
+					var range2= $("#endDate4").val();
 					//alert(range1);
 					if((range1!='')||(range2!=''))
 					{
 						$("#ck4").attr("checked",true);
 						$("#ck3").attr("checked",false);
-						$("#days").attr("disabled",true);
+						$("#days3").attr("disabled",true);
 					}else
 					{	 $("#ck3").attr("checked","checked");
-						 $("#startDate,#endDate").attr("disabled",true);
-				   		 $("#days").attr("disabled",false);
+						 $("#startDate4,#endDate4").attr("disabled",true);
+				   		 $("#days3").attr("disabled",false);
 					}
 
 				</script>
@@ -65,8 +65,8 @@
 			<tr>
 
 				<td>
-				 <span><input id="ck3" type="radio" name="r1" style="width:25px;"  onclick="$('#startDate,#endDate').attr('disabled',true);$('#days').attr('disabled',false);$('#startDate,#endDate').val('');"/>时间:</span>				   
-					<select name="filter.days" id="days">
+				 <span><input id="ck3" type="radio" name="r1" style="width:25px;"  onclick="$('#startDate4,#endDate4').attr('disabled',true);$('#days').attr('disabled',false);$('#startDate4,#endDate4').val('');"/>时间:</span>				   
+					<select name="filter.days" id="days3">
 						<option value="">默认所有时间</option>
 						<c:forEach var="d" items="${filter.dayList}">
 						  <c:choose>
@@ -82,10 +82,10 @@
 					</select>
 				</td>
 				<td class="dateRange">
-					<span><input id="ck4" type="radio" name="r1" style="width:25px;" onclick="$('#startDate,#endDate').removeAttr('disabled');$('#days').attr('disabled',true);$('#days').attr('checked',false);$('#days').val('');"/>时间段:</span>
-					<input id="startDate" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
+					<span><input id="ck4" type="radio" name="r1" style="width:25px;" onclick="$('#startDate4,#endDate4').removeAttr('disabled');$('#days3').attr('disabled',true);$('#days3').attr('checked',false);$('#days3').val('');"/>时间段:</span>
+					<input id="startDate4" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
 					<span class="limit">-</span>
-					<input id="endDate" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
+					<input id="endDate4" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
 				</td>
 
 

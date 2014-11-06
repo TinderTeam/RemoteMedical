@@ -88,7 +88,5 @@ public class SystemUser implements PersistenceObject
 				+ ", regDate=" + regDate + "]";
 	}
 	
-	
-	
 
 }

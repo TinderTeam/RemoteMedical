@@ -392,7 +392,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			} else
 			{
 				ExpertModel expert = this.getExpertByID(expertID);
-				HospitalModel hopital = this.getHospitalByID(expertID);
+				HospitalModel hopital = this.getHospitalByID(hospitalID);
 				Link link = new Link();
 				link.setHospitalID(hospitalID);
 				link.setExpertID(expertID);

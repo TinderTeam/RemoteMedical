@@ -55,7 +55,7 @@ public class ReportView implements PersistenceObject
 	private String operatorsPhysician; // 检查医生	 
 	private String reportPhysician; // 报告医生
 	private String reviewPhysician; // 审核医生
-	private int imageCount; // 图像数目
+	private Integer imageCount; // 图像数目
 	private String imagePathWL; // 报告缩略图像路径
 	private Date exApply; // 申请远程日期
 	private Date exStartUpImg; // 开始上传图像时间
@@ -302,11 +302,11 @@ public class ReportView implements PersistenceObject
 	{
 		this.reviewPhysician = reviewPhysician;
 	}
-	public int getImageCount()
+	public Integer getImageCount()
 	{
 		return imageCount;
 	}
-	public void setImageCount(int imageCount)
+	public void setImageCount(Integer imageCount)
 	{
 		this.imageCount = imageCount;
 	}

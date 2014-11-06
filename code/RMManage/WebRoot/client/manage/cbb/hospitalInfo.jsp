@@ -73,13 +73,13 @@
 			</dl>
 			<dl style="width:50%;">
 				<dt>医院电话：</dt>			
-				<dd><input type="text" name="hospitalModel.hospital.hospitalPhone"  maxlength="16" size="50" value="${hospitalModel.hospital.contactsPhone}"/></dd>
+				<dd><input type="text" name="hospitalModel.hospital.hospitalPhone"  maxlength="16" size="50" value="${hospitalModel.hospital.hospitalPhone}"/></dd>
 			</dl>
 			<div class="divider"></div>
 			<dl style="width:100%;height:50px;">
 				<dt >联系电话：</dt>			
 				<dd style="width:85%;">
-				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.hospitalPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.contactsPhone}</textarea>
 				<span class="info" style="float:right;">*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>
@@ -103,7 +103,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-							<c:when test="${hospitalModel.hospital.state =='已创建'}">
+							<c:when test="${hospitalModel.hospital.state ==0}"> 
 								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
 							</c:when>
 							<c:otherwise>

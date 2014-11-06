@@ -183,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-							<c:when test="${expertModel.expert.state =='已创建'}">
+							<c:when test="${expertModel.expert.state == 0}">
 								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
 							</c:when>
 							<c:otherwise>

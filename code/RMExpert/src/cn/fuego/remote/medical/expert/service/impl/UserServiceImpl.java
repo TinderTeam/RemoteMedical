@@ -52,7 +52,7 @@ public class UserServiceImpl  extends MISPUserServiceImpl
 			Expert expert=(Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "id", userName));
 			if(null!=expert)
 			{
-				if(!expert.getState().equals(UserStatusEnum.REGISTERED.getStatus()))
+				if(!expert.getState().equals(UserStatusEnum.REGISTERED.getIntValue()))
 				{
 						throw new ServiceException(CommonExceptionMsg.NOT_REGISTED);
 				}

@@ -279,7 +279,7 @@ public class ExpertServiceImpl implements ExpertService
 		 
 		conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"id",userName));//除操作者本身以外
 
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", UserStatusEnum.REGISTERED.getStatus()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state",String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 		
 		AbstractDataSource<Expert> dataSource = new DataBaseSourceImpl<Expert>(Expert.class,conditionList);
 		

@@ -181,6 +181,7 @@ public class ExpertManageAction extends DWZTableAction
 		{
 			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
 			this.getOperateMessage().setMessage(e.getMessage());
+			log.error("add expert failed",e);
 			
 		}
 	

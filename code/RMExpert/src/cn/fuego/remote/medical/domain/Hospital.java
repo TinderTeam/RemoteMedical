@@ -188,11 +188,11 @@ public class Hospital implements PersistenceObject
 	{
 		this.state = state;
 	}
-	public int getAuthority()
+	public Integer getAuthority()
 	{
 		return authority;
 	}
-	public void setAuthority(int authority)
+	public void setAuthority(Integer authority)
 	{
 		this.authority = authority;
 	}
