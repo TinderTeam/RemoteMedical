@@ -9,17 +9,17 @@ CREATE DATABASE `pacs` /*!40100 DEFAULT CHARACTER SET utf8 */;
 #
 
 CREATE TABLE `pacs`.`approval` (
-  `Ai_ID` int(11) NOT NULL,
+  `Ai_ID` int(11) NOT NULL AUTO_INCREMENT,
   `As_Type` int(11) DEFAULT NULL,
   `As_Name` varchar(255) DEFAULT NULL,
+  `As_ApplyUser` varchar(255) DEFAULT NULL,
+  `As_HandleUser` varchar(255) DEFAULT NULL,
   `Hs_ID` varchar(255) DEFAULT NULL,
   `Es_ID` varchar(255) DEFAULT NULL,
   `As_Status` varchar(255) DEFAULT NULL,
-  `As_ApplyTime` varchar(255) DEFAULT NULL,
-  `Ad_HandleTime` varchar(255) DEFAULT NULL,
+  `As_ApplyTime` datetime DEFAULT NULL,
+  `Ad_HandleTime` datetime DEFAULT NULL,
   `Ad_Desp` varchar(255) DEFAULT NULL,
-  `As_ApplyUser` varchar(255) DEFAULT NULL,
-  `As_HandleUser` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Ai_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -102,7 +102,7 @@ CREATE TABLE `pacs`.`imagearchiving` (
   `Pi_SerialNO` int(32) NOT NULL,
   `Hs_ID` varchar(64) NOT NULL,
   `Is_ImageAchName` varchar(255) NOT NULL,
-  `Ii_ImageID` varchar(64) DEFAULT NULL,
+  `Is_ImageID` varchar(64) DEFAULT NULL,
   `Is_Modality` varchar(16) DEFAULT NULL,
   `Ii_ImageNO` int(32) DEFAULT NULL,
   `Is_SOPInstanceUID` varchar(100) DEFAULT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `pacs`.`link` (
 #
 
 CREATE TABLE `pacs`.`misp_oper_log` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `USER` varchar(255) NOT NULL,
   `NAME` varchar(100) NOT NULL,
   `OBJECT` varchar(255) DEFAULT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE `pacs`.`misp_oper_log` (
 #
 
 CREATE TABLE `pacs`.`misp_privilege` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `master_type` varchar(20) NOT NULL,
   `master_value` varchar(255) NOT NULL,
   `access_obj_type` varchar(20) NOT NULL,
@@ -308,9 +308,9 @@ CREATE TABLE `pacs`.`report` (
 #
 
 CREATE TABLE `pacs`.`user` (
-  `Ui_ID` int(32) NOT NULL,
-  `Us_Account` varchar(16) DEFAULT NULL,
-  `Us_PassWord` varchar(10) DEFAULT NULL,
+  `Ui_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Us_Account` varchar(64) NOT NULL,
+  `Us_PassWord` varchar(64) NOT NULL,
   `Ui_AccountType` int(32) DEFAULT NULL,
   `Ui_Grade` smallint(16) DEFAULT NULL,
   `Ud_RegDate` datetime DEFAULT NULL,

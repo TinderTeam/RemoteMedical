@@ -66,10 +66,14 @@
         <property name="exDoctor" column="Rs_ExpertID" length="64"></property>
         <property name="expertDoctorName" column="Rs_ExpertDoctor" length="64"></property>
         
-        <property name="exState" column="Ri_ExState" ></property>
-        <property name="exReportState" column="Ri_ExReportState"></property>
+        <property name="exState"   >
+              <column name="Ri_ExState" sql-type="smallint"></column> 
+        </property>
+        <property name="exReportState"  >
+              <column name="Ri_ExReportState" sql-type="smallint"></column> 
+        </property>
         
-        <property name="positive" column="Rs_Positive" ></property>
+        <property name="positive" column="Rs_Positive" length="4" ></property>
         
         <property name="reserve1" column="Rs_Reserve1" length="64"></property>
         <property name="reserve2" column="Rs_Reserve2" length="128"></property>

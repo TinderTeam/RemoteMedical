@@ -9,7 +9,7 @@
 
 			<div class="unit">
 				<label>用户名称：</label>
-				<input type="text" size="30" name="filter.userName" class="required"/>
+				<input type="text" size="30" name="filter.userName" maxlength="64" class="required"/>
 			</div>
 			<div class="divider"></div>
 			<div class="unit">

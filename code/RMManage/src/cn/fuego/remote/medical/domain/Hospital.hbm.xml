@@ -31,7 +31,7 @@
 		 <property name="apply" column="Hd_Apply"></property>
 		 <property name="reg" column="Hd_Reg"></property>
 		 <property name="auditor" column="Hs_Auditor" length="64"></property>
- 		 <property name="state" column="Hs_State" length="128"></property>
+ 		 <property name="state" column="Hi_State" length="128"></property>
  		 <property name="authority" column="Hi_Authority" ></property>
  		 <property name="reserve1" column="Hs_Reserve1" length="64"></property>
  		 <property name="reserve2" column="Hs_Reserve2" length="128"></property>

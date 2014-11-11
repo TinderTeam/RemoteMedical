@@ -27,6 +27,7 @@ public class SystemUser implements PersistenceObject
 	private String password;
 	private int accountType;
 	private Date regDate;
+	private Integer grade;
 	
 	
 	public static String getUserIDAttr()
@@ -79,14 +80,27 @@ public class SystemUser implements PersistenceObject
 	{
 		this.regDate = regDate;
 	}
+	
+	
+
+	public Integer getGrade()
+	{
+		return grade;
+	}
+
+	public void setGrade(Integer grade)
+	{
+		this.grade = grade;
+	}
 
 	@Override
 	public String toString()
 	{
 		return "SystemUser [userID=" + userID + ", userName=" + userName
 				+ ", password=" + password + ", accountType=" + accountType
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", grade=" + grade + "]";
 	}
+ 
 	
 
 }

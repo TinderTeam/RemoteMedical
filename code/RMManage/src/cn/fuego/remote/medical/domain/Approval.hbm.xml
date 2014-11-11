@@ -9,7 +9,7 @@
 	<class name="Approval" table="approval">
 
 	    <id name="id" column="Ai_ID" >
-			<generator class="increment"/> 
+			<generator class="identity"/> 
 		</id>
 		 <property name="applyType" column="As_Type"></property>
 		 <property name="applyName" column="As_Name"></property>

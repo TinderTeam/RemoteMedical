@@ -8,12 +8,16 @@
 	package="cn.fuego.misp.domain">
 	<class name="SystemUser" table="user">
 			<id name="userID" column="Ui_ID" >
-			<generator class="increment"/>
+			<generator class="identity"/>
 			</id>
-            <property name="userName" column="Us_Account"  not-null="true" ></property>
+            <property name="userName" column="Us_Account" length='64' not-null="true" ></property>
         
-            <property name="password" column="Us_PassWord"  not-null="true" ></property>
+            <property name="password" column="Us_PassWord" length='64' not-null="true" ></property>
             <property name="accountType" column="Ui_AccountType"  length='20' ></property>
+            <property name="grade"   >
+                	<column name="Ui_Grade" sql-type="smallint"></column>
+            </property>
+            
             <property name="regDate" column="Ud_RegDate"  ></property>
 
 	
