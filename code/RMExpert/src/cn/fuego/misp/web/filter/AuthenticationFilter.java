@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.user.UserModel;
 
@@ -27,10 +31,12 @@ import cn.fuego.misp.web.model.user.UserModel;
  */
 public class AuthenticationFilter implements Filter
 {
+	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
+
 
 	private static final String LOGIN_URL_FLAG = "login";
-	private static final  String LOGIN_PAGE = "client/misp/login.jsp";
-	private static final  String JS_FILE = ".js";
+	private static final  String RES_PAGE = "client";
+  
 	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
@@ -44,11 +50,13 @@ public class AuthenticationFilter implements Filter
 		 //the url does not contains login url, we should check login or not
 		 if(!url.endsWith(httpRequest.getContextPath()) 
 			&& !url.endsWith(httpRequest.getContextPath()+"/")
-			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.toLowerCase().endsWith(JS_FILE))
+			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.contains(RES_PAGE))
 		 {
+			 log.info("the url need verify. url is " + url);
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
 			 if(null == loginUser || ValidatorUtil.isEmpty(loginUser.getUserName()))
 			 {
+				 log.warn("the url have been redirect. url is " + url);
 				 httpResponse.sendRedirect(httpRequest.getContextPath() );
 				 return;
 			 }

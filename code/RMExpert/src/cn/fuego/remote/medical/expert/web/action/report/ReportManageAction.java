@@ -56,6 +56,7 @@ public class ReportManageAction extends DWZTableAction
 	public String execute()
 	{
 		
+		
 		reportList.setPage(this.getPage());
 		reportList.setDataSource(expertService.getMedicalList(this.getLoginUser().getUserName(), filter));
 		return SUCCESS;

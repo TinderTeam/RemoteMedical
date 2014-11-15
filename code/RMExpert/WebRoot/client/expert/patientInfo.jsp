@@ -277,7 +277,7 @@ function submitForm(url)
 		   {
 		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
 			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
-			 ReYoWebDownLoad.url= hostURL+ "/" + imageURL[nowCnt];
+			 ReYoWebDownLoad.url= hostURL+ imageURL[nowCnt];
 			 //alert(ReYoWebDownLoad.url);
 			 ReYoWebDownLoad.percent = 0;
 		 	 ReYoWebDownLoad.path ="d:/temp/" + imageFileName[nowCnt];

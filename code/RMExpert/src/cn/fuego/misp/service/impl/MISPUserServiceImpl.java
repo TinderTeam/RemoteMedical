@@ -13,11 +13,11 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.common.exception.SystemOperateException;
 import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
@@ -26,10 +26,6 @@ import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
-import cn.fuego.remote.medical.constant.UserStatusEnum;
-import cn.fuego.remote.medical.constant.UserTypeEnum;
-import cn.fuego.remote.medical.dao.DaoContext;
-import cn.fuego.remote.medical.domain.Expert;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -61,13 +57,13 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
+			throw new SystemOperateException(CommonExceptionMsg.LOGIN_FAILED);
 		}
 
 		else if (!targetUser.getPassword().equals(password))
 		{
 			log.warn("the password is wrong");
-			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
+			throw new SystemOperateException(CommonExceptionMsg.LOGIN_FAILED);
 		}
 		else
 		{
@@ -96,12 +92,12 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.USER_NOT_EXISTED);
+			throw new SystemOperateException(CommonExceptionMsg.USER_NOT_EXISTED);
 		}
 		else if (!targetUser.getPassword().equals(oldPwd))
 		{
 			log.warn("the password is wrong");
-			throw new ServiceException(CommonExceptionMsg.OLD_PASSWORD_WORD);
+			throw new SystemOperateException(CommonExceptionMsg.OLD_PASSWORD_WORD);
 		}
 		else
 		{

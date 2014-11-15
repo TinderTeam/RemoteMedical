@@ -22,15 +22,15 @@
     <package name="default" namespace="/" extends="misp">
         
         <global-results>
-            <result name="exception-system">/client/platform/common/systemError.jsp</result>
+            <result name="exception-system">/client/misp/common/systemError.jsp</result>
  
-            <result name="exception-service">/client/platform/common/operateError.jsp</result>
+            <result name="exception-service">/client/misp/common/operateError.jsp</result>
         </global-results>
              
         <global-exception-mappings>
-            <exception-mapping result="exception-system" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+            <exception-mapping result="exception-system" exception="java.lang.Exception"></exception-mapping>
             
-            <exception-mapping result="exception-service" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+            <exception-mapping result="exception-service" exception="cn.fuego.common.exception.SystemOperateException"></exception-mapping>
         </global-exception-mappings>    
     </package>
     

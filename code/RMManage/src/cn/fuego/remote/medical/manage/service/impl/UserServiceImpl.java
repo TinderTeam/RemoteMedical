@@ -24,6 +24,7 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.common.exception.SystemOperateException;
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
@@ -234,7 +235,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			else
 			{
-				throw new ServiceException(CommonExceptionMsg.SIGN_IMG_TOO_BIG);
+				throw new SystemOperateException(CommonExceptionMsg.SIGN_IMG_TOO_BIG);
 			}
 
 			
@@ -314,7 +315,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		if(null != oldUser)
 		{
 			log.error("create user failed,the user name "+ userName +" is existed." );
-			throw new ServiceException(CommonExceptionMsg.USER_EXISTED);
+			throw new SystemOperateException(CommonExceptionMsg.USER_EXISTED);
 		}
 		SystemUser user = new SystemUser();
 		user.setUserName(userName);
@@ -383,10 +384,10 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			{
 				if (oldLink.getLinkState() == LinkStatusEnum.LINK_FAILED.getStatusValue())
 				{
-					throw new ServiceException(CommonExceptionMsg.LINK_APPROVING);
+					throw new SystemOperateException(CommonExceptionMsg.LINK_APPROVING);
 				} else
 				{
-					throw new ServiceException(CommonExceptionMsg.LINK_EXISTED);
+					throw new SystemOperateException(CommonExceptionMsg.LINK_EXISTED);
 				}
 
 			} else

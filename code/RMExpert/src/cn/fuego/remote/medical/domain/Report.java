@@ -61,8 +61,8 @@ public class Report implements PersistenceObject
 	private Date exDownReport; // 本地下载报告时间
 	private String exApplyDoctor; //申请远程医生
 	private String exDoctor; // 诊断专家
-	private String exState; //专家状态（）
-	private int exReportState; // 专家报告状态（0-未完结，1-已编写，2-已完结)
+	private Integer exState; //专家状态（）
+	private Integer exReportState; // 专家报告状态（0-未完结，1-已编写，2-已完结)
 	
 	private Date exGetReport;
 	private String modality;
@@ -428,20 +428,20 @@ public class Report implements PersistenceObject
 	{
 		this.exDoctor = exDoctor;
 	}
-	public String getExState()
+	public Integer getExState()
 	{
 		return exState;
 	}
-	public void setExState(String exState)
+	public void setExState(Integer exState)
 	{
 		this.exState = exState;
 	}
 
-	public int getExReportState()
+	public Integer getExReportState()
 	{
 		return exReportState;
 	}
-	public void setExReportState(int exReportState)
+	public void setExReportState(Integer exReportState)
 	{
 		this.exReportState = exReportState;
 	}
