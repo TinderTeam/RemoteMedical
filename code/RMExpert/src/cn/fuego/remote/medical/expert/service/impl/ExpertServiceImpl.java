@@ -173,7 +173,6 @@ public class ExpertServiceImpl implements ExpertService
 		{	
 			if(status==ReportStatusEnum.CANCEL||status==ReportStatusEnum.SUBMIT)//撤销报告或提交报告需要短信通知
 			{
-				List<String> phoneNumList = new ArrayList<String>();
 			    String content = "";
 			    if(status==ReportStatusEnum.CANCEL)
 			    {
@@ -186,16 +185,26 @@ public class ExpertServiceImpl implements ExpertService
 			    	
 			    	operate = MISPOperLogConsant.SUBMIT_REPORT;
 			    }
-			    String[] a =hospital.getContactsPhone().split(";");//通知电话列表所用字段
-			    if(!ValidatorUtil.isEmpty(a))
+			    if(null != hospital.getContactsPhone())
 			    {
-				    phoneNumList = Arrays.asList(a);
-				    MISPServiceContext.getInstance().getMISPShortMessageService().sendMessage(phoneNumList, content);
+				    String[] a =hospital.getContactsPhone().split(";");//通知电话列表所用字段
+					List<String> phoneNumList = new ArrayList<String>();
+
+				    if(!ValidatorUtil.isEmpty(a))
+				    {
+					    phoneNumList = Arrays.asList(a);
+					    MISPServiceContext.getInstance().getMISPShortMessageService().sendMessage(phoneNumList, content);
+				    }
+				    else
+				    {
+				    	log.warn("hospital phone is empty, the hospitalID is"+reportModel.getReportView().getHospitalID());
+				    }
 			    }
 			    else
 			    {
 			    	log.warn("hospital phone is empty, the hospitalID is"+reportModel.getReportView().getHospitalID());
 			    }
+
 				
 			}
 			else

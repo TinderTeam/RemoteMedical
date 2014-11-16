@@ -114,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="login_banner"><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/login_banner.jpg" /></div>
 			<div class="login_main">
 				<ul class="helpList">
-					<li><a href="<%=request.getContextPath()%>/client/download/WebView.exe">下载插件</a></li>
+					<li><a href="<%=request.getContextPath()%>/client/resource/WebView.exe">下载插件</a></li>
 
 					<li><a href="#">忘记密码怎么办？</a></li>
 

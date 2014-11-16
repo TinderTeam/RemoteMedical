@@ -36,7 +36,8 @@ public class AuthenticationFilter implements Filter
 
 	private static final String LOGIN_URL_FLAG = "login";
 	private static final  String RES_PAGE = "client";
-  
+	private static final  String RESOURCE = "resource";
+
 	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
@@ -46,13 +47,13 @@ public class AuthenticationFilter implements Filter
 		 HttpServletResponse httpResponse = (HttpServletResponse)response;
 		 HttpSession  session = httpRequest.getSession();
 		 String url = httpRequest.getRequestURL().toString();
-		  
+		 log.info("url is " + url);
 		 //the url does not contains login url, we should check login or not
 		 if(!url.endsWith(httpRequest.getContextPath()) 
 			&& !url.endsWith(httpRequest.getContextPath()+"/")
-			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.contains(RES_PAGE))
+			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.contains(RES_PAGE) && !url.contains(RESOURCE))
 		 {
-			 log.info("the url need verify. url is " + url);
+			 log.info("the url need verify");
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
 			 if(null == loginUser || ValidatorUtil.isEmpty(loginUser.getUserName()))
 			 {

@@ -25,9 +25,10 @@ function submitForm2(url,id,name)
 }
 </script>
 <div class="pageHeader">
-	<form id="pagerForm" method="post" action="expert/ReportManage!showTransfer.action" onsubmit="return dwzSearch(this, 'dialog');" >
+	<form id="pagerForm" method="post" action="expert/ReportManage!showTransfer.action?selectedID=${selectedID}" onsubmit="return dwzSearch(this, 'dialog');" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
-	    <input type="hidden" name="numPerPage" value="${numPerPage}" />	
+        <input type="hidden" name="numPerPage" value="${numPerPage}" />
+	    
 	<div class="searchBar">
 		
 		<table class="searchContent">

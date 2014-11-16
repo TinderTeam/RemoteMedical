@@ -78,21 +78,7 @@ $(function()
 		}
 	});
 });
-// 进入首页准备
- $(document).ready(function(){
- 	setTimeout(function() {
-	// IE
-	if(document.all) {
-		document.getElementById("home").click();
-	}
-	// 其它浏览器
-	else {
-		var e = document.createEvent("MouseEvents");
-		e.initEvent("click", true, true);
-		document.getElementById("home").dispatchEvent(e);
-	}
-	}, 500);
- });
+
 
 function resetForm(objForm){
 
@@ -182,6 +168,25 @@ function resetForm(objForm){
 
  
 	<div id="footer"> &copy; 2014  <a href="http://fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
+
+<script type="text/javascript">
+// 进入首页准备
+ $(document).ready(function(){
+ 	setTimeout(function() {
+	// IE
+	if(document.all) {
+		document.getElementById("home").click();
+	}
+	// 其它浏览器
+	else {
+		var e = document.createEvent("MouseEvents");
+		e.initEvent("click", true, true);
+		document.getElementById("home").dispatchEvent(e);
+	}
+	}, 1000);
+ });
+
+</script>
 
 
 </body>
