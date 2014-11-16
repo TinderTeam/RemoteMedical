@@ -45,7 +45,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 	public void create(PersistenceObject object)
 	{
 		log.info("the object class is " + getFeaturedClass());
-		if(null != object)
+		if(null == object)
 		{
 			log.warn("the object is null");
 			return;
@@ -70,7 +70,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 	public void update(PersistenceObject object)
 	{
 		log.info("the object class is " + getFeaturedClass());
-		if(null != object)
+		if(null == object)
 		{
 			log.warn("the object is null");
 			return;

@@ -35,7 +35,7 @@ public class AuthenticationFilter implements Filter
 
 
 	private static final String LOGIN_URL_FLAG = "login";
-	private static final  String RES_PAGE = "client";
+	private static final  String RES_PAGE = ".js";
 	private static final  String RESOURCE = "resource";
 
 	//private static final  String LOGIN_PAGE = "login/login!home.action";
