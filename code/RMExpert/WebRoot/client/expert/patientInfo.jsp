@@ -8,6 +8,19 @@
 <script type="text/javascript">
 function submitForm(url) 
 {
+ if(url == "submit")
+ {
+    if ($.trim($("#text3").val()).length<=0)
+    {
+        alert("检查所见不能为空");
+        return;
+    }
+    if($.trim($("#text4").val()).length<=0)
+    {
+         alert("诊断意见不能为空");
+        return;
+    }
+  }
  document.form1.action = "expert/ReportManage!" +url;
  return validateCallback(document.form1,navTabAjaxDone);
 }
@@ -43,6 +56,8 @@ function submitForm(url)
 			trigger : 'hover'
 		});
 	});
+	
+ 
 </script> 
 
 <input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
@@ -56,6 +71,7 @@ function submitForm(url)
 
 <p id="dis" style="display:none;">
 </p>
+ 		    
 	<div class="accordion" style="width:83%;float:left;margin:0px;" id="accordionL">
  
 		<div class="accordionContent" style="width:22%;float:left;" id="contentL" >
@@ -88,8 +104,8 @@ function submitForm(url)
 				 
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
-				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
-				         <input   id="image${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
+				         <input   id="url${status.index}"  value="${e.image.imageSavePath}${e.image.imgArchName}" style="display:none;"></input>
+				         <input   id="image${status.index}"  value="${e.image.imageSavePath}/${e.image.imgArchName}" style="display:none;"></input>
 				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
 	                <dl style="width:98% !important;">
@@ -114,7 +130,7 @@ function submitForm(url)
 
 						</dt>
 						<dd style="width:25% !important;float:right;">
-							<span style="margin:0px 5px;"><input id="viewBt${status.index}" type="button" value="查看" disabled="disabled"></span>
+							<span style="margin:0px 5px;"><input id="viewBt${status.index}" type="button" value="查看" disabled="disabled"  onclick="location.href='reg.asp'"/></span>
 						</dd>					
 
 					</dl>					      

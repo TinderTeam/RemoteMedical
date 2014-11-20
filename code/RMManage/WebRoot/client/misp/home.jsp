@@ -88,7 +88,7 @@ function resetForm(objForm){
 			<div class="headerNav">
 				<a class="logo" href="http://www.szangell.com/">安健科技</a>
 				<ul class="nav">
-                    <li>欢迎您，用户：${loginUser.userName}!</li>
+                    <li>欢迎您，用户：${loginUser.userName}</li>
 	 
 					<li><a href="<%=request.getContextPath()%>/client/manage/passwordModify.jsp" target="dialog" width="600">密码修改</a></li> 
  

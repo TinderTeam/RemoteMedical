@@ -149,7 +149,7 @@ public class ExpertServiceImpl implements ExpertService
 		}
 		
 		//read template information
-		reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTree());
+		reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTreeByName(reportView.getModality()));
 		return reportModel;
 	}
 

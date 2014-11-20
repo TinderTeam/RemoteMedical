@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.action.basic.MISPAction;
@@ -65,7 +64,7 @@ public class LoginAction extends MISPAction
 			// Loading MenuTree
 			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(String.valueOf(user.getUserID()));
 		}
-		catch (ServiceException ex)
+		catch (Exception ex)
 		{
 			message = ex.getMessage();
 			log.warn(ex.getMessage(), ex);

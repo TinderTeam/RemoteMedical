@@ -39,6 +39,8 @@ public class ReportTemplateCache
 
 	private ReportTemplateModel templateTree = loadTemplate();
 	private static ReportTemplateCache instance = null;
+	
+	private static int treeCurrID = 1;
 	private ReportTemplateCache()
 	{
 	}
@@ -57,7 +59,18 @@ public class ReportTemplateCache
 		return templateTree;
 	}
 
-
+	public ReportTemplateModel getTemplateTreeByName(String name)
+	{
+		for(ReportTemplateModel e : templateTree.getChildList())
+		{
+			if(e.getName().equals(name))
+			{
+				return e;
+			}
+		}
+		log.error("can not find template by device name " + name);
+		return templateTree;
+	}
 
 	private ReportTemplateModel loadTemplate() 
 	{
@@ -88,7 +101,10 @@ public class ReportTemplateCache
 	private ReportTemplateModel getTemplateByElement(Element e)
 	{
 		ReportTemplateModel template = new ReportTemplateModel();
-
+ 
+		template.setId(String.valueOf(treeCurrID));
+		treeCurrID++;
+		
 		template.setName("模板");
 		if("Report".equals(e.getName()))
 		{

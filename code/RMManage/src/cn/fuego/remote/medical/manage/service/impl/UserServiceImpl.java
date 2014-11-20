@@ -253,7 +253,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			else
 			{
-				throw new ServiceException(CommonExceptionMsg.EX_IMG_TOO_BIG);
+				throw new SystemOperateException(CommonExceptionMsg.EX_IMG_TOO_BIG);
 			}
 			
 		}	
@@ -407,7 +407,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 		} else
 		{
-			throw new ServiceException(CommonExceptionMsg.INPUT_EMPTY);
+			throw new SystemOperateException(CommonExceptionMsg.INPUT_EMPTY);
 		}
 		
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.ADD_EXPERT,hospitalID+","+expertID, MISPOperLogConsant.OPERATE_SUCCESS);

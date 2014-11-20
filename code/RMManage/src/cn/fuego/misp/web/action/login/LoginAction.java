@@ -19,6 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.service.spi.ServiceException;
 
+import cn.fuego.common.exception.SystemOperateException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.action.basic.MISPAction;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
@@ -65,12 +66,13 @@ public class LoginAction extends MISPAction
 			// Loading MenuTree
 			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(String.valueOf(user.getUserID()));
 		}
-		catch (ServiceException ex)
+		catch (SystemOperateException ex)
 		{
 			message = ex.getMessage();
 			log.warn(ex.getMessage(), ex);
 			return this.LOGIN_FAILED;
 		}
+ 
 
 		// if login success, we should put the user into session
 		session.put(SessionAttrNameConst.LOGIN_USER, user);

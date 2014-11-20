@@ -37,7 +37,28 @@ public enum UserSexEnum
 	{
 		return typeValue;
 	}
-	
+	public static UserSexEnum getEnumByInt(String typeValue)
+	{
+		for (UserSexEnum c : UserSexEnum.values())
+		{
+			if (typeValue.equals(c.typeValue))
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	public static UserSexEnum getEnumByStr(String strValue)
+	{
+		for (UserSexEnum c : UserSexEnum.values())
+		{
+			if (strValue.equals(c.type) )
+			{
+				return c;
+			}
+		}
+		return null;
+	}
 	
  
 
