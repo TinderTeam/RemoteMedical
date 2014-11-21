@@ -27,7 +27,16 @@ function submitForm(url)
 </script>
 <!-- 自适应屏幕高度 -->
 <script type="text/javascript">
+    //初始化进入页面参数设定
+    var flag=0;
+	adaptCSS();
 
+    //当浏览器窗口大小改变时，设置显示内容的高度  
+    window.onresize=function(){  
+        adaptCSS(); 
+    }; 
+	function adaptCSS()
+	{
 	//版面布局自适应
 	total = document.documentElement.clientHeight;
 	colHeight = total - 74;//84
@@ -40,16 +49,30 @@ function submitForm(url)
 	//文本域宽度自适应
 	textAreaWidth = document.getElementById("panelDA").clientWidth;
 	partW = textAreaWidth * 0.065;
-	//$("#dis").innerText=textAreaWidth;
-	$(".textWidth").attr("cols", partW);
+	//$(".textWidth").attr("cols", partW);
+	$(".textWidth").width(textAreaWidth*0.49+"px");
 	//文本域高度自适应
-	textAreaHeight = document.getElementById("panelDA").clientHeight;
-	partH = textAreaHeight;
-	//document.getElementById("dis").innerText=textAreaHeight;
-	$("#textD1").height(partH * 0.4 + "px");
-	$("#text1,#text2").attr("rows", partH * 0.015);
-	$("#textD2").height(partH * 0.55 + "px");
-	$("#text3,#text4").attr("rows", partH * 0.027);
+	partH = document.getElementById("panelDA").clientHeight;
+	 
+	 var textAreaHeight1,textAreaHeight2;
+	 textAreaHeight1=partH * 0.40;
+	 textAreaHeight2=partH * 0.55;
+
+	$("#textD1").height(textAreaHeight1 + "px");
+	//$("#text1,#text2").attr("rows", partH * 0.02);
+	$("#text1,#text2").height(textAreaHeight1-80 + "px");
+	$("#textD2").height(textAreaHeight2 + "px");
+	if(flag==0)//修正初始化进入页面和窗口大小改变高度值的差异
+	 {
+	 	$("#text3,#text4").height(textAreaHeight2-75 + "px");
+	 	flag=1;
+	 }
+	 else{
+	 	$("#text3,#text4").height(textAreaHeight2-62 + "px");
+	 }
+		
+	}
+
 	//运行模板浮窗显示
 	$(function() {
 		$(".treeMenu").popover({
@@ -153,14 +176,14 @@ function submitForm(url)
 				
 				<div id="textD1">
 				<p style="font-size:1.2em;">医生诊断</p>
-				<div class="divider"></div>				
+				<div class="divider" ></div>				
 				<dl style="width:50%;">
 					<dt style="text-align:left;width:80%;" >检查所见：</dt>
-					<dd ><textarea name="medicalReport.reportView.studyContent" cols="" rows="" readonly="true" id="text1" class="textWidth">${medicalReport.reportView.studyContent}</textarea></dd>
+					<dd  class="textWidth"><textarea name="medicalReport.reportView.studyContent" cols="" rows="" readonly="true" id="text1" style="width:95%;">${medicalReport.reportView.studyContent}</textarea></dd>
 				</dl>
 				<dl  style="width:50%;" >
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-					<dd><textarea name="medicalReport.reportView.studyConclusion" cols="" rows="" readonly="true" id="text2" class="textWidth">${medicalReport.reportView.studyConclusion}</textarea></dd>
+					<dd class="textWidth"><textarea name="medicalReport.reportView.studyConclusion" cols="" rows="" readonly="true" id="text2" style="width:95%;">${medicalReport.reportView.studyConclusion}</textarea></dd>
 				</dl>
 				</div>
 
@@ -169,11 +192,11 @@ function submitForm(url)
 				<div class="divider"></div>
 				<dl style="width:50%;" id="text3dl">
 					<dt style="text-align:left;width:80%;" >检查所见：</dt>
-					<dd style="width:100%;"><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" class="textWidth">${medicalReport.reportView.exStudyContent}</textarea></dd>
+					<dd class="textWidth" ><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" style="width:95%;">${medicalReport.reportView.exStudyContent}</textarea></dd>
 				</dl>
 				<dl  style="width:50%;" id="text4dl">
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-					<dd><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" class="textWidth">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+					<dd class="textWidth"><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" style="width:95%;">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
 				</dl>
 				</div>
 			</div>

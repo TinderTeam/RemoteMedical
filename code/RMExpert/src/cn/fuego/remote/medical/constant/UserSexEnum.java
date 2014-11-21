@@ -41,7 +41,7 @@ public enum UserSexEnum
 	{
 		for (UserSexEnum c : UserSexEnum.values())
 		{
-			if (typeValue.equals(c.typeValue))
+			if (c.typeValue.equals(typeValue))
 			{
 				return c;
 			}
@@ -52,7 +52,7 @@ public enum UserSexEnum
 	{
 		for (UserSexEnum c : UserSexEnum.values())
 		{
-			if (strValue.equals(c.type) )
+			if (c.type.equals(strValue) )
 			{
 				return c;
 			}
