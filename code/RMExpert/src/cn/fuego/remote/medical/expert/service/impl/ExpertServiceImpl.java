@@ -42,6 +42,7 @@ import cn.fuego.remote.medical.expert.web.model.ExpertModel;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
 
 /** 
  * @ClassName: ExpertServiceImpl 
@@ -322,6 +323,13 @@ public class ExpertServiceImpl implements ExpertService
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), MISPOperLogConsant.TRANS_REPORT, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS); 
 		
 		
+	}
+
+	@Override
+	public ReportTemplateModel getReportModalById(String modalID)
+	{
+		ReportTemplateModel reportModal=ReportTemplateCache.getInstance().getReportTemplateById(modalID);
+		return reportModal;
 	}	
 
 	

@@ -4,7 +4,15 @@
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-
+<script type="text/javascript">
+function openModal(target)
+{
+	//setTimeout("$(target).click()", 1000); 
+	//setTimeout("target.click()", 1000);
+	setTimeout(function(){$(target).click();},3000);
+	
+}
+</script>
   
     <c:forEach var="e" items="${templateList}">	
         <ul>
@@ -16,7 +24,10 @@
              </c:if>
 	        <c:if test="${null==e.childList}">
 			 
-				 <li><a href="#" class="treeMenu"  data-container="body" data-toggle="popover"  data-content="这里输入模板内容!" data-original-title="${e.name}" data-placement="left">${e.name}</a></li>		
+<%-- 				 <li><a href="#" class="treeMenu"  data-container="body" data-toggle="popover"  
+				 data-content="这里输入模板内容!" data-original-title="${e.name}" data-placement="left">${e.name}</a></li>	 --%>
+				  <li><a href="ReportManage!showModal.action?selectedID=${e.id}" class="treeMenu"  title="${e.name}" target="dialog"    mask="true" >${e.name}</a></li>	
+				 
 		    </c:if>
         </ul>	
     </c:forEach>  	

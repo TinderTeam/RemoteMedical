@@ -108,11 +108,11 @@ public class ReportTemplateCache
 		template.setName("模板");
 		if("Report".equals(e.getName()))
 		{
-			template.setName("诊断报告");
+			template.setName("检查所见");
 		}
 		if("Conclusion".equals(e.getName()))
 		{
-			template.setName("诊断结论");
+			template.setName("诊断意见");
 		}
 		
 		if(!ValidatorUtil.isEmpty(e.elements()))
@@ -137,5 +137,31 @@ public class ReportTemplateCache
 		template.setValue(e.getText());
 
 		return template;
+	}
+	public ReportTemplateModel getReportTemplateById(String id)
+	{
+		return getReportTemplateById(id,this.templateTree);
+	}
+	private ReportTemplateModel getReportTemplateById(String templateID,ReportTemplateModel tree)
+	{
+		if(tree.getId().equals(templateID))
+		{
+		   return tree;
+		}
+		ReportTemplateModel result = null;
+
+		if(null != tree.getChildList())
+		{
+			for(ReportTemplateModel e : tree.getChildList())
+			{
+				result = getReportTemplateById(templateID, e);
+				if(null != result)
+				{
+					return result;
+				}
+			}
+		}
+		return result;
+		
 	}
 }

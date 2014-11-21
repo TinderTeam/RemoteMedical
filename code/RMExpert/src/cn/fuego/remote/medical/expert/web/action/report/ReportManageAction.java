@@ -23,6 +23,7 @@ import cn.fuego.remote.medical.expert.service.ServiceContext;
 import cn.fuego.remote.medical.expert.web.model.ExpertModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
 
 
 /** 
@@ -53,6 +54,7 @@ public class ReportManageAction extends DWZTableAction
 	private Report report;
 	//确定转换专家需要报告ID
 	private String selectedReportID;
+	private ReportTemplateModel reportModal;
 	public String execute()
 	{
 		
@@ -150,6 +152,13 @@ public class ReportManageAction extends DWZTableAction
 		this.getOperateMessage().setForwardUrl(FRONT_PAGE);
 		return MISP_DONE_PAGE;
 	}
+	public String showModal()
+	{
+		
+		reportModal =expertService.getReportModalById(this.getSelectedID());
+		return "showModal";
+		
+	}
 	
 	public TableDataModel<ReportView> getReportList()
 	{
@@ -222,6 +231,20 @@ public class ReportManageAction extends DWZTableAction
 	public void setSelectedReportID(String selectedReportID)
 	{
 		this.selectedReportID = selectedReportID;
+	}
+	/**
+	 * @return the reportModal
+	 */
+	public ReportTemplateModel getReportModal()
+	{
+		return reportModal;
+	}
+	/**
+	 * @param reportModal the reportModal to set
+	 */
+	public void setReportModal(ReportTemplateModel reportModal)
+	{
+		this.reportModal = reportModal;
 	}
 
  

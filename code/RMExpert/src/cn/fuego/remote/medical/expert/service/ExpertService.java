@@ -19,6 +19,7 @@ import cn.fuego.remote.medical.expert.web.model.ExpertModel;
 import cn.fuego.remote.medical.expert.web.model.ImageModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
 
 
 /** 
@@ -58,5 +59,8 @@ public interface ExpertService
 	AbstractDataSource<Expert> getExpertList(ExpertModel ExpertFilter,  String userName,String reportViewID);
 	
 	void transferExpert(String expertID,String reportViewID);
+
+
+	ReportTemplateModel getReportModalById(String modalID);
 
 }
