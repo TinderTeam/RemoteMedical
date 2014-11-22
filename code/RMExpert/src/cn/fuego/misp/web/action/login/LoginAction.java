@@ -70,6 +70,7 @@ public class LoginAction extends MISPAction
 			log.warn(ex.getMessage(), ex);
 			return this.LOGIN_FAILED;
 		}
+ 
 
 		// if login success, we should put the user into session
 		session.put(SessionAttrNameConst.LOGIN_USER, user);

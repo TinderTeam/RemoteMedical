@@ -147,7 +147,7 @@
                 <td>${e.modality}</td>
                 <td>${e.patientID}</td>
 	            <td>${e.patientName}</td>
-	            <td>${e.patientSex}</td>
+	            <td>${e.disPatientSex}</td>
 	            <td>${e.patientAge}</td>
 	            <td>${e.bodyPart}</td>
 	            <td>${e.exApplyDoctor}</td>	

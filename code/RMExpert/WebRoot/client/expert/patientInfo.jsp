@@ -79,8 +79,7 @@ function submitForm(url)
 			trigger : 'hover'
 		});
 	});
-	
- 
+
 </script> 
 
 <input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
@@ -110,13 +109,13 @@ function submitForm(url)
 				
 				<dl>
 					<dt style="text-align:center;width:20%; ">性别：</dt>
-					<dd>${medicalReport.reportView.patientSex}</dd>
+					<dd>${medicalReport.reportView.disPatientSex}</dd>
 				</dl>
 				<dl>
 					<dt style="text-align:center;width:20%;">年龄：</dt>
 					<dd>${medicalReport.reportView.patientAge}</dd>
 				</dl>
-
+  
 			</div>
 		</div>
 
@@ -128,7 +127,7 @@ function submitForm(url)
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
 				         <input   id="url${status.index}"  value="${e.image.imageSavePath}${e.image.imgArchName}" style="display:none;"></input>
-				         <input   id="image${status.index}"  value="${e.image.imageSavePath}/${e.image.imgArchName}" style="display:none;"></input>
+				         <input   id="image${status.index}"  value="${e.image.imgArchName}" style="display:none;"></input>
 				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
 	                <dl style="width:98% !important;">
@@ -153,7 +152,7 @@ function submitForm(url)
 
 						</dt>
 						<dd style="width:25% !important;float:right;">
-							<span style="margin:0px 5px;"><input id="viewBt${status.index}" type="button" value="查看" disabled="disabled"  onclick="location.href='reg.asp'"/></span>
+	                      <span style="margin:0px 5px;"><input  id="viewBt${status.index}" type="button" value="查看" disabled="disabled" onclick="viewDoc('${e.image.imgArchName}');" /></span>
 						</dd>					
 
 					</dl>					      
@@ -235,9 +234,12 @@ function submitForm(url)
 		   <ul class="tree treeFolder collapse">
 
        	      <li>
-       	      <a href="tabsPage.html" target="navTab"  >${medicalReport.template.name}</a>
+       	         <c:if test='${null != medicalReport.template}'>
+       	         
+       	           <a href="#"   >${medicalReport.template.name}</a>
        	           <c:set var="templateList" value="${medicalReport.template.childList}" scope="request"/>
 			       <jsp:include page="template.jsp"/>
+			     </c:if>
        	      </li>
        	   </ul> 
 
@@ -263,6 +265,8 @@ function submitForm(url)
        
         var imageCnt = $("#imageCount").val();
         var nowCnt = 0;
+        
+        var fileRootPath = "D:/";
         
         var isStarted = false;
         var isStop=true;
@@ -319,7 +323,7 @@ function submitForm(url)
 			 ReYoWebDownLoad.url= hostURL+ imageURL[nowCnt];
 			 //alert(ReYoWebDownLoad.url);
 			 ReYoWebDownLoad.percent = 0;
-		 	 ReYoWebDownLoad.path ="d:/temp/" + imageFileName[nowCnt];
+		 	 ReYoWebDownLoad.path =fileRootPath+ imageFileName[nowCnt];
 			 ReYoWebDownLoad.ReYoStartDownload();
 			 isStarted = true;
 		   }
@@ -384,6 +388,11 @@ function submitForm(url)
 			
 		});
 	}
+	
+	function viewDoc(url)
+    {
+           window.location.href='WebView://' + fileRootPath+url;
+    }
 	function deleteFile(target)
 	{
       var   fso = new  ActiveXObject("Scripting.FileSystemObject");   

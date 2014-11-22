@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
+import cn.fuego.remote.medical.constant.UserSexEnum;
 import cn.fuego.remote.medical.domain.ReportView;
 
 /** 
@@ -46,6 +47,8 @@ public class MedicalReportModel
 	{
 		this.reportView = reportView;
 	}
+	
+
 
 
 	public List<ImageModel> getImageList()

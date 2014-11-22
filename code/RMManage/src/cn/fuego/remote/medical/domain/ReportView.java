@@ -153,6 +153,11 @@ public class ReportView implements PersistenceObject
 	}
 	public String getPatientSex()
 	{
+ 
+		return patientSex;
+	}
+	public String getDisPatientSex()
+	{
 		UserSexEnum sex = UserSexEnum.getEnumByInt(patientSex);
 		if(null != sex )
 		{
@@ -160,6 +165,7 @@ public class ReportView implements PersistenceObject
 		}
 		return patientSex;
 	}
+	
 	public void setPatientSex(String patientSex)
 	{
 		this.patientSex = patientSex;

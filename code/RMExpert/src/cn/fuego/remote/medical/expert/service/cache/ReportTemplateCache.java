@@ -69,7 +69,8 @@ public class ReportTemplateCache
 			}
 		}
 		log.error("can not find template by device name " + name);
-		return templateTree;
+ 
+		return null;
 	}
 
 	private ReportTemplateModel loadTemplate() 

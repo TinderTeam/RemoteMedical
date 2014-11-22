@@ -14,7 +14,6 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
-import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.domain.Report;
 import cn.fuego.remote.medical.domain.ReportView;
