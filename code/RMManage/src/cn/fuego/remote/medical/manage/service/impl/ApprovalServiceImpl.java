@@ -68,8 +68,8 @@ public class ApprovalServiceImpl implements ApprovalService
 	public void createHospitalApply(HospitalModel hospital)
 	{
 		hospital.getHospital().setState(UserStatusEnum.APPLIED.getIntValue());
-		DaoContext.getInstance().getHospitalDao().update(hospital.getHospital());
-		createApply(ApplyTypeEnum.MODIFY_HOSPITAL,hospital.getHospital().getId(),hospital.getHospital().getId(),null);
+		ServiceContext.getInstance().getUserService().modifyHospitalInfo(hospital, hospital.getHospital().getId());
+ 		createApply(ApplyTypeEnum.MODIFY_HOSPITAL,hospital.getHospital().getId(),hospital.getHospital().getId(),null);
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(hospital.getHospital().getId(), MISPOperLogConsant.MODIFY_HOSPITAL, null, MISPOperLogConsant.OPERATE_SUCCESS);		
 		 
 		
@@ -117,6 +117,8 @@ public class ApprovalServiceImpl implements ApprovalService
 		Approval approval =(Approval) DaoContext.getInstance().getApprovalDao().getUniRecord(condition);
 		return approval;
 	}
+	
+	
  
 
 	@Override
@@ -132,12 +134,15 @@ public class ApprovalServiceImpl implements ApprovalService
 			case MODIFY_EXPERT:  
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.REGISTERED.getIntValue());
+				expertModel.getExpert().setAuthority(1);
+
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);
 				break;
 			case MODIFY_HOSPITAL: 
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.REGISTERED.getIntValue());
+				hospitalModel.getHospital().setAuthority(1);
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);				  
 				break;

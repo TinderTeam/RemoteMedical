@@ -65,7 +65,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 	   return 	super.Login(userName, password);
 	}
-	@Override
+	@Override	
 	public AbstractDataSource<Hospital> getHospitalList(HospitalModel filter)
 	{
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
@@ -207,6 +207,8 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void modifyHospitalInfo(HospitalModel hospitalModel,String operator)
 	{
+		hospitalValidator(hospitalModel);
+
 		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
 		
@@ -218,9 +220,21 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		HospitalModel oldInfo = getHospitalByID(hospitalModel.getHospital().getId());
 		hospitalModel.getHospital().setState(oldInfo.getHospital().getState());
 		
+		hospitalValidator(hospitalModel);
+		
 		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
 		
+	}
+	private void hospitalValidator(HospitalModel hospitalModel)
+	{
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, "name",hospitalModel.getHospital().getName());
+		Hospital hos = (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(condition);
+		if(null != hos && !hos.getId().equals(hospitalModel.getHospital().getId()))
+		{
+			log.warn("hospital name is repeat. the hospital is " + hospitalModel.getHospital());
+			throw new SystemOperateException(CommonExceptionMsg.HOSPITAL_NAME_REPEAT);
+		}
 	}
 
 	@Override
@@ -347,26 +361,28 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	@Override
 	public void deleteUserList(List<String> userIDList,String operator)
 	{
-
-		for(int i=0;i<userIDList.size();i++)
-		{  
-
-			SystemUser oldUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", userIDList.get(i)));
-			
-			switch(UserTypeEnum.getEnumByInt(oldUser.getAccountType()))
-			{
-			case EXPERT:
-                //Expert expert=(Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "id", userID));
-				DaoContext.getInstance().getExpertDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "id", oldUser.getUserName()));
-				break;
-			case HOSPITAL:
-
-				DaoContext.getInstance().getHospitalDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "id", oldUser.getUserName()));
-				break;
-			default :
-			}
-		}
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
+
+		List<SystemUser> userList = (List<SystemUser>) MISPDaoContext.getInstance().getSystemUserDao().getAll(condition);
+		
+		if(!ValidatorUtil.isEmpty(userList))
+		{
+			for(SystemUser user : userList)
+			{
+				if(user.getAccountType() != UserTypeEnum.LOW_ADMIN.getTypeValue())
+				{
+					throw new SystemOperateException(CommonExceptionMsg.DELET_LIMIT);
+				}
+				
+			}
+
+ 		}
+		else
+		{
+			throw new SystemOperateException(CommonExceptionMsg.SELECT_USER_EMPTY);
+		}
+
+ 
 		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.DELETE_USER, userIDList.toString(), MISPOperLogConsant.OPERATE_SUCCESS);
 

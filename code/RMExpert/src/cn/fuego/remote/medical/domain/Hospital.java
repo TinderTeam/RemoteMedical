@@ -44,7 +44,7 @@ public class Hospital implements PersistenceObject
 	private Date reg;
 	private String auditor;
 	private Integer state;
-	private Integer authority;
+	private Integer authority = 0;
 	private String reserve1;
 	private String reserve2;
 	private Integer reserve3;

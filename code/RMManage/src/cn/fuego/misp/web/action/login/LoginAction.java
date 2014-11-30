@@ -53,11 +53,7 @@ public class LoginAction extends MISPAction
 
 		try
 		{
-			if (session.get(SessionAttrNameConst.LOGIN_USER) != null)
-			{
-				return SUCCESS;
-			}
-			
+ 
 
 			// User Login
 			user = MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());

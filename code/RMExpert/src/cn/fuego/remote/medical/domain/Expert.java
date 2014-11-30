@@ -47,7 +47,7 @@ public class Expert implements PersistenceObject
 	private String expertise;
 	private String remark;
 	private Blob signName;
-	private Integer authority;
+	private Integer authority = 0;
 	private Integer state;
 	private Integer onlineState;
 	
