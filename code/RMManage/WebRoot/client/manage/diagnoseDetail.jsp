@@ -11,7 +11,7 @@
 <%
 String hospitalContactWay=request.getParameter("hospitalContactWay");
  %>
-<textarea style="width:98%;height:100px;font-size:1.5em;">
+<textarea style="width:98%;height:100px;font-size:1.5em;" readonly="readonly">
 
 <%=hospitalContactWay%>
 </textarea>

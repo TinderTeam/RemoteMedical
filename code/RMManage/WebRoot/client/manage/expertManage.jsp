@@ -10,33 +10,36 @@
 	if(accountType==2)
 	{
 		$("#addEx").css('display', 'block');
-		$("#exTable").attr("layoutH", '140');
+		$("#exTable").attr("layoutH", '130');
 	}
 
 </script>
 
 <div class="pageHeader">
-	<div class="pageFormContent" style="height:30px;overflow:hidden;display:none;" id="addEx" >
-		<s:form  name="exAdd" action="user/ExpertManage" method="POST" onsubmit="return iframeCallback(this,navTabAjaxDone);" >
-			<dl style="width:40%;" >
-				<dt style="width:20%;">专家账号：</dt>
-				<dd style="width:70%;">
-					<input  name="targetExpert.id" type="text"  readonly="readonly"/>
-					<a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
-					<span class="info">点击查找带回</span>
-				</dd>
-			</dl>
-			<dl style="width:30%;" >
-				<dt style="width:20%;">专家名称：</dt>
-				<dd>
-					<input class="readonly" name="targetExpert.name" readonly="readonly" type="text"/>
-				</dd>
-			</dl>
-			<s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
-			<s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" method="execute"></s:submit> 			
+	<div  style="height:40px;overflow:hidden;display:none;" id="addEx" >
+		<s:form  name="exAdd" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" >
+		<div class="searchBar">
+			<table class="searchContent">
+			<tr>
+				<td>专家账号：<input  name="targetExpert.id" type="text"  readonly="readonly"/>
+				</td>
+				<td>专家姓名：<input  name="targetExpert.name" readonly="readonly" type="text"/>
+				</td>
+				<td style="margin-right:20px;"><a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
+					<label style="color:grey;font-size:0.7em;">(点击图标查找专家)</label>
+				</td>
+				<td><s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
+				</td>
+				<td><!-- <button type="button" class="mispButton primary"  onclick="resetForm(this.form)" >取 消</button> -->
+				<s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" ></s:submit>
+				</td>
+		 			
+			</tr>
 
+			</table>
+		</div>
 		</s:form>
-<div class="divider"></div>				
+		<div class="divider"></div>		
 	</div>
 
 	<s:form  id="pagerForm" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" name="exSearch">

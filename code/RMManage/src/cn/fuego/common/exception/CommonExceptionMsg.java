@@ -21,7 +21,7 @@ public class CommonExceptionMsg
     public static final String NOT_IN_EXPERT="您不在专家列表中";
 	public static final String EX_IMG_TOO_BIG="个人照片尺寸太大，请重新上传";
 	public static final String SIGN_IMG_TOO_BIG="签名照尺寸太大，请重新上传";
-	
+	public static final String SELECTED_NULL = "请选择专家进行添加";
 	public static final String SELECT_USER_EMPTY ="请选择用户";
 	public static final String DELET_LIMIT = "只能删除普通管理员";
 	

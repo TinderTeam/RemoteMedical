@@ -423,7 +423,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 		} else
 		{
-			throw new SystemOperateException(CommonExceptionMsg.INPUT_EMPTY);
+			throw new SystemOperateException(CommonExceptionMsg.SELECTED_NULL);
 		}
 		
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.ADD_EXPERT,hospitalID+","+expertID, MISPOperLogConsant.OPERATE_SUCCESS);

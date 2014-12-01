@@ -117,8 +117,6 @@ public class ApprovalServiceImpl implements ApprovalService
 		Approval approval =(Approval) DaoContext.getInstance().getApprovalDao().getUniRecord(condition);
 		return approval;
 	}
-	
-	
  
 
 	@Override
