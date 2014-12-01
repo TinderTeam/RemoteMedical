@@ -1,5 +1,6 @@
 package cn.fuego.remote.medical.manage.web.action.user;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
 
@@ -141,7 +142,7 @@ public class ExpertManageAction extends DWZTableAction
     public String getSignNameImag() throws SQLException 
     {
     	 
-    	signNameStream = userService.getExpertByID(picid).getExpert().getSignName().getBinaryStream();
+    	signNameStream = new ByteArrayInputStream(userService.getExpertByID(picid).getExpert().getSignName()); 
     	this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
         return "signName";
     }
@@ -149,7 +150,7 @@ public class ExpertManageAction extends DWZTableAction
     public String getPhotoImag() throws SQLException 
     {
     	 
-    	this.expertStream = userService.getExpertByID(picid).getExpert().getExPhoto().getBinaryStream();
+    	this.expertStream = new ByteArrayInputStream(userService.getExpertByID(picid).getExpert().getExPhoto());
     	 
 
         return "expertPhoto";

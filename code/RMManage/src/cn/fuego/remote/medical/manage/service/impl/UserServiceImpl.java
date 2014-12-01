@@ -268,7 +268,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		{
 			if(expertModel.getSignPic().length()<1024*65)
 			{
-				expertModel.getExpert().setSignName(HibernateUtil.getBlobByFile(expertModel.getSignPic()));
+				expertModel.getExpert().setSignName(HibernateUtil.getByteByFile(expertModel.getSignPic()));
 			}
 			else
 			{
@@ -286,7 +286,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		{
 			if(expertModel.getExPhoto().length()<1024*65)
 			{
-				expertModel.getExpert().setExPhoto(HibernateUtil.getBlobByFile(expertModel.getExPhoto()));
+				expertModel.getExpert().setExPhoto(HibernateUtil.getByteByFile(expertModel.getExPhoto()));
 			}
 			else
 			{

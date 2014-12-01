@@ -219,6 +219,30 @@ public final class HibernateUtil
 		return c;
 	}
 	
+	public static byte[] getByteByFile(File file)
+	{
+		byte[] bytes = new byte[(int) file.length()]; ;
+		Session s = null;
+		try
+		{
+ 			FileInputStream fi = new FileInputStream(file);
+            fi.read(bytes);
+			 
+		} catch (Exception e)
+		{
+			log.error("convert file to blob failed",e);
+		}
+		finally
+		{
+			if (s != null)
+			{
+				s.close();
+			}
+				
+		}
+		
+		return bytes;
+	} 
 	public static Blob getBlobByFile(File file)
 	{
 		Blob blob = null;

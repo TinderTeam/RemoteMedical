@@ -25,8 +25,11 @@
     <property name="hibernate.c3p0.idleConnectionTestPeriod">18000</property>
     <property name="hibernate.c3p0.acquireRetryAttempts">3</property>
     <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+    
 	<property name="hibernate.c3p0.timeout">60</property>
 	<property name="hibernate.c3p0.validate">true</property>
+	<property name="hibernate.jdbc.use_streams_for_binary">true</property>
+	
 	<!--misp po configration -->
 	<mapping resource="cn/fuego/misp/domain/SystemUser.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemMenu.hbm.xml" />
