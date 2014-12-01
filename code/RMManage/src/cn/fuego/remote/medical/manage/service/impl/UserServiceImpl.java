@@ -63,7 +63,31 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	public UserModel Login(String userName, String password)
 	{
 		
-	   return 	super.Login(userName, password);
+		UserModel userModel = super.Login(userName, password);
+		SystemUser targetUser = super.getSystemUserByUserName(userName);
+		switch(UserTypeEnum.getEnumByInt(targetUser.getAccountType()))
+		{
+		case EXPERT:
+			ExpertModel expertModel = this.getExpertByID(userName);
+			if(expertModel.getExpert().getState()==UserStatusEnum.CANCELED.getIntValue())
+			{
+				log.warn("the account is canceled"+expertModel.getExpert().getState());
+				throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
+			}
+
+			break;
+		case HOSPITAL:
+			HospitalModel hospitalModel = this.getHospitalByID(userName);
+			if(hospitalModel.getHospital().getState()==UserStatusEnum.CANCELED.getIntValue())
+			{
+				log.warn("the account is canceled"+hospitalModel.getHospital().getState());
+				throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
+			}
+			break;
+		default :break;
+		}
+			
+		return 	userModel;
 	}
 	@Override	
 	public AbstractDataSource<Hospital> getHospitalList(HospitalModel filter)
@@ -99,7 +123,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}			
 		}
 		
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"state",String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
+		//conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"state",String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 	
 		AbstractDataSource<Hospital> dataSource = new DataBaseSourceImpl<Hospital>(Hospital.class,conditionList);
 		
@@ -184,7 +208,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		}
 		 
 		
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
+		//conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 		
 		AbstractDataSource<Expert> dataSource = new DataBaseSourceImpl<Expert>(Expert.class,conditionList);
 		
@@ -351,7 +375,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			hospital.setState(UserStatusEnum.CREATED.getIntValue());
 			DaoContext.getInstance().getHospitalDao().create(hospital);
 			break;
-		default :
+		default :break;
 		}
 
 		MISPDaoContext.getInstance().getSystemUserDao().create(user);

@@ -26,6 +26,11 @@ import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
+import cn.fuego.remote.medical.dao.DaoContext;
+import cn.fuego.remote.medical.domain.Expert;
+import cn.fuego.remote.medical.domain.Hospital;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -111,6 +116,123 @@ public class MISPUserServiceImpl implements MISPUserService
 		Set<String> menuIDList = MISPServiceContext.getInstance().getMISPPrivilegeManage().getMenuIDListByUser(userID);
 		
 		return SystemMenuCache.getInstance().getMenuListWithShowIDList(menuIDList);
+	}
+	@Override
+	public void Logoff(String userName)
+	{
+		SystemUser targetUser = this.getSystemUserByUserName(userName);
+		
+		if(targetUser!=null)
+		{
+			int accountType = targetUser.getAccountType();
+			switch(UserTypeEnum.getEnumByInt(accountType))
+			{
+			case EXPERT:
+				Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
+				if(expert!=null)
+				{
+					if(expert.getState()==UserStatusEnum.CANCELED.getIntValue())
+					{
+						throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
+					}
+					else
+					{
+						expert.setState(UserStatusEnum.CANCELED.getIntValue());
+					}
+					
+					DaoContext.getInstance().getExpertDao().update(expert);
+				}
+				else
+				{
+					throw new SystemOperateException(CommonExceptionMsg.NOT_IN_EXPERT);
+				}
+				
+				break;
+			case HOSPITAL:
+				Hospital hospital = (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
+				if(hospital!=null)
+				{
+					if(hospital.getState()==UserStatusEnum.CANCELED.getIntValue())
+					{
+						throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
+					}
+					else
+					{
+						hospital.setState(UserStatusEnum.CANCELED.getIntValue());
+					}
+					
+					DaoContext.getInstance().getHospitalDao().update(hospital);
+				}
+				else
+				{
+					throw new SystemOperateException(CommonExceptionMsg.NOT_IN_HOSPITAL);
+				}				
+				
+				break;
+			default :break;
+			}
+			
+			//MISPDaoContext.getInstance().getSystemUserDao()
+		}
+		
+	}
+	@Override
+	public void Logon(String userName)
+	{
+		SystemUser targetUser = this.getSystemUserByUserName(userName);
+		
+		if(targetUser!=null)
+		{
+			int accountType = targetUser.getAccountType();
+			switch(UserTypeEnum.getEnumByInt(accountType))
+			{
+			case EXPERT:
+				Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
+				if(expert!=null)
+				{
+					if(expert.getState()==UserStatusEnum.CANCELED.getIntValue())
+					{
+						expert.setState(UserStatusEnum.CREATED.getIntValue());
+					}
+					else
+					{
+						throw new SystemOperateException(CommonExceptionMsg.ALREADY_NOT_CANCEL);
+					}
+					
+					DaoContext.getInstance().getExpertDao().update(expert);
+				}
+				else
+				{
+					throw new SystemOperateException(CommonExceptionMsg.NOT_IN_EXPERT);
+				}
+				
+				break;
+			case HOSPITAL:
+				Hospital hospital = (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
+				if(hospital!=null)
+				{
+					if(hospital.getState()==UserStatusEnum.CANCELED.getIntValue())
+					{
+						hospital.setState(UserStatusEnum.CREATED.getIntValue());
+					}
+					else
+					{
+						throw new SystemOperateException(CommonExceptionMsg.ALREADY_NOT_CANCEL);
+					}
+					DaoContext.getInstance().getHospitalDao().update(hospital);
+				}
+				else
+				{
+					throw new SystemOperateException(CommonExceptionMsg.NOT_IN_HOSPITAL);
+				}				
+				
+				break;
+			default :break;
+			}
+			
+			//MISPDaoContext.getInstance().getSystemUserDao()
+		}
+		
 	}
 
 }

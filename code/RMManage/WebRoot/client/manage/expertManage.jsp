@@ -12,12 +12,16 @@
 		$("#addEx").css('display', 'block');
 		$("#exTable").attr("layoutH", '130');
 	}
+	if(accountType!=99)
+	{
+		$(".accountCol").hide();
+	}
 
 </script>
 
 <div class="pageHeader">
 	<div  style="height:40px;overflow:hidden;display:none;" id="addEx" >
-		<s:form  name="exAdd" action="user/ExpertManage" method="POST" onsubmit="return navTabSearch(this);" >
+		<s:form  name="exAdd" action="user/ExpertManage" method="POST"  onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="searchBar">
 			<table class="searchContent">
 			<tr>
@@ -25,13 +29,14 @@
 				</td>
 				<td>专家姓名：<input  name="targetExpert.name" readonly="readonly" type="text"/>
 				</td>
-				<td style="margin-right:20px;"><a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
-					<label style="color:grey;font-size:0.7em;">(点击图标查找专家)</label>
+				<td ><a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
+					<label style="color:grey;font-size:0.5em;">(点击图标查找专家)</label>
 				</td>
+				<td>&nbsp;&nbsp;</td>
 				<td><s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
 				</td>
-				<td><!-- <button type="button" class="mispButton primary"  onclick="resetForm(this.form)" >取 消</button> -->
-				<s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" ></s:submit>
+				<td><s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" method="cancel"></s:submit>
+				
 				</td>
 		 			
 			</tr>
@@ -80,14 +85,16 @@
 	<table class="table" width="100%" layoutH="88" id="exTable">
 		<thead>
 			<tr>		
-				<th width="100" align="center">专家账号</th>
-				<th width="120" align="center">姓名</th>
-				<th width="100" align="center">职称</th>
-				<th width="100" align="center">工作医院</th>
-				<th width="100" align="center">手机号码</th>
-				<th width="100" align="center">座机号码</th>
-				<th width="100" align="center">邮件地址</th>
-				<th width="100" align="center">查看详情</th>
+				<th width="10%" align="center">专家账号</th>
+				<th width="10%" align="center">姓名</th>
+				<th width="10%" align="center">职称</th>
+				<th width="20%" align="center">工作医院</th>
+				<th width="10%" align="center">手机号码</th>
+				<th width="10%" align="center">座机号码</th>
+				<th width="10%" align="center">邮件地址</th>
+				<th width="5%" align="center">账户状态</th>
+				<th width="5%" align="center">查看详情</th>
+				<th width="10%" align="center" class="accountCol">账户管理</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -101,9 +108,30 @@
 				<td>${e.telephoneNo}</td>
 				<td>${e.email}</td>
 				<td>
-					
-				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
-				
+					<c:forEach var="us" items="${userStatusList}">
+						  <c:choose>		       
+							   <c:when test="${us.intValue==e.state}">  
+	                             ${us.strValue}
+							   </c:when>
+							   <c:otherwise></c:otherwise>					   
+						   </c:choose>
+					</c:forEach>
+				</td>
+				<td>				
+				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>	
+				</td>
+				<td class="accountCol">
+				<c:choose>
+					<c:when test="${e.state==2}">
+						<a title="启用确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logon"   mask="true" 
+							class="mispButton " style="line-height:6px;">启用账户</a>
+					</c:when>
+					<c:otherwise>
+						<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
+							class="mispButton danger" style="line-height:6px;">注销账户</a>					
+					</c:otherwise>
+				</c:choose>
+
 				</td>
 			</tr>
 		</c:forEach>	

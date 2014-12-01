@@ -94,16 +94,7 @@ function resetForm(objForm){
  
 					<li><a href="login/login!logout.action">退出</a></li>
 				</ul>
-<!-- 			<ul class="themeList" id="themeList">
-					<li theme="azure"><div class="selected">天蓝</div></li>
-					 <li theme="default"><div >蓝色</div></li>
-					<li theme="green"><div>绿色</div></li>
-					<li theme="red"><div>红色</div></li>
-					<li theme="purple"><div>紫色</div></li>
-					<li theme="silver"><div>银色</div></li>
 					
-				</ul>
- -->					
 			</div>
 
 			<!-- navMenu -->
@@ -150,8 +141,8 @@ function resetForm(objForm){
 					<div class="page unitBox">
 						<div class="accountInfo">
 							<div class="alertInfo">
-								<p><a href="#"  style="line-height:19px"><span>待办工作32项，消息212条</span></a></p>
-								<p><a href="#"  style="line-height:19px">2014年09月30日，星期二</a></p>
+								<p><a href="#"  style="line-height:19px"><span></span></a></p>
+								<p><a href="#"  style="line-height:19px"></a></p>
 							</div>
 							<div class="right">
 								<p style="color:red"> </p>

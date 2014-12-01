@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
 
 /** 
  * @ClassName: TableAction 
@@ -37,7 +38,7 @@ public abstract class TableAction extends MISPAction
 	abstract public String modify();
 	abstract public String show();
 	
-
+	private UserStatusEnum[] userStatusList = UserStatusEnum.values();
 	
 	public List<String> convertToPageMessage(List<String> messageList)
 	{
@@ -95,6 +96,14 @@ public abstract class TableAction extends MISPAction
 	public static String getShowInfo()
 	{
 		return SHOW_INFO;
+	}
+	public UserStatusEnum[] getUserStatusList()
+	{
+		return userStatusList;
+	}
+	public void setUserStatusList(UserStatusEnum[] userStatusList)
+	{
+		this.userStatusList = userStatusList;
 	}
 
 	

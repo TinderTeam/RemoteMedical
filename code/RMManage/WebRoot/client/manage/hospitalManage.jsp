@@ -2,7 +2,16 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<input type="hidden" id="currentAccount" value="${loginUser.accountType}" />
+<script type="text/javascript">
 
+	var accountType=$("#currentAccount").val();
+	if(accountType!=99)
+	{
+		$(".accountCol").hide();
+	}
+
+</script>
 
 
 <div class="pageHeader">
@@ -50,13 +59,15 @@
 		<thead>
 		
 			<tr>
-				<th width="100" align="center">医院账号</th>
-				<th width="200" align="center">医院名称</th>
-				<th width="100" align="center">规模</th>
-				<th width="300" align="center">地点</th>
-				<th width="100" align="center">联系人</th>
-				<th width="100" align="center">联系电话</th>
-				<th width="100" align="center">操作</th>
+				<th width="10%" align="center">医院账号</th>
+				<th width="15%" align="center">医院名称</th>
+				<th width="10%" align="center">规模</th>
+				<th width="15%" align="center">地点</th>
+				<th width="10%" align="center">联系人</th>
+				<th width="15%" align="center">联系电话</th>
+				<th width="10%" align="center">账户状态</th>
+				<th width="5%" align="center">查看详情</th>
+				<th width="10%" align="center" class="accountCol">账户管理</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -69,12 +80,31 @@
 				<td>${e.contacts}</td>
 				<td>${e.contactsPhone}</td>
 				<td>
-					
-					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
-
-				
+					<c:forEach var="us" items="${userStatusList}">
+						  <c:choose>		       
+							   <c:when test="${us.intValue==e.state}">  
+	                             ${us.strValue}
+							   </c:when>
+							   <c:otherwise></c:otherwise>					   
+						   </c:choose>
+					</c:forEach>
 				</td>
+				<td>					
+					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
+				</td>
+				<td class="accountCol">
+				<c:choose>
+					<c:when test="${e.state==2}">
+						<a title="启用确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logon"   mask="true" 
+							class="mispButton " style="line-height:6px;">启用账户</a>
+					</c:when>
+					<c:otherwise>
+						<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
+							class="mispButton danger" style="line-height:6px;">注销账户</a>					
+					</c:otherwise>
+				</c:choose>
 
+				</td>
 			</tr>
 		</c:forEach>			
 			

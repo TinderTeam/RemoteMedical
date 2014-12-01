@@ -20,11 +20,7 @@
 				<label>关联申请时间：</label>
 				<input type="text" size="30" name="linkModel.link.linkTime" class="readonly" readonly="true" value="${linkModel.link.linkTime}"/>
 			</div>
-<!--  		<div class="unit">
-				<label>关联状态：</label>
-				<input type="text" size="30" name="linkModel.link.linkState" class="readonly" readonly="true" value="${linkModel.link.linkState}"/>
-			</div>	
--->											
+									
 			<div id="errorMsg" style="color:red;"></div>
 		</div>
 		<div class="formBar">

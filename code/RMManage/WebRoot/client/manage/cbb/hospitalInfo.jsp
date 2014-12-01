@@ -25,7 +25,7 @@
 		<input id="operateType" value="${operateType}" style="display:none;"/>
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
 		<div class="pageFormContent" layoutH="56" style="padding:0px 180px 20px 180px;">
-	<fieldset>
+	<fieldset style="margin-top:20px;">
 		<legend>关键信息</legend>
 			<p>
 				<label>医院账号：</label>			

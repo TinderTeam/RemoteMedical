@@ -53,6 +53,19 @@ public interface MISPUserService
 	 * @return
 	 */
 	List<MenuTreeModel> getMenuTreeByUserID(String userID);
+	/**
+	 * 用户注销
+	 * @param userName
+	 * 
+	 */
+	
+	public void Logoff(String userName);
+	/**
+	 * 用户启用
+	 * @param userName
+	 * 
+	 */
+	public void Logon(String userName);
 	
 
 }

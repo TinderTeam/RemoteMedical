@@ -24,8 +24,11 @@ public class CommonExceptionMsg
 	public static final String SELECTED_NULL = "请选择专家进行添加";
 	public static final String SELECT_USER_EMPTY ="请选择用户";
 	public static final String DELET_LIMIT = "只能删除普通管理员";
-	
+	public static final String NOT_IN_HOSPITAL="您不在医院列表中";
 	public static final String HOSPITAL_NAME_REPEAT="医院名字已被注册了,请更换";
+	
+	public static final String ALREADY_NOT_CANCEL = "该账户已经被启用";
+	public static final String ALREADY_CANCEL = "该账户已经被注销";
 
 
 }

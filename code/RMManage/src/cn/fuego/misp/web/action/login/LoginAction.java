@@ -45,7 +45,7 @@ public class LoginAction extends MISPAction
 	private String message ="";
 	private String code;
     private PasswordModel pwdModel;
-
+    private String accountOperate;
 	public String execute()
 	{
 		ActionContext actionContext = ActionContext.getContext();
@@ -109,6 +109,33 @@ public class LoginAction extends MISPAction
 		session.clear();
 		return LOGIN_FAILED;
 	}
+	/*
+	 * 用户注销和启用
+	 */
+	public String accountManage()
+	{
+		try
+		{
+			if(this.getAccountOperate().equals("logoff"))
+			{
+				MISPServiceContext.getInstance().getUserService().Logoff(user.getUserName());
+				this.getOperateMessage().setMessage("账户注销成功");
+			}
+			if(this.getAccountOperate().equals("logon"))
+			{
+				MISPServiceContext.getInstance().getUserService().Logon(user.getUserName());
+				this.getOperateMessage().setMessage("账户启用成功");
+			}
+
+            this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		} catch (Exception e)
+		{
+			log.error("logoff user failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setMessage(e.getMessage());
+		}
+		return MISP_DONE_PAGE;
+	}	
 	
 	public String home()
 	{
@@ -185,6 +212,14 @@ public class LoginAction extends MISPAction
 	public void setCode(String code)
 	{
 		this.code = code;
+	}
+	public String getAccountOperate()
+	{
+		return accountOperate;
+	}
+	public void setAccountOperate(String accountOperate)
+	{
+		this.accountOperate = accountOperate;
 	}
 
 }
