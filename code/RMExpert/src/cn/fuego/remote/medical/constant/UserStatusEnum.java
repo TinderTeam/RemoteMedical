@@ -1,5 +1,5 @@
 /**   
-* @Title: UserStatusEnum.java 
+ * @Title: UserStatusEnum.java 
 * @Package cn.fuego.remote.medical.constant 
 * @Description: TODO
 * @author Tang Jun   
@@ -26,7 +26,7 @@ public enum UserStatusEnum
 	private int intValue;
 	private UserStatusEnum(String strValue, int intValue)
 	{
-		this.strValue = strValue;
+		this.strValue = strValue;		
 		this.intValue = intValue;
 	}
  

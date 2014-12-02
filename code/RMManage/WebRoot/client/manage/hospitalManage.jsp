@@ -98,9 +98,11 @@
 						<a title="启用确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logon"   mask="true" 
 							class="mispButton " style="line-height:6px;">启用账户</a>
 					</c:when>
-					<c:otherwise>
-						<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
+					<c:when test="${e.state==3}">
+					<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
 							class="mispButton danger" style="line-height:6px;">注销账户</a>					
+					</c:when>
+					<c:otherwise>
 					</c:otherwise>
 				</c:choose>
 

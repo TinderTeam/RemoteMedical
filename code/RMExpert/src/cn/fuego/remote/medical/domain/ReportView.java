@@ -165,7 +165,6 @@ public class ReportView implements PersistenceObject
 		}
 		return patientSex;
 	}
-	
 	public void setPatientSex(String patientSex)
 	{
 		this.patientSex = patientSex;

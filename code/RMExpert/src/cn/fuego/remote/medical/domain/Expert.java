@@ -37,7 +37,7 @@ public class Expert implements PersistenceObject
 	private String qq;
 	private String weixin;
 	private String resume;
-	private Blob exPhoto;
+	private byte[] exPhoto;
 	private String jobTitle;
 	private String workPlace;
 	private String province;
@@ -46,7 +46,7 @@ public class Expert implements PersistenceObject
 	
 	private String expertise;
 	private String remark;
-	private Blob signName;
+	private byte[] signName;
 	private Integer authority = 0;
 	private Integer state;
 	private Integer onlineState;
@@ -147,13 +147,23 @@ public class Expert implements PersistenceObject
 		this.resume = resume;
 	}
 
-	public Blob getExPhoto()
+ 
+	public byte[] getExPhoto()
 	{
 		return exPhoto;
 	}
-	public void setExPhoto(Blob exPhoto)
+	public void setExPhoto(byte[] exPhoto)
 	{
 		this.exPhoto = exPhoto;
+	}
+ 
+	public byte[] getSignName()
+	{
+		return signName;
+	}
+	public void setSignName(byte[] signName)
+	{
+		this.signName = signName;
 	}
 	public String getJobTitle()
 	{
@@ -211,14 +221,7 @@ public class Expert implements PersistenceObject
 	{
 		this.remark = remark;
 	}
-	public Blob getSignName()
-	{
-		return signName;
-	}
-	public void setSignName(Blob signName)
-	{
-		this.signName = signName;
-	}
+ 
 	public Integer getAuthority()
 	{
 		return authority;

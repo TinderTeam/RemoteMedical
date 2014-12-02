@@ -131,7 +131,7 @@ public class MISPUserServiceImpl implements MISPUserService
 				Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
 				if(expert!=null)
 				{
-					if(expert.getState()==UserStatusEnum.CANCELED.getIntValue())
+					if(expert.getState() !=UserStatusEnum.REGISTERED.getIntValue())
 					{
 						throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
 					}
@@ -153,7 +153,7 @@ public class MISPUserServiceImpl implements MISPUserService
 				Hospital hospital = (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",userName));
 				if(hospital!=null)
 				{
-					if(hospital.getState()==UserStatusEnum.CANCELED.getIntValue())
+					if(hospital.getState() != UserStatusEnum.REGISTERED.getIntValue())
 					{
 						throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
 					}
