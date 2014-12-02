@@ -138,6 +138,7 @@ public class MISPUserServiceImpl implements MISPUserService
 					else
 					{
 						expert.setState(UserStatusEnum.CANCELED.getIntValue());
+						expert.setAuthority(0);
 					}
 					
 					DaoContext.getInstance().getExpertDao().update(expert);
@@ -159,6 +160,7 @@ public class MISPUserServiceImpl implements MISPUserService
 					else
 					{
 						hospital.setState(UserStatusEnum.CANCELED.getIntValue());
+						hospital.setAuthority(0);
 					}
 					
 					DaoContext.getInstance().getHospitalDao().update(hospital);
@@ -192,7 +194,8 @@ public class MISPUserServiceImpl implements MISPUserService
 				{
 					if(expert.getState()==UserStatusEnum.CANCELED.getIntValue())
 					{
-						expert.setState(UserStatusEnum.CREATED.getIntValue());
+						expert.setState(UserStatusEnum.REGISTERED.getIntValue());
+						expert.setAuthority(1);
 					}
 					else
 					{
@@ -213,7 +216,8 @@ public class MISPUserServiceImpl implements MISPUserService
 				{
 					if(hospital.getState()==UserStatusEnum.CANCELED.getIntValue())
 					{
-						hospital.setState(UserStatusEnum.CREATED.getIntValue());
+						hospital.setState(UserStatusEnum.REGISTERED.getIntValue());
+						hospital.setAuthority(1);
 					}
 					else
 					{

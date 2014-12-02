@@ -3,7 +3,6 @@ package cn.fuego.remote.medical.manage.web.model;
 import java.io.File;
 
 import cn.fuego.remote.medical.constant.UserSexEnum;
-import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.domain.Expert;
 
 public class ExpertModel

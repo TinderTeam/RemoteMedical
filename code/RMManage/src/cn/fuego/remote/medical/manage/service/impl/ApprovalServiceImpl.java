@@ -68,6 +68,7 @@ public class ApprovalServiceImpl implements ApprovalService
 	public void createHospitalApply(HospitalModel hospital)
 	{
 		hospital.getHospital().setState(UserStatusEnum.APPLIED.getIntValue());
+		hospital.getHospital().setApply(DateUtil.getCurrentDate());
 		ServiceContext.getInstance().getUserService().modifyHospitalInfo(hospital, hospital.getHospital().getId());
  		createApply(ApplyTypeEnum.MODIFY_HOSPITAL,hospital.getHospital().getId(),hospital.getHospital().getId(),null);
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(hospital.getHospital().getId(), MISPOperLogConsant.MODIFY_HOSPITAL, null, MISPOperLogConsant.OPERATE_SUCCESS);		
@@ -78,6 +79,8 @@ public class ApprovalServiceImpl implements ApprovalService
 	public void createExpertApply(ExpertModel expert)
 	{
 		expert.getExpert().setState(UserStatusEnum.APPLIED.getIntValue());
+		expert.getExpert().setApply(DateUtil.getCurrentDate());
+
 		ServiceContext.getInstance().getUserService().saveExpertInfo(expert,expert.getExpert().getId());
 		createApply(ApplyTypeEnum.MODIFY_EXPERT,expert.getExpert().getId(),null,expert.getExpert().getId());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(expert.getExpert().getId(), MISPOperLogConsant.MODIFY_APPLY, null, MISPOperLogConsant.OPERATE_SUCCESS);
@@ -133,6 +136,8 @@ public class ApprovalServiceImpl implements ApprovalService
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.REGISTERED.getIntValue());
 				expertModel.getExpert().setAuthority(1);
+				expertModel.getExpert().setAuditor(handleUser);
+				expertModel.getExpert().setReg(DateUtil.getCurrentDate());
 
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);
@@ -141,12 +146,17 @@ public class ApprovalServiceImpl implements ApprovalService
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.REGISTERED.getIntValue());
 				hospitalModel.getHospital().setAuthority(1);
+				hospitalModel.getHospital().setAuditor(handleUser);
+				hospitalModel.getHospital().setReg(DateUtil.getCurrentDate());
+				
+				
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);				  
 				break;
 			case ADD_EXPERT:
 				LinkModel linkModel= ServiceContext.getInstance().getUserService().getLinkByID(approval.getHospitalID(), approval.getExpertID());
 				linkModel.getLink().setLinkState(LinkStatusEnum.LINK_SUCCESS.getStatusValue());
+				linkModel.getLink().setAuditor(handleUser);
 				linkModel.getLink().setLinkTime(DateUtil.getCurrentDate());
 				DaoContext.getInstance().getLinkDao().update(linkModel.getLink());
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_AGREE);
@@ -171,12 +181,18 @@ public class ApprovalServiceImpl implements ApprovalService
 			case MODIFY_EXPERT:  
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.CREATED.getIntValue());
+				expertModel.getExpert().setAuditor(handleUser);
+				expertModel.getExpert().setReg(DateUtil.getCurrentDate());
+				
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);
 				break;
 			case MODIFY_HOSPITAL: 
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.CREATED.getIntValue());
+				hospitalModel.getHospital().setAuditor(handleUser);
+				hospitalModel.getHospital().setReg(DateUtil.getCurrentDate());
+				
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);								  
 				break;
