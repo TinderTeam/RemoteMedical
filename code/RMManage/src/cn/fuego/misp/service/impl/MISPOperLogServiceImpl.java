@@ -9,6 +9,7 @@
 package cn.fuego.misp.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
@@ -95,9 +96,11 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getEndTime()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"operTime",filter.getEndTime()));
+				Date  endDate = DateUtil.addDay(DateUtil.stringToDate(filter.getEndTime()), 1);		
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"operTime",DateUtil.DateToString(endDate)));
 			}			
 		}
+		conditionList.add(new QueryCondition(ConditionTypeEnum.ASC_ORDER,"operTime"));
 
 		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class,conditionList);
 	 

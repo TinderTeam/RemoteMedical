@@ -15,25 +15,22 @@
 	<div class="searchBar">
 				<script type="text/javascript">
 
-					//$('#days').attr('checked',checked);
-					var range1= $("#startDate").val();
-					var range2= $("#endDate").val();
-					//alert(range1);
-					if((range1!='')||(range2!=''))
-					{
-						$("#ck2").attr("checked",true);
-						$("#ck1").attr("checked",false);
-						$("#days").attr("disabled",true);
-					}else
-					{	 $("#ck1").attr("checked","checked");
-						 $("#startDate,#endDate").attr("disabled",true);
-				   		 $("#days").attr("disabled",false);
+					function changeMode(mode)
+					{ 
+					   if(mode== 0)
+					   {
+					      $('#startDate,#endDate').attr('disabled',true);
+                          $('#days').attr('disabled',false);
+                          $('#startDate,#endDate').val('');		
+					   }
+					   else
+					   {
+					      $('#startDate,#endDate').removeAttr('disabled');
+					      $('#days').attr('disabled',true);
+					      $('#days').attr('checked',false);$('#days').val('');
+					   } 
 					}
-	$(function() {
-		$(".phoneLink").popover({
-			trigger : 'hover'
-		});
-	});
+
 				</script>
 				
 		<table class="searchContent">
@@ -58,11 +55,38 @@
 					</select>
 				</td>
 				<td>
-					设备类型：<input type="text" name="filter.modality" value="${filter.modality}"/>
+					设备类型： 
+					<select name="filter.modality">
+						<option value="">默认所有类型</option>
+						<c:forEach var="e" items="${filter.deviceTypeList}">
+						  <c:choose>
+						       
+							   <c:when test="${e == filter.modality}">  
+	                             <option value="${e}" selected="selected">${e}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${e}">${e}</option>
+							   </c:otherwise>
+						   </c:choose>
+						</c:forEach>
+					</select>
 				</td>
-			
 				<td>
-					医院名称：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}" />
+					远程请求医院： 
+					<select name="filter.hospitalName"  >
+					  <option value="">默认所有医院</option>
+					  
+					  <c:forEach var="name" items="${filter.hospitalNameList}">
+					    <c:choose>
+					        <c:when test="${name == filter.hospitalName}">  
+	                             <option value="${name}" selected="selected">${name}</option>
+							   </c:when>
+							   <c:otherwise>  
+							      <option value="${name}">${name}</option>
+							</c:otherwise>
+						 </c:choose>
+ 					  </c:forEach>
+					</select>
 				</td>
 				<td>
 					病人姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
@@ -72,7 +96,14 @@
 			<tr>
 
 				<td>
-				 <span><input id="ck1" type="radio" name="r1" style="width:25px;"  onclick="$('#startDate,#endDate').attr('disabled',true);$('#days').attr('disabled',false);$('#startDate,#endDate').val('');"/>时间:</span>				   
+				 
+				 
+				   <c:if test="${filter.mode == 0}">
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>时间:</span>	
+				   </c:if>
+				   <c:if test="${filter.mode == 1}">
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>时间:</span>	
+				   </c:if>
 					<select name="filter.days" id="days">
 						<option value="">默认所有时间</option>
 						<c:forEach var="d" items="${filter.dayList}">
@@ -89,7 +120,18 @@
 					</select>
 				</td>
 				<td class="dateRange">
-					<span><input id="ck2" type="radio" name="r1" style="width:25px;" onclick="$('#startDate,#endDate').removeAttr('disabled');$('#days').attr('disabled',true);$('#days').attr('checked',false);$('#days').val('');"/>时间段:</span>
+				   <c:if test="${filter.mode == 0}">
+					<span><input id="ck2" type="radio" name="filter.mode" style="width:25px;" value="1"  onclick="changeMode(1);"/>时间段:</span>
+					  <script>
+                          changeMode(0);			  
+                       </script>
+				   </c:if>	
+				   <c:if test="${filter.mode == 1}">
+					<span><input id="ck2" type="radio" name="filter.mode" style="width:25px;" value="1"  checked="checked" onclick="changeMode(1);"/>时间段:</span>
+					  <script>
+					      changeMode(1);			
+					  </script>
+				   </c:if>	
 					<input id="startDate" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
 					<span class="limit">-</span>
 					<input id="endDate" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
@@ -113,8 +155,9 @@
 </div>
 <div class="pageContent">
 	<div class="panelBar">
+ 
 	</div>
-	<table class="table" style="width:1600px;" layoutH="138">
+	<table class="table" width="100%" layoutH="138">
 		<thead>
 			<tr>
 				<th width="150px" align="center">检查设备</th>

@@ -7,6 +7,7 @@
 * @version V1.0   
 */ 
 package cn.fuego.remote.medical.manage.web.model;
+import java.util.List;
 
 import cn.fuego.remote.medical.constant.DayNumEnum;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
@@ -28,7 +29,11 @@ public class ReportFilterModel
 	private String startDate;
 	private String endDate;
 	private String days;
+	private int mode =  0;
 	private DayNumEnum[] dayList = DayNumEnum.values();
+	
+	private String[] deviceTypeList = new String[]{"DX","CR","CT","MR"};
+	private List<String> hospitalNameList;
 	
 	private ReportStatusEnum[] reportStatusList = ReportStatusEnum.values();
 	public String getPatientName()
@@ -103,5 +108,31 @@ public class ReportFilterModel
 	{
 		this.days = days;
 	}
+	public List<String> getHospitalNameList()
+	{
+		return hospitalNameList;
+	}
+	public void setHospitalNameList(List<String> hospitalNameList)
+	{
+		this.hospitalNameList = hospitalNameList;
+	}
+	public int getMode()
+	{
+		return mode;
+	}
+	public void setMode(int mode)
+	{
+		this.mode = mode;
+	}
+	public String[] getDeviceTypeList()
+	{
+		return deviceTypeList;
+	}
+	public void setDeviceTypeList(String[] deviceTypeList)
+	{
+		this.deviceTypeList = deviceTypeList;
+	}
+	
+	
 
 }

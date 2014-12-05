@@ -28,7 +28,7 @@ public class CommonExceptionMsg
 	public static final String HOSPITAL_NAME_REPEAT="医院名字已被注册了,请更换";
 	
 	public static final String ALREADY_NOT_CANCEL = "该账户已经被启用";
-	public static final String ALREADY_CANCEL = "该账户未注册，不能被注销";
+	public static final String ALREADY_CANCEL = "该账户已经被注销";
 
 
 }

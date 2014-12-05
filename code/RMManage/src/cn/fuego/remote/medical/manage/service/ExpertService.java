@@ -52,4 +52,5 @@ public interface ExpertService
 	 */
 	void submitMedicalReport(ReportStatusEnum status,MedicalReportModel report);
 
+    List<String> getLinkHosptialByExpert(String expertID);
 }

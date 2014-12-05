@@ -10,6 +10,7 @@ package cn.fuego.remote.medical.manage.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -23,10 +24,12 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.remote.medical.constant.DayNumEnum;
+import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.dao.ReportDao;
+import cn.fuego.remote.medical.domain.Link;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.manage.service.ExpertService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
@@ -84,7 +87,14 @@ public class ExpertServiceImpl implements ExpertService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getModality()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"modality",filter.getModality()));
+				List<String> list = new ArrayList<String>();
+				if(filter.getModality().equals("DX"))
+				{
+					list.add("DR");
+				}
+				list.add(filter.getModality());
+				
+				conditionList.add(new QueryCondition(ConditionTypeEnum.IN,"modality",list));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getHospitalName()))
 			{
@@ -96,13 +106,16 @@ public class ExpertServiceImpl implements ExpertService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"exReportState",String.valueOf(ReportStatusEnum.getEnumByStr(filter.getExReportState()).getStatusValue())));
 			}
 			
+			conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL, "exReportState",String.valueOf(ReportStatusEnum.CANCEL.getStatusValue())));
+
 			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"exApply",filter.getStartDate()));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"exApply",filter.getEndDate()));
+				Date  endDate = DateUtil.addDay(DateUtil.stringToDate(filter.getEndDate()), 1);
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"exApply",DateUtil.DateToString(endDate)));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getDays()))
 			{
@@ -139,4 +152,20 @@ public class ExpertServiceImpl implements ExpertService
 
 	}
 
+	public List<String> getLinkHosptialByExpert(String expertID)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>(); 
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "expertID",expertID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "linkState",String.valueOf(LinkStatusEnum.LINK_SUCCESS.getStatusValue())));
+		List<Link> linkList = (List<Link>) DaoContext.getInstance().getLinkDao().getAll(conditionList);
+		List<String> hospNameList = new ArrayList<String>();
+		for(Link e : linkList)
+		{
+			if(!ValidatorUtil.isEmpty(e.getHospitalName()))
+			{
+				hospNameList.add(e.getHospitalName());
+			}
+		}
+		return hospNameList;
+	}
 }
