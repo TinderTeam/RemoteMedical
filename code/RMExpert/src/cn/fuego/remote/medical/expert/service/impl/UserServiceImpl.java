@@ -54,7 +54,16 @@ public class UserServiceImpl  extends MISPUserServiceImpl
 			{
 				if(!expert.getState().equals(UserStatusEnum.REGISTERED.getIntValue()))
 				{
+					if(expert.getState().equals(UserStatusEnum.CANCELED.getIntValue()))
+					{
+						throw new SystemOperateException(CommonExceptionMsg.ALREADY_CANCEL);
+
+					}
+					else
+					{
 						throw new SystemOperateException(CommonExceptionMsg.NOT_REGISTED);
+
+					}
 				}
 				
 			}

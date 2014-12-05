@@ -28,6 +28,13 @@ public class DateUtil
 
 	}
 
+	public static Date addDay(Date date,int day)
+	{
+		Calendar today = Calendar.getInstance();
+		today.setTime(date);
+		today.add(Calendar.DAY_OF_MONTH,day);
+		return today.getTime();
+	}
 	public static String DateToString(Date date)
 	{
 		String str = null;
@@ -135,6 +142,8 @@ public class DateUtil
 
 		return time.toString();
 	}
+	
+	
 
 	public static int countDayNum(Date startDate, Date endDate)
 	{

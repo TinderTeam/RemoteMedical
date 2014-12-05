@@ -61,6 +61,14 @@ public class ReportTemplateCache
 
 	public ReportTemplateModel getTemplateTreeByName(String name)
 	{
+		if(name.equals("DX"))
+		{
+			name = "DR";
+		}
+		if(name.equals("CR"))
+		{
+			name = "DR";
+		}
 		for(ReportTemplateModel e : templateTree.getChildList())
 		{
 			if(e.getName().equals(name))

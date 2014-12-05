@@ -12,11 +12,13 @@
 <script type="text/javascript">
 function submitForm2(url,id,name) 
 {
-	
+ 
 	alertMsg.confirm("确定要将报告移交给专家"+id+"("+name+")"+"！", {
 		okCall: function(){
+		 
 		 document.expertTransForm.action = "expert/ReportManage!" +url;
- 		return validateCallback(document.expertTransForm,navTabAjaxDone);
+ 
+ 		return validateCallback(document.expertTransForm,dialogAjaxDone);
 
 		}
 	});
@@ -55,7 +57,7 @@ function submitForm2(url,id,name)
 	</form>
 </div>
 <div class="pageContent">
-<s:form    method="POST"  name="expertTransForm" action="expert/ReportManage"  >
+<s:form    method="POST"  name="expertTransForm"  class="pageForm required-validate"  action="expert/ReportManage"  >
 
 	<table class="table" layoutH="85" targetType="dialog" width="100%">
 		<thead>

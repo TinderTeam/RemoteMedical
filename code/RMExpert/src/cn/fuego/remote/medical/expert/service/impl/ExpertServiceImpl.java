@@ -88,7 +88,14 @@ public class ExpertServiceImpl implements ExpertService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getModality()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"modality",filter.getModality()));
+				List<String> list = new ArrayList<String>();
+				if(filter.getModality().equals("DX"))
+				{
+					list.add("DR");
+				}
+				list.add(filter.getModality());
+				
+				conditionList.add(new QueryCondition(ConditionTypeEnum.IN,"modality",list));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getHospitalName()))
 			{
@@ -100,13 +107,16 @@ public class ExpertServiceImpl implements ExpertService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"exReportState",String.valueOf(ReportStatusEnum.getEnumByStr(filter.getExReportState()).getStatusValue())));
 			}
 			
+			conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL, "exReportState",String.valueOf(ReportStatusEnum.CANCEL.getStatusValue())));
+
 			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"exApply",filter.getStartDate()));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"exApply",filter.getEndDate()));
+				Date  endDate = DateUtil.addDay(DateUtil.stringToDate(filter.getEndDate()), 1);
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"exApply",DateUtil.DateToString(endDate)));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getDays()))
 			{
@@ -148,6 +158,15 @@ public class ExpertServiceImpl implements ExpertService
 			imageModel.setImage(image);
 			reportModel.getImageList().add(imageModel);
 		}
+		
+		 Report report = (Report) repertDao.getUniRecord(conditionList);
+		 
+		 if(null != report)
+		 {
+		   report.setExGetReport(DateUtil.getCurrentDate());
+		   repertDao.update(report);
+		 }
+		 
 		
 		//read template information
 		reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTreeByName(reportView.getModality()));
@@ -213,11 +232,20 @@ public class ExpertServiceImpl implements ExpertService
 		    	operate = MISPOperLogConsant.SAVE_REPORT;
 
 			}
+			
 
 			report.setExStudyContent(reportModel.getReportView().getExStudyContent());
 			report.setExStudyConclusion(reportModel.getReportView().getExStudyConclusion());
+			
+			if(status == ReportStatusEnum.SUBMIT)
+			{
+				report.setExReport(DateUtil.getCurrentDate());
+			}
+		 
+
 			report.setExReportState(status.getStatusValue());
 			repertDao.update(report);
+		 
 			MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), operate, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS); 
 			
 
@@ -309,10 +337,16 @@ public class ExpertServiceImpl implements ExpertService
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportView.getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportView.getSerialNo())));
+		
 		Report report = (Report) repertDao.getUniRecord(conditionList);
 		if(null != report)
 		{
+			Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord( new QueryCondition(ConditionTypeEnum.EQUAL, "expertID",expertID));
+			 
 			report.setExDoctor(expertID);
+			report.setExpertDoctorName(expert.getName());
+			report.setExStudyConclusion("");
+			report.setExStudyContent("");
 			repertDao.update(report);
 
 		}
@@ -331,6 +365,23 @@ public class ExpertServiceImpl implements ExpertService
 		ReportTemplateModel reportModal=ReportTemplateCache.getInstance().getReportTemplateById(modalID);
 		return reportModal;
 	}	
+	
+	public List<String> getLinkHosptialByExpert(String expertID)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>(); 
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "expertID",expertID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "linkState",String.valueOf(LinkStatusEnum.LINK_SUCCESS.getStatusValue())));
+		List<Link> linkList = (List<Link>) DaoContext.getInstance().getLinkDao().getAll(conditionList);
+		List<String> hospNameList = new ArrayList<String>();
+		for(Link e : linkList)
+		{
+			if(!ValidatorUtil.isEmpty(e.getHospitalName()))
+			{
+				hospNameList.add(e.getHospitalName());
+			}
+		}
+		return hospNameList;
+	}
 
 	
 

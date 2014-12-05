@@ -124,9 +124,15 @@ function submitForm(url)
 			<div class="pageFormContent"  id="panelImg"> 
 			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
+				 <dd style="font-size:1.2em;width:25% !important;float:right;">
+							
+					 <span style="margin:0px 5px;"><input id="downBt0" type="button" onclick="StartDown(this.id)" value="下载"/></span>
+					 <span style="margin:0px 5px;"><input  id="viewBt0" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /></span>
+				 </dd>
+						    
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
-				         <input   id="url${status.index}"  value="${e.image.imageSavePath}${e.image.imgArchName}" style="display:none;"></input>
+				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
 				         <input   id="image${status.index}"  value="${e.image.imgArchName}" style="display:none;"></input>
 				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
@@ -152,7 +158,7 @@ function submitForm(url)
 
 						</dt>
 						<dd style="width:25% !important;float:right;">
-	                      <span style="margin:0px 5px;"><input  id="viewBt${status.index}" type="button" value="查看" disabled="disabled" onclick="viewDoc('${e.image.imgArchName}');" /></span>
+	                      <span style="margin:0px 5px;"><input  id="viewBt${status.index}" type="button" value="查看" disabled="disabled" onclick="viewDoc(${status.index});" /></span>
 						</dd>					
 
 					</dl>					      
@@ -202,7 +208,7 @@ function submitForm(url)
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
 				<ul style="float:right;">
 					 <c:choose>
-							   <c:when test="${2 == medicalReport.reportView.exReportState}">
+							   <c:when test="${1 == medicalReport.reportView.exReportState}">
   
 	                            <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="cancal" value="撤销报告" onclick="submitForm('cancel')"  /></li>
 							    <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="back" value="返回" onclick="submitForm('back')"/></li>					            
@@ -211,8 +217,7 @@ function submitForm(url)
 							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
 					           <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
 							   <!--  <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('showTransfer')"  /></li>-->
-							   <li style="padding-bottom:5px;"><a class="mispButton primary" href="ReportManage!showTransfer.action?selectedID=${medicalReport.reportView.id}"  target="dialog" title="转换专家">转换专家</a></li>
-							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="back" value="返回" onclick="submitForm('back')"/></li>
+ 							   <li style="padding-bottom:5px;"> <input class="mispButton primary close" type="button"  name="back" value="返回"  /></li>
 					           </c:otherwise>
 					</c:choose>
 
@@ -247,10 +252,7 @@ function submitForm(url)
 
 
 	</div>
-	
-
-		
-
+ 
 
 </div>
 <script type="text/javascript">
@@ -261,7 +263,7 @@ function submitForm(url)
         var imageURL =  new Array();
        
         var imageFileName =  new Array();
-        var progressID =  new Array("downSize1","downSize2","downSize3");
+        var progressID =  new Array();
        
         var imageCnt = $("#imageCount").val();
         var nowCnt = 0;
@@ -318,12 +320,16 @@ function submitForm(url)
 		{
 		   if(isStarted == false)
 		   {
+		   
+		     //create path
+		     createPath(imageURL[nowCnt]);
+		     
 		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
 			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
-			 ReYoWebDownLoad.url= hostURL+ imageURL[nowCnt];
+			 ReYoWebDownLoad.url= hostURL+ imageURL[nowCnt] + imageFileName[nowCnt];
 			 //alert(ReYoWebDownLoad.url);
 			 ReYoWebDownLoad.percent = 0;
-		 	 ReYoWebDownLoad.path =fileRootPath+ imageFileName[nowCnt];
+		 	 ReYoWebDownLoad.path =fileRootPath+   imageURL[nowCnt] + imageFileName[nowCnt];
 			 ReYoWebDownLoad.ReYoStartDownload();
 			 isStarted = true;
 		   }
@@ -355,7 +361,7 @@ function submitForm(url)
 		  			}
 		  			else
 		  			{
-		  			 nowCnt = 0;
+		  			  nowCnt = 0;
 		  			 }
 				}
 				else
@@ -389,9 +395,39 @@ function submitForm(url)
 		});
 	}
 	
-	function viewDoc(url)
+	function viewAllDoc()
+	{
+	 	function viewDoc(nowCnt)
     {
-           window.location.href='WebView://' + fileRootPath+url;
+           
+         window.location.href='WebView://';
+         var cmd = "";
+         for(var i=0;i<imageCnt;i++)
+        {
+            var path = fileRootPath + imageURL[i] + imageFileName[i];
+            if(i == 0)
+            {
+              cmd += path;
+            }
+            else
+           {
+              cmd += path + "|";
+            };
+            
+            
+        };
+ 
+    }
+	}
+	function viewDoc(nowCnt)
+    {
+           
+           window.location.href='WebView://' + fileRootPath + imageURL[nowCnt] + imageFileName[nowCnt]; 
+    }
+    
+     function createPath(path)
+    {
+           window.location.href='WebView://create:' + path;
     }
 	function deleteFile(target)
 	{

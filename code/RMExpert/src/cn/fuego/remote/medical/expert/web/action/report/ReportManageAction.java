@@ -60,6 +60,9 @@ public class ReportManageAction extends DWZTableAction
 		
 		reportList.setPage(this.getPage());
 		reportList.setDataSource(expertService.getMedicalList(this.getLoginUser().getUserName(), filter));
+ 
+		filter.setHospitalNameList(expertService.getLinkHosptialByExpert(this.getLoginUser().getUserName()));
+		
 		return SUCCESS;
 	}
 	/* (non-Javadoc)
@@ -139,11 +142,13 @@ public class ReportManageAction extends DWZTableAction
 	public String transferSure()
 	{
 		expertService.transferExpert(this.getSelectedID(),this.getSelectedReportID());
-		//this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
-		this.getOperateMessage().setCallbackType(MispMessageModel.REDIRECT);
-		this.getOperateMessage().setForwardUrl(ServletActionContext.getRequest().getContextPath()+PARENT_PAGE);
-		//this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
-		return MISP_DONE_PAGE;
+		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		
+ 
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		this.getOperateMessage().setNavTabId("Home");
+ 
+ 		return MISP_DONE_PAGE;
 	}
 	public String back()
 	{

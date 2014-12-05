@@ -62,5 +62,8 @@ public interface ExpertService
 
 
 	ReportTemplateModel getReportModalById(String modalID);
+	
+    List<String> getLinkHosptialByExpert(String expertID);
+
 
 }
