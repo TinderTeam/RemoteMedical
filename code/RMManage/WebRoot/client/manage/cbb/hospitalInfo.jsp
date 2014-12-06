@@ -8,7 +8,14 @@
 <input id="operateType" value="${operateType}" style="display:none;"/>
 <script type="text/javascript">
 
-    
+   $(function () 
+    {
+
+        var text_width=$("#textW").width();
+        //alert(text_width);
+        $(".field").width(text_width+75 + "px");
+        
+        });
     var operateType =$("#operateType").val();
     if(operateType=='check')
     {
@@ -24,8 +31,8 @@
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		<input id="operateType" value="${operateType}" style="display:none;"/>
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
-		<div class="pageFormContent" layoutH="56" style="padding:0px 180px 20px 180px;">
-	<fieldset style="margin-top:20px;">
+		<div class="pageFormContent" layoutH="56" style="padding:0px 20px 20px 40px;">
+	<fieldset style="margin-top:20px;" class="field">
 		<legend>关键信息</legend>
 			<p>
 				<label>医院账号：</label>			
@@ -35,7 +42,7 @@
 				<label>医院名称：</label>			
 				<input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="30" value="${hospitalModel.hospital.name}" />
 			</p>			
-			<p>
+			<p class="nowrap">
 				<label>医院地址：</label>
 				<input type="hidden" id="currentProvince" value="${hospitalModel.hospital.province}"/>
 				<input type="hidden" id="currentCity" value="${hospitalModel.hospital.city}"/>
@@ -75,23 +82,23 @@
 				<input type="text" name="hospitalModel.hospital.hospitalPhone"  maxlength="16" size="30" value="${hospitalModel.hospital.hospitalPhone}"/>
 			</p>
 	</fieldset>
-	<fieldset style="margin-top:20px;">
+	<fieldset style="margin-top:20px;margin-bottom:40px;" class="field">
 		<legend>扩展描述</legend>		
 			<dl class="nowrap">
 				<dt >联系电话：</dt>			
 				<dd >
-				<textarea name="hospitalModel.hospital.contactsPhone"  cols="80" rows="3" maxlength="255" class="phonelist">${hospitalModel.hospital.contactsPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
 				<span class="info" >*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>
 
 				<dl class="nowrap">
 					<dt >医院简介：</dt>
-					<dd ><textarea name="hospitalModel.hospital.resume" cols="80" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea></dd>
+					<dd ><textarea name="hospitalModel.hospital.resume" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea></dd>
 				</dl>
 				<dl class="nowrap">
 					<dt >医院描述：</dt>
-					<dd ><textarea name="hospitalModel.hospital.remark" cols="80" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea></dd>
+					<dd ><textarea name="hospitalModel.hospital.remark" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea></dd>
 				</dl>			
 	</fieldset>		
 		</div>
@@ -112,14 +119,15 @@
 							</c:otherwise>
 						
 						</c:choose>
-							<c:choose>
+						<li><input type="button" class="mispButton primary close" value="返  回" /></li>
+<%-- 							<c:choose>
 								<c:when test="${loginUser.accountType==2}">
 									<li><input type="button" class="mispButton primary close" value="关 闭"/></li>
 								</c:when>
 								<c:otherwise>
 									<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
 								</c:otherwise>
-							</c:choose>							
+							</c:choose>	 --%>						
 					</c:otherwise>
 						
 				</c:choose>			

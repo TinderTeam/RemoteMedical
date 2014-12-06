@@ -9,12 +9,13 @@
 
 			<div class="unit">
 				<label>用户名称：</label>
-				<input type="text" size="30" name="filter.userName" maxlength="64" class="required"/>
+				<input type="text" size="30" name="filter.userName" maxlength="64" class="required alphanumeric"/>
+				<span class="info" >*字母、数字、下划线中的一种或几种组合格式</span>
 			</div>
 			<div class="divider"></div>
 			<div class="unit">
 				<label>账户类型：</label>
-				<select class="combox" name="filter.accountType" >
+				<select  name="filter.accountType" >
 						 <c:forEach var="ut2" items="${filter.userTypeList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${ut2.type=='超级管理员'}">  

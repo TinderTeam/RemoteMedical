@@ -37,7 +37,7 @@ public class UserManageAction extends DWZTableAction
 		userTable.setPage(this.getPage());
 		try
 		{
-			userTable.setDataSource(userService.getUserList(filter));
+			userTable.setDataSource(userService.getUserList(filter,this.getLoginUser().getAccountType()));
 		} catch (ParseException e)
 		{
 			// TODO Auto-generated catch block

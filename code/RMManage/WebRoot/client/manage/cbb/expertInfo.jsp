@@ -11,10 +11,17 @@
 <input id="operateType" value="${operateType}" style="display:none;" />
 <script type="text/javascript">
    
-    $(function () {
-            $("#up1").uploadPreview({ Img: "ImgPr1" });
-            $("#up2").uploadPreview({ Img: "ImgPr2" });
-        });//图片预览js
+    $(function () 
+    {
+    	//图片预览js
+        $("#up1").uploadPreview({ Img: "ImgPr1" });
+        $("#up2").uploadPreview({ Img: "ImgPr2" });
+        
+        var text_width=$("#textW").width();
+        //alert(text_width);
+        $(".field").width(text_width+75 + "px");
+        
+        });
     var operateType =$("#operateType").val();
     if(operateType=='check')
     {
@@ -31,9 +38,9 @@
 		<input type="text" name="selectedID" value="${selectedID}"	style="display:none;" />
 		<input type="text" name="accountType" value="${loginUser.accountType}"	style="display:none;" />
 		<input type="text" name="expertModel.expert.state"	value="${expertModel.expert.state}" style="display:none;" />
-		<div class="pageFormContent" layoutH="58"	style="padding:0px 180px 20px 180px;">
+		<div class="pageFormContent" layoutH="78"	style="padding:0px 20px 40px 80px;">
 			<div style="margin-top:20px;">
-				<fieldset>
+				<fieldset class="field">
 					<legend style="font-size:1.2em;"><strong>个人信息</strong></legend>
 					<div style="float:right; margin-top:5px; margin-right:16%;">
 						<div
@@ -80,7 +87,7 @@
 			</div>
 
 			<div style="margin-top:20px;">
-				<fieldset>
+				<fieldset class="field">
 					<legend style="font-size:1.2em;"><strong>联系方式</strong></legend>
 					<p>
 						<label>手机号码：</label> 
@@ -105,13 +112,13 @@
 				</fieldset>
 			</div>
 
-			<div style="margin-top:20px;">
-				<fieldset>
-					<legend style="font-size:1.2em;"><strong>工作信息</strong></legend>
+			<div style="margin-top:20px; margin-bottom:40px;">
+				<fieldset  class="field">
+					<legend style="font-size:1.2em;margin:0 -7px;"><strong>工作信息</strong></legend>
 					<dl class="nowrap">
 						<dt>专家简介：</dt>
 						<dd>
-						<textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="2000">${expertModel.expert.resume}</textarea>
+						<textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="2000" id="textW">${expertModel.expert.resume}</textarea>
 						<span class="info" >*最多可输入2000个字符</span>
 						</dd>
 					</dl>
@@ -127,13 +134,16 @@
 						<label>工作医院名称：</label> 
 						<input type="text" name="expertModel.expert.workPlace" size="98"	value="${expertModel.expert.workPlace}" />
 					</p>
-					<p>
+					<p class="nowrap">
 						<label>工作医院地点：</label> 
 						<input type="hidden" id="currentEProvince" value="${expertModel.expert.province}" />
 						<input type="hidden" id="currentECity" value="${expertModel.expert.city}" /> 
 						<input type="hidden" id="currentECounty" value="${expertModel.expert.county}" />
+						
 						<select id="EeProvince" name="expertModel.expert.province" style="margin-left:0px;"></select>
+						
 						<select id="EeCity" name="expertModel.expert.city"></select> 
+						
 						<select id="EeArea" name="expertModel.expert.county"></select>
 
 				<script type="text/javascript">
@@ -192,14 +202,15 @@
 							</c:otherwise>
 
 						</c:choose>
-						<c:choose>
+						<li><input type="button" class="mispButton primary close" value="返  回" /></li>
+		<%-- 				<c:choose>
 							<c:when test="${loginUser.accountType==1}">
 								<li><input type="button" class="mispButton primary close" value="关 闭" /></li>
 							</c:when>
 							<c:otherwise>
 								<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
 							</c:otherwise>
-						</c:choose>
+						</c:choose> --%>
 
 					</c:otherwise>
 

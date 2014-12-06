@@ -24,15 +24,17 @@ String operate=request.getParameter("operate");
 		<div class="pageFormContent" layoutH="58">
            <input type="hidden" size="30"  id="accountOperate" name="accountOperate" maxlength="64"  readonly="readonly" value="<%=operate%>"/>
 			<div class="unit">
-				<label>用户名称：</label>
+				<label>用户账号：</label>
 				<input type="text" size="30" name="user.userName" maxlength="64"  readonly="readonly" value="<%=userName%>"/>
 			</div>
 			<div class="divider"></div>
-			<div class="unit">
-				<label>用户状态：</label>
+			<div class="unit" style="text-align:center;">
+			 <p  id="logoff" style="color:red;font-size:1.5em;display:none;">确定注销该账户？</p>
+			 <p  id="logon" style="color:red;font-size:1.5em;display:none;">确定启用该账户？</p>
+<!-- 				<label>用户状态：</label>
 					<input id="logoff" type="text" size="30" name="" maxlength="64" readonly="readonly"  value="已注销" style="display:none;"/>
 					<input id="logon" type="text" size="30" name="" maxlength="64" readonly="readonly"  value="已创建" style="display:none;"/>
-	
+	 -->
 			</div>		
 
 		

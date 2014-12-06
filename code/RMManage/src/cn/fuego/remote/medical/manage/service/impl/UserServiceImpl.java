@@ -306,7 +306,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 
 
 	@Override
-	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException
+	public AbstractDataSource<SystemUser> getUserList(UserFilterModel filter ,int accountType) throws ParseException
 	{
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 
@@ -319,10 +319,14 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"userName",filter.getUserName()));
 				
 			}
-			if(!ValidatorUtil.isEmpty(filter.getAccountType()))
+
+			if(accountType!=UserTypeEnum.ADMIN.getTypeValue())//超级管理员可以看到所有用户
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"accountType",String.valueOf(UserTypeEnum.ADMIN.getTypeValue())));
+			}
+			else if(!ValidatorUtil.isEmpty(filter.getAccountType()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"accountType",String.valueOf(UserTypeEnum.getEnumByStr(filter.getAccountType()).getTypeValue())));
-				
 			}
 			if(!ValidatorUtil.isEmpty(filter.getStartDate()))
 			{

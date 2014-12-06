@@ -22,7 +22,7 @@ public interface UserService extends MISPUserService
 
 	 
 	 AbstractDataSource<Expert> getExpertList(ExpertModel filter, int accountType, String userName);
-	 AbstractDataSource<SystemUser> getUserList(UserFilterModel filter) throws ParseException ;
+	 AbstractDataSource<SystemUser> getUserList(UserFilterModel filter, int accountType) throws ParseException ;
 	 
 	 ExpertModel getExpertByID(String id);
 	 LinkModel getLinkByID(String hospitalID, String expertID);

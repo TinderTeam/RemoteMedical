@@ -16,10 +16,30 @@
 	{
 		$(".accountCol").hide();
 	}
+function submitAccountManage(type,id,name) 
+{
+	var msg=null;
+	if(type=="logoff")
+	{
+		msg="确定需要注销账户：";
+	}
+	if(type=="logon")
+	{
+		msg="确定需要启用账户：";
+	}
+	alertMsg.confirm(msg+id+"("+name+")"+"？", {
+		okCall: function(){
 
+         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, DWZ.ajaxDone, "json");
+         navTab.reload("user/ExpertManage");
+		}
+	});
+
+
+}
 </script>
 
-<div class="pageHeader">
+<div class="pageHeader" id="head">
 	<div  style="height:40px;overflow:hidden;display:none;" id="addEx" >
 		<s:form  name="exAdd" action="user/ExpertManage" method="POST"  onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="searchBar">
@@ -30,7 +50,7 @@
 				<td>专家姓名：<input  name="targetExpert.name" readonly="readonly" type="text"/>
 				</td>
 				<td ><a class="btnLook" href="user/ExpertManage!addExpert.action" lookupGroup="targetExpert">专家列表</a>	
-					<label style="color:grey;font-size:0.5em;">(点击图标查找专家)</label>
+					<label style="color:grey;">(点击图标查找专家)</label>
 				</td>
 				<td>&nbsp;&nbsp;</td>
 				<td><s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
@@ -81,7 +101,7 @@
 	</s:form>
 </div>
 <div class="pageContent">
-
+<s:form  method="POST"  name="accountForm"  action="user/ExpertManage" >
 	<table class="table" width="100%" layoutH="88" id="exTable">
 		<thead>
 			<tr>		
@@ -123,13 +143,12 @@
 				<td class="accountCol">
 				<c:choose>
 					<c:when test="${e.state==2}">
-						<a title="启用确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logon"   mask="true" 
+						<a title="确定要启用该账户"   href="javascript:;"  mask="true" onclick="submitAccountManage('logon','${e.id }','${e.name}')"
 							class="mispButton " style="line-height:6px;">启用账户</a>
 					</c:when>
 					<c:when test="${e.state==3}">
-							<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
+						<a title="确定要注销该账户"  href="javascript:;" mask="true" onclick="submitAccountManage('logoff','${e.id }','${e.name}')"
 							class="mispButton danger" style="line-height:6px;">注销账户</a>					
-				
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
@@ -141,7 +160,8 @@
 			
 		</tbody>
 	</table>
-	<div class="panelBar">
+</s:form>
+	<div class="panelBar" >
 		<div class="pages">
 			<span>显示</span>
 	        <c:set var="page" value="${expertTable.page}" scope="request"/>

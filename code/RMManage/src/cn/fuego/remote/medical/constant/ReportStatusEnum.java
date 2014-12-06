@@ -18,10 +18,9 @@ package cn.fuego.remote.medical.constant;
 
 public enum ReportStatusEnum
 {
-	
-	SUBMIT("已报告",1), // 提交报告
-	SAVE("未报告",0), // 保存报告
-	CANCEL("撤销报告",2); // 撤销报告
+	SUBMIT("已完结",2), // 提交报告
+	SAVE("已编写",1), // 保存报告
+	CANCEL("未完结",0); // 撤销报告
 	private String status;
     private int statusValue;
 	private ReportStatusEnum(String status,int statusValue)

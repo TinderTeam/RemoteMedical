@@ -63,6 +63,12 @@ $(function()
 			$("#themeList").theme({themeBase:"themes"}); // themeBase 相对于index页面的主题base路径
 		}
 	});
+	 //当浏览器窗口大小改变时，tab内容自适应
+    window.onresize=function(){  
+
+       navTabPageBreak(); 
+
+    }; 
 });
 function resetForm(objForm){
 
