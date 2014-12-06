@@ -203,7 +203,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "workPlace", filter.getExpert().getWorkPlace()));
 
 			}
-			if(!ValidatorUtil.isEmpty(String.valueOf(filter.getExpert().getState())))
+			if(null != filter.getExpert().getState())
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "state", String.valueOf(UserStatusEnum.REGISTERED.getIntValue())));
 			}

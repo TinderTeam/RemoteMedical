@@ -36,7 +36,7 @@ public class ReportFilterModel
 	private String[] deviceTypeList = new String[]{"DX","CR","CT","MR"};
 	private List<String> hospitalNameList;
 	
-	private ReportStatusEnum[] reportStatusList = ReportStatusEnum.values();
+	private ReportStatusEnum[] reportStatusList = new ReportStatusEnum[]{ReportStatusEnum.SAVE,ReportStatusEnum.SUBMIT};
 	public String getPatientName()
 	{
 		return patientName;

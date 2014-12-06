@@ -18,15 +18,15 @@
 					{ 
 					   if(mode== 0)
 					   {
-					      $('#startDate,#endDate').attr('disabled',true);
-                          $('#days').attr('disabled',false);
-                          $('#startDate,#endDate').val('');		
+					      $('#startDate2,#endDate2').attr('disabled',true);
+                          $('#days2').attr('disabled',false);
+                          $('#startDate2,#endDate2').val('');		
 					   }
 					   else
 					   {
-					      $('#startDate,#endDate').removeAttr('disabled');
-					      $('#days').attr('disabled',true);
-					      $('#days').attr('checked',false);$('#days').val('');
+					      $('#startDate2,#endDate2').removeAttr('disabled');
+					      $('#days2').attr('disabled',true);
+					      $('#days2').attr('checked',false);$('#days2').val('');
 					   } 
 					}
 
@@ -70,6 +70,13 @@
 					</select>
 				</td>
 				<td>
+					<c:choose>
+				    
+				  <c:when test="${loginUser.accountType == 99 || loginUser.accountType==2}">  
+				     
+				    远程请求医院：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}"/>
+                  </c:when>
+				   <c:otherwise> 
 					远程请求医院： 
 					<select name="filter.hospitalName"  >
 					  <option value="">默认所有医院</option>
@@ -85,6 +92,8 @@
 						 </c:choose>
  					  </c:forEach>
 					</select>
+					 </c:otherwise> 
+				   </c:choose>	
 				</td>
 				<td>
 					病人姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
@@ -97,12 +106,12 @@
 				 
 				 
 				   <c:if test="${filter.mode == 0}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>远程请求医时间:</span>	
 				   </c:if>
 				   <c:if test="${filter.mode == 1}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求医时间:</span>	
 				   </c:if>
-					<select name="filter.days" id="days">
+					<select name="filter.days" id="days2">
 						<option value="">默认所有时间</option>
 						<c:forEach var="d" items="${filter.dayList}">
 						  <c:choose>
@@ -130,9 +139,9 @@
 					      changeMode(1);			
 					  </script>
 				   </c:if>	
-					<input id="startDate" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
+					<input id="startDate2" type="text" readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}" />
 					<span class="limit">-</span>
-					<input id="endDate" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
+					<input id="endDate2" type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}" />
 				</td>
 
 
@@ -166,6 +175,7 @@
 				<th width="150px" align="center">检查部位</th>
 				<th width="120px" align="center">申请医生</th>
 				<th width="120px" align="center">报告状态</th>
+				<th width="120px" align="center">远程请求时间</th>
 				<th width="150px" align="center">报告回传时间</th>
 				<th width="120px" align="center">专家编号</th>
 				<th width="120px" align="center">专家姓名</th>
@@ -199,6 +209,7 @@
 						   </c:choose>
 					</c:forEach>
 	            </td>
+		    <td>${e.exApply}</td>
 	            <td>${e.exReport}</td>
 	            
 	            <td>${e.exDoctor}</td>

@@ -72,6 +72,13 @@
 					</select>
 				</td>
 				<td>
+				 <c:choose>
+				    
+				  <c:when test="${loginUser.accountType == 99 || loginUser.accountType==2}">  
+				     
+				    远程请求医院：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}"/>
+                  </c:when>
+				   <c:otherwise> 
 					远程请求医院： 
 					<select name="filter.hospitalName"  >
 					  <option value="">默认所有医院</option>
@@ -87,6 +94,8 @@
 						 </c:choose>
  					  </c:forEach>
 					</select>
+					 </c:otherwise> 
+				   </c:choose>	
 				</td>
 				<td>
 					病人姓名：<input type="text" name="filter.patientName" value="${filter.patientName}"/>
@@ -99,10 +108,10 @@
 				 
 				 
 				   <c:if test="${filter.mode == 0}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>远程请求医时间:</span>	
 				   </c:if>
 				   <c:if test="${filter.mode == 1}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求医时间:</span>	
 				   </c:if>
 					<select name="filter.days" id="days">
 						<option value="">默认所有时间</option>
@@ -168,7 +177,7 @@
 				<th width="150px" align="center">检查部位</th>
 				<th width="120px" align="center">申请医生</th>
 				<th width="120px" align="center">报告状态</th>
-				
+				<th width="120px" align="center">远程请求时间</th>
 				<th width="150px" align="center">报告回传时间</th>
 				
 				<th width="120px" align="center">专家编号</th>
@@ -207,6 +216,7 @@
 						   </c:choose>
 					</c:forEach>
 	            </td>
+		    <td>${e.exApply}</td>
 	            <td>${e.exReport}</td>
 	            
 	            <td>${e.exDoctor}</td>

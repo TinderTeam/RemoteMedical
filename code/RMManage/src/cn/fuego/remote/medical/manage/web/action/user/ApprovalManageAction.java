@@ -27,6 +27,8 @@ public class ApprovalManageAction extends DWZTableAction
 	/**
 	 * 
 	 */
+	public static final String PARENT_PAGE="user/ApprovalManage";
+
 	private static final long serialVersionUID = 1L;
 	
 
@@ -104,7 +106,16 @@ public class ApprovalManageAction extends DWZTableAction
  * 医院添加专家申请同意
  * @return
  */
-	
+    public String cancel()
+    
+    {
+		this.getOperateMessage().setCallbackType(MispMessageModel.CANCEL);
+
+		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
+		
+    	return MISP_DONE_PAGE;
+    	
+    }
 	public String applyAgree()
 	{
 		approvalService.handleAgree(this.getLoginUser().getUserName(),this.getSelectedID());

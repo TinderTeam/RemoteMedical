@@ -1,6 +1,7 @@
 package cn.fuego.remote.medical.manage.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -53,8 +54,10 @@ public class ApprovalServiceImpl implements ApprovalService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getEndDate()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"applyTime",filter.getEndDate()));
-			}			
+				Date  endDate = DateUtil.addDay(DateUtil.stringToDate(filter.getEndDate()), 1);		
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"applyTime",DateUtil.DateToString(endDate)));
+			
+ 			}			
 		}
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"status",ApplyStatusEnum.APPROVING.getStatus()));
 		AbstractDataSource<Approval> dataSource = new DataBaseSourceImpl<Approval>(Approval.class,conditionList);

@@ -126,8 +126,8 @@ function submitForm(url)
 				 
 				 <dd style="font-size:1.2em;width:25% !important;float:right;">
 							
-					 <span style="margin:0px 5px;"><input id="downBt0" type="button" onclick="StartDown(this.id)" value="下载"/></span>
-					 <span style="margin:0px 5px;"><input  id="viewBt0" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /></span>
+					 <span style="margin:0px 5px;"><input id="downAllBt" type="button" onclick="StartAll()" value="下载"/></span>
+					 <span style="margin:0px 5px;"><input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /></span>
 				 </dd>
 						    
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
@@ -286,6 +286,14 @@ function submitForm(url)
 	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
  
 		 };
+		 
+		function StartAll()
+		{
+		   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+		   updateProgress();
+		}
 
  
         
@@ -347,9 +355,7 @@ function submitForm(url)
 				{
  
 		  			ReYoWebDownLoad.done=false;
-				    $("#downBt"+nowCnt).attr("disabled",true);
-			        $("#downBt"+nowCnt).attr("value","完成");
-				    $("#viewBt"+nowCnt).attr("disabled",false);
+				    
 			        		        
                     loading(progressID[nowCnt],100);
  			        //alert(nowCnt);
@@ -362,7 +368,10 @@ function submitForm(url)
 		  			else
 		  			{
 		  			  nowCnt = 0;
-		  			 }
+		  			  $("#downAllBt").attr("disabled",true);
+			          $("#downAllBt").attr("value","完成");
+				      $("#viewAllBt").attr("disabled",false);
+		  			}
 				}
 				else
 				{
@@ -388,7 +397,7 @@ function submitForm(url)
 			$(this).children().html(per);
 			
             if(per=='100%'){
-                $(this).children().html('下载完成!');
+                $(this).children().html('100%');
 
             }
 			
@@ -397,11 +406,9 @@ function submitForm(url)
 	
 	function viewAllDoc()
 	{
-	 	function viewDoc(nowCnt)
-    {
-           
-         window.location.href='WebView://';
-         var cmd = "";
+     
+           var cmd ='WebView://';
+         
          for(var i=0;i<imageCnt;i++)
         {
             var path = fileRootPath + imageURL[i] + imageFileName[i];
@@ -416,8 +423,8 @@ function submitForm(url)
             
             
         };
- 
-    }
+        window.location.href = cmd;
+
 	}
 	function viewDoc(nowCnt)
     {

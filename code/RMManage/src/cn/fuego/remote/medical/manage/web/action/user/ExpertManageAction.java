@@ -85,7 +85,7 @@ public class ExpertManageAction extends DWZTableAction
     public String cancel()
     
     {
-		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		this.getOperateMessage().setCallbackType(MispMessageModel.CANCEL);
 
 		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
 		
