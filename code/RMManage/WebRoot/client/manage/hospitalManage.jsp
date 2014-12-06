@@ -22,14 +22,19 @@ function submitAccountManage2(type,id,name)
 		msg="确定需要启用账户：";
 	}
 	alertMsg.confirm(msg+id+"("+name+")"+"？", {
-		okCall: function(){
+		okCall: function(json){
 
-         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, DWZ.ajaxDone, "json");
-         navTab.reload("user/HospitalManage");
+         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, reloadCurrentTab2(json), "json");
+        
 		}
 	});
 
-
+}
+	//自定义重载tab方法
+function reloadCurrentTab2(json)
+{
+   DWZ.ajaxDone(json);
+   navTab.reload("user/HospitalManage");
 }
 </script>
 
