@@ -11,7 +11,7 @@ function submitForm(url){
 }
 
 </script>
-<div class="pageHeader">
+<div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<s:form id="pagerForm" onsubmit="return navTabSearch(this);" action="log/LogManage" method="POST" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />

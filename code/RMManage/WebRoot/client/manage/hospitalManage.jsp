@@ -10,11 +10,31 @@
 	{
 		$(".accountCol").hide();
 	}
+function submitAccountManage2(type,id,name) 
+{
+	var msg=null;
+	if(type=="logoff")
+	{
+		msg="确定需要注销账户：";
+	}
+	if(type=="logon")
+	{
+		msg="确定需要启用账户：";
+	}
+	alertMsg.confirm(msg+id+"("+name+")"+"？", {
+		okCall: function(){
 
+         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, DWZ.ajaxDone, "json");
+         navTab.reload("user/HospitalManage");
+		}
+	});
+
+
+}
 </script>
 
 
-<div class="pageHeader">
+<div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	
 	<s:form  id="pagerForm" action="user/HospitalManage" method="POST" onsubmit="return navTabSearch(this);">
 
@@ -95,11 +115,11 @@
 				<td class="accountCol">
 				<c:choose>
 					<c:when test="${e.state==2}">
-						<a title="启用确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logon"   mask="true" 
+						<a title="确定要启用该账户"   href="javascript:;"  mask="true" onclick="submitAccountManage2('logon','${e.id }','${e.name}')"
 							class="mispButton " style="line-height:6px;">启用账户</a>
 					</c:when>
 					<c:when test="${e.state==3}">
-					<a title="注销确认" target="dialog" href="<%=request.getContextPath()%>/client/manage/logoff.jsp?userName=${e.id}&operate=logoff"   mask="true" 
+						<a title="确定要注销该账户"  href="javascript:;" mask="true" onclick="submitAccountManage2('logoff','${e.id }','${e.name}')"
 							class="mispButton danger" style="line-height:6px;">注销账户</a>					
 					</c:when>
 					<c:otherwise>

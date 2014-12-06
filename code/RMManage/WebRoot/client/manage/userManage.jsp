@@ -11,7 +11,7 @@ function submitForm(url){
 }
 
 </script>
-<div class="pageHeader">
+<div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="user/UserManage" method="post" name="userSearch">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
@@ -19,10 +19,7 @@ function submitForm(url){
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
-			<!-- <td>
-					用户编号：<input type="text" name="filter.userID" />
-				</td>
-			 -->	
+
 				<td>
 					用户名称：<input type="text" name="filter.userName" value="${filter.userName}" id="userName"/>
 				</td>				
@@ -76,7 +73,7 @@ function submitForm(url){
 	<table class="table" width="100%" layoutH="115">
 		<thead>
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
+				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin:5px;"></th>
 				<th width="20%" align="center">用户编号</th>
 				<th width="25%" align="center">用户名称</th>
 				<th width="20%" align="center">账号类型</th>
@@ -89,7 +86,7 @@ function submitForm(url){
 		<c:forEach var="e" items="${userTable.currentPageData}"> 
 			
 			<tr target="sid_user" rel="${e.userID}">
-				<td><input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin-top:5px;"></td>
+				<td><input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin:5px;"></td>
 				<td>${e.userID}</td>
 				<td>${e.userName}</td>
 				<td>
