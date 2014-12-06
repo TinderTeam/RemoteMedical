@@ -22,12 +22,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            //每次请求需要一个不同的参数，否则可能会返回同样的验证码  
         //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
         obj.src="login/ValidateImage.action?d="+timenow;  
-    } 
-    $(function(){
-    
-     	$("#Bt1").click(function(){
-        //alert($.trim($("#uaseName").val()).length);
-        if ($.trim($("#userName").val()).length<=0)
+    }
+        //enter 按下提交表单
+
+	$(function() {
+			document.onkeydown = function(e) {
+				var ev = document.all ? window.event : e;
+				if (ev.keyCode == 13) {// 如（ev.ctrlKey && ev.keyCode==13）为ctrl+Center 触发  
+					//要处理的事件  
+					submitLogin();
+				}
+			};
+		}); 
+	function submitLogin()
+	{
+		if ($.trim($("#userName").val()).length<=0)
         {
         	$("#warn").html("用户名输入不能为空！");
         }else if($.trim($("#userPwd").val()).length<=0)
@@ -57,6 +66,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
               });
         }                
+		
+	}
+    $(function(){
+    
+     	$("#Bt1").click(function(){
+        //alert($.trim($("#uaseName").val()).length);
+           submitLogin();    
 
      	});//Bt1 click function
      }); //function

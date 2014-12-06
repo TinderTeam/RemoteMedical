@@ -142,8 +142,6 @@ public class DateUtil
 
 		return time.toString();
 	}
-	
-	
 
 	public static int countDayNum(Date startDate, Date endDate)
 	{

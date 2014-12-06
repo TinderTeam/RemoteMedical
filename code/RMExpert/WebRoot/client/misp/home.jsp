@@ -100,16 +100,7 @@ function resetForm(objForm){
  
 					<li><a href="login/login!logout.action">退出</a></li>
 				</ul>
-<!-- 			<ul class="themeList" id="themeList">
-					<li theme="azure"><div class="selected">天蓝</div></li>
-					 <li theme="default"><div >蓝色</div></li>
-					<li theme="green"><div>绿色</div></li>
-					<li theme="red"><div>红色</div></li>
-					<li theme="purple"><div>紫色</div></li>
-					<li theme="silver"><div>银色</div></li>
-					
-				</ul>
- -->					
+				
 			</div>
 
 			<!-- navMenu -->
