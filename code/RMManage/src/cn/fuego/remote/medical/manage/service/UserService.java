@@ -28,11 +28,10 @@ public interface UserService extends MISPUserService
 	 LinkModel getLinkByID(String hospitalID, String expertID);
 		
 	 
-	void modifyHospitalInfo(HospitalModel hospitalModel,String operator);
-	
-	void saveHospitalInfo(HospitalModel hospitalModel,String operator);
+ 
+	public void saveHospitalInfo(HospitalModel hospitalModel,String operator,String type);
 
-	void saveExpertInfo(ExpertModel expertModel,String operator);
+	void saveExpertInfo(ExpertModel expertModel,String operator, String type);
 
 	
 	void createUser(String userName,String accountType, String operator);

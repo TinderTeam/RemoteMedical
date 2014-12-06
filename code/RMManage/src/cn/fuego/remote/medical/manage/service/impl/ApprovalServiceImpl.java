@@ -70,9 +70,8 @@ public class ApprovalServiceImpl implements ApprovalService
 	@Override
 	public void createHospitalApply(HospitalModel hospital)
 	{
-		hospital.getHospital().setState(UserStatusEnum.APPLIED.getIntValue());
-		hospital.getHospital().setApply(DateUtil.getCurrentDate());
-		ServiceContext.getInstance().getUserService().modifyHospitalInfo(hospital, hospital.getHospital().getId());
+ 
+		ServiceContext.getInstance().getUserService().saveHospitalInfo(hospital, hospital.getHospital().getId(),"apply");
  		createApply(ApplyTypeEnum.MODIFY_HOSPITAL,hospital.getHospital().getId(),hospital.getHospital().getId(),null);
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(hospital.getHospital().getId(), MISPOperLogConsant.MODIFY_HOSPITAL, null, MISPOperLogConsant.OPERATE_SUCCESS);		
 		 
@@ -81,10 +80,8 @@ public class ApprovalServiceImpl implements ApprovalService
 	@Override
 	public void createExpertApply(ExpertModel expert)
 	{
-		expert.getExpert().setState(UserStatusEnum.APPLIED.getIntValue());
-		expert.getExpert().setApply(DateUtil.getCurrentDate());
 
-		ServiceContext.getInstance().getUserService().saveExpertInfo(expert,expert.getExpert().getId());
+		ServiceContext.getInstance().getUserService().saveExpertInfo(expert,expert.getExpert().getId(),"apply");
 		createApply(ApplyTypeEnum.MODIFY_EXPERT,expert.getExpert().getId(),null,expert.getExpert().getId());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(expert.getExpert().getId(), MISPOperLogConsant.MODIFY_APPLY, null, MISPOperLogConsant.OPERATE_SUCCESS);
 
@@ -184,18 +181,14 @@ public class ApprovalServiceImpl implements ApprovalService
 			case MODIFY_EXPERT:  
 				ExpertModel expertModel =ServiceContext.getInstance().getUserService().getExpertByID(approval.getExpertID());
 				expertModel.getExpert().setState(UserStatusEnum.CREATED.getIntValue());
-				expertModel.getExpert().setAuditor(handleUser);
-				expertModel.getExpert().setReg(DateUtil.getCurrentDate());
-				
+				expertModel.getExpert().setAuditor(handleUser);				
 				DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);
 				break;
 			case MODIFY_HOSPITAL: 
 				HospitalModel hospitalModel =ServiceContext.getInstance().getUserService().getHospitalByID(approval.getHospitalID());
 				hospitalModel.getHospital().setState(UserStatusEnum.CREATED.getIntValue());
-				hospitalModel.getHospital().setAuditor(handleUser);
-				hospitalModel.getHospital().setReg(DateUtil.getCurrentDate());
-				
+				hospitalModel.getHospital().setAuditor(handleUser);	
 				DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());				
 				MISPServiceContext.getInstance().getMISPOperLogService().recordLog(handleUser, MISPOperLogConsant.APPLY_CHECK, approval.getApplyName(), MISPOperLogConsant.APPLY_REFUSE);								  
 				break;

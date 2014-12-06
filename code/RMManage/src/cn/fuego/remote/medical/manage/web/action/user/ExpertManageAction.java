@@ -102,7 +102,7 @@ public class ExpertManageAction extends DWZTableAction
     {
     	try
 		{
-			userService.saveExpertInfo(expertModel,this.getLoginUser().getUserName());
+			userService.saveExpertInfo(expertModel,this.getLoginUser().getUserName(),"save");
 		} catch (Exception e)
 		{
 			log.error("save user failed",e);

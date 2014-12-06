@@ -61,12 +61,7 @@ public class HospitalManageAction extends DWZTableAction
 	public String modify()
 	{
 
-		
-		userService.modifyHospitalInfo(hospitalModel,this.getLoginUser().getUserName());
-		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
-
-		this.getOperateMessage().setForwardUrl(PARENT_PAGE);
-
+ 
 		return MISP_DONE_PAGE;
 	}
 	
@@ -90,7 +85,7 @@ public class HospitalManageAction extends DWZTableAction
     }
     public String infoSave()
     {
-    	userService.saveHospitalInfo(hospitalModel,this.getLoginUser().getUserName());
+    	userService.saveHospitalInfo(hospitalModel,this.getLoginUser().getUserName(),"save");
     	
     	return MISP_DONE_PAGE;
     }

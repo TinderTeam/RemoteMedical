@@ -33,6 +33,7 @@ import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.ApplyStatusEnum;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
@@ -232,24 +233,32 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		return expertModel;
 	}
 	@Override
-	public void modifyHospitalInfo(HospitalModel hospitalModel,String operator)
-	{
-		hospitalValidator(hospitalModel);
-
-		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
-		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
-		
-		
-	}
-	@Override
-	public void saveHospitalInfo(HospitalModel hospitalModel,String operator)
+	public void saveHospitalInfo(HospitalModel hospitalModel,String operator,String type)
 	{
 		HospitalModel oldInfo = getHospitalByID(hospitalModel.getHospital().getId());
-		hospitalModel.getHospital().setState(oldInfo.getHospital().getState());
 		
-		hospitalValidator(hospitalModel);
+		if(type.equals("apply"))
+		{
+			oldInfo.getHospital().setState(UserStatusEnum.APPLIED.getIntValue());
+			oldInfo.getHospital().setApply(DateUtil.getCurrentDate());
+		}
+ 
+		oldInfo.getHospital().setAddress(hospitalModel.getHospital().getAddress());
+		oldInfo.getHospital().setCity(hospitalModel.getHospital().getCity());
+		oldInfo.getHospital().setContacts(hospitalModel.getHospital().getContacts());
+		oldInfo.getHospital().setContactsPhone(hospitalModel.getHospital().getContactsPhone());
+		oldInfo.getHospital().setContactWay(hospitalModel.getHospital().getContactWay());
+		oldInfo.getHospital().setCounty(hospitalModel.getHospital().getCounty());
+		oldInfo.getHospital().setHospitalPhone(hospitalModel.getHospital().getHospitalPhone());
+		oldInfo.getHospital().setName(hospitalModel.getHospital().getName());
+		oldInfo.getHospital().setProvince(hospitalModel.getHospital().getProvince());
+		oldInfo.getHospital().setRank(hospitalModel.getHospital().getRank());
+		oldInfo.getHospital().setRemark(hospitalModel.getHospital().getRemark());
+		oldInfo.getHospital().setResume(hospitalModel.getHospital().getResume());
 		
-		DaoContext.getInstance().getHospitalDao().update(hospitalModel.getHospital());
+		hospitalValidator(oldInfo);
+		
+		DaoContext.getInstance().getHospitalDao().update(oldInfo.getHospital());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_HOSPITAL, hospitalModel.getHospital().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
 		
 	}
@@ -265,14 +274,14 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 	}
 
 	@Override
-	public void saveExpertInfo(ExpertModel expertModel,String operator)
+	public void saveExpertInfo(ExpertModel expertModel,String operator,String type)
 	{
 		ExpertModel old = getExpertByID(expertModel.getExpert().getId());
 		if(expertModel.getSignPic()!=null)
 		{
 			if(expertModel.getSignPic().length()<1024*65)
 			{
-				expertModel.getExpert().setSignName(HibernateUtil.getByteByFile(expertModel.getSignPic()));
+				old.getExpert().setSignName(HibernateUtil.getByteByFile(expertModel.getSignPic()));
 			}
 			else
 			{
@@ -281,16 +290,13 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 
 			
 		}
-		else
-		{
-			expertModel.getExpert().setSignName(old.getExpert().getSignName());
-		}
+ 
 		
 		if(expertModel.getExPhoto()!=null)
 		{
 			if(expertModel.getExPhoto().length()<1024*65)
 			{
-				expertModel.getExpert().setExPhoto(HibernateUtil.getByteByFile(expertModel.getExPhoto()));
+				old.getExpert().setExPhoto(HibernateUtil.getByteByFile(expertModel.getExPhoto()));
 			}
 			else
 			{
@@ -298,11 +304,35 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			
 		}	
-		else
-		{
-			expertModel.getExpert().setExPhoto(old.getExpert().getExPhoto());
-		}
-		DaoContext.getInstance().getExpertDao().update(expertModel.getExpert());
+ 
+		//以下字段保存时变量值
+		old.getExpert().setName(expertModel.getExpert().getName());
+		old.getExpert().setSex(expertModel.getExpert().getSex());
+		old.getExpert().setAge(expertModel.getExpert().getAge());
+		old.getExpert().setPhoneNo(expertModel.getExpert().getPhoneNo());
+		old.getExpert().setTelephoneNo(expertModel.getExpert().getTelephoneNo());
+		old.getExpert().setEmail(expertModel.getExpert().getEmail());
+		old.getExpert().setQq(expertModel.getExpert().getQq());
+		old.getExpert().setWeixin(expertModel.getExpert().getWeixin());
+		old.getExpert().setResume(expertModel.getExpert().getResume());
+		old.getExpert().setJobTitle(expertModel.getExpert().getJobTitle());
+		old.getExpert().setExpertise(expertModel.getExpert().getExpertise());
+		old.getExpert().setWorkPlace(expertModel.getExpert().getWorkPlace());
+		old.getExpert().setProvince(expertModel.getExpert().getProvince());
+		old.getExpert().setCity(expertModel.getExpert().getCity());
+		old.getExpert().setCounty(expertModel.getExpert().getCounty());
+		old.getExpert().setRemark(expertModel.getExpert().getRemark());
+        if(type.equals("apply"))
+        {
+        	old.getExpert().setState(UserStatusEnum.APPLIED.getIntValue());
+        	old.getExpert().setApply(DateUtil.getCurrentDate());
+        }
+	/*	    expertModel.getExpert().setApply(expertModel.getExpert().getApply());
+	    expertModel.getExpert().setState(expertModel.getExpert().getState());
+	expertModel.getExpert().setReg(old.getExpert().getReg());
+		expertModel.getExpert().setAuditor(old.getExpert().getAuditor());
+		expertModel.getExpert().setAuthority(old.getExpert().getAuthority()); */ 
+		DaoContext.getInstance().getExpertDao().update(old.getExpert());
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(operator, MISPOperLogConsant.MODIFY_EXPERT, expertModel.getExpert().getId(), MISPOperLogConsant.OPERATE_SUCCESS);
 		
 	}

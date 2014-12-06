@@ -121,15 +121,6 @@
 						</c:choose>
 						<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
 						
-						 
-<%-- 							<c:choose>
-								<c:when test="${loginUser.accountType==2}">
-									<li><input type="button" class="mispButton primary close" value="关 闭"/></li>
-								</c:when>
-								<c:otherwise>
-									<li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li>
-								</c:otherwise>
-							</c:choose>	 --%>						
 					</c:otherwise>
 						
 				</c:choose>			
