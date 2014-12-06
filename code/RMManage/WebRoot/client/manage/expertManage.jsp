@@ -28,9 +28,9 @@ function submitAccountManage(type,id,name)
 		msg="确定需要启用账户：";
 	}
 	alertMsg.confirm(msg+id+"("+name+")"+"？", {
-		okCall: function(json){
+		okCall: function(){
 
-         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, reloadCurrentTab(json), "json");
+         $.post("login/login!accountManage.action?accountOperate=" +type+"&user.userName="+id, reloadCurrentTab, "json");
         
 		}
 	});
