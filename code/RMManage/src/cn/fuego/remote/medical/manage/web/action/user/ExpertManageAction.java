@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.domain.Expert;
 import cn.fuego.remote.medical.manage.service.ApprovalService;
@@ -160,8 +161,13 @@ public class ExpertManageAction extends DWZTableAction
      * @return
      */
     public String addExpert()
-    {	
-		expertTable.setPage(this.getPage());
+    {	if(null == filter)
+        {
+    	   filter = new ExpertModel();
+    	   filter.setExpert(new Expert());
+        }
+    	filter.getExpert().setState(UserStatusEnum.REGISTERED.getIntValue());
+    	expertTable.setPage(this.getPage());
 		expertTable.setDataSource(userService.getExpertList(filter,UserTypeEnum.ADMIN.getTypeValue(),null));
     	return "addExpert";
     	

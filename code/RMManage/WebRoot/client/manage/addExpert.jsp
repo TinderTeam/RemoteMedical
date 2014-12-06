@@ -25,7 +25,7 @@
 					专家姓名：<input type="text" name="filter.expert.name" value="${filter.expert.name}"/>
 				</td>
 				<td>
-					职称类型：<input type="text" name="filter.expert.jobTitle" value="${filter.expert.name}"/>
+					职称类型：<input type="text" name="filter.expert.jobTitle" value="${filter.expert.jobTitle}"/>
 				</td>				
 			</tr>
 

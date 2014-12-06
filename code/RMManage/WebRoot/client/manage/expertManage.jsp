@@ -45,7 +45,7 @@ function reloadCurrentTab(json)
 </script>
 
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
-	<div  style="height:40px;overflow:hidden;display:none;" id="addEx" >
+	<div  style="height:43px;overflow:hidden;display:none;" id="addEx" >
 		<s:form  name="exAdd" action="user/ExpertManage" method="POST"  onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="searchBar">
 			<table class="searchContent">
