@@ -100,7 +100,7 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"operTime",DateUtil.DateToString(endDate)));
 			}			
 		}
-		conditionList.add(new QueryCondition(ConditionTypeEnum.ASC_ORDER,"operTime"));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"operTime"));
 
 		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class,conditionList);
 	 
