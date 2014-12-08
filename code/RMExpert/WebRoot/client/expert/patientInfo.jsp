@@ -124,11 +124,12 @@ function submitForm(url)
 			<div class="pageFormContent"  id="panelImg"> 
 			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
-				 <dd style="font-size:1.2em;width:25% !important;float:right;">
+				 <div style="font-size:1.2em;float:left;">
 							
-					 <span style="margin:0px 5px;"><input id="downAllBt" type="button" onclick="StartAll()" value="下载"/></span>
-					 <span style="margin:0px 5px;"><input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /></span>
-				 </dd>
+					 
+                                           <input id="downAllBt" type="button" onclick="StartAll()" value="下载" style="margin:5px 10px;"/> 
+					   <input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" />
+                                </div>
 						    
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
@@ -143,23 +144,18 @@ function submitForm(url)
 								<span style="margin:0px 5px 0px 0px;">部位：<u>${e.image.bodyPart}</u></span>
 							</dt>
 						
-						    <dd style="font-size:1.2em;width:25% !important;float:right;">
-							
-							    <span style="margin:0px 5px;"><input id="downBt${status.index}" type="button" onclick="StartDown(this.id)" value="下载"/></span>
-						    </dd>
+						    
 	
 					</dl>	
 					<dl style="width:98% !important;">
-						<dt style="width:70% !important;">
+						<dt style="width:90% !important;">
 					
-				    	<div class="progress" style="padding-top:5px" id="downSize${status.index}">
+				    	             <div class="progress" style="padding-top:5px" id="downSize${status.index}">
 							<span class="blue" style="width:0%;" ><span style="width:10% !important;text-align:center;" ></span></span>
-						</div>
+						     </div>
 
 						</dt>
-						<dd style="width:25% !important;float:right;">
-	                      <span style="margin:0px 5px;"><input  id="viewBt${status.index}" type="button" value="查看" disabled="disabled" onclick="viewDoc(${status.index});" /></span>
-						</dd>					
+				 					
 
 					</dl>					      
 				 </c:forEach>
@@ -211,16 +207,15 @@ function submitForm(url)
 							   <c:when test="${1 == medicalReport.reportView.exReportState}">
   
 	                            <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="cancal" value="撤销报告" onclick="submitForm('cancel')"  /></li>
-							    <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="back" value="返回" onclick="submitForm('back')"/></li>					            
-					           </c:when>
+							   </c:when>
 							   <c:otherwise>  
 							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
 					           <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
 							   <!--  <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('showTransfer')"  /></li>-->
- 							   <li style="padding-bottom:5px;"> <input class="mispButton primary close" type="button"  name="back" value="返回"  /></li>
-					           </c:otherwise>
+ 							  </c:otherwise>
 					</c:choose>
-
+                    <li style="padding-bottom:5px;"> <input class="mispButton primary close" type="button"  name="back" value="返回"  /></li>
+					          
 				</ul>
 			</div>		
 			</div>
@@ -293,6 +288,7 @@ function submitForm(url)
 	       contextPath = $("#contextPath").val();
 	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
 		   updateProgress();
+                   $("#downAllBt").attr("disabled",true);
 		}
 
  

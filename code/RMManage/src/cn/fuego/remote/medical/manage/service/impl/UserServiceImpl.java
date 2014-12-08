@@ -138,6 +138,12 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		
 		HospitalModel hospitalModel = new HospitalModel();
 		Hospital hospital = (Hospital) DaoContext.getInstance().getHospitalDao().getUniRecord(condition);
+		
+		if(null == hospital)
+		{
+			log.warn("can not find the hospital by id. the is " + id);
+			return null;
+		}
 		hospitalModel.setHospital(hospital);
 	  		
 		return hospitalModel;
@@ -456,6 +462,15 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 		if (!ValidatorUtil.isEmpty(expertID))
 		{
 
+			HospitalModel hospital = this.getHospitalByID(hospitalID);
+			if(null == hospital)
+			{
+				throw new SystemOperateException(CommonExceptionMsg.USER_NOT_EXISTED); 
+			}
+			if(hospital.getHospital().getState() != UserStatusEnum.REGISTERED.getIntValue())
+			{
+				throw new SystemOperateException(CommonExceptionMsg.NOT_REGISTED); 
+			}
 			Link oldLink = getLinkByID(hospitalID, expertID).getLink();
 			if (oldLink != null)
 			{
