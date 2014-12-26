@@ -8,7 +8,7 @@
 <script type="text/javascript">
 function submitForm(url) 
 {
- if(url == "submit")
+ if(url == "submit" || url=="modify")
  {
     if ($.trim($("#text3").val()).length<=0)
     {
@@ -193,11 +193,25 @@ function submitForm(url)
 				<div class="divider"></div>
 				<dl style="width:50%;" id="text3dl">
 					<dt style="text-align:left;width:80%;" >检查所见：</dt>
-					<dd class="textWidth" ><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" style="width:95%;">${medicalReport.reportView.exStudyContent}</textarea></dd>
+				   <c:choose>
+					 <c:when test="${1 == medicalReport.reportView.exReportState}">
+					    <dd class="textWidth" ><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3"   readonly="true"  style="width:95%;">${medicalReport.reportView.exStudyContent}</textarea></dd>
+					 </c:when>
+					 <c:otherwise>  
+					    <dd class="textWidth" ><textarea name="medicalReport.reportView.exStudyContent" cols="" rows="" id="text3" style="width:95%;">${medicalReport.reportView.exStudyContent}</textarea></dd>
+					 </c:otherwise>
+					</c:choose>
 				</dl>
 				<dl  style="width:50%;" id="text4dl">
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-					<dd class="textWidth"><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" style="width:95%;">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+									   <c:choose>
+					 <c:when test="${1 == medicalReport.reportView.exReportState}">
+					    <dd class="textWidth"><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows=""   readonly="true"  id="text4" style="width:95%;">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+					 </c:when>
+					 <c:otherwise>  
+					    <dd class="textWidth"><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows="" id="text4" style="width:95%;">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
+					 </c:otherwise>
+					</c:choose>
 				</dl>
 				</div>
 			</div>
@@ -214,7 +228,7 @@ function submitForm(url)
 							   <!--  <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('showTransfer')"  /></li>-->
  							  </c:otherwise>
 					</c:choose>
-                    <li style="padding-bottom:5px;"> <input class="mispButton primary close" type="button"  name="back" value="返回"  /></li>
+                    <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button"  name="back" value="返回"  onclick="submitForm('back')" /></li>
 					          
 				</ul>
 			</div>		
@@ -281,173 +295,7 @@ function submitForm(url)
 	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
  
 		 };
-		 
-		function StartAll()
-		{
-		   sessionID = $("#sessionID").val();
-	       contextPath = $("#contextPath").val();
-	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
-		   updateProgress();
-                   $("#downAllBt").attr("disabled",true);
-		}
-
- 
-        
-		function StartDown(id)
-		{
-
-		   sessionID = $("#sessionID").val();
-	       contextPath = $("#contextPath").val();
-	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
- 
- 			if(isStop==true)
-			{
-				$("#"+id).attr("value","取消");
-				if(isStarted == true)
-				{
-				   ReYoWebDownLoad.ReYoStartDownload();
-				}
-				
-				isStop=false;
-				updateProgress();
-			}
-			else
-			{
-			    $("#"+id).attr("value","下载");
-				ReYoWebDownLoad.ReYoStopDownload();
-				isStop=true;
-			}
-
-		}
- 
-		function updateProgress()
-		{
-		   if(isStarted == false)
-		   {
-		   
-		     //create path
-		     createPath(imageURL[nowCnt]);
-		     
-		     ReYoWebDownLoad.copyright="锐洋软件拥有版权 www.interdrp.com";
-			 ReYoWebDownLoad.url= hostURL+ "/DownloadImage?filePath=D:/down.pdf&sessionID="+sessionID;
-			 ReYoWebDownLoad.url= hostURL+ imageURL[nowCnt] + imageFileName[nowCnt];
-			 //alert(ReYoWebDownLoad.url);
-			 ReYoWebDownLoad.percent = 0;
-		 	 ReYoWebDownLoad.path =fileRootPath+   imageURL[nowCnt] + imageFileName[nowCnt];
-			 ReYoWebDownLoad.ReYoStartDownload();
-			 isStarted = true;
-		   }
- 
-		 	if (ReYoWebDownLoad.cancle)
-		    {
-		
-				alert("本次下载已取消！");
-				isStarted = false;
-				return;
-		    }
-		 	else
-			{
-				if (ReYoWebDownLoad.done) 
-				{
- 
-		  			ReYoWebDownLoad.done=false;
-				    
-			        		        
-                    loading(progressID[nowCnt],100);
- 			        //alert(nowCnt);
-		  			nowCnt ++;
-		  			isStarted = false;
-		  			if(nowCnt<imageCnt)
-		  			{
-		  		   	  setTimeout("updateProgress()",500);	
-		  			}
-		  			else
-		  			{
-		  			  nowCnt = 0;
-		  			  $("#downAllBt").attr("disabled",true);
-			          $("#downAllBt").attr("value","完成");
-				      $("#viewAllBt").attr("disabled",false);
-		  			}
-				}
-				else
-				{
-					 if(isStop==false)
-					 {
-					 	setTimeout("updateProgress()",500);		
-						//document.getElementById(progressID[nowCnt]).value = ReYoWebDownLoad.percent;
-						loading(progressID[nowCnt],ReYoWebDownLoad.percent);
-					 }
-
-
-				}
-			}
-		
-		}
-		
-
-	function loading(progressID,percent){
-
-        var per = percent + "%";
-	    $("#"+progressID).find("span:first-child").animate({width:per},30,function(){
-
-			$(this).children().html(per);
-			
-            if(per=='100%'){
-                $(this).children().html('100%');
-
-            }
-			
-		});
-	}
 	
-	function viewAllDoc()
-	{
-     
-           var cmd ='WebView://';
-         
-         for(var i=0;i<imageCnt;i++)
-        {
-            var path = fileRootPath + imageURL[i] + imageFileName[i];
-            if(i == 0)
-            {
-              cmd += path;
-            }
-            else
-           {
-              cmd += path + "|";
-            };
-            
-            
-        };
-        window.location.href = cmd;
-
-	}
-	function viewDoc(nowCnt)
-    {
-           
-           window.location.href='WebView://' + fileRootPath + imageURL[nowCnt] + imageFileName[nowCnt]; 
-    }
-    
-     function createPath(path)
-    {
-           window.location.href='WebView://create:' + path;
-    }
-	function deleteFile(target)
-	{
-      var   fso = new  ActiveXObject("Scripting.FileSystemObject");   
-      if(fso.FileExists(target))
-      {
-      	fso.DeleteFile(target);
-      	 alert("删除成功！");
-      }
-        
-      else
-      {
-      	alert("删除对象不存在！");
-      }   
-       
-		 
-	}
 	
 	</script>
 

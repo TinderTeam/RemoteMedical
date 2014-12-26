@@ -134,6 +134,14 @@ public class ReportTemplateCache
 				{
 					template.setName(child.getText());
 				}
+				else if("Sentence".equals(child.getName()))
+				{
+					for (Iterator<?> j = child.elementIterator(); j.hasNext();)
+					{
+						childList.add(getTemplateByElement((Element)j.next()));
+					}
+					
+				}
 				else
 				{
 					childList.add(getTemplateByElement(child));

@@ -85,10 +85,10 @@
 				<td>${e.applyTime}</td>
 				<td>
 					<c:if test="${(e.applyType=='1')||(e.applyType=='2')}">
-					<a title="修改申请" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}&operateType=check" class="btnView" rel="Menu${selectedMenuID}">查看</a>
+					<a title="审核管理" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}&operateType=check" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 					</c:if>
 					<c:if test="${e.applyType=='3'}">
-					<a title="修改申请" target="dialog" href="ApprovalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>					
+					<a title="审核管理" target="dialog" href="ApprovalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>					
 					</c:if>
 
 				</td>

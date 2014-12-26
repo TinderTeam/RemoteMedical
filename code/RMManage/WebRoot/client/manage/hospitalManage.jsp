@@ -87,7 +87,7 @@ function reloadCurrentTab2(json)
 				<th width="10%" align="center">医院账号</th>
 				<th width="15%" align="center">医院名称</th>
 				<th width="10%" align="center">规模</th>
-				<th width="15%" align="center">地点</th>
+				<th width="15%" align="center">详细地址</th>
 				<th width="10%" align="center">联系人</th>
 				<th width="15%" align="center">联系电话</th>
 				<th width="10%" align="center">账户状态</th>

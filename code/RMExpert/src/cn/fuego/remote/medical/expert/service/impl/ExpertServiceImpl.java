@@ -241,9 +241,17 @@ public class ExpertServiceImpl implements ExpertService
 			{
 				report.setExReport(DateUtil.getCurrentDate());
 			}
-		 
+ 
+			if(status == ReportStatusEnum.CANCEL)
+			{
+				report.setExReportState(ReportStatusEnum.SAVE.getStatusValue());
 
-			report.setExReportState(status.getStatusValue());
+			}
+			else
+			{
+				report.setExReportState(status.getStatusValue());
+			}
+
 			repertDao.update(report);
 		 
 			MISPServiceContext.getInstance().getMISPOperLogService().recordLog(report.getExDoctor(), operate, "报告编号"+String.valueOf(report.getSerialNo()), MISPOperLogConsant.OPERATE_SUCCESS); 

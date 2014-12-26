@@ -152,7 +152,7 @@ public class ReportManageAction extends DWZTableAction
 	}
 	public String back()
 	{
-		this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		this.getOperateMessage().setCallbackType(MispMessageModel.CANCEL);
 		this.getOperateMessage().setForwardUrl(FRONT_PAGE);
 		return MISP_DONE_PAGE;
 	}

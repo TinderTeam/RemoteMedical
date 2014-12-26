@@ -11,7 +11,9 @@ package cn.fuego.remote.medical.manage.service.impl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -158,7 +160,7 @@ public class ExpertServiceImpl implements ExpertService
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "expertID",expertID));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "linkState",String.valueOf(LinkStatusEnum.LINK_SUCCESS.getStatusValue())));
 		List<Link> linkList = (List<Link>) DaoContext.getInstance().getLinkDao().getAll(conditionList);
-		List<String> hospNameList = new ArrayList<String>();
+		Set<String> hospNameList = new HashSet<String>();
 		for(Link e : linkList)
 		{
 			if(!ValidatorUtil.isEmpty(e.getHospitalName()))
@@ -166,6 +168,6 @@ public class ExpertServiceImpl implements ExpertService
 				hospNameList.add(e.getHospitalName());
 			}
 		}
-		return hospNameList;
+		return new ArrayList<String>(hospNameList);
 	}
 }

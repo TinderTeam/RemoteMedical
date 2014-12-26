@@ -9,16 +9,15 @@
 
 
 	 <OBJECT
-	   classid="clsid:27AEE2AD-4451-4FB7-BA27-2D2CAD155E58"
-	   codebase="ReYoWebDownLoad.cab#version=1,724,0,903"
-	   id="ReYoWebDownLoad"
+	   classid="clsid:67134AD0-705A-4CD6-B520-56435E59EDE6"
+ 	   id="ReYoWebDownLoad"
 	          name="ReYoWebDownLoad"
 	   width=119
 	   height=0
 	   align=center
 	   hspace=0
-	   vspace=0      
-	>
+	   vspace=0 >   
+	 
 	</OBJECT>  
 
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/azure/style.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -182,6 +181,143 @@ function resetForm(objForm){
 	}
 	}, 1000);
  });
+
+
+	 
+		function StartAll()
+		{
+		   sessionID = $("#sessionID").val();
+	       contextPath = $("#contextPath").val();
+	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+           isStop=false;
+		   updateProgress();
+           $("#downAllBt").attr("disabled",true);
+                   
+		}
+
+ 
+        
+	 
+ 
+		function updateProgress()
+		{
+		   if(isStarted == false)
+		   {
+		   
+		     //create path
+		     //createPath(imageURL[nowCnt]);
+		     ReYoWebDownLoad.debug = true;
+             ReYoWebDownLoad.url= hostURL+ "/"+imageURL[nowCnt] + imageFileName[nowCnt];
+ 
+		 	 ReYoWebDownLoad.path =fileRootPath+   imageURL[nowCnt] + imageFileName[nowCnt];
+			 ReYoWebDownLoad.StartDown();
+			 isStarted = true;
+		   }
+ 
+		 	if (ReYoWebDownLoad.cancle)
+		    {
+		        $("#downAllBt").attr("disabled",false);
+				alert("本次下载已取消！");
+				isStarted = false;
+                               
+				return;
+		    }
+		 	else
+			{
+			    if (ReYoWebDownLoad.failed)
+			    {
+			       alert("下载失败");
+			       $("#downAllBt").attr("disabled",false);
+			    } 
+			    else
+			   {
+				   	if (ReYoWebDownLoad.done) 
+					{
+	 
+			  			ReYoWebDownLoad.done=false;
+					    
+				        		        
+	                    loading(progressID[nowCnt],100);
+	 			        //alert(nowCnt);
+			  			nowCnt ++;
+			  			isStarted = false;
+			  			if(nowCnt<imageCnt)
+			  			{
+			  		   	  setTimeout("updateProgress()",500);	
+			  			}
+			  			else
+			  			{
+			  			  nowCnt = 0;
+			  			  $("#downAllBt").attr("disabled",true);
+				          $("#downAllBt").attr("value","完成");
+					      $("#viewAllBt").attr("disabled",false);
+			  			}
+					}
+					else
+					{
+						 if(isStop==false)
+						 {
+						 	setTimeout("updateProgress()",500);		
+							//document.getElementById(progressID[nowCnt]).value = ReYoWebDownLoad.percent;
+							loading(progressID[nowCnt],ReYoWebDownLoad.percent);
+						 }
+	
+	
+					}
+			    }
+			
+			}
+		
+		}
+		
+
+	function loading(progressID,percent){
+
+        var per = percent + "%";
+	    $("#"+progressID).find("span:first-child").animate({width:per},30,function(){
+
+			$(this).children().html(per);
+			
+            if(per=='100%'){
+                $(this).children().html('100%');
+
+            }
+			
+		});
+	}
+	
+	function viewAllDoc()
+	{
+     
+           var cmd ='WebView://';
+         
+         for(var i=0;i<imageCnt;i++)
+        {
+            var path = fileRootPath + imageURL[i] + imageFileName[i];
+            if(i == 0)
+            {
+              cmd += path;
+            }
+            else
+           {
+              cmd += "|" + path;
+            };
+            
+            
+        };
+        window.location.href = cmd;
+
+	}
+	function viewDoc(nowCnt)
+    {
+           
+           window.location.href='WebView://' + fileRootPath + imageURL[nowCnt] + imageFileName[nowCnt]; 
+    }
+    
+     function createPath(path)
+    {
+           window.location.href='WebView://create:' + path;
+    }
 
 </script>
 

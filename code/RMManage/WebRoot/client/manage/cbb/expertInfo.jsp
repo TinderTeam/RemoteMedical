@@ -91,7 +91,7 @@
 					<legend style="font-size:1.2em;"><strong>联系方式</strong></legend>
 					<p>
 						<label>手机号码：</label> 
-						<input type="text" name="expertModel.expert.phoneNo" class="phone" size="30" value="${expertModel.expert.phoneNo}" />
+						<input type="text" name="expertModel.expert.phoneNo" class="required" class="phone" size="30" value="${expertModel.expert.phoneNo}" />
 					</p>
 					<p>
 						<label>座机号码：</label> 
@@ -124,7 +124,7 @@
 					</dl>
 					<p>
 						<label>职称：</label> 
-						<input type="text" name="expertModel.expert.jobTitle"  size="30"	alue="${expertModel.expert.jobTitle}" />
+						<input type="text" name="expertModel.expert.jobTitle"  size="30"	value="${expertModel.expert.jobTitle}" />
 					</p>
 					<p>
 						<label>擅长专业技能：</label>
