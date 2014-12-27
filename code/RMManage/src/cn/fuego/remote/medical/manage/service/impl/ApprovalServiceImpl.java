@@ -41,7 +41,7 @@ public class ApprovalServiceImpl implements ApprovalService
 		{
 			if(!ValidatorUtil.isEmpty(filter.getApplyName()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"applyName",filter.getApplyName()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"applyUser",filter.getApplyName()));
 			}
 			if(!ValidatorUtil.isEmpty(filter.getApplyType()))
 			{

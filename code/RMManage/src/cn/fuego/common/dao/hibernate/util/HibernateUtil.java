@@ -162,7 +162,7 @@ public final class HibernateUtil
 				switch(condition.getOperate())
 				{
 				case INCLUDLE:
-					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue().trim()+"%"));
 					break;
 				case EXCLUDLE:
 					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
