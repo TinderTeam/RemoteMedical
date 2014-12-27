@@ -17,10 +17,10 @@
         $("#up1").uploadPreview({ Img: "ImgPr1" });
         $("#up2").uploadPreview({ Img: "ImgPr2" });
         
-        var text_width=$("#textW").width();
+        var text_width=$("#extextW").width();
         //alert(text_width);
         //$(".field").width(text_width+75 + "px");
-        $(".field").width(text_width+75 + "px");
+        $(".exfield").width(text_width+120 + "px");
         });
     var operateType =$("#operateType").val();
     if(operateType=='check')
@@ -41,7 +41,7 @@
 		<div class="pageFormContent" layoutH="78"	style="padding:0px 20px 40px 80px;"> 
 				
 			<div style="margin-top:20px;margin-bottom:20px;">
-				<fieldset class="field">
+				<fieldset class="exfield">
 					<legend style="font-size:1.2em;"><strong>个人信息</strong></legend>
 					
 					<div style="float:right; margin-top:5px; margin-right:6%;width:40%;">
@@ -98,7 +98,7 @@
 			</div>
 
 			
-				<fieldset class="field">
+				<fieldset class="exfield">
 					<legend style="font-size:1.2em;"><strong>联系方式</strong></legend>
 					<div style="height:140px;overflow:hidden !important;" class="pageFormContent nowrap"  >
 					<dl style="width:45%;clear:none;">
@@ -123,7 +123,7 @@
 					</dl>
 					<dl style="width:45%;clear:none; ">
 						<dt style="width:20% ">微信号：</dt>
-						<dd style="width:75% "><input type="text" class="mobilephone required"	name="expertModel.expert.weixin"  maxlength="32" size="30" value="${expertModel.expert.weixin}" />
+						<dd style="width:75% "><input type="text" 	name="expertModel.expert.weixin"  maxlength="32" size="30" value="${expertModel.expert.weixin}" />
 						</dd>
 					</dl>
 					</div>
@@ -131,13 +131,13 @@
 			
 
 			<div style="margin-top:20px; margin-bottom:40px;">
-				<fieldset  class="field">
+				<fieldset  class="exfield">
 					<legend style="font-size:1.2em;margin:0 -7px;"><strong>工作信息</strong></legend>
-					<div style="height:450px;overflow:hidden !important;" class="pageFormContent nowrap"  >
+					<div style="height:500px;overflow:hidden !important;" class="pageFormContent nowrap"  >
 					<dl class="nowrap">
 						<dt style="width:10%;">专家简介：</dt>
 						<dd>
-						<textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="2000" id="textW">${expertModel.expert.resume}</textarea>
+						<textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="2000" id="extextW">${expertModel.expert.resume}</textarea>
 						<span class="info" >*最多可输入2000个字符</span>
 						</dd>
 					</dl>
@@ -147,13 +147,13 @@
 						</dd>
 					</dl>
 					<dl style="width:45%;clear:none;">
-						<dt style="width:22%;">擅长专业技能：</dt>
+						<dt style="width:25%;">擅长专业技能：</dt>
 						<dd style="width:70%;"><input type="text" name="expertModel.expert.expertise" maxlength="128" size="30" value="${expertModel.expert.expertise}" />
 						<dd>
 					</dl>
 					<dl class="nowrap">
 						<dt style="width:10%;">工作医院名称：</dt> 
-						<dd><input type="text" name="expertModel.expert.workPlace" size="105"	value="${expertModel.expert.workPlace}" maxlength="128"/>
+						<dd><input type="text" name="expertModel.expert.workPlace" size="111"	value="${expertModel.expert.workPlace}" maxlength="128"/>
 						</dd>
 					</dl>
 					<dl class="nowrap">

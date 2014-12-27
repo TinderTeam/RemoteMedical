@@ -13,7 +13,7 @@
 
         var text_width=$("#textW").width();
         //alert(text_width);
-        $(".field").width(text_width+100 + "px");
+        $(".field").width(text_width+120 + "px");
         
         });
     var operateType =$("#operateType").val();
@@ -31,7 +31,7 @@
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		<input id="operateType" value="${operateType}" style="display:none;"/>
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
-		<div class="pageFormContent" layoutH="56" style="padding:0px 20px 20px 40px;">
+		<div class="pageFormContent" layoutH="56" style="padding:0px 20px 20px 80px;">
 	<fieldset style="margin-top:20px;" class="field">
 		<legend>关键信息</legend>
 		 <div style="height:180px;overflow:hidden !important;" class="pageFormContent nowrap"  >
@@ -98,20 +98,20 @@
 			<dl class="nowrap">
 				<dt  style="width:9% ">联系电话：</dt>			
 				<dd >
-				<textarea name="hospitalModel.hospital.contactsPhone"  cols="90" rows="3" maxlength="255" class="phonelist required" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist required" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
 				<span class="info" >*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>
 
 				<dl class="nowrap">
 					<dt style="width:9% " >医院简介：</dt>
-					<dd ><textarea name="hospitalModel.hospital.resume" cols="90" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea>
+					<dd ><textarea name="hospitalModel.hospital.resume" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea>
 					<span class="info" >*输入不超过2000个字符</span>
 					</dd>
 				</dl>
 				<dl class="nowrap">
 					<dt  style="width:9% ">医院描述：</dt>
-					<dd ><textarea name="hospitalModel.hospital.remark" cols="90" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea>
+					<dd ><textarea name="hospitalModel.hospital.remark" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea>
 					<span class="info" >*输入不超过2000个字符</span>
 					</dd>
 				</dl>	
