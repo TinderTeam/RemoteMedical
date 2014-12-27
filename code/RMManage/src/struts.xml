@@ -115,8 +115,8 @@
 
 		<action name="ApprovalManage" class="cn.fuego.remote.medical.manage.web.action.user.ApprovalManageAction">
 			<result type="dispatcher">/client/manage/approvalManage.jsp</result>
-			<result type="dispatcher" name="showModifyHospital">/client/manage/cbb/hospitalInfo.jsp</result>
-			<result type="dispatcher" name="showModifyExpert">/client/manage/cbb/expertInfo.jsp</result>
+			<result type="dispatcher" name="showModifyHospital">/client/manage/hospitalInfoCheck.jsp</result>
+			<result type="dispatcher" name="showModifyExpert">/client/manage/expertInfoCheck.jsp</result>
 			<result type="dispatcher" name="showAddExpert">/client/manage/linkInfo.jsp</result>
 		</action>
  

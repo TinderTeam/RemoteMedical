@@ -8,26 +8,20 @@
 	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
 %>
 
-<input id="operateType" value="${operateType}" style="display:none;" />
+
 <script type="text/javascript">
    
     $(function () 
     {
-    	//图片预览js
-        $("#up1").uploadPreview({ Img: "ImgPr1" });
-        $("#up2").uploadPreview({ Img: "ImgPr2" });
         
         var text_width=$("#extextW").width();
-        //alert(text_width);
-        //$(".field").width(text_width+75 + "px");
+
         $(".exfield").width(text_width+120 + "px");
         });
-/*     var operateType =$("#operateType").val();
-    if(operateType=='check')
-    {
+
    		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
 		 $("select").prop('disabled', true);
-    }    */     
+    
 	
 </script>
 
@@ -134,55 +128,55 @@
 					<legend style="font-size:1.2em;margin:0 -7px;"><strong>工作信息</strong></legend>
 					<div style="height:500px;overflow:hidden !important;" class="pageFormContent nowrap"  >
 					<dl class="nowrap">
-						<dt style="width:12%;">专家简介：</dt>
+						<dt style="width:10%;">专家简介：</dt>
 						<dd>
 						<textarea name="expertModel.expert.resume" cols="100" rows="7" maxlength="2000" id="extextW">${expertModel.expert.resume}</textarea>
 						<span class="info" >*最多可输入2000个字符</span>
 						</dd>
 					</dl>
-					<dl style="clear:none;">
-						<dt style="width:12%;">职称：</dt> 
-						<dd style="width:30%;"><input type="text" name="expertModel.expert.jobTitle" maxlength="32" size="30"	value="${expertModel.expert.jobTitle}" />
+					<dl style="width:45%;clear:none;">
+						<dt style="width:22%;">职称：</dt> 
+						<dd style="width:70%;"><input type="text" name="expertModel.expert.jobTitle" maxlength="32" size="30"	value="${expertModel.expert.jobTitle}" />
 						</dd>
 					</dl>
-					<dl style="clear:none;">
-						<dt style="width:12%;">擅长专业技能：</dt>
-						<dd style="width:30%;"><input type="text" name="expertModel.expert.expertise" maxlength="128" size="30" value="${expertModel.expert.expertise}" />
+					<dl style="width:45%;clear:none;">
+						<dt style="width:25%;">擅长专业技能：</dt>
+						<dd style="width:70%;"><input type="text" name="expertModel.expert.expertise" maxlength="128" size="30" value="${expertModel.expert.expertise}" />
 						<dd>
 					</dl>
 					<dl class="nowrap">
-						<dt style="width:12%;">工作医院名称：</dt> 
-						<dd><input type="text" name="expertModel.expert.workPlace" size="90"	value="${expertModel.expert.workPlace}" maxlength="128"/>
+						<dt style="width:10%;">工作医院名称：</dt> 
+						<dd><input type="text" name="expertModel.expert.workPlace" size="111"	value="${expertModel.expert.workPlace}" maxlength="128"/>
 						</dd>
 					</dl>
 					<dl class="nowrap">
-						<dt style="width:12%;">工作医院地点：</dt> 
-						<dd><input type="hidden" id="currentEProvince" value="${expertModel.expert.province}" />
-						<input type="hidden" id="currentECity" value="${expertModel.expert.city}" /> 
-						<input type="hidden" id="currentECounty" value="${expertModel.expert.county}" />
+						<dt style="width:10%;">工作医院地点：</dt> 
+						<dd><input type="hidden" id="currentCEProvince" value="${expertModel.expert.province}" />
+						<input type="hidden" id="currentCECity" value="${expertModel.expert.city}" /> 
+						<input type="hidden" id="currentCECounty" value="${expertModel.expert.county}" />
 						
-						<select id="EeProvince" name="expertModel.expert.province" style="margin-left:0px;"></select>
+						<select id="CEeProvince" name="expertModel.expert.province" style="margin-left:0px;"></select>
 						
-						<select id="EeCity" name="expertModel.expert.city"></select> 
+						<select id="CEeCity" name="expertModel.expert.city"></select> 
 						
-						<select id="EeArea" name="expertModel.expert.county"></select>
+						<select id="CEeArea" name="expertModel.expert.county"></select>
 
 				<script type="text/javascript">
-					addressInit('EeProvince', 'EeCity', 'EeArea', document.getElementById("currentEProvince").value, document.getElementById("currentECity").value, document.getElementById("currentECounty").value);
+					addressInit('CEeProvince', 'CEeCity', 'CEeArea', document.getElementById("currentCEProvince").value, document.getElementById("currentCECity").value, document.getElementById("currentCECounty").value);
 	
 				</script>
 						</dd>
 					</dl>
 
 					<dl class="nowrap">
-						<dt style="width:12%;">补充描述：</dt>
+						<dt style="width:10%;">补充描述：</dt>
 						<dd>
 						<textarea name="expertModel.expert.remark" cols="100" rows="7" maxlength="2000">${expertModel.expert.remark}</textarea>
 						<span class="info" >*最多可输入2000个字符</span>
 						</dd>
 					</dl>
 					<dl class="nowrap" style="height:110px !important;">
-						<dt style="width:12%;">上传签名：</dt>
+						<dt style="width:10%;">上传签名：</dt>
 						<dd style="width:30%;clear:none;">
 							<div style=" float:left; display:block; margin-left:0px !important; overflow:hidden; width:200px; height:70px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 								<img id="ImgPr2" src="user/ExpertManage!getSignNameImag.action?picid=${expertModel.expert.id}" height="70" width="200" id="img1" alt="签名照片">
@@ -203,47 +197,14 @@
 		</div>
 		<div class="formBar" style="padding-bottom:10px;">
 			<ul style="float:none!important;margin-left:35%">
-				<c:choose>
-					<c:when test="${operateType =='check'}">
-						<li style="padding:0px 30px 0px 10px;">
-						<s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
-						</li>
-						<li style="padding:0px 30px 0px 10px;">
-						<s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
-						</li>
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${expertModel.expert.state == 0}">
-								<li style="padding:0px 30px 0px 10px;">
-								<s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li style="padding:0px 30px 0px 10px;">
-								<s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit>
-								</li>
-							</c:otherwise>
 
-						</c:choose>
-						<c:choose>
-							<c:when test="${loginUser.accountType==1}">
-							<li>
-							    <input value="关 闭" class="mispButton primary close" type="button"/>
-							</li>
-							</c:when>
-							<c:otherwise>
-							<a title="专家管理" target="navTab" href="user/ExpertManage" class="mispButton primary" rel="Menu7">返 回</a>
-							<!-- <li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li> -->
-							</c:otherwise>
-							
-						</c:choose>
-							
+				<li style="padding:0px 30px 0px 10px;"><s:submit
+						method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
+				</li>
+				<li style="padding:0px 30px 0px 10px;"><s:submit
+						method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
+				</li>
 
-
-					</c:otherwise>
-
-				</c:choose>
 
 
 			</ul>
@@ -251,4 +212,3 @@
 	</s:form>
 
 </div>
-

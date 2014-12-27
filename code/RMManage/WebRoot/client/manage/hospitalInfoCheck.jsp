@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
+%>
 
 <input id="currentUser" value="${loginUser.userName}" style="display:none;"/>
 <input id="targetUser" value="${hospitalModel.hospital.id}" style="display:none;"/>
-<input id="operateType" value="${operateType}" style="display:none;"/>
 <script type="text/javascript">
 
    $(function () 
@@ -16,20 +20,17 @@
         $(".field").width(text_width+120 + "px");
         
         });
-/*     var operateType =$("#operateType").val();
-    if(operateType=='check')
-    {
+
    		 $('input,textarea',$('form[name=hsForm]')).prop('readonly',true);
 		 $("select").prop('disabled', true);
-    }
-	 */
+ 
 	   
 </script>
 
 <div class="pageContent">
 	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
-		<input id="operateType" value="${operateType}" style="display:none;"/>
+		
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
 		<div class="pageFormContent" layoutH="56" style="padding:0px 20px 20px 80px;">
 	<fieldset style="margin-top:20px;" class="field">
@@ -48,16 +49,16 @@
 			<dl class="nowrap">
 				<dt style="width:9% ">医院地址：</dt>
 				<dd>
-				<input type="hidden" id="currentProvince" value="${hospitalModel.hospital.province}"/>
-				<input type="hidden" id="currentCity" value="${hospitalModel.hospital.city}"/>
-				<input type="hidden" id="currentCounty" value="${hospitalModel.hospital.county}"/>
+				<input type="hidden" id="currentCProvince" value="${hospitalModel.hospital.province}"/>
+				<input type="hidden" id="currentCCity" value="${hospitalModel.hospital.city}"/>
+				<input type="hidden" id="currentCCounty" value="${hospitalModel.hospital.county}"/>
 
-				<select id="editProvince" name="hospitalModel.hospital.province" style="margin-left:0px;"></select>
-				<select id="editCity" name="hospitalModel.hospital.city" ></select>
-				<select id="editArea" name="hospitalModel.hospital.county"></select>
+				<select id="editCProvince" name="hospitalModel.hospital.province" style="margin-left:0px;"></select>
+				<select id="editCCity" name="hospitalModel.hospital.city" ></select>
+				<select id="editCArea" name="hospitalModel.hospital.county"></select>
 
 				<script type="text/javascript">
-					addressInit('editProvince', 'editCity', 'editArea', document.getElementById("currentProvince").value, document.getElementById("currentCity").value, document.getElementById("currentCounty").value);
+					addressInit('editCProvince', 'editCCity', 'editCArea', document.getElementById("currentCProvince").value, document.getElementById("currentCCity").value, document.getElementById("currentCCounty").value);
 	
 				</script>
 				</dd>
@@ -65,7 +66,7 @@
 			
 			<dl class="nowrap">
 				<dt style="width:9% ">详细地址：</dt>			
-				<dd ><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="84" value="${hospitalModel.hospital.address}"/>
+				<dd ><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="93" value="${hospitalModel.hospital.address}"/>
 				</dd>
 			</dl>
 
@@ -120,36 +121,14 @@
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:40%" >
-				<c:choose>
-					<c:when test="${operateType =='check'}">
-						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit></li>
-						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit></li>						
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${hospitalModel.hospital.state ==0}"> 
-								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
-							</c:when>
-							<c:otherwise>
-								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>
-							</c:otherwise>
-						
-						</c:choose>
-						<c:choose>
-							<c:when test="${loginUser.accountType==2}">
-							<li>
-							    <input value="关 闭" class="mispButton primary close" type="button"/>
-							</li>
-							</c:when>
-							<c:otherwise><a title="医院管理" target="navTab" href="user/HospitalManage" class="mispButton primary" rel="Menu8">返 回</a></c:otherwise>
-							
-						</c:choose>
 
-					</c:otherwise>
-						
-				</c:choose>			
+				<li style="padding:0px 30px 0px 10px;"><s:submit
+						method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
+				</li>
+				<li style="padding:0px 30px 0px 10px;"><s:submit
+						method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
+				</li>
 
-				
 			</ul>
 		</div>
 	</s:form>
