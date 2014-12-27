@@ -13,7 +13,7 @@
 
         var text_width=$("#textW").width();
         //alert(text_width);
-        $(".field").width(text_width+75 + "px");
+        $(".field").width(text_width+100 + "px");
         
         });
     var operateType =$("#operateType").val();
@@ -34,16 +34,20 @@
 		<div class="pageFormContent" layoutH="56" style="padding:0px 20px 20px 40px;">
 	<fieldset style="margin-top:20px;" class="field">
 		<legend>关键信息</legend>
-			<p>
-				<label>医院账号：</label>			
-				<input type="text" name="hospitalModel.hospital.id"  alt="" size="30" readonly="readonly" value="${hospitalModel.hospital.id}"/>
-			</p>		
-			<p>
-				<label>医院名称：</label>			
-				<input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="30" value="${hospitalModel.hospital.name}" />
-			</p>			
-			<p class="nowrap">
-				<label>医院地址：</label>
+		 <div style="height:180px;overflow:hidden !important;" class="pageFormContent nowrap"  >
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">医院账号：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.id"  alt="" size="30" readonly="readonly" value="${hospitalModel.hospital.id}"/>
+				</dd>
+			</dl>		
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">医院名称：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="30" value="${hospitalModel.hospital.name}" />
+				</dd>
+			</dl>			
+			<dl class="nowrap">
+				<dt style="width:9% ">医院地址：</dt>
+				<dd>
 				<input type="hidden" id="currentProvince" value="${hospitalModel.hospital.province}"/>
 				<input type="hidden" id="currentCity" value="${hospitalModel.hospital.city}"/>
 				<input type="hidden" id="currentCounty" value="${hospitalModel.hospital.county}"/>
@@ -56,50 +60,62 @@
 					addressInit('editProvince', 'editCity', 'editArea', document.getElementById("currentProvince").value, document.getElementById("currentCity").value, document.getElementById("currentCounty").value);
 	
 				</script>
-				
-			</p>
+				</dd>
+			</dl>
 			
-			<p>
-				<label>详细地址：</label>			
-				<input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="30" value="${hospitalModel.hospital.address}"/>
-			</p>
+			<dl class="nowrap">
+				<dt style="width:9% ">详细地址：</dt>			
+				<dd ><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="93" value="${hospitalModel.hospital.address}"/>
+				</dd>
+			</dl>
 
-			<p>
-				<label>医院规模：</label>			
-				<input type="text" name="hospitalModel.hospital.rank"  maxlength="32" size="30" value="${hospitalModel.hospital.rank}"/>
-			</p>			
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">医院规模：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.rank"  maxlength="32" size="30" value="${hospitalModel.hospital.rank}"/>
+				</dd>
+			</dl>			
 
-			<p>
-				<label>联系方式：</label>			
-				<input type="text" name="hospitalModel.hospital.contactWay"  maxlength="32" size="30" value="${hospitalModel.hospital.contactWay}"/>
-			</p>
-			<p>
-				<label>联系人：</label>			
-				<input type="text" name="hospitalModel.hospital.contacts"  maxlength="64" size="30" value="${hospitalModel.hospital.contacts}"/>
-			</p>
-			<p>
-				<label>医院电话：</label>			
-				<input type="text" name="hospitalModel.hospital.hospitalPhone"  maxlength="16" size="30" value="${hospitalModel.hospital.hospitalPhone}"/>
-			</p>
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">联系方式：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.contactWay"  maxlength="32" size="30" value="${hospitalModel.hospital.contactWay}"/>
+				</dd>
+			</dl>
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">联系人：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.contacts"  maxlength="64" size="30" value="${hospitalModel.hospital.contacts}"/>
+				</dd>
+			</dl>
+			<dl style="width:45%;clear:none;">
+				<dt style="width:20% ">医院电话：</dt>			
+				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.hospitalPhone" class="telephone" maxlength="16" size="30" value="${hospitalModel.hospital.hospitalPhone}"/>
+				</dd>
+			</dl>
+			</div>
 	</fieldset>
 	<fieldset style="margin-top:20px;margin-bottom:40px;" class="field">
-		<legend>扩展描述</legend>		
+		<legend>扩展描述</legend>	
+		<div style="height:350px;overflow:hidden !important;" class="pageFormContent nowrap"  >
 			<dl class="nowrap">
-				<dt >联系电话：</dt>			
+				<dt  style="width:9% ">联系电话：</dt>			
 				<dd >
-				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="90" rows="3" maxlength="255" class="phonelist required" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
 				<span class="info" >*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>
 
 				<dl class="nowrap">
-					<dt >医院简介：</dt>
-					<dd ><textarea name="hospitalModel.hospital.resume" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea></dd>
+					<dt style="width:9% " >医院简介：</dt>
+					<dd ><textarea name="hospitalModel.hospital.resume" cols="90" rows="7" maxlength="2000">${hospitalModel.hospital.resume}</textarea>
+					<span class="info" >*输入不超过2000个字符</span>
+					</dd>
 				</dl>
 				<dl class="nowrap">
-					<dt >医院描述：</dt>
-					<dd ><textarea name="hospitalModel.hospital.remark" cols="100" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea></dd>
-				</dl>			
+					<dt  style="width:9% ">医院描述：</dt>
+					<dd ><textarea name="hospitalModel.hospital.remark" cols="90" rows="7" maxlength="2000">${hospitalModel.hospital.remark}</textarea>
+					<span class="info" >*输入不超过2000个字符</span>
+					</dd>
+				</dl>	
+		</div>		
 	</fieldset>		
 		</div>
 		<div class="formBar" >
