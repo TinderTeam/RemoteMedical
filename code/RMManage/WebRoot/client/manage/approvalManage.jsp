@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 <s:form  id="pagerForm" action="user/ApprovalManage" method="POST" onsubmit="return navTabSearch(this);">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
@@ -81,8 +81,10 @@
 						
  				</td>
 				<td>${e.applyUser}</td>
-
-				<td>${e.applyTime}</td>
+	            
+	            
+				<td>
+				  <fmt:formatDate value="${e.applyTime}" pattern="yyyy-MM-dd HH:mm:ss"/>  
 				<td>
 					<c:if test="${(e.applyType=='1')||(e.applyType=='2')}">
 					<a title="审核管理" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}&operateType=check" class="btnView" rel="Menu${selectedMenuID}">查看</a>

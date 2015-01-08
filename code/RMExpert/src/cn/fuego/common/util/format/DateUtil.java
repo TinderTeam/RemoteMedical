@@ -2,6 +2,7 @@ package cn.fuego.common.util.format;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -90,7 +91,7 @@ public class DateUtil
 		return da;
 
 	}
-
+ 
 	public static Date addYear(String purchaseDate, int expectYear)
 	{
 

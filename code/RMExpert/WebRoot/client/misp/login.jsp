@@ -96,9 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="login_headerContent">
 				<div class="navList">
 					<ul>
-						<li><a href="#">设为首页</a></li>
-						<li><a href="#">反馈</a></li>
-						<li><a href="#" >帮助</a></li>
+
 					</ul>
 				</div>
 				<h2 class="login_title"><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/login_title.png" /></h2>
@@ -132,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="helpList">
 					<li><a href="<%=request.getContextPath()%>/client/resource/WebView.exe">下载插件</a></li>
 
-					<li><a href="#">忘记密码怎么办？</a></li>
+
 
 				</ul>
 				<div class="login_inner">

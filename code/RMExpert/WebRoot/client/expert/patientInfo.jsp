@@ -8,7 +8,7 @@
 <script type="text/javascript">
 function submitForm(url) 
 {
- if(url == "submit" || url=="modify")
+ if(url == "submit")
  {
     if ($.trim($("#text3").val()).length<=0)
     {

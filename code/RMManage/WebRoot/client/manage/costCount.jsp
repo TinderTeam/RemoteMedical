@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="report/ReportManage!costCount.action" method="post">
 	<input type="hidden" name="status" value="${param.status}">
@@ -209,8 +209,13 @@
 						   </c:choose>
 					</c:forEach>
 	            </td>
-		    <td>${e.exApply}</td>
-	            <td>${e.exReport}</td>
+		    <td> 
+	            <fmt:formatDate value="${e.exApply}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+	            </td>
+		    
+	            <td>
+		     <fmt:formatDate value="${e.exReport}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+	            </td>
 	            
 	            <td>${e.exDoctor}</td>
 	            <td>${e.expertName}</td>

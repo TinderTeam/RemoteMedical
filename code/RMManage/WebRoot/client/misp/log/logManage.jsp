@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <script type="text/javascript">
 
 function submitForm(url){
@@ -83,7 +84,9 @@ function submitForm(url){
 	            <td>${e.name}</td>
 	            <td>${e.object}</td>
 	            <td>${e.result}</td>
-	            <td>${e.operTime}</td>
+	            <td> 
+	              <fmt:formatDate value="${e.operTime}" pattern="yyyy-MM-dd HH:mm:ss"/>  
+	            </td>
 
 			</tr>
 		</c:forEach>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
 	<input type="hidden" name="status" value="${param.status}">
@@ -174,21 +174,28 @@
 	<tbody>
 	    <c:forEach var="e" items="${reportList.currentPageData}"> 		
 	        <tr target="sid_user" rel="1"  >
-	        	<td>
+	        	
  	        		<c:choose>
  	        			<c:when test="${e.statusColor=='red'}">
- 	        			<span class="label label-danger" >请尽快处理</span>
+ 	        		      <td bgcolor="red" style="color:white;">	
+ 	        		        请尽快处理
+ 	        		      </td>
  	        			</c:when>
  	        			
  	        			<c:when test="${e.statusColor=='grey'}">
- 	        				<span class="label label-default" >已处理</span>
+ 	        		<td bgcolor="green" style="color:white;">	
+ 	        		     已处理    </td>
  	        			</c:when>
  	        			<c:otherwise>
- 	        			<span class="label label-success" >待处理</span>
+ 	        		<td bgcolor="green" style="color:white;">
+ 	        		      
+ 	        			 待处理 
+ 	        			  
+ 	        	     </td>
  	        			</c:otherwise> 	        			
  	        		</c:choose>
 	        		
-	        	</td>
+	        	
 	            <td>${e.patientName}</td>
 	            <td>${e.disPatientSex}</td>
 	            <td>${e.patientAge}</td>
@@ -207,14 +214,17 @@
 					</c:forEach>
 	            </td>
 	            <td>${e.modality}</td>
-	            <td>${e.exApply}</td>
+	            <td> 
+	            <fmt:formatDate value="${e.exApply}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+	            </td>
 	            <td>${e.hospitalName}</td>
 	            
 	            <td>${e.exApplyDoctor}</td>	
 	            <td>
  					<span ><a class="btnView" title="查看病人报告详情" target="navTab" rel="report" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" ></a></span>
+				 <c:if test="${0 == e.exReportState}">
 				    <span ><a class="btnAssign"  title="转换专家" target="dialog" href="ReportManage!showTransfer.action?selectedID=${e.id}"  >转换专家</a></span>
-					
+				  </c:if>
 				</td>
 			</tr>
 		</c:forEach>
