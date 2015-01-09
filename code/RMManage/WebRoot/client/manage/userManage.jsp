@@ -24,8 +24,9 @@ function submitForm(url){
 					用户名称：<input type="text" name="filter.userName" value="${filter.userName}" id="userName"/>
 				</td>				
 				<td>
+					账户类型：
 					<select  name="filter.accountType" id="mySelect">
-						 <option value="">账户类型</option>
+						 <option value="">所有类型</option>
 
 					 <c:forEach var="ut2" items="${filter.userTypeList}">
 						  		 <c:choose>		       

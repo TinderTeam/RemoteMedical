@@ -64,7 +64,7 @@
 					</dl>
 					<dl style="clear:none;">
 						<dt style="width:20%;">姓名：</dt> 
-						<dd style="width:70%;"><input type="text" size="30" class="required" name="expertModel.expert.name" value="${expertModel.expert.name}" maxlength="64" />
+						<dd style="width:70%;"><input type="text" size="30" class="required" name="expertModel.expert.name" value="${expertModel.expert.name}" maxlength="32" />
 
 						</dd>
 					</dl>
@@ -152,7 +152,7 @@
 					</dl>
 					<dl class="nowrap">
 						<dt style="width:12%;">工作医院名称：</dt> 
-						<dd><input type="text" name="expertModel.expert.workPlace" size="90"	value="${expertModel.expert.workPlace}" maxlength="128"/>
+						<dd><input type="text" name="expertModel.expert.workPlace" size="90"	value="${expertModel.expert.workPlace}" maxlength="64"/>
 						</dd>
 					</dl>
 					<dl class="nowrap">
