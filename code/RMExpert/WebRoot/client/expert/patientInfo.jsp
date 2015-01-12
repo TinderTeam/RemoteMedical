@@ -5,6 +5,10 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/client/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <script type="text/javascript" src="<%=request.getContextPath()%>/client/lib/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery.validate.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 function submitForm(url) 
 {
@@ -20,6 +24,10 @@ function submitForm(url)
          alert("诊断意见不能为空");
         return;
     }
+  }
+  if(url == "back")
+  {
+     closeDown();
   }
  document.form1.action = "expert/ReportManage!" +url;
  return validateCallback(document.form1,navTabAjaxDone);
@@ -163,7 +171,9 @@ function submitForm(url)
 			<h1>病症诊断区</h1>
 
 			<div class="pageFormContent"  id="panelDA" minH="420" >
-				<input type="hidden" name="medicalReport.reportView.id" value="${medicalReport.reportView.id}" />
+				 <input type="hidden" id="reportModality" name="medicalReport.reportView.modality" value="${medicalReport.reportView.modality}" />
+			
+				<input type="hidden" id="reportViewId" name="medicalReport.reportView.id" value="${medicalReport.reportView.id}" />
 				<input type="hidden" name="medicalReport.reportView.hospitalID" value="${medicalReport.reportView.hospitalID}" />
 				<input type="hidden" name="medicalReport.reportView.serialNo" value="${medicalReport.reportView.serialNo}" />
 				<input type="hidden" name="medicalReport.reportView.exReportState" value="${medicalReport.reportView.exReportState}" />
@@ -249,16 +259,8 @@ function submitForm(url)
 		</div>
 		<div class="accordionContent" id="contentDM" >
        	      	
-		   <ul class="tree treeFolder collapse">
+		   <ul id="tree" class="ztree" >
 
-       	      <li>
-       	         <c:if test='${null != medicalReport.template}'>
-       	         
-       	           <a href="#">${medicalReport.template.name}</a>
-       	           <c:set var="templateList" value="${medicalReport.template.childList}" scope="request"/>
-			       <jsp:include page="template.jsp"/>
-			     </c:if>
-       	      </li>
        	   </ul> 
 
 		</div>
@@ -277,6 +279,7 @@ function submitForm(url)
        
         var imageFileName =  new Array();
         var progressID =  new Array();
+        var imageCode =  new Array();
        
         var imageCnt = $("#imageCount").val();
         var nowCnt = 0;
@@ -289,17 +292,80 @@ function submitForm(url)
         {
             imageURL[i]= $("#url"+i).val();
             imageFileName[i] = $("#image"+i).val();
+            imageCode[i] = $("#md5Code"+i).val();
+            
             progressID[i] = "downSize" + i;
         }
  
-	     window.onload= function()
-	     { 
-		   sessionID = $("#sessionID").val();
-	       contextPath = $("#contextPath").val();
-	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+ var reportViewId = $("#reportModality").val();
  
-		 };
-	
-	
+ var setting = {
+ callback: {
+				onClick:showTemplateValue
+			}
+        };
+ 
+   $(document).ready(function(){
+           $.ajax({  
+        async : false,  
+        cache:false,  
+        type: 'POST',  
+        dataType:"json",  
+        url: "expert/ReportManage!showTemplate.action?selectedID="+reportViewId,//请求的action路径  
+        error: function () {//请求失败处理函数  
+            alert('请求失败');  
+        },  
+        success:function(data){ //请求成功后处理函数。    
+           
+            //var treeNodes =eval('([' + data + '])');  //把后台封装好的简单Json格式赋给treeNodes   
+          
+            try
+            {
+             
+               $.fn.zTree.init($("#tree"), setting, data);   
+              }
+              catch(e)
+              {
+                alert(e);
+              }
+             }  
+    });  
+   });       
+ 
+     var treeObj = $.fn.zTree.getZTreeObj("tree");
+	 var nodes = treeObj.getNodes();
+	 
+	 for(var i=0;i<nodes.length;i++) 
+	 {
+	    treeObj.expandNode(nodes[i], true, false, true);
+	   
+	    if (nodes[i].children != undefined)
+	    {
+	      var childs = nodes[i].children;
+	      for(var i=0;i<childs.length;i++)
+	       {
+	        treeObj.expandNode(childs[i], true, false, true);
+	       }
+	    }
+ 
+
+			
+	 }
+	 
+	 function showTemplateValue(event, treeId, treeNode) 
+	 {
+ 
+       var options = {mask:true,maxable:false,minable:true,resizable:true,drawable:true,fresh:true};
+      // window.showModalDialog ('ReportManage!showModal.action?selectedID='+treeNode.id); 
+        if(treeNode.name=='检查所见')
+         {
+            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"","aaaa",options);
+         }
+         else if(treeNode.name=='诊断意见')
+        {
+            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"","aaaa",options);
+         }
+       
+     };
 	</script>
 

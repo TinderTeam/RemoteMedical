@@ -172,7 +172,7 @@ public class ExpertServiceImpl implements ExpertService
 		 
 		
 		//read template information
-		reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTreeByName(reportView.getModality()));
+		//reportModel.setTemplate(ReportTemplateCache.getInstance().getTemplateTreeByName(reportView.getModality()));
 		return reportModel;
 	}
 
@@ -352,7 +352,7 @@ public class ExpertServiceImpl implements ExpertService
 		Report report = (Report) repertDao.getUniRecord(conditionList);
 		if(null != report)
 		{
-			Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord( new QueryCondition(ConditionTypeEnum.EQUAL, "expertID",expertID));
+			Expert expert = (Expert) DaoContext.getInstance().getExpertDao().getUniRecord( new QueryCondition(ConditionTypeEnum.EQUAL, "id",expertID));
 			 
 			report.setExDoctor(expertID);
 			report.setExpertDoctorName(expert.getName());

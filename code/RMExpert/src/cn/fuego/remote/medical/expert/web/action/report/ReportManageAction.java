@@ -8,9 +8,22 @@
 */ 
 package cn.fuego.remote.medical.expert.web.action.report;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
+
+import net.sf.json.JSONArray;
+import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.action.login.LoginAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.remote.medical.constant.ReportStatusEnum;
@@ -19,10 +32,12 @@ import cn.fuego.remote.medical.domain.Report;
 import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.expert.service.ExpertService;
 import cn.fuego.remote.medical.expert.service.ServiceContext;
+import cn.fuego.remote.medical.expert.service.cache.ReportTemplateCache;
 import cn.fuego.remote.medical.expert.web.model.ExpertModel;
 import cn.fuego.remote.medical.expert.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.expert.web.model.ReportFilterModel;
 import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
+import freemarker.cache.TemplateCache;
 
 
 /** 
@@ -36,6 +51,8 @@ import cn.fuego.remote.medical.expert.web.model.ReportTemplateModel;
 
 public class ReportManageAction extends DWZTableAction
 {
+	private Log log = LogFactory.getLog(ReportManageAction.class);
+
 	/**
 	 * 
 	 */
@@ -163,6 +180,25 @@ public class ReportManageAction extends DWZTableAction
 		return "showModal";
 		
 	}
+	
+	public void showTemplate() 
+	{  
+ 
+        String json = JsonConvert.ObjectToJson( ReportTemplateCache.getInstance().getTemplateTreeByName(this.getSelectedID()));
+       // json = "{"+json + "}";
+    	HttpServletResponse response = ServletActionContext.getResponse();   
+    	//response.setContentType("application/json"); //火狐浏览器必须加上这句  
+        response.setCharacterEncoding("UTF-8");
+		try
+		{
+			response.getWriter().print(json);
+		} catch (IOException e)
+		{
+			log.error("can not get the template data");
+		}
+        //利用Json插件将Array转换成Json格式  
+         
+    }  
 	
 	public TableDataModel<ReportView> getReportList()
 	{

@@ -69,7 +69,7 @@ public class ReportTemplateCache
 		{
 			name = "DR";
 		}
-		for(ReportTemplateModel e : templateTree.getChildList())
+		for(ReportTemplateModel e : templateTree.getChildren())
 		{
 			if(e.getName().equals(name))
 			{
@@ -112,6 +112,7 @@ public class ReportTemplateCache
 		ReportTemplateModel template = new ReportTemplateModel();
  
 		template.setId(String.valueOf(treeCurrID));
+		//template.setUrl("ReportManage!showModal.action?selectedID="+template.getId());
 		treeCurrID++;
 		
 		template.setName("模板");
@@ -148,10 +149,11 @@ public class ReportTemplateCache
 				}
 
 			}
-			template.setChildList(childList);
+			template.setChildren(childList);
 
 		}
-		template.setValue(e.getText());
+		
+		template.setValue(e.getText().trim());
 
 		return template;
 	}
@@ -167,9 +169,9 @@ public class ReportTemplateCache
 		}
 		ReportTemplateModel result = null;
 
-		if(null != tree.getChildList())
+		if(null != tree.getChildren())
 		{
-			for(ReportTemplateModel e : tree.getChildList())
+			for(ReportTemplateModel e : tree.getChildren())
 			{
 				result = getReportTemplateById(templateID, e);
 				if(null != result)

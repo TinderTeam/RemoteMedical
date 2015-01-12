@@ -53,7 +53,7 @@
 					</select>
 				</td>
 				<td>
-					设备类型： 
+					检查设备： 
 					<select name="filter.modality">
 						<option value="">默认所有类型</option>
 						<c:forEach var="e" items="${filter.deviceTypeList}">
@@ -100,7 +100,7 @@
 				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>远程请求医时间:</span>	
 				   </c:if>
 				   <c:if test="${filter.mode == 1}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求医时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求时间:</span>	
 				   </c:if>
 					<select name="filter.days" id="days">
 						<option value="">默认所有时间</option>

@@ -187,34 +187,52 @@ function resetForm(objForm){
 
 
 	 
-		function StartAll()
+
+			function StartAll()
 		{
 		   sessionID = $("#sessionID").val();
 	       contextPath = $("#contextPath").val();
 	       hostURL = document.location.protocol +"//"+ document.location.host + contextPath;
+
+              closeDown();
            isStop=false;
 		   updateProgress();
            $("#downAllBt").attr("disabled",true);
                    
 		}
 
- 
+                function closeDown()
+                {
+
+                   try
+                 {
+                   ReYoWebDownLoad.CloseDown();
+                   }
+                   catch(e)
+                   {
+                   }
+                   
+                 }
         
 	 
  
 		function updateProgress()
 		{
-		   if(isStarted == false)
+                  
+
+		   if(isStarted == false && ReYoWebDownLoad.stopDown == true)
 		   {
 		   
 		     //create path
-		     //createPath(imageURL[nowCnt]);
+		      createPath(imageURL[nowCnt]);
 		     ReYoWebDownLoad.debug = true;
              ReYoWebDownLoad.url= hostURL+ "/"+imageURL[nowCnt] + imageFileName[nowCnt];
- 
+            
+             ReYoWebDownLoad.md5Code = imageCode[nowCnt];
 		 	 ReYoWebDownLoad.path =fileRootPath+   imageURL[nowCnt] + imageFileName[nowCnt];
 			 ReYoWebDownLoad.StartDown();
 			 isStarted = true;
+                         
 		   }
  
 		 	if (ReYoWebDownLoad.cancle)
@@ -228,7 +246,8 @@ function resetForm(objForm){
 		 	else
 			{
 			    if (ReYoWebDownLoad.failed)
-			    {
+			    {  
+                               
 			       alert("下载失败");
 			       $("#downAllBt").attr("disabled",false);
 			    } 
@@ -288,6 +307,7 @@ function resetForm(objForm){
 			
 		});
 	}
+
 	
 	function viewAllDoc()
 	{
