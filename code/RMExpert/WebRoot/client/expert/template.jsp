@@ -4,15 +4,7 @@
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<script type="text/javascript">
-function openModal(target)
-{
-	//setTimeout("$(target).click()", 1000); 
-	//setTimeout("target.click()", 1000);
-	setTimeout(function(){$(target).click();},3000);
-	
-}
-</script>
+
   
     <c:forEach var="e" items="${templateList}">	
         <ul>

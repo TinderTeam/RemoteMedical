@@ -4,11 +4,11 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () 
-      {
-			$.pdialog.resizeDialog({style: {width: 600,height:300,}}, 				
-			$.pdialog.getCurrent(), "");
-        });//dialog 宽度重新定义
-      function addModal(){
+      {     //dialog 宽度重新定义
+			$.pdialog.resizeDialog({style: {width: 600,height:300}}, 				
+			$.pdialog.getCurrent(), ""); 
+        });
+       function addModal(){
       var text=document.getElementById('reportModal').value;
       var modalType=document.getElementById('modalName').value;
       if(modalType=="检查所见")
@@ -18,7 +18,7 @@
       if(modalType=="诊断意见")
       {
       	document.getElementById('text4').innerText=text;
-      }
+      } 
       $.pdialog.closeCurrent();
       }
 </script>
@@ -27,7 +27,9 @@
 <div class="divider" ></div>
 		<div class="formBar">
 			<ul style="margin-right:240px !important;" >
-					<li style="padding:0px 30px 0px 10px;"><a  class="mispButton primary" onclick="addModal()">添加模板</a></li>
-							
+				<li style="padding:0px 30px 0px 10px;">
+				<!-- <a class="mispButton primary" onclick="addModal()">添加模板</a> -->
+				<a  href="#" class="button" onclick="addModal()"><span>添加模板</span></a>
+				</li>			
 			</ul>
 		</div>

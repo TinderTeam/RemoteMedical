@@ -73,13 +73,6 @@ function submitForm(url)
 		
 	}
 
-	//运行模板浮窗显示
-	$(function() {
-		$(".treeMenu").popover({
-			trigger : 'hover'
-		});
-	});
-
 </script> 
 
 <input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
@@ -124,12 +117,12 @@ function submitForm(url)
 			<div class="pageFormContent"  id="panelImg"> 
 			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
-				 <div style="font-size:1.2em;float:left;">
-							
-					 
-                                           <input id="downAllBt" type="button" onclick="StartAll()" value="下载" style="margin:5px 10px;"/> 
-					   <input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" />
-                                </div>
+				 <div style="float:left;">
+					<div style="margin-left:10px;"  class="buttonActive"><div class="buttonContent"><button id="downAllBt" type="button" onclick="StartAll()" >下 载</button></div></div>		
+					<div style="margin-left:10px;" class="buttonActive"><div class="buttonContent"><button id="viewAllBt" type="button" disabled="disabled" onclick="viewAllDoc();" >查 看</button></div></div>	
+                       <!-- <input id="downAllBt" type="button" onclick="StartAll()" value="下载" class="button"/>  -->
+					   <!-- <input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /> -->
+                 </div>
 						    
 				<c:forEach var="e" items="${medicalReport.imageList}" varStatus="status"> 	
 				         
@@ -150,7 +143,7 @@ function submitForm(url)
 					<dl style="width:98% !important;">
 						<dt style="width:90% !important;">
 					
-				    	             <div class="progress" style="padding-top:5px" id="downSize${status.index}">
+				    	    <div class="progress" style="padding-top:5px" id="downSize${status.index}">
 							<span class="blue" style="width:0%;" ><span style="width:10% !important;text-align:center;" ></span></span>
 						     </div>
 
@@ -204,7 +197,7 @@ function submitForm(url)
 				</dl>
 				<dl  style="width:50%;" id="text4dl">
 					<dt style="text-align:left;width:80%;">诊断意见：</dt>
-									   <c:choose>
+					 <c:choose>
 					 <c:when test="${1 == medicalReport.reportView.exReportState}">
 					    <dd class="textWidth"><textarea name="medicalReport.reportView.exStudyConclusion" cols="" rows=""   readonly="true"  id="text4" style="width:95%;">${medicalReport.reportView.exStudyConclusion}</textarea></dd>
 					 </c:when>
@@ -218,17 +211,28 @@ function submitForm(url)
 				<div class="panelBar" style="height:30px !important;overflow:hidden;">
 				<ul style="float:right;">
 					 <c:choose>
-							   <c:when test="${1 == medicalReport.reportView.exReportState}">
-  
-	                            <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="cancal" value="撤销报告" onclick="submitForm('cancel')"  /></li>
+							   <c:when test="${1 == medicalReport.reportView.exReportState}"> 
+	                            <li style="padding-bottom:5px;">
+	                            <div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitForm('cancel')">撤销报告</button></div></div> 
+	                            </li>
 							   </c:when>
 							   <c:otherwise>  
-							   <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" ></li>
-					           <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> </li>
+							   <li style="padding-bottom:5px;"> 
+							   <!-- <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" > -->
+							   <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('cancel')">保存报告</button></div></div>
+							   </li>
+					           <li style="padding-bottom:5px;">
+					            <!-- <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> -->
+					             <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('submit')">提交报告</button></div></div>
+					           </li>
 							   <!--  <li> <input type="button" name="transfer" value="转换专家" onclick="submitForm('showTransfer')"  /></li>-->
+							   
  							  </c:otherwise>
 					</c:choose>
-                    <li style="padding-bottom:5px;"> <input class="mispButton primary" type="button"  name="back" value="返回"  onclick="submitForm('back')" /></li>
+                    <li style="padding-bottom:5px;"> 
+                    <!-- <input class="mispButton primary" type="button"  name="back" value="返回"  onclick="submitForm('back')" /> -->
+                    <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('back')" name="back" >返回</button></div></div>
+                    </li>
 					          
 				</ul>
 			</div>		
@@ -250,7 +254,7 @@ function submitForm(url)
        	      <li>
        	         <c:if test='${null != medicalReport.template}'>
        	         
-       	           <a href="#"   >${medicalReport.template.name}</a>
+       	           <a href="#">${medicalReport.template.name}</a>
        	           <c:set var="templateList" value="${medicalReport.template.childList}" scope="request"/>
 			       <jsp:include page="template.jsp"/>
 			     </c:if>

@@ -187,10 +187,8 @@
  	        		     已处理    </td>
  	        			</c:when>
  	        			<c:otherwise>
- 	        		<td bgcolor="green" style="color:white;">
- 	        		      
- 	        			 待处理 
- 	        			  
+ 	        		<td bgcolor="green" style="color:white;">	        		      
+ 	        			 待处理 	        			  
  	        	     </td>
  	        			</c:otherwise> 	        			
  	        		</c:choose>
@@ -221,9 +219,10 @@
 	            
 	            <td>${e.exApplyDoctor}</td>	
 	            <td>
- 					<span ><a class="btnView" title="查看病人报告详情" target="navTab" rel="report" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" ></a></span>
+	           	 	<a href="#" >&nbsp;</a>
+ 					<a class="btnView" title="查看病人报告详情" target="navTab" rel="report" href="ReportManage!show.action?selectedID=${e.id}&operateType=show" ></a>
 				 <c:if test="${0 == e.exReportState}">
-				    <span ><a class="btnAssign"  title="转换专家" target="dialog" href="ReportManage!showTransfer.action?selectedID=${e.id}"  >转换专家</a></span>
+				    <a style="margin-left:10px;" class="btnAssign"  title="转换专家" target="dialog" href="ReportManage!showTransfer.action?selectedID=${e.id}" ></a>
 				  </c:if>
 				</td>
 			</tr>
