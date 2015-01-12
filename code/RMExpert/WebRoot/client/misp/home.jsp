@@ -101,7 +101,8 @@ function resetForm(objForm){
 				<ul class="nav">
                     <li>欢迎您，用户：${loginUser.userName}</li>
 	 
-					<li><a href="<%=request.getContextPath()%>/client/expert/passwordModify.jsp" target="dialog" width="600">密码修改</a></li> 
+					<li><a href="<%=request.getContextPath()%>/client/expert/passwordModify.jsp" target="dialog" width="600" maxable="false" minable="false"
+					 mask="true" resizable="false">密码修改</a></li> 
  
 					<li><a href="login/login!logout.action">退出</a></li>
 				</ul>

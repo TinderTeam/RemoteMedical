@@ -24,7 +24,7 @@
 		<div class="formBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提 交</button></div></div></li>
-				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>
+				<li style="margin:0px 30px;"><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>
 			</ul>
 		</div>
 	</s:form>
