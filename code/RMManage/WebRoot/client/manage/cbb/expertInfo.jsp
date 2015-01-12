@@ -212,18 +212,7 @@ function submitExForm1(url){
 		</div>
 		<div class="formBar" style="padding-bottom:10px;">
 			<ul style="float:none!important;margin-left:35%">
-				<c:choose>
-					<c:when test="${operateType =='check'}">
-						<li style="padding:0px 30px 0px 10px;">
-						<!-- <s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit> -->
-						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('applyAgree')">同 意</button></div></div>
-						</li>
-						<li style="padding:0px 30px 0px 10px;">
-						<!-- <s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit> -->
-						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('applyRefuse')">拒 绝</button></div></div>
-						</li>
-					</c:when>
-					<c:otherwise>
+
 						<c:choose>
 							<c:when test="${expertModel.expert.state == 0}">
 								<li style="padding:0px 30px 0px 10px;">
@@ -251,12 +240,7 @@ function submitExForm1(url){
 							</c:otherwise>
 							
 						</c:choose>
-							
 
-
-					</c:otherwise>
-
-				</c:choose>
 
 
 			</ul>
