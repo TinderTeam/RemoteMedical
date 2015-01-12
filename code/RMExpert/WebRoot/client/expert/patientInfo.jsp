@@ -126,8 +126,8 @@ function submitForm(url)
 			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
 				 <div style="float:left;">
-					<div style="margin-left:10px;"  class="buttonActive"><div class="buttonContent"><button id="downAllBt" type="button" onclick="StartAll()" >下 载</button></div></div>		
-					<div style="margin-left:10px;" class="buttonActive"><div class="buttonContent"><button id="viewAllBt" type="button" disabled="disabled" onclick="viewAllDoc();" >查 看</button></div></div>	
+					<div  id="allDownClass" style="margin-left:10px;"  class="buttonActive"><div class="buttonContent"><button id="downAllBt" type="button" onclick="StartAll()" >下 载</button></div></div>		
+					<div id="viewClass" style="margin-left:10px;" class="buttonDisabled"><div class="buttonContent"><button id="viewAllBt" type="button" disabled="disabled" onclick="viewAllDoc();" >查 看</button></div></div>	
                        <!-- <input id="downAllBt" type="button" onclick="StartAll()" value="下载" class="button"/>  -->
 					   <!-- <input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /> -->
                  </div>
@@ -357,11 +357,11 @@ function submitForm(url)
       // window.showModalDialog ('ReportManage!showModal.action?selectedID='+treeNode.id); 
         if(treeNode.name=='检查所见')
          {
-            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"","aaaa",options);
+            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"",treeNode.name,options);
          }
          else if(treeNode.name=='诊断意见')
         {
-            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"","aaaa",options);
+            $.pdialog.open("ReportManage!showModal.action?selectedID="+treeNode.id,"",treeNode.name,options);
          }
        
      };

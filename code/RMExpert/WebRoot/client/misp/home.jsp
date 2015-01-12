@@ -185,8 +185,35 @@ function resetForm(objForm){
 	}, 1000);
  });
 
-
-	 
+       function disableDown(disable)
+       {
+          $("#downAllBt").attr("disabled",disable);
+          if(disable)
+          {
+            $("#allDownClass").attr("class","buttonDisabled");
+          }
+          else
+         {
+            $("#allDownClass").attr("class","buttonActive");
+          }
+       }
+	   function disableView(disable)
+       {
+          $("#downAllBt").attr("disabled",disable);
+          alert(disable);
+          
+          if(disable)
+          {
+            $("#viewClass").attr("class","buttonDisabled");
+          }
+          else
+         {
+            $("#viewClass").attr("class","buttonActive");
+          }
+          alert( $("#viewAllBt").attr("class"));
+          $("#viewAllBt").attr("disabled",disable);
+          
+       }
 
 			function StartAll()
 		{
@@ -197,7 +224,7 @@ function resetForm(objForm){
               closeDown();
            isStop=false;
 		   updateProgress();
-           $("#downAllBt").attr("disabled",true);
+          disableDown(true);
                    
 		}
 
@@ -225,7 +252,7 @@ function resetForm(objForm){
 		   
 		     //create path
 		      createPath(imageURL[nowCnt]);
-		     ReYoWebDownLoad.debug = true;
+		     //ReYoWebDownLoad.debug = true;
              ReYoWebDownLoad.url= hostURL+ "/"+imageURL[nowCnt] + imageFileName[nowCnt];
             
              ReYoWebDownLoad.md5Code = imageCode[nowCnt];
@@ -270,9 +297,10 @@ function resetForm(objForm){
 			  			else
 			  			{
 			  			  nowCnt = 0;
-			  			  $("#downAllBt").attr("disabled",true);
+			  			  disableDown(true);
 				          $("#downAllBt").attr("value","完成");
-					      $("#viewAllBt").attr("disabled",false);
+				          disableView(false);
+					     
 			  			}
 					}
 					else
