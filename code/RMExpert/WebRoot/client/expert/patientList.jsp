@@ -97,7 +97,7 @@
 				 
 				 
 				   <c:if test="${filter.mode == 0}">
-				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>远程请求医时间:</span>	
+				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" checked="checked" onclick="changeMode(0);"/>远程请求时间:</span>	
 				   </c:if>
 				   <c:if test="${filter.mode == 1}">
 				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求时间:</span>	
