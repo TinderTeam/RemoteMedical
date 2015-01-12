@@ -120,7 +120,7 @@ function resetForm(objForm){
 				<div class="accordion" fillSpace="sidebar">
 
 					<div class="accordionContent">
-						<ul class="tree treeFolder">
+					<ul class="tree treeFolder">
                            <jsp:include page="common/menu.jsp"/>
 						</ul>
 					</div>
@@ -177,9 +177,7 @@ function resetForm(objForm){
 </pre>
 						</div>
 						
-						<div style="width:230px;position: absolute;top:60px;right:0" layoutH="80">
-							<iframe width="100%" height="430" class="share_self"  frameborder="0" scrolling="no" src=""></iframe>
-						</div>
+
 					</div>
 					
 				</div>

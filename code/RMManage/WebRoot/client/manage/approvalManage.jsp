@@ -13,9 +13,10 @@
 				<td>
 					申请人：<input type="text" name="filter.applyName" value="${filter.applyName}"/>
 				</td>
-				<td>			
+				<td>
+					申请类型：		
 					<select  name="filter.applyType" >
-						 <option value="">申请类型</option>
+						 <option value="">所有类型</option>
 						 <c:forEach var="at" items="${filter.applyTypeList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${at.type == filter.applyType}">  
@@ -37,10 +38,13 @@
 					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
 				<td>
-					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+					<!-- <s:submit  value="查 询" cssClass="button"></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div>
 				</td>
 				<td>
-					<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
+					<!-- <s:submit  value="重 置" cssClass="button"  onclick="resetForm(this.form) "></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form)">重 置</button></div></div>
+					
 				</td>				
 			</tr>
 
@@ -53,18 +57,17 @@
 	<table class="table" style="width:100%;" layoutH="88">
 		<thead>
 			<tr>
-				<th width="100" align="center">申请编号</th>
-				<th width="120" align="center">申请类型</th>
-				<th width="100" align="center">申请人</th>
-				<th width="100" align="center">申请时间</th>
-				<th width="100" align="center">操作</th>
+				<th width="20%" align="center">申请编号</th>
+				<th width="20%" align="center">申请类型</th>
+				<th width="20%" align="center">申请人</th>
+				<th width="20%" align="center">申请时间</th>
+				<th width="20%" align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-		
 		<c:forEach var="e" items="${approvalTable.currentPageData}">
 
-			<tr target="sid_user" rel="1">
+			<tr target="sid_user" rel="${e.id}">
 				<td>${e.id}</td>
 				<td>
 						<c:forEach var="t" items="${filter.applyTypeList}">
@@ -81,19 +84,19 @@
 						
  				</td>
 				<td>${e.applyUser}</td>
-	            
-	            
+
+				<td>${e.applyTime}</td>
+
 				<td>
-				  <fmt:formatDate value="${e.applyTime}" pattern="yyyy-MM-dd HH:mm:ss"/>  
-				<td>
+				<a  href="#" >&nbsp;</a>
 					<c:if test="${(e.applyType=='1')||(e.applyType=='2')}">
-					<a title="审核管理" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}&operateType=check" class="btnView" rel="Menu${selectedMenuID}">查看</a>
+					<a title="审核管理" target="navTab" href="ApprovalManage!show.action?selectedID=${e.id}&operateType=check" class="btnEdit" rel="Menu${selectedMenuID}">查看</a>
 					</c:if>
 					<c:if test="${e.applyType=='3'}">
-					<a title="审核管理" target="dialog" href="ApprovalManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>					
-					</c:if>
+					<a title="审核管理" target="dialog" href="ApprovalManage!show.action?selectedID=${e.id}" class="btnEdit" rel="Menu${selectedMenuID}">查看</a>					
+					</c:if> 
 
-				</td>
+				</td> 
 			</tr>
 		
 		</c:forEach>			

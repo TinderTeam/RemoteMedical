@@ -23,11 +23,18 @@
 		 $("select").prop('disabled', true);
     }
 	 */
+	 function submitHsForm1(url)
+	 {
+    var thisForm = document.hsForm;
+	thisForm.action="user/HospitalManage!"+url;
+	return iframeCallback(thisForm,navTabAjaxDone);
+	
+}
 	   
 </script>
 
 <div class="pageContent">
-	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
+	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		<input id="operateType" value="${operateType}" style="display:none;"/>
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
@@ -41,8 +48,8 @@
 				</dd>
 			</dl>		
 			<dl style="width:45%;clear:none;">
-				<dt style="width:20% ">医院名称：</dt>			
-				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="30" value="${hospitalModel.hospital.name}" />
+				<dt style="width:25% ">医院名称：</dt>			
+				<dd style="width:70% "><input type="text" name="hospitalModel.hospital.name" class="required " maxlength="64" size="30" value="${hospitalModel.hospital.name}" />
 				</dd>
 			</dl>			
 			<dl class="nowrap">
@@ -65,7 +72,7 @@
 			
 			<dl class="nowrap">
 				<dt style="width:9% ">详细地址：</dt>			
-				<dd ><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="84" value="${hospitalModel.hospital.address}"/>
+				<dd ><input type="text" name="hospitalModel.hospital.address"  maxlength="255" size="90" value="${hospitalModel.hospital.address}"/>
 				</dd>
 			</dl>
 
@@ -74,10 +81,9 @@
 				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.rank"  maxlength="32" size="30" value="${hospitalModel.hospital.rank}"/>
 				</dd>
 			</dl>			
-
 			<dl style="width:45%;clear:none;">
-				<dt style="width:20% ">联系方式：</dt>			
-				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.contactWay"  maxlength="32" size="30" value="${hospitalModel.hospital.contactWay}"/>
+				<dt style="width:25% ">医院电话：</dt>			
+				<dd style="width:70% "><input type="text" name="hospitalModel.hospital.hospitalPhone" class="telephone" maxlength="16" size="30" value="${hospitalModel.hospital.hospitalPhone}"/>
 				</dd>
 			</dl>
 			<dl style="width:45%;clear:none;">
@@ -86,19 +92,19 @@
 				</dd>
 			</dl>
 			<dl style="width:45%;clear:none;">
-				<dt style="width:20% ">医院电话：</dt>			
-				<dd style="width:75% "><input type="text" name="hospitalModel.hospital.hospitalPhone" class="telephone" maxlength="16" size="30" value="${hospitalModel.hospital.hospitalPhone}"/>
+				<dt style="width:25% ">联系人电话：</dt>			
+				<dd style="width:70% "><input type="text" name="hospitalModel.hospital.contactWay"  class="mobilephone" maxlength="16" size="30" value="${hospitalModel.hospital.contactWay}"/>
 				</dd>
 			</dl>
 			</div>
 	</fieldset>
 	<fieldset style="margin-top:20px;margin-bottom:40px;" class="field">
 		<legend>扩展描述</legend>	
-		<div style="height:350px;overflow:hidden !important;" class="pageFormContent nowrap"  >
+		<div style="height:370px;overflow:hidden !important;" class="pageFormContent nowrap"  >
 			<dl class="nowrap">
 				<dt  style="width:9% ">联系电话：</dt>			
 				<dd >
-				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelist required" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
+				<textarea name="hospitalModel.hospital.contactsPhone"  cols="100" rows="3" maxlength="255" class="phonelistFormat phonelistTen required" id="textW">${hospitalModel.hospital.contactsPhone}</textarea>
 				<span class="info" >*以英文分号隔开，不超过10个号码</span>
 				</dd>
 			</dl>
@@ -120,36 +126,33 @@
 		</div>
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:40%" >
-				<c:choose>
-					<c:when test="${operateType =='check'}">
-						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit></li>
-						<li style="padding:0px 30px 0px 10px;"><s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit></li>						
-					</c:when>
-					<c:otherwise>
 						<c:choose>
 							<c:when test="${hospitalModel.hospital.state ==0}"> 
-								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit></li>	
+								<li style="padding:0px 30px 0px 10px;">
+								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitHsForm1('infoSubmit')">提 交</button></div></div>
+								</li>	
 							</c:when>
 							<c:otherwise>
-								<li style="padding:0px 30px 0px 10px;"><s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit></li>
+								<li style="padding:0px 30px 0px 10px;">
+								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitHsForm1('infoSave')">保 存</button></div></div>
+								</li>
 							</c:otherwise>
 						
 						</c:choose>
 						<c:choose>
 							<c:when test="${loginUser.accountType==2}">
 							<li>
-							    <input value="关 闭" class="mispButton primary close" type="button"/>
+							<div class="button"><div class="buttonContent"><button type="button" class="close">关 闭</button></div></div>
+
 							</li>
 							</c:when>
-							<c:otherwise><a title="医院管理" target="navTab" href="user/HospitalManage" class="mispButton primary" rel="Menu8">返 回</a></c:otherwise>
+							<c:otherwise>
+							<a title="医院管理" target="navTab" href="user/HospitalManage" class="button" rel="Menu8"><span>返 回</span></a>
+
+							</c:otherwise>
 							
 						</c:choose>
-
-					</c:otherwise>
-						
-				</c:choose>			
-
-				
+					
 			</ul>
 		</div>
 	</s:form>

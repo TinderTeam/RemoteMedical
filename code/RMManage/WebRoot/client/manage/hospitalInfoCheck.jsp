@@ -21,14 +21,19 @@
         
         });
 
-   		 $('input,textarea',$('form[name=hsForm]')).prop('readonly',true);
+   		 $('input,textarea',$('form[name=hsForm2]')).prop('readonly',true);
 		 $("select").prop('disabled', true);
  
-	   
+function submitHsForm2(url){
+    var thisForm = document.hsForm2;
+	thisForm.action="user/HospitalManage!"+url;
+	return iframeCallback(thisForm,navTabAjaxDone);
+	
+}		   
 </script>
 
 <div class="pageContent">
-	<s:form method="post" name="hsForm" action="user/HospitalManage" class="pageForm required-validate" onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
+	<s:form method="post" name="hsForm2" action="user/HospitalManage" class="pageForm required-validate"  >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		
 		<input type="text" name="hospitalModel.hospital.state" value="${hospitalModel.hospital.state}"  style="display:none;"/>
@@ -122,11 +127,11 @@
 		<div class="formBar" >
 			<ul style="float:none!important;margin-left:40%" >
 
-				<li style="padding:0px 30px 0px 10px;"><s:submit
-						method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
+				<li style="padding:0px 30px 0px 10px;">
+				<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitHsForm2('applyAgree')">同 意</button></div></div>
 				</li>
-				<li style="padding:0px 30px 0px 10px;"><s:submit
-						method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
+				<li style="padding:0px 30px 0px 10px;">
+						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitHsForm2('applyRefuse')">拒 绝</button></div></div>
 				</li>
 
 			</ul>

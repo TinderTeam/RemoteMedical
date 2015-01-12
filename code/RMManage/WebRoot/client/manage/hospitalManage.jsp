@@ -65,12 +65,15 @@ function reloadCurrentTab2(json)
 					addressInit('manageProvince', 'manageCity', 'manageArea');
 	
 				</script>
-				</td>
-				<td><s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+				<td>
+					<!-- <s:submit  value="查 询" cssClass="button"></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div>
 				</td>
 				<td>
-				<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
-				</td>				    
+					<!-- <s:submit  value="重 置" cssClass="button"  onclick="resetForm(this.form) "></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form)">重 置</button></div></div>
+					
+				</td>			    
 			</tr>
 
 		</table>
@@ -89,7 +92,7 @@ function reloadCurrentTab2(json)
 				<th width="10%" align="center">规模</th>
 				<th width="15%" align="center">详细地址</th>
 				<th width="10%" align="center">联系人</th>
-				<th width="15%" align="center">联系电话</th>
+				<th width="15%" align="center">联系人电话</th>
 				<th width="10%" align="center">账户状态</th>
 				<th width="5%" align="center">查看详情</th>
 				<th width="10%" align="center" class="accountCol">账户管理</th>
@@ -103,7 +106,7 @@ function reloadCurrentTab2(json)
 				<td>${e.rank}</td>
 				<td>${e.address}</td>
 				<td>${e.contacts}</td>
-				<td>${e.contactsPhone}</td>
+				<td>${e.contactWay}</td>
 				<td>
 					<c:forEach var="us" items="${userStatusList}">
 						  <c:choose>		       
@@ -114,7 +117,8 @@ function reloadCurrentTab2(json)
 						   </c:choose>
 					</c:forEach>
 				</td>
-				<td>					
+				<td>	
+					 <a href="#" >&nbsp;</a> 			
 					<a title="医院管理" target="navTab" href="HospitalManage!show.action?selectedID=${e.id}&operateType=edit&selectedMenuID=${selectedMenuID}" class="btnView" rel="Menu${selectedMenuID}">查看</a>
 				</td>
 				<td class="accountCol">

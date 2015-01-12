@@ -27,13 +27,22 @@
     {
    		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
 		 $("select").prop('disabled', true);
-    }    */     
+    }    */  
+
+
+function submitExForm1(url){
+    var thisForm = document.exForm;
+	thisForm.action="user/ExpertManage!"+url;
+	return iframeCallback(thisForm,navTabAjaxDone);
 	
-</script>
+}
+
+</script>   
+
 
 <div class="pageContent">
 
-	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data"	onsubmit="return iframeCallback(this,navTabAjaxDone);">
+	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data">
 		<input type="text" name="selectedID" value="${selectedID}"	style="display:none;" />
 		<input type="text" name="accountType" value="${loginUser.accountType}"	style="display:none;" />
 		<input type="text" name="expertModel.expert.state"	value="${expertModel.expert.state}" style="display:none;" />
@@ -206,22 +215,25 @@
 				<c:choose>
 					<c:when test="${operateType =='check'}">
 						<li style="padding:0px 30px 0px 10px;">
-						<s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
+						<!-- <s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit> -->
+						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('applyAgree')">同 意</button></div></div>
 						</li>
 						<li style="padding:0px 30px 0px 10px;">
-						<s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
+						<!-- <s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit> -->
+						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('applyRefuse')">拒 绝</button></div></div>
 						</li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${expertModel.expert.state == 0}">
 								<li style="padding:0px 30px 0px 10px;">
-								<s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit>
+								<!-- <s:submit method="infoSubmit" value="提 交 " cssClass="mispButton primary"></s:submit> -->
+								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('infoSubmit')">提 交</button></div></div>
 								</li>
 							</c:when>
 							<c:otherwise>
 								<li style="padding:0px 30px 0px 10px;">
-								<s:submit method="infoSave" value="保 存" cssClass="mispButton primary"></s:submit>
+								<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm1('infoSave')">保 存</button></div></div>
 								</li>
 							</c:otherwise>
 
@@ -229,12 +241,13 @@
 						<c:choose>
 							<c:when test="${loginUser.accountType==1}">
 							<li>
-							    <input value="关 闭" class="mispButton primary close" type="button"/>
+
+							    <div class="button"><div class="buttonContent"><button type="button" class="close">关 闭</button></div></div>
 							</li>
 							</c:when>
 							<c:otherwise>
-							<a title="专家管理" target="navTab" href="user/ExpertManage" class="mispButton primary" rel="Menu7">返 回</a>
-							<!-- <li><s:submit method="cancel" value="返 回" cssClass="mispButton primary"></s:submit></li> -->
+							<a title="专家管理" target="navTab" href="user/ExpertManage" class="button" rel="Menu7"><span>返 回</span></a>
+
 							</c:otherwise>
 							
 						</c:choose>

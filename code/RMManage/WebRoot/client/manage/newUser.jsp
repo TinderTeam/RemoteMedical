@@ -10,7 +10,11 @@
 			<div class="unit">
 				<label>用户名称：</label>
 				<input type="text" size="30" name="filter.userName" maxlength="64" class="required alphanumeric"/>
-				<span class="info" >*字母、数字、下划线中的一种或几种组合格式</span>
+				
+			</div>
+			<div class="unit">
+			<label>&nbsp;&nbsp;</label>
+			<span class="info" >*字母、数字、下划线中的一种或几种组合格式</span>
 			</div>
 			<div class="divider"></div>
 			<div class="unit">

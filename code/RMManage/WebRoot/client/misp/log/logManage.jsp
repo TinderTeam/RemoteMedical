@@ -40,10 +40,12 @@ function submitForm(url){
 					<input type="text"  readonly="readonly" class="date" name="filter.endTime" value="${filter.endTime}">
 				</td>
 				<td>
-					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+					<!-- <s:submit  value="查 询" cssClass="button"></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div>
 				</td>
 				<td>
-					<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
+					<!-- <s:submit  value="重 置" cssClass="button"  onclick="resetForm(this.form) "></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form)">重 置</button></div></div>
 					
 				</td>					 
 			</tr>
@@ -63,7 +65,7 @@ function submitForm(url){
 	<table class="table" width="100%" layoutH="115">
 		<thead>
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>			
+				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" ></th>			
 				<th width="80" align="center">编号</th>
 				<th width="100" align="center">操作人</th>
 				<th width="80" align="center">操作名称</th>
@@ -78,7 +80,7 @@ function submitForm(url){
 	
 	    <c:forEach var="e" items="${logList.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.id}" >
-				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>	        
+				<td><input name="selectedIDList" value="${e.id}" type="checkbox" ></td>	        
 	            <td>${e.id}</td>
 	            <td>${e.user}</td>
 	            <td>${e.name}</td>

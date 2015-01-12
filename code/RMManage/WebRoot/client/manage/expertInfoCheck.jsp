@@ -19,15 +19,20 @@
         $(".exfield").width(text_width+120 + "px");
         });
 
-   		 $('input,textarea',$('form[name=exForm]')).prop('readonly',true);
+   		 $('input,textarea',$('form[name=exForm2]')).prop('readonly',true);
 		 $("select").prop('disabled', true);
     
+function submitExForm2(url){
+    var thisForm = document.exForm2;
+	thisForm.action="user/ExpertManage!"+url;
+	return iframeCallback(thisForm,navTabAjaxDone);
 	
+}	
 </script>
 
 <div class="pageContent">
 
-	<s:form method="post" name="exForm" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data"	onsubmit="return iframeCallback(this,navTabAjaxDone);">
+	<s:form method="post" name="exForm2" action="user/ExpertManage" class="pageForm required-validate" enctype="multipart/form-data">
 		<input type="text" name="selectedID" value="${selectedID}"	style="display:none;" />
 		<input type="text" name="accountType" value="${loginUser.accountType}"	style="display:none;" />
 		<input type="text" name="expertModel.expert.state"	value="${expertModel.expert.state}" style="display:none;" />
@@ -198,11 +203,11 @@
 		<div class="formBar" style="padding-bottom:10px;">
 			<ul style="float:none!important;margin-left:35%">
 
-				<li style="padding:0px 30px 0px 10px;"><s:submit
-						method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit>
+				<li style="padding:0px 30px 0px 10px;"><!-- <s:submit method="applyAgree" value="同 意" cssClass="mispButton primary"></s:submit> -->
+				<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm2('applyAgree')">同 意</button></div></div>
 				</li>
-				<li style="padding:0px 30px 0px 10px;"><s:submit
-						method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit>
+				<li style="padding:0px 30px 0px 10px;"><!-- <s:submit method="applyRefuse" value="拒 绝" cssClass="mispButton danger"></s:submit> -->
+						<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitExForm2('applyRefuse')">拒 绝</button></div></div>
 				</li>
 
 

@@ -42,11 +42,17 @@ function reloadCurrentTab(json)
    DWZ.ajaxDone(json);
    navTab.reload("user/ExpertManage");
 }
+function submitAddForm(url){
+    var thisForm = document.exAdd;
+	thisForm.action="user/ExpertManage!"+url;
+	return iframeCallback(thisForm,navTabAjaxDone);
+	
+}	
 </script>
 
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<div  style="height:43px;overflow:hidden;display:none;" id="addEx" >
-		<s:form  name="exAdd" action="user/ExpertManage" method="POST"  onsubmit="return iframeCallback(this,navTabAjaxDone);"  >
+		<s:form  name="exAdd" action="user/ExpertManage" method="POST"  >
 		<div class="searchBar">
 			<table class="searchContent">
 			<tr>
@@ -58,10 +64,11 @@ function reloadCurrentTab(json)
 					<label style="color:grey;">(点击图标查找专家)</label>
 				</td>
 				<td>&nbsp;&nbsp;</td>
-				<td><s:submit  value="添加专家" cssClass="mispButton primary" method="addSure"></s:submit> 
+				<td>
+				<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitAddForm('addSure')">添加专家</button></div></div>
 				</td>
-				<td><s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" method="cancel"></s:submit>
-				
+				<td><!-- <s:submit  value="取 消" cssClass="mispButton primary"  onclick="resetForm(this.form)" method="cancel"></s:submit> -->
+				<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitAddForm('cancel')">取 消</button></div></div>
 				</td>
 		 			
 			</tr>
@@ -92,10 +99,13 @@ function reloadCurrentTab(json)
 					所在医院：<input type="text" name="filter.expert.workPlace" value="${filter.expert.workPlace}"/>
 				</td>
 				<td>
-				  <s:submit  value="查 询" cssClass="mispButton primary"></s:submit> 
+					<!-- <s:submit  value="查 询" cssClass="button"></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div>
 				</td>
 				<td>
-				<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form)" ></s:submit>
+					<!-- <s:submit  value="重 置" cssClass="button"  onclick="resetForm(this.form) "></s:submit> -->
+					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form)">重 置</button></div></div>
+					
 				</td>
 				
 			</tr>
@@ -113,10 +123,10 @@ function reloadCurrentTab(json)
 				<th width="10%" align="center">专家账号</th>
 				<th width="10%" align="center">姓名</th>
 				<th width="10%" align="center">职称</th>
-				<th width="20%" align="center">工作医院</th>
+				<th width="15%" align="center">工作医院</th>
 				<th width="10%" align="center">手机号码</th>
 				<th width="10%" align="center">座机号码</th>
-				<th width="10%" align="center">邮件地址</th>
+				<th width="15%" align="center">邮件地址</th>
 				<th width="5%" align="center">账户状态</th>
 				<th width="5%" align="center">查看详情</th>
 				<th width="10%" align="center" class="accountCol">账户管理</th>
@@ -142,10 +152,12 @@ function reloadCurrentTab(json)
 						   </c:choose>
 					</c:forEach>
 				</td>
-				<td>				
+				<td>
+				<a  href="#" >&nbsp;</a>				
 				<a title="专家管理" target="navTab" href="ExpertManage!show.action?selectedID=${e.id}" class="btnView" rel="Menu${selectedMenuID}">查看</a>	
 				</td>
 				<td class="accountCol">
+				 
 				<c:choose>
 					<c:when test="${e.state==2}">
 						<a title="确定要启用该账户"   href="javascript:;"  mask="true" onclick="submitAccountManage('logon','${e.id }','${e.name}')"
