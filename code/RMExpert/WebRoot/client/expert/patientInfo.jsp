@@ -5,44 +5,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/client/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
-  <script type="text/javascript" src="<%=request.getContextPath()%>/client/lib/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
-<script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery.validate.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-function submitForm(url) 
-{
- if(url == "submit")
- {
-    if ($.trim($("#text3").val()).length<=0)
-    {
-        alert("检查所见不能为空");
-        return;
-    }
-    if($.trim($("#text4").val()).length<=0)
-    {
-         alert("诊断意见不能为空");
-        return;
-    }
-  }
-  if(url == "back")
-  {
-     closeDown();
-  }
- document.form1.action = "expert/ReportManage!" +url;
- return validateCallback(document.form1,navTabAjaxDone);
-}
-</script>
+ 
 <!-- 自适应屏幕高度 -->
 <script type="text/javascript">
     //初始化进入页面参数设定
     var flag=0;
 	adaptCSS();
 
-    //当浏览器窗口大小改变时，设置显示内容的高度  
-    window.onresize=function(){  
-        adaptCSS(); 
-    }; 
+
 	function adaptCSS()
 	{
 	//版面布局自适应
@@ -80,9 +50,39 @@ function submitForm(url)
 	 }
 		
 	}
-
+    //当浏览器窗口大小改变时，设置显示内容的高度  
+    window.onresize=function(){  
+        adaptCSS(); 
+    }; 
 </script> 
 
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/client/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+  <script type="text/javascript" src="<%=request.getContextPath()%>/client/lib/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+
+<script type="text/javascript">
+function submitForm(url) 
+{
+ if(url == "submit")
+ {
+    if ($.trim($("#text3").val()).length<=0)
+    {
+        alert("检查所见不能为空");
+        return;
+    }
+    if($.trim($("#text4").val()).length<=0)
+    {
+         alert("诊断意见不能为空");
+        return;
+    }
+  }
+  if(url == "back")
+  {
+     closeDown();
+  }
+ document.form1.action = "expert/ReportManage!" +url;
+ return validateCallback(document.form1,navTabAjaxDone);
+}
+</script>
 <input id="sessionID" value="<%=session.getId()%>" style="display:none;"/>
 <input id="contextPath" value="<%=request.getContextPath()%>" style="display:none;"/>
 <input id="hospitalID" name="hospitalID"  value="${medicalReport.reportView.hospitalID}" style="display:none;"/>
@@ -348,8 +348,6 @@ function submitForm(url)
 	       }
 	    }
  
-
-			
 	 }
 	 
 	 function showTemplateValue(event, treeId, treeNode) 
