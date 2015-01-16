@@ -3,6 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+ 
+<script type="text/javascript">
+ 	//申明默认宽度
+ 	var thWidthArray=new Array(80,80,80,80,100,80,150,100,120,120,80);
+ 	$(document).ready(function() 
+ 	{
+ 		reWidthTb("#tbPL",thWidthArray);
+ 	});
+</script>
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="expert/ReportManage" method="post">
 	<input type="hidden" name="status" value="${param.status}">
@@ -155,7 +164,7 @@
 	<div class="panelBar">
 
 	</div>
-	<table class="table" width="100%" layoutH="138">
+	<table class="table" width="100%" layoutH="138" id="tbPL">
 		<thead>
 			<tr>
 				<th width="80" align="center">处理状态</th>
