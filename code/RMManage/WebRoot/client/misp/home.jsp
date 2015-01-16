@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>远程诊断管理平台</title>
@@ -27,23 +28,14 @@
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery.validate.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/client/lib/dwz/xheditor/xheditor-1.2.1.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/client/lib/dwz/xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/client/lib/dwz/uploadify/scripts/jquery.uploadify.js" type="text/javascript"></script>
-
-
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/bin/dwz.min.js" type="text/javascript"></script>
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
-<!-- 浮动窗口显示css&js -->
-<link href="<%=request.getContextPath()%>/client/lib/newCSS/BS.css" rel="stylesheet" type="text/css" media="screen"/> 
-<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-tooltip.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/client/lib/newJS/bootstrap-popover.js" type="text/javascript"></script>
-<!-- 统一按钮样式 -->
-<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>  
 
+<!-- button css -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>
     
 	
 	
@@ -72,21 +64,10 @@ $(function()
 
     }; 
 });
-function resetForm(objForm){
 
-    $(":input",objForm).not(":button, :submit, :reset, :hidden").val('').removeAttr("selected");
-    //$(':select',objForm).removeAttr('selected');//IE报错，jQuery冲突	  
-}
+
 </script>
 
-
-<!-- 省市三级联动js -->
-<script  src="<%=request.getContextPath()%>/client/lib/newJS/jsAddress.js" type="text/javascript"></script>
-<!-- button css -->
-<link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>
-<!-- 图片上传预览js -->
-
-<script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -117,7 +98,7 @@ function resetForm(objForm){
 				</div>
 			</div>
 			<div id="sidebar">
-				<div class="toggleCollapse"><h2>管理平台</h2><div></div></div>
+				<div class="toggleCollapse"><h2>管理平台</h2><div onclick="javascript:navTabPageBreak();"></div></div>
 
 				<div class="accordion" fillSpace="sidebar">
 
@@ -189,6 +170,42 @@ function resetForm(objForm){
 	</div>
 
 	<div id="footer"> &copy; 2014  <a href="http://fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
+	
 
+<!-- 省市三级联动js -->
+<script  src="<%=request.getContextPath()%>/client/lib/newJS/jsAddress.js" type="text/javascript"></script>
+
+<!-- 图片上传预览js -->
+
+<script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+	function resetForm(objForm) 
+	{
+
+		$(":input", objForm).not(":button, :submit, :reset, :hidden").val('')
+				.removeAttr("selected");
+		//$(':select',objForm).removeAttr('selected');//IE报错，jQuery冲突	  
+	}
+	//var screenWidth = document.documentElement.clientWidth;
+
+	function reWidthTb(idVal, thWidthData) {
+
+		var newWidth = 0;
+		$(idVal).find("tr").each(function(trindex, tritem) {
+			$(tritem).find("th").each(function(tdindex, tditem) {
+				var curWidth = $(tditem).width();
+				if (curWidth < thWidthData[tdindex]) {
+					newWidth += thWidthData[tdindex];
+				} else {
+					newWidth += $(tditem).width();
+				}
+
+			});
+		});
+		//alert(newWidth);
+		$(idVal).attr('width', newWidth);
+	}
+</script>
 </body>
 </html>

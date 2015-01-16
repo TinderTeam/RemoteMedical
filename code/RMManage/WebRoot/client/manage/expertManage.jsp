@@ -2,7 +2,15 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+ 
+ <script type="text/javascript">
+ 	//申明默认宽度
+ 	var thWidthArray=new Array(100,100,100,150,100,150,150,80,80,100);
+ 	$(document).ready(function() 
+ 	{
+ 		reWidthTb("#exTable",thWidthArray);
+ 	});
+ </script>
 <input type="hidden" id="currentAccount" value="${loginUser.accountType}" />
 <script type="text/javascript">
 
@@ -120,16 +128,16 @@ function submitAddForm(url){
 	<table class="table" width="100%" layoutH="88" id="exTable">
 		<thead>
 			<tr>		
-				<th width="10%" align="center">专家账号</th>
-				<th width="10%" align="center">姓名</th>
-				<th width="10%" align="center">职称</th>
-				<th width="15%" align="center">工作医院</th>
-				<th width="10%" align="center">手机号码</th>
-				<th width="10%" align="center">座机号码</th>
-				<th width="15%" align="center">邮件地址</th>
-				<th width="5%" align="center">账户状态</th>
-				<th width="5%" align="center">查看详情</th>
-				<th width="10%" align="center" class="accountCol">账户管理</th>
+				<th width="100" align="center">专家账号</th>
+				<th width="100" align="center">姓名</th>
+				<th width="100" align="center">职称</th>
+				<th width="150" align="center">工作医院</th>
+				<th width="100" align="center">手机号码</th>
+				<th width="150" align="center">座机号码</th>
+				<th width="150" align="center">邮件地址</th>
+				<th width="80" align="center">账户状态</th>
+				<th width="80" align="center">查看详情</th>
+				<th width="100" align="center" class="accountCol">账户管理</th>
 			</tr>
 		</thead>
 		<tbody>

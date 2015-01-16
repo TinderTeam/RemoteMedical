@@ -2,6 +2,14 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+ <script type="text/javascript">
+ 	//申明默认宽度
+ 	var thWidthArray=new Array(100,200,80,200,80,100,80,80,150);
+ 	$(document).ready(function() 
+ 	{
+ 		reWidthTb("#hmTable",thWidthArray);
+ 	});
+ </script>
 <input type="hidden" id="currentAccount" value="${loginUser.accountType}" />
 <script type="text/javascript">
 
@@ -83,19 +91,19 @@ function reloadCurrentTab2(json)
 </div>
 <div class="pageContent">
 
-	<table class="table" width="100%" layoutH="88">
+	<table class="table" width="100%" layoutH="88" id="hmTable">
 		<thead>
 		
 			<tr>
-				<th width="10%" align="center">医院账号</th>
-				<th width="15%" align="center">医院名称</th>
-				<th width="10%" align="center">规模</th>
-				<th width="15%" align="center">详细地址</th>
-				<th width="10%" align="center">联系人</th>
-				<th width="15%" align="center">联系人电话</th>
-				<th width="10%" align="center">账户状态</th>
-				<th width="5%" align="center">查看详情</th>
-				<th width="10%" align="center" class="accountCol">账户管理</th>
+				<th width="100" align="center">医院账号</th>
+				<th width="200" align="center">医院名称</th>
+				<th width="80" align="center">规模</th>
+				<th width="200" align="center">详细地址</th>
+				<th width="80" align="center">联系人</th>
+				<th width="100" align="center">联系人电话</th>
+				<th width="80" align="center">账户状态</th>
+				<th width="80" align="center">查看详情</th>
+				<th width="150" align="center" class="accountCol">账户管理</th>
 			</tr>
 		</thead>
 		<tbody>

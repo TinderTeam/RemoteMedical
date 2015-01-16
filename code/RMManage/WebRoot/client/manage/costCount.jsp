@@ -3,6 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<script type="text/javascript">
+ 	//申明默认宽度
+ 	var thWidthArray=new Array(80,80,80,80,80,80,80,80,140,140,80,80,80,160,80,100);
+ 	$(document).ready(function() 
+ 	{
+ 		reWidthTb("#tbCC",thWidthArray);
+ 	});
+ </script>
 <div class="pageHeader" style="overflow-x: hidden;overflow-y: auto;">
 	<form id="pagerForm"  onsubmit="return navTabSearch(this);" action="report/ReportManage!costCount.action" method="post">
 	<input type="hidden" name="status" value="${param.status}">
@@ -164,29 +172,31 @@
 	<div class="panelBar">
  
 	</div>
-	<table class="table" width="100%" layoutH="138">
+
+	<table class="table" id="tbCC" width="1400" layoutH="138">
 		<thead>
 			<tr>
-				<th width="150px" align="center">检查设备</th>
-				<th width="120px" align="center">病人编号</th>
-				<th width="100px" align="center">病人姓名</th>
-				<th width="120px" align="center">病人性别</th>
-				<th width="100px" align="center">病人年龄</th>
-				<th width="150px" align="center">检查部位</th>
-				<th width="120px" align="center">申请医生</th>
-				<th width="120px" align="center">报告状态</th>
-				<th width="120px" align="center">远程请求时间</th>
-				<th width="150px" align="center">报告回传时间</th>
-				<th width="120px" align="center">专家编号</th>
-				<th width="120px" align="center">专家姓名</th>
-				<th width="100px" align="center">医院编号</th>
-				<th width="150px" align="center">医院名称</th>
-				<th width="120px" align="center">专家收费</th>
-				<th width="120px" align="center">医生诊断收费</th>
+				<th width="80" align="center">检查设备</th>
+				<th width="80" align="center">病人编号</th>
+				<th width="80" align="center">病人姓名</th>
+				<th width="80" align="center">病人性别</th>
+				<th width="80" align="center">病人年龄</th>
+				<th width="80"  align="center">检查部位</th>
+				<th width="80" align="center">申请医生</th>
+				<th width="80" align="center">报告状态</th>
+				<th width="140" align="center">远程请求时间</th>
+				<th width="140" align="center">报告回传时间</th>
+				<th width="80" align="center">专家编号</th>
+				<th width="80" align="center">专家姓名</th>
+				<th width="80" align="center">医院编号</th>
+				<th width="150" align="center">医院名称</th>
+				<th width="80" align="center">专家收费</th>
+				<th width="100" align="center">医生诊断收费</th>
 				
 			</tr>
 		</thead>
 		<tbody>
+
        <c:forEach var="e" items="${reportList.currentPageData}"> 		
 	        <tr target="sid_user" rel="1"  >
                 <td>${e.modality}</td>
