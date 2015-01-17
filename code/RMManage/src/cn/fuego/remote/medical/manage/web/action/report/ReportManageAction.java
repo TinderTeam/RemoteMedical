@@ -14,6 +14,7 @@ import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.manage.service.ExpertService;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.manage.web.model.WorkStaticsModel;
 
 /** 
  * @ClassName: ReportManageAction 
@@ -29,6 +30,7 @@ public class ReportManageAction extends DWZTableAction
 	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
  	private ReportFilterModel filter = new ReportFilterModel(); 
  
+ 	private WorkStaticsModel workStatics;
 	public String execute()
 	{
 		
@@ -42,6 +44,12 @@ public class ReportManageAction extends DWZTableAction
 	{
 		execute();
 		return "cost";
+	}
+	
+	public String workCount()
+	{
+		workStatics = expertService.getWorkStatics(this.getLoginUser().getUserName(), filter);
+		return "work";
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#show()
@@ -109,6 +117,16 @@ public class ReportManageAction extends DWZTableAction
 	public void setFilter(ReportFilterModel filter)
 	{
 		this.filter = filter;
+	}
+
+	public WorkStaticsModel getWorkStatics()
+	{
+		return workStatics;
+	}
+
+	public void setWorkStatics(WorkStaticsModel workStatics)
+	{
+		this.workStatics = workStatics;
 	}
 
  

@@ -11,6 +11,8 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.ApplyStatusEnum;
+import cn.fuego.remote.medical.domain.Approval;
 import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.service.UserService;
 import cn.fuego.remote.medical.manage.service.impl.UserServiceImpl;
@@ -32,6 +34,29 @@ public class UserManageAction extends DWZTableAction
 
 	private UserFilterModel filter = new UserFilterModel();
 	private TableDataModel<SystemUser> userTable = new  TableDataModel<SystemUser>();	
+	
+    private int approvalCount = 0;
+    private boolean approvalRefuse = false;
+    
+    
+    
+	public int getApprovalCount()
+	{
+		return approvalCount;
+	}
+	public void setApprovalCount(int approvalCount)
+	{
+		this.approvalCount = approvalCount;
+	}
+ 
+	public boolean isApprovalRefuse()
+	{
+		return approvalRefuse;
+	}
+	public void setApprovalRefuse(boolean approvalRefuse)
+	{
+		this.approvalRefuse = approvalRefuse;
+	}
 	public String execute()
 	{
 		userTable.setPage(this.getPage());
@@ -62,6 +87,22 @@ public class UserManageAction extends DWZTableAction
 
 		return MISP_DONE_PAGE;
 
+	}
+	
+	public String home()
+	{
+		this.approvalCount = ServiceContext.getInstance().getApprovalService().getApprovalCount(this.getLoginUser().getUserName());
+		Approval approval = ServiceContext.getInstance().getApprovalService().getApprovalInfo(this.getLoginUser().getUserName());
+		
+		if( null != approval)
+		{
+			if(ApplyStatusEnum.REFUSED.getStatus().equals(approval.getStatus()))
+			{
+				this.approvalRefuse = true;
+			}
+		}
+		 
+		return "home";
 	}
 
 	@Override

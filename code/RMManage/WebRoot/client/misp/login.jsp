@@ -128,9 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="login_banner"><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/login_banner.jpg" /></div>
 			<div class="login_main">
 				<ul class="helpList">
-					<li><a href="#">下载驱动程序</a></li>
-
-	
+	 
 				</ul>
 				<div class="login_inner">
 				

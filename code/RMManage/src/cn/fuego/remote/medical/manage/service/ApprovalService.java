@@ -23,7 +23,8 @@ public interface ApprovalService
 	void handleAgree(String handleUser,String approvalID);
 
 	void handleRefuse(String handleUser, String approvalID);	
-	
+	public int getApprovalCount(String userName);
+	public Approval getApprovalInfo(String userName);
 
 	
 

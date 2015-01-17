@@ -16,6 +16,7 @@ import cn.fuego.remote.medical.domain.ReportView;
 import cn.fuego.remote.medical.manage.web.model.ImageModel;
 import cn.fuego.remote.medical.manage.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.manage.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.manage.web.model.WorkStaticsModel;
 
 /** 
  * @ClassName: ExpertService 
@@ -53,4 +54,7 @@ public interface ExpertService
 	void submitMedicalReport(ReportStatusEnum status,MedicalReportModel report);
 
     List<String> getLinkHosptialByExpert(String expertID);
+    
+	public WorkStaticsModel getWorkStatics(String userName,ReportFilterModel filter);
+
 }

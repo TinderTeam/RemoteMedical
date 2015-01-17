@@ -78,7 +78,7 @@
    		<action name="ReportManage" class="cn.fuego.remote.medical.manage.web.action.report.ReportManageAction">
 			<result type="dispatcher">/client/manage/diagnoseCount.jsp</result>
  			<result type="dispatcher" name="cost">/client/manage/costCount.jsp</result>
- 			
+ 			<result type="dispatcher" name="work">/client/manage/workCount.jsp</result>
  		</action>
  
  	</package>
@@ -89,6 +89,8 @@
 			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
 			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
 			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
+			<result type="dispatcher" name="home">/client/manage/message.jsp</result>
+			
 		</action>
    		<action name="HospitalManage" class="cn.fuego.remote.medical.manage.web.action.user.HospitalManageAction">
 			<result type="dispatcher">/client/manage/hospitalManage.jsp</result>

@@ -49,7 +49,7 @@ function submitForm2(url,id,name)
 		</table> 
 		<div class="subBar">
 			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
+				<li><div class="buttonActive" style="padding-right:30px;float:left;"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div></li>
 			</ul>
 		</div>

@@ -135,25 +135,34 @@ $(function()
 								<p><a href="#"  style="line-height:19px"></a></p>
 							</div>
 							<div class="right">
-								<p style="color:red"> </p>
+								<p style="color:red"></p>
 							</div>
-							<p><span></span></p>
-							<p></p>
+							 
 						</div>
-						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
+						<div class="pageFormContent"  style="margin-right:230px">
+						    <c:if test="${approvalCount!=0}"> 
+						      <div style="font-size:1.8em;">
+						         您有${approvalCount}项待审批事项,请及时处理！
+						      </div> 
+						     </c:if>
+						     <c:if test="${approvalRefuse==true}"> 
+						      <div style="font-size:1.8em;">
+						         信息修改申请被拒绝，请重新提交！
+						      </div> 
+						     </c:if>
+						</div>
 							
 
 <h2></h2>
-<div class="unit"></div>
-<div class="unit"></div>
+ 
 
-<div class="divider"></div>
+ 
 <h2></h2>
 <pre style="margin:5px;line-height:1.4em">
 
 </pre>
 
-<div class="divider"></div>
+ 
 <h2><span style="color:red;"></span></h2><br/>
 <pre style="margin:5px;line-height:1.4em;">
 

@@ -38,6 +38,10 @@
 					      $('#days').attr('checked',false);$('#days').val('');
 					   } 
 					}
+					function query()
+					{  
+					  $('#queryBtn').click();
+					}
 
 				</script>
 		<table class="searchContent">
@@ -111,7 +115,7 @@
 				   <c:if test="${filter.mode == 1}">
 				   		<span><input id="ck1" type="radio" name="filter.mode" style="width:25px;" value="0" onclick="changeMode(0);"/>远程请求时间:</span>	
 				   </c:if>
-					<select name="filter.days" id="days">
+					<select name="filter.days" id="days" onchange="query()">
 						<option value="">默认所有时间</option>
 						<c:forEach var="d" items="${filter.dayList}">
 						  <c:choose>
@@ -149,7 +153,7 @@
 				
                 </td>
                 <td>
-               	    <div class="buttonActive" style="padding-right:30px;"><div class="buttonContent"><button type="submit" >查 询</button>	</div></div>
+               	    <div class="buttonActive" style="padding-right:30px;float:left;"><div class="buttonContent"><button id="queryBtn"type="submit" >查 询</button>	</div></div>
 					<div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div>
 				</td>
 				 
@@ -196,7 +200,7 @@
  	        		     已处理    </td>
  	        			</c:when>
  	        			<c:otherwise>
- 	        		<td bgcolor="green" style="color:white;">	        		      
+ 	        		<td bgcolor="yellow" style="color:white;">	        		      
  	        			 待处理 	        			  
  	        	     </td>
  	        			</c:otherwise> 	        			

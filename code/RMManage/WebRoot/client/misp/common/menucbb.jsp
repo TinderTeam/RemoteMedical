@@ -21,8 +21,14 @@
 					<ul>
 					<c:forEach var="childMenuItem" items="${menuTreeItem}">	
 					 <c:if test="${childMenuItem.menu.selected == true}">
-					 <li><a href="<%=request.getContextPath()%>/client/${childMenuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${childMenuItem.menu.menuID}" target="navTab" rel="Menu${childMenuItem.menu.menuID}">${childMenuItem.menu.value}</a></li>
-					 </c:if>	
+						 <c:if test="${childMenuItem.menu.name !='我的首页'}">
+						  <li><a href="<%=request.getContextPath()%>/client/${childMenuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${childMenuItem.menu.menuID}" target="navTab" rel="Menu${childMenuItem.menu.menuID}">${childMenuItem.menu.value}</a></li>
+						  </c:if>
+						 <c:if test="${childMenuItem.menu.name =='我的首页'}">
+						   <li><a href="<%=request.getContextPath()%>/client/${childMenuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${childMenuItem.menu.menuID}" target="navTab" rel="main">${childMenuItem.menu.value}</a></li>
+						 
+						 </c:if>
+ 					</c:if>	
 					</c:forEach>
 					 
 					</ul>								

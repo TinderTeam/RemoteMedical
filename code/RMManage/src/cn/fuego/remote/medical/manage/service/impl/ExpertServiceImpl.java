@@ -38,6 +38,7 @@ import cn.fuego.remote.medical.manage.service.ServiceContext;
 import cn.fuego.remote.medical.manage.web.model.ImageModel;
 import cn.fuego.remote.medical.manage.web.model.MedicalReportModel;
 import cn.fuego.remote.medical.manage.web.model.ReportFilterModel;
+import cn.fuego.remote.medical.manage.web.model.WorkStaticsModel;
 
 /** 
  * @ClassName: ExpertServiceImpl 
@@ -101,6 +102,12 @@ public class ExpertServiceImpl implements ExpertService
 			if(!ValidatorUtil.isEmpty(filter.getHospitalName()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"hospitalName",filter.getHospitalName()));
+			}
+			
+			if(!ValidatorUtil.isEmpty(filter.getExpertName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"expertName",filter.getExpertName()));
+
 			}
 			
 			if(!ValidatorUtil.isEmpty(filter.getExReportState()) && !ConditionTypeEnum.ALL.equals(filter.getExReportState()))
@@ -169,5 +176,38 @@ public class ExpertServiceImpl implements ExpertService
 			}
 		}
 		return new ArrayList<String>(hospNameList);
+	}
+	
+	public WorkStaticsModel getWorkStatics(String userName,ReportFilterModel filter)
+	{
+		WorkStaticsModel work = new WorkStaticsModel();
+ 
+		AbstractDataSource<ReportView> reportViewList = getMedicalList(userName,  filter);
+		
+		for(ReportView view : reportViewList.getAllPageData())
+		{
+			int count = 0;
+			if(null != view.getImageCount())
+			{
+				count = view.getImageCount();
+			}
+			if("DR".equals(view.getModality()) || "DX".equals(view.getModality()) ||"CR".equals(view.getModality()))
+			{
+				work.setCrCount(work.getCrCount()+ count);
+			}
+			if("CT".equals(view.getModality()))
+			{
+				work.setCrCount(work.getCrCount()+ count);
+			}
+			if("MR".equals(view.getModality()))
+			{
+				work.setCrCount(work.getCrCount()+ count);
+			}
+		}
+		
+		work.setTotal(work.getCrCount()+work.getCtCount()+work.getMrCount());
+
+		
+		return work;
 	}
 }

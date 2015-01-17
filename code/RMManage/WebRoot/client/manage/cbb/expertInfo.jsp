@@ -14,8 +14,8 @@
     $(function () 
     {
     	//图片预览js
-        $("#up1").uploadPreview({ Img: "ImgPr1" });
-        $("#up2").uploadPreview({ Img: "ImgPr2" });
+        $("#up1").uploadPreview({ Img: "ImgPr1",ImgType:["jpg","bmp"] });
+        $("#up2").uploadPreview({ Img: "ImgPr2",ImgType:["jpg","bmp"] });
         
         var text_width=$("#extextW").width();
         //alert(text_width);
@@ -61,9 +61,10 @@ function submitExForm1(url){
 
 						</div>
 						<div>
+		 
 							<s:file name="expertModel.exPhoto" id="up1"></s:file>
 						</div>
-						<span class="info">上传图片大小不得超过65KB</span>
+						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
 					</div>
 					<div style="float:left; margin-top:5px;width:45%; " class="pageFormContent nowrap"  >
 					<dl style="clear:none;">
@@ -202,7 +203,7 @@ function submitExForm1(url){
 							<div style="padding-top:30px !important;">
 								<s:file name="expertModel.signPic" id="up2"></s:file>
 							</div>
-							<span class="info">上传图片大小不得超过65KB</span>
+							<span class="info">上传图片大小不得超过65KB，只支持bmp与jpg格式</span>
 						</dd>
 					</dl>
 					</div>

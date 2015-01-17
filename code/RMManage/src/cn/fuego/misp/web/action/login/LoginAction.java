@@ -25,6 +25,9 @@ import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.user.PasswordModel;
 import cn.fuego.misp.web.model.user.UserModel;
+import cn.fuego.remote.medical.constant.ApplyStatusEnum;
+import cn.fuego.remote.medical.domain.Approval;
+import cn.fuego.remote.medical.manage.service.ServiceContext;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -46,6 +49,8 @@ public class LoginAction extends MISPAction
 	private String code;
     private PasswordModel pwdModel;
     private String accountOperate;
+ 
+ 
 	public String execute()
 	{
 		ActionContext actionContext = ActionContext.getContext();
@@ -67,10 +72,23 @@ public class LoginAction extends MISPAction
 			return this.LOGIN_FAILED;
 		}
  
-
+		int approvalCount = ServiceContext.getInstance().getApprovalService().getApprovalCount(user.getUserName());
+		Approval approval = ServiceContext.getInstance().getApprovalService().getApprovalInfo(user.getUserName());
+		
+		boolean approvalRefuse = false;
+		if( null != approval)
+		{
+			if(ApplyStatusEnum.REFUSED.getStatus().equals(approval.getStatus()))
+			{
+				approvalRefuse = true;
+			}
+		}
 		// if login success, we should put the user into session
 		session.put(SessionAttrNameConst.LOGIN_USER, user);
 		session.put(SessionAttrNameConst.MENU_TREE, menuTreeItem);
+		session.put("approvalCount", approvalCount);
+		session.put("approvalRefuse", approvalRefuse);
+
 		/*
 		 * This Code is Designed by Bowen. Which is means to config the basic page info. for instance, the name and the breadTrail we mast try to do and design better on this fuction.
 		 */

@@ -23,6 +23,8 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.common.exception.SystemOperateException;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPOperLogConsant;
@@ -199,6 +201,10 @@ public class ExpertServiceImpl implements ExpertService
 			    String content = "";
 			    if(status==ReportStatusEnum.CANCEL)
 			    {
+			    	if(report.getExDownReport() != null)
+			    	{
+			    		throw new SystemOperateException(CommonExceptionMsg.REPORT_CAN_NOT_CACEL);
+			    	}
 			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经被撤销！";
 			    	operate = MISPOperLogConsant.CANCEL_REPORT;
 			    }

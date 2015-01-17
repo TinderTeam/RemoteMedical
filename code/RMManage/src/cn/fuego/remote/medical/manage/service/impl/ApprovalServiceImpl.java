@@ -14,11 +14,13 @@ import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPOperLogConsant;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.remote.medical.constant.ApplyStatusEnum;
 import cn.fuego.remote.medical.constant.ApplyTypeEnum;
 import cn.fuego.remote.medical.constant.LinkStatusEnum;
 import cn.fuego.remote.medical.constant.UserStatusEnum;
+import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.dao.DaoContext;
 import cn.fuego.remote.medical.domain.Approval;
 import cn.fuego.remote.medical.domain.Link;
@@ -207,6 +209,48 @@ public class ApprovalServiceImpl implements ApprovalService
 		}		
 		
 	}
+	
+	public int getApprovalCount(String userName)
+	{
+		SystemUser user = ServiceContext.getInstance().getUserService().getSystemUserByUserName(userName);
+		if(null == user)
+		{
+			return 0;
+		}
+		if(user.getAccountType() == UserTypeEnum.ADMIN.getTypeValue() || user.getAccountType() == UserTypeEnum.LOW_ADMIN.getTypeValue())
+		{
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"status",ApplyStatusEnum.APPROVING.getStatus()));
+			
+			List<Approval> approvalList = (List<Approval>) DaoContext.getInstance().getApprovalDao().getAll(conditionList);
+			return approvalList.size();
+		}
+		
+ 
+	return 0;
+		
+		
+	}
+	
+	public Approval getApprovalInfo(String userName)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		
+		 
+        conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER, "id"));
+        
+		//conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"status",ApplyStatusEnum.REFUSED.getStatus()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"applyType",String.valueOf(ApplyTypeEnum.ADD_EXPERT.getTypeValue())));
 
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"applyUser",userName));
+
+		List<Approval> approvalList = (List<Approval>) DaoContext.getInstance().getApprovalDao().getAll(conditionList,0,1);
+		if(!ValidatorUtil.isEmpty(approvalList))
+		{
+			return approvalList.get(0);
+		}
+		return null;
+	}
+ 
  
 }

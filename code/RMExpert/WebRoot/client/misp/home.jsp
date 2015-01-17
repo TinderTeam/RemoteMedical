@@ -187,7 +187,7 @@ $(function()
 	   function disableView(disable)
        {
           $("#downAllBt").attr("disabled",disable);
-          alert(disable);
+        
           
           if(disable)
           {
@@ -197,7 +197,7 @@ $(function()
          {
             $("#viewClass").attr("class","buttonActive");
           }
-          alert( $("#viewAllBt").attr("class"));
+     
           $("#viewAllBt").attr("disabled",disable);
           
        }
@@ -262,7 +262,7 @@ $(function()
 			    if (ReYoWebDownLoad.failed)
 			    {  
                                
-			       alert("下载失败");
+			       //alert("下载失败");
 			       $("#downAllBt").attr("disabled",false);
 			    } 
 			    else

@@ -25,6 +25,7 @@ public class ReportFilterModel
 	private String patientName;
 	private String exReportState;
 	private String modality;
+	private String expertName;
 	private String hospitalName;
 	private String startDate;
 	private String endDate;
@@ -36,6 +37,16 @@ public class ReportFilterModel
 	private List<String> hospitalNameList;
 	
 	private ReportStatusEnum[] reportStatusList = new ReportStatusEnum[]{ReportStatusEnum.SAVE,ReportStatusEnum.SUBMIT};
+	
+	
+	public String getExpertName()
+	{
+		return expertName;
+	}
+	public void setExpertName(String expertName)
+	{
+		this.expertName = expertName;
+	}
 	public String getPatientName()
 	{
 		return patientName;

@@ -223,13 +223,13 @@ function submitForm(url)
 					 <c:choose>
 							   <c:when test="${1 == medicalReport.reportView.exReportState}"> 
 	                            <li style="padding-bottom:5px;">
-	                            <div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="submitForm('cancel')">撤销报告</button></div></div> 
+	                            <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('cancel')">撤销报告</button></div></div> 
 	                            </li>
 							   </c:when>
 							   <c:otherwise>  
 							   <li style="padding-bottom:5px;"> 
 							   <!-- <input class="mispButton primary" type="button" name="modify" value="保存报告" onclick="submitForm('modify')" > -->
-							   <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('cancel')">保存报告</button></div></div>
+							   <div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitForm('modify')">保存报告</button></div></div>
 							   </li>
 					           <li style="padding-bottom:5px;">
 					            <!-- <input class="mispButton primary" type="button" name="save" value="提交报告" onclick="submitForm('submit')"  /> -->
@@ -257,12 +257,12 @@ function submitForm(url)
 		<div class="accordionHeader">
 			<p style="font-size:1.5em;padding:7px;"><strong>诊断模板</strong></p>
 		</div>
-		<div class="accordionContent" id="contentDM" >
-       	      	
-		   <ul id="tree" class="ztree" >
+		<div class="accordionContent" id="contentDM" style="width:100%;position:relative;">
+       	  	
+		   <ul id="tree" class="ztree" style="width:100%;position:absolute;">
 
-       	   </ul> 
-
+       	   
+          </ul>
 		</div>
 
 
@@ -303,6 +303,7 @@ function submitForm(url)
  callback: {
 				onClick:showTemplateValue
 			}
+ 	
         };
  
    $(document).ready(function(){
