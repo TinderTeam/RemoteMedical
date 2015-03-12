@@ -46,6 +46,9 @@ public class MXShortMessageServiceImpl implements MISPShortMessageService
 	@Override
 	public void sendMessage(List<String> phoneNumList, String content)
 	{
+		log.info("the phone number is " + phoneNumList);
+		log.info("the content is " + content);
+
 		String url = MX_MESSAGE_URL + "UserID="
 				+ SystemConfigInfo.getMessageUserID();
 		url += "&Account=" + SystemConfigInfo.getMessageAccount();
@@ -65,7 +68,7 @@ public class MXShortMessageServiceImpl implements MISPShortMessageService
 			
 		}
 		url += "&Phones=" + phoneStr;
-		url += "&Content=" + content;
+		url += "&Content=" + content+SystemConfigInfo.getConfigItem("MESSAGE_SIGN");
 		url += "&SendTime=";
 		url += "&SendType=1";
 		url += "&PostFixNumber=";

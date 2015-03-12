@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.remote.medical.constant.UserStatusEnum;
 
 /** 
  * @ClassName: TableAction 
@@ -26,18 +27,44 @@ public abstract class TableAction extends MISPAction
 	public static final String SHOW_INFO = "showInfo";
 	public static final String EDIT_INFO ="editInfo";
 	private String jumpActionName;
-	private String selectedID;
-	private String[] selectedIDList;
-	private String operateType;//对应左侧menu
+	
+	
+	private String selectedID;  //表格选中项目
+	private String[] selectedIDList; //表格多选选中项目
+	private String operateType;//当前操作类型
 
  
+	/**
+	 * 新增表格数据
+	 * @return
+	 */
 	abstract public String create();
+	
+	/**
+	 * 删除单条数据
+	 * @return
+	 */
 	abstract public String delete();
+	
+	/**
+	 * 删除多条数据
+	 * @return
+	 */
 	abstract public String deleteList();
+	
+	/**
+	 * 修改数据
+	 * @return
+	 */
 	abstract public String modify();
+	
+	/**
+	 * 展示详细信息
+	 * @return
+	 */
 	abstract public String show();
 	
-
+	private UserStatusEnum[] userStatusList = UserStatusEnum.values();
 	
 	public List<String> convertToPageMessage(List<String> messageList)
 	{
@@ -95,6 +122,14 @@ public abstract class TableAction extends MISPAction
 	public static String getShowInfo()
 	{
 		return SHOW_INFO;
+	}
+	public UserStatusEnum[] getUserStatusList()
+	{
+		return userStatusList;
+	}
+	public void setUserStatusList(UserStatusEnum[] userStatusList)
+	{
+		this.userStatusList = userStatusList;
 	}
 
 	

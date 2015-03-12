@@ -178,7 +178,9 @@ $(function()
 
 	</div>
 
-	<div id="footer"> &copy; 2014  <a href="http://fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
+	<div id="footer">
+ <jsp:include page="include/footer.jsp" ></jsp:include>
+</div>
 	
 
 <!-- 省市三级联动js -->

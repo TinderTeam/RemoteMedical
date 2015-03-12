@@ -67,8 +67,10 @@ public class AuthenticationFilter implements Filter
 		chain.doFilter(request, httpResponse);
 	}
 
+	/**判断该URL是否不需要验证**/
 	private boolean isExcludePath(String url)
 	{
+		 /**从配置文件中读取配置项**/
 		 String exPath = SystemConfigInfo.getConfigItem("EXCLUDLE_PATH");
 		 if(ValidatorUtil.isEmpty(exPath))
 		 {
@@ -76,9 +78,11 @@ public class AuthenticationFilter implements Filter
 			 return false;
 		 }
 
+		 
 		 String[] pathArry = exPath.split(",");
 		 for(int i=0;i<pathArry.length;i++)
 		 {
+			 
 			 if(pathArry[i].startsWith("."))
 			 {
 				 if(url.endsWith(pathArry[i]))

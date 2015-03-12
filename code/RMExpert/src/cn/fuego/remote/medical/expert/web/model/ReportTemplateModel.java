@@ -12,7 +12,7 @@ import java.util.List;
 
 /** 
  * @ClassName: ReportTemplate 
- * @Description: TODO
+ * @Description: 模板信息，与Ztree相关属性对应
  * @author Tang Jun
  * @date 2014-10-1 下午11:33:20 
  *  

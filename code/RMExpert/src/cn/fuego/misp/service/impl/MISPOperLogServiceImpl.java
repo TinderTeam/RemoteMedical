@@ -70,6 +70,7 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 	public AbstractDataSource<OperLog> getOperLogList(LogFilterModel filter)
 	{
 
+		/*操作日志查询，过滤*/
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		if(null != filter)
 			
@@ -100,6 +101,7 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"operTime",DateUtil.DateToString(endDate)));
 			}			
 		}
+		/**按照操作时间进行排序**/
 		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"operTime"));
 
 		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class,conditionList);

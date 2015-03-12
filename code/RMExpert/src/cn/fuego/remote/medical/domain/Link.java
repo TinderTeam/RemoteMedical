@@ -53,7 +53,7 @@ public class Link implements PersistenceObject
 	}
 	public void setAuditor(String auditor)
 	{
-		auditor = auditor;
+		this.auditor = auditor;
 	}
 	public String getHospitalID()
 	{

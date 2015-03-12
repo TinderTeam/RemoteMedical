@@ -147,6 +147,13 @@ public final class HibernateUtil
 		}
 	}
 	
+	/**
+	 * 将条件转换为Hibernate查询对象
+	 * @param clazz
+	 * @param conditionList
+	 * @param s
+	 * @return
+	 */
 	public static  Criteria getCriteriaByCondition(Class clazz , List<QueryCondition> conditionList,Session s)
 	{
 		Criteria c  = s.createCriteria(clazz);
@@ -162,7 +169,7 @@ public final class HibernateUtil
 				switch(condition.getOperate())
 				{
 				case INCLUDLE:
-					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue().trim()+"%"));
 					break;
 				case EXCLUDLE:
 					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));

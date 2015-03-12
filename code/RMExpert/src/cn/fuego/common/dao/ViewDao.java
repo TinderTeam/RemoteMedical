@@ -23,13 +23,52 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public interface ViewDao
 {
+	/**
+	 * 获取所有数据
+	 * @return
+	 */
 	Collection getAll();
+	
+	/**
+	 * 根据条件获取数据条目数
+	 * @param conditionList
+	 * @return
+	 */
 	long getCount(List<QueryCondition> conditionList);
+	
+	/**
+	 * 根据条件获取多条数据
+	 * @param conditionList
+	 * @return
+	 */
 	Collection getAll(List<QueryCondition> conditionList);
+	
+	/**
+	 * 根据条件获取多条数据
+	 * @param conditionList
+	 * @return
+	 */
 	Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
+	
+	/**
+	 * 根据条件获取多条数据
+	 * @param conditionList
+	 * @return
+	 */
 	Collection getAll(QueryCondition condition);
 
+	/**
+	 * 根据条件获取单条数据
+	 * @param conditionList
+	 * @return
+	 */
 	PersistenceObject getUniRecord(QueryCondition condition);
+	
+	/**
+	 * 根据条件获取单条数据
+	 * @param conditionList
+	 * @return
+	 */
 	PersistenceObject getUniRecord(List<QueryCondition> conditionList);
 
 

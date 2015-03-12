@@ -6,6 +6,13 @@ import cn.fuego.remote.medical.constant.UserSexEnum;
 import cn.fuego.remote.medical.constant.UserTypeEnum;
 import cn.fuego.remote.medical.domain.Expert;
 
+/**
+ * 
+* @ClassName: ExpertModel 
+* @Description: 专家相关信息
+* @date 2015-3-9 上午10:40:25 
+*
+ */
 public class ExpertModel
 {
 	private Expert expert;

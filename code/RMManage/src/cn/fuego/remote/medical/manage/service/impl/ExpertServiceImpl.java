@@ -103,7 +103,10 @@ public class ExpertServiceImpl implements ExpertService
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"hospitalName",filter.getHospitalName()));
 			}
-			
+			if(!ValidatorUtil.isEmpty(filter.getExpertID()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"exDoctor",filter.getExpertID()));
+ 			}
 			if(!ValidatorUtil.isEmpty(filter.getExpertName()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"expertName",filter.getExpertName()));
@@ -178,10 +181,28 @@ public class ExpertServiceImpl implements ExpertService
 		return new ArrayList<String>(hospNameList);
 	}
 	
+	public List<String> getLinkExpertByHosptial(String hosptialID)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>(); 
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",hosptialID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "linkState",String.valueOf(LinkStatusEnum.LINK_SUCCESS.getStatusValue())));
+		List<Link> linkList = (List<Link>) DaoContext.getInstance().getLinkDao().getAll(conditionList);
+		Set<String> expertList = new HashSet<String>();
+		for(Link e : linkList)
+		{
+			if(!ValidatorUtil.isEmpty(e.getExpertID()))
+			{
+				expertList.add(e.getExpertID());
+			}
+		}
+		return new ArrayList<String>(expertList);
+	}
+	
 	public WorkStaticsModel getWorkStatics(String userName,ReportFilterModel filter)
 	{
 		WorkStaticsModel work = new WorkStaticsModel();
  
+		filter.setExReportState(ReportStatusEnum.SUBMIT.getStatus());
 		AbstractDataSource<ReportView> reportViewList = getMedicalList(userName,  filter);
 		
 		for(ReportView view : reportViewList.getAllPageData())

@@ -19,7 +19,7 @@ import cn.fuego.misp.web.model.page.TableDataModel;
 
 /** 
  * @ClassName: LogManageAction 
- * @Description: TODO
+ * @Description: 日志管理
  * @author Tang Jun
  * @date 2014-10-8 上午10:46:17 
  *  

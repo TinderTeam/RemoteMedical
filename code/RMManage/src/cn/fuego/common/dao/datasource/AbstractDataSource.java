@@ -20,10 +20,24 @@ import java.util.List;
 
 public interface AbstractDataSource<E>
 {
+	/**
+	 * 获取当前页面数据
+	 * @param startNum
+	 * @param endNum
+	 * @return
+	 */
 	public List<E> getCurrentPageData(int startNum,int endNum);
 	
+	/**
+	 * 获取所有数据
+	 * @return
+	 */
 	public List<E> getAllPageData();
 	
+	/**
+	 * 获取数据总数
+	 * @return
+	 */
 	public long getDataCount();
 
 }

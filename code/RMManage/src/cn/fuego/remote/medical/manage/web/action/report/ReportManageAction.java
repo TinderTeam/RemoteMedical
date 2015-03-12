@@ -49,6 +49,8 @@ public class ReportManageAction extends DWZTableAction
 	public String workCount()
 	{
 		workStatics = expertService.getWorkStatics(this.getLoginUser().getUserName(), filter);
+		filter.setHospitalNameList(expertService.getLinkHosptialByExpert(this.getLoginUser().getUserName()));
+		filter.setExpertIDList(expertService.getLinkExpertByHosptial(this.getLoginUser().getUserName()));
 		return "work";
 	}
 	/* (non-Javadoc)

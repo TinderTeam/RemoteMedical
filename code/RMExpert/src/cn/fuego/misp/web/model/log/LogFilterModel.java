@@ -18,7 +18,7 @@ package cn.fuego.misp.web.model.log;
 
 public class LogFilterModel
 {
-	private String id;
+	private String id;  //
 	private String user;
 	private String name;
 	private String object;

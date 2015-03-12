@@ -22,6 +22,7 @@
         //$(".field").width(text_width+75 + "px");
         $(".exfield").width(text_width+120 + "px");
         });
+        
 /*     var operateType =$("#operateType").val();
     if(operateType=='check')
     {
@@ -33,10 +34,23 @@
 function submitExForm1(url){
     var thisForm = document.exForm;
 	thisForm.action="user/ExpertManage!"+url;
-	return iframeCallback(thisForm,navTabAjaxDone);
+ 
+	return iframeCallback(thisForm,reloadCurrentTab);
 	
 }
 
+function reloadCurrentTab(json)
+{
+   DWZ.ajaxDone(json);
+ 
+   $("#up1").val("");
+   $("#up2").val("");
+   $("#ImgPr1").attr("src","user/ExpertManage!getPhotoImag.action?picid="+$("#expertID").val());
+   $("#ImgPr2").attr("src","user/ExpertManage!getSignNameImag.action?picid="+$("#expertID").val());
+ 
+ }
+ 
+  
 </script>   
 
 
@@ -62,14 +76,14 @@ function submitExForm1(url){
 						</div>
 						<div>
 		 
-							<s:file name="expertModel.exPhoto" id="up1"></s:file>
+							<s:file name="expertModel.exPhoto" id="up1"  ></s:file>
 						</div>
 						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
 					</div>
 					<div style="float:left; margin-top:5px;width:45%; " class="pageFormContent nowrap"  >
 					<dl style="clear:none;">
 						<dt style="width:20%;">专家编号：</dt> 
-						<dd style="width:70%;"><input name="expertModel.expert.id" type="text" size="30" value="${expertModel.expert.id}" readonly="readonly" />
+						<dd style="width:70%;"><input id="expertID" name="expertModel.expert.id" type="text" size="30" value="${expertModel.expert.id}" readonly="readonly" />
 						</dd>
 					</dl>
 					<dl style="clear:none;">
@@ -122,7 +136,7 @@ function submitExForm1(url){
 					</dl>
 					<dl style="width:45%;clear:none; ">
 						<dt style="width:20% ">电子邮箱：</dt> 
-						<dd style="width:75% "><input type="text"	name="expertModel.expert.email" class="email" maxlength="64" size="30"	value="${expertModel.expert.email}" />
+						<dd style="width:75% "><input type="text"	name="expertModel.expert.email" class="email" maxlength="32" size="30"	value="${expertModel.expert.email}" />
 						</dd>
 					</dl>
 					<dl style="width:45%;clear:none; ">
@@ -132,7 +146,7 @@ function submitExForm1(url){
 					</dl>
 					<dl style="width:45%;clear:none; ">
 						<dt style="width:20% ">微信号：</dt>
-						<dd style="width:75% "><input type="text" 	name="expertModel.expert.weixin"  maxlength="32" size="30" value="${expertModel.expert.weixin}" />
+						<dd style="width:75% "><input type="text" 	name="expertModel.expert.weixin"  maxlength="16" size="30" value="${expertModel.expert.weixin}" />
 						</dd>
 					</dl>
 					</div>
@@ -152,7 +166,7 @@ function submitExForm1(url){
 					</dl>
 					<dl style="clear:none;">
 						<dt style="width:12%;">职称：</dt> 
-						<dd style="width:30%;"><input type="text" name="expertModel.expert.jobTitle" maxlength="32" size="30"	value="${expertModel.expert.jobTitle}" />
+						<dd style="width:30%;"><input type="text" name="expertModel.expert.jobTitle" maxlength="16" size="30"	value="${expertModel.expert.jobTitle}" />
 						</dd>
 					</dl>
 					<dl style="clear:none;">

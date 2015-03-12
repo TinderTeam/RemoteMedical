@@ -61,8 +61,18 @@ public interface ExpertService
 	void transferExpert(String expertID,String reportViewID);
 
 
+	/**
+	 * 获取模板信息
+	 * @param modalID
+	 * @return
+	 */
 	ReportTemplateModel getReportModalById(String modalID);
 	
+	/**
+	 * 获取通过专家ID关联的医院
+	 * @param expertID
+	 * @return
+	 */
     List<String> getLinkHosptialByExpert(String expertID);
 
 

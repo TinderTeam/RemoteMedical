@@ -20,14 +20,14 @@ import java.util.Set;
 public interface MISPPrivilegeManage
 {
 	/**
-	 * 
+	 * 根据用户ID获取菜单权限
 	 * @param userID
 	 * @return
 	 */
 	public Set<String> getMenuIDListByUser(String userID);
 	
 	/**
-	 * 
+	 * 根据用户角色获取菜单权限
 	 * @param roleID
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public interface MISPPrivilegeManage
  	
 	
 	/**
-	 * 
+	 * 用户是否对该功能有权限
 	 * @param userID
 	 * @param prvilegeID
 	 * @return

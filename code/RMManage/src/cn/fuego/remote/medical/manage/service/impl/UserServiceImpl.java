@@ -291,6 +291,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			else
 			{
+				expertModel.setSignPic(null);
 				throw new SystemOperateException(CommonExceptionMsg.SIGN_IMG_TOO_BIG);
 			}
 
@@ -306,6 +307,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			}
 			else
 			{
+				expertModel.setExPhoto(null);
 				throw new SystemOperateException(CommonExceptionMsg.EX_IMG_TOO_BIG);
 			}
 			
@@ -364,7 +366,7 @@ public class UserServiceImpl extends MISPUserServiceImpl implements UserService
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"accountType",String.valueOf(UserTypeEnum.ADMIN.getTypeValue())));
 			}
-			else if(!ValidatorUtil.isEmpty(filter.getAccountType()))
+			if(!ValidatorUtil.isEmpty(filter.getAccountType()))
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"accountType",String.valueOf(UserTypeEnum.getEnumByStr(filter.getAccountType()).getTypeValue())));
 			}

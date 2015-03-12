@@ -21,13 +21,13 @@ import cn.fuego.remote.medical.constant.UserTypeEnum;
  */
 
 public class UserModel
-{
-	private int userID;
-	private String userName;
-	private String password;
-	private int accountType;
-	private Date regDate;
-	private String validateCode;
+{  
+	private int userID;  //用户ID
+	private String userName; //用户名称
+	private String password; //用户密码
+	private int accountType; //账号类型
+	private Date regDate; //注册类型
+	private String validateCode; //验证类型
 	public int getUserID()
 	{
 		return userID;

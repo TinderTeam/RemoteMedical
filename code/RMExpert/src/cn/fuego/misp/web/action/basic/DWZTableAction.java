@@ -25,6 +25,10 @@ public abstract class DWZTableAction extends TableAction
 	private int pageNum = 1;
 	
 	
+	/**
+	 * 获取DWZ框架分页参数
+	 * @return
+	 */
 	public PageModel getPage()
 	{
 		PageModel page = new PageModel();

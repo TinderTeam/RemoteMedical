@@ -1,5 +1,6 @@
 package cn.fuego.common.exception;
 
+
 public class CommonExceptionMsg
 {
 

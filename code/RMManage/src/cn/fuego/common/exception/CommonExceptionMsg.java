@@ -1,5 +1,6 @@
 package cn.fuego.common.exception;
 
+
 public class CommonExceptionMsg
 {
 
@@ -29,6 +30,7 @@ public class CommonExceptionMsg
 	
 	public static final String ALREADY_NOT_CANCEL = "该账户已经被启用";
 	public static final String ALREADY_CANCEL = "该账户已经被注销";
+	public static final String REPORT_CAN_NOT_CACEL = "该报告已经被下载，不能撤销";
 
 
 }

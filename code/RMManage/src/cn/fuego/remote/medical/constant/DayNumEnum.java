@@ -18,6 +18,7 @@ package cn.fuego.remote.medical.constant;
 public enum DayNumEnum
 {
 	TODAY("今天",0),
+	YESTERDAY("昨天",1),
 	LAST3("近三天",3),
 	LAST7("近七天",7);
 

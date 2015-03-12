@@ -126,8 +126,8 @@ function submitForm(url)
 			      <input id="imageCount" value='${fn:length(medicalReport.imageList)}' style="display:none;"/> 
 				 
 				 <div style="float:left;">
-					<div  id="allDownClass" style="margin-left:10px;"  class="buttonActive"><div class="buttonContent"><button id="downAllBt" type="button" onclick="StartAll()" >下 载</button></div></div>		
-					<div id="viewClass" style="margin-left:10px;" class="buttonDisabled"><div class="buttonContent"><button id="viewAllBt" type="button" disabled="disabled" onclick="viewAllDoc();" >查 看</button></div></div>	
+					<div  id="allDownClass" style="margin-left:10px;float:left;"  class="buttonActive"><div class="buttonContent"><button id="downAllBt" type="button" onclick="StartAll()" >下 载</button></div></div>		
+					<div id="viewClass" style="margin-left:10px;float:left" class="buttonDisabled"><div class="buttonContent"><button id="viewAllBt" type="button" disabled="disabled" onclick="viewAllDoc();" >查 看</button></div></div>	
                        <!-- <input id="downAllBt" type="button" onclick="StartAll()" value="下载" class="button"/>  -->
 					   <!-- <input  id="viewAllBt" type="button" value="查看" disabled="disabled" onclick="viewAllDoc();" /> -->
                  </div>
@@ -136,13 +136,15 @@ function submitForm(url)
 				         
 				         <input   id="url${status.index}"  value="${e.image.imageSavePath}" style="display:none;"></input>
 				         <input   id="image${status.index}"  value="${e.image.imgArchName}" style="display:none;"></input>
+				         <input   id="imageNumber${status.index}"  value="${e.image.seriesID}.${e.image.imageNo}" style="display:none;"></input>
+				         
 				         <input  id="md5Code${status.index}" value="${e.image.imageCode}" style="display:none;"></input>
 				    
 	                <dl style="width:98% !important;">
 							<dt style="font-size:1.2em;width:70% !important;">
 								<span style="margin:0px 5px 0px 0px;width:100%;"><u>${e.image.imgArchName}</u></span>
 								<br>
-								<span style="margin:0px 5px 0px 0px;">部位：<u>${e.image.bodyPart}</u></span>
+								<span style="margin:0px 5px 0px 0px;">部位：<u>${e.image.protocolName}</u></span>
 							</dt>
 						
 						    
@@ -278,6 +280,8 @@ function submitForm(url)
         var imageURL =  new Array();
        
         var imageFileName =  new Array();
+        var imageNumber =  new Array();
+        
         var progressID =  new Array();
         var imageCode =  new Array();
        
@@ -292,6 +296,7 @@ function submitForm(url)
         {
             imageURL[i]= $("#url"+i).val();
             imageFileName[i] = $("#image"+i).val();
+            imageNumber[i] = $("#imageNumber"+i).val();
             imageCode[i] = $("#md5Code"+i).val();
             
             progressID[i] = "downSize" + i;

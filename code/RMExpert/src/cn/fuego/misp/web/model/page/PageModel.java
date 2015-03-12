@@ -24,10 +24,11 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 public class PageModel
 {
  
+    
 	private List<Integer> pages =new ArrayList<Integer>();
 	private int[] pageSizeList ={20,50,100,200}; 
 	private int pageSize =20;  //defualt page size
-	private int currentPage = 1;
+	private int currentPage = 1; //当前页面
 	private long count = 0;
 	
  

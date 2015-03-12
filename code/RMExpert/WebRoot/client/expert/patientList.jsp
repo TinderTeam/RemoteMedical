@@ -27,14 +27,14 @@
 					{ 
 					   if(mode== 0)
 					   {
-					      $('#startDate,#endDate').attr('disabled',true);
-                          $('#days').attr('disabled',false);
-                          $('#startDate,#endDate').val('');		
+					      $('#startDate,#endDate').attr('disabled','disabled');
+					      $('#days').removeAttr('disabled');
+                           $('#startDate,#endDate').val('');		
 					   }
 					   else
 					   {
 					      $('#startDate,#endDate').removeAttr('disabled');
-					      $('#days').attr('disabled',true);
+					      $('#days').attr('disabled','disabled');
 					      $('#days').attr('checked',false);$('#days').val('');
 					   } 
 					}
@@ -190,17 +190,17 @@
 	        	
  	        		<c:choose>
  	        			<c:when test="${e.statusColor=='red'}">
- 	        		      <td bgcolor="red" style="color:white;">	
+ 	        		      <td bgcolor="#D44027" style="color:white;">	
  	        		        请尽快处理
  	        		      </td>
  	        			</c:when>
  	        			
  	        			<c:when test="${e.statusColor=='grey'}">
- 	        		<td bgcolor="green" style="color:white;">	
+ 	        		<td bgcolor="gray" style="color:white;">	
  	        		     已处理    </td>
  	        			</c:when>
  	        			<c:otherwise>
- 	        		<td bgcolor="yellow" style="color:white;">	        		      
+ 	        		<td bgcolor="green" style="color:white;">	        		      
  	        			 待处理 	        			  
  	        	     </td>
  	        			</c:otherwise> 	        			

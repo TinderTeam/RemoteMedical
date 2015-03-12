@@ -22,9 +22,10 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 
 public class QueryCondition
 {
-	private ConditionTypeEnum conditionType;
-	private String attrName;
-	private String firstValue;
+	
+	private ConditionTypeEnum conditionType; //条件类型
+	private String attrName;  //属性名称
+	private String firstValue;  
 	private String secondValue;
 	private List<String> listValue;
  

@@ -18,8 +18,8 @@ package cn.fuego.misp.web.constant;
 
 public class SessionAttrNameConst
 { 
-	public static final String LOGIN_USER = "loginUser";
- 	public static final String MENU_TREE = "menuTreeItem";
+	public static final String LOGIN_USER = "loginUser";  //登录的用户
+ 	public static final String MENU_TREE = "menuTreeItem"; //菜单数据
 	public static final String SELECTED_MENU_ID = "selectedSessionMenuID";
  
 }

@@ -9,8 +9,8 @@ package cn.fuego.misp.web.model.user;
  */
 public class PasswordModel
 {
-	private String oldPassword;
-	private String newPassword;
+	private String oldPassword;  //旧密码
+	private String newPassword;  //新密码
 	public String getOldPassword()
 	{
 		return oldPassword;

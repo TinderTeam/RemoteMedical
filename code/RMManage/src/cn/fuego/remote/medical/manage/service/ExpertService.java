@@ -55,6 +55,14 @@ public interface ExpertService
 
     List<String> getLinkHosptialByExpert(String expertID);
     
+    /**
+     * 获取医院关联的专家ID
+     * @param hospitalID
+     * @return
+     */
+    List<String> getLinkExpertByHosptial(String hospitalID);
+
+    
 	public WorkStaticsModel getWorkStatics(String userName,ReportFilterModel filter);
 
 }

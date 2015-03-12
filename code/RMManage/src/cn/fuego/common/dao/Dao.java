@@ -27,12 +27,29 @@ import cn.fuego.common.domain.PersistenceObject;
 public interface Dao extends ViewDao
 {
 
+	/**
+	 * 新增对象
+	 * @param object
+	 */
 	void create(PersistenceObject object);
 
+	/**
+	 * 更新对象
+	 * @param object
+	 */
 	void update(PersistenceObject object);
  
+	
+	/**
+	 * 根据条件删除
+	 * @param conditionList
+	 */
 	void delete(List<QueryCondition> conditionList);
 	
+	/**
+	 * 根据条件删除
+	 * @param conditionList
+	 */
 	void delete(QueryCondition condition);
 
 }

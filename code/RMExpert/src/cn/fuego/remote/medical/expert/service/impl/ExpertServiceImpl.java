@@ -93,6 +93,7 @@ public class ExpertServiceImpl implements ExpertService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getModality()))
 			{
+				/*过滤的是DX与DR是一致的，业务需求*/
 				List<String> list = new ArrayList<String>();
 				if(filter.getModality().equals("DX"))
 				{
@@ -125,6 +126,7 @@ public class ExpertServiceImpl implements ExpertService
 			}
 			if(!ValidatorUtil.isEmpty(filter.getDays()))
 			{
+				/*解决日期查询差一天的bug*/
 				Calendar today = Calendar.getInstance();
 				today.add(Calendar.DAY_OF_MONTH, -Integer.valueOf(DayNumEnum.getEnumByStr(filter.getDays()).getDayValue()));
 				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"exApply",DateUtil.DateToString(today.getTime())));
@@ -155,6 +157,8 @@ public class ExpertServiceImpl implements ExpertService
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
 
+		
+		/**查询图像列表**/
 		List<ImageArchiving> imageList = (List<ImageArchiving>) DaoContext.getInstance().getImageArchivingDao().getAll(conditionList);
 		
 		for(ImageArchiving image :imageList)
@@ -166,6 +170,7 @@ public class ExpertServiceImpl implements ExpertService
 		
 		 Report report = (Report) repertDao.getUniRecord(conditionList);
 		 
+		 /**每次查询之后，要更新报告的获取时间**/
 		 if(null != report)
 		 {
 		   report.setExGetReport(DateUtil.getCurrentDate());
@@ -205,15 +210,17 @@ public class ExpertServiceImpl implements ExpertService
 			    	{
 			    		throw new SystemOperateException(CommonExceptionMsg.REPORT_CAN_NOT_CACEL);
 			    	}
-			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经被撤销！";
+			    	content="病人"+report.getPatientID()+"的报告已经被撤销！";
 			    	operate = MISPOperLogConsant.CANCEL_REPORT;
 			    }
 			    else
 			    {
-			    	content="病人"+reportModel.getReportView().getPatientID()+"的报告已经回传，请注意查收！";
+			    	content="病人"+report.getPatientID()+"的报告已经回传，请注意查收！";
 			    	
 			    	operate = MISPOperLogConsant.SUBMIT_REPORT;
 			    }
+			    
+			    /**报告状态转化，要通知医院联系人，采用短信接口通知*/
 			    if(null != hospital.getContactsPhone())
 			    {
 				    String[] a =hospital.getContactsPhone().split(";");//通知电话列表所用字段
@@ -251,6 +258,7 @@ public class ExpertServiceImpl implements ExpertService
 				report.setExReport(DateUtil.getCurrentDate());
 			}
  
+			/**更新报告状态**/
 			if(status == ReportStatusEnum.CANCEL)
 			{
 				report.setExReportState(ReportStatusEnum.SAVE.getStatusValue());
@@ -376,6 +384,7 @@ public class ExpertServiceImpl implements ExpertService
 		
 	}
 
+ 
 	@Override
 	public ReportTemplateModel getReportModalById(String modalID)
 	{

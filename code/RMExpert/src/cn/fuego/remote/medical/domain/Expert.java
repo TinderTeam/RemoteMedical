@@ -52,10 +52,10 @@ public class Expert implements PersistenceObject
 	private Integer onlineState;
 	
 	private Date login;
-	private Date apply;
-	private Date reg;
+	private Date apply; //申请时间
+	private Date reg;   //注册时间
 	
-	private String auditor;
+	private String auditor; //审核人
 	
 	private Integer ctCount;
 	private Integer drCount;

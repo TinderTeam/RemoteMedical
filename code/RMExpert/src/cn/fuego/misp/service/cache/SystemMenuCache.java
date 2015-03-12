@@ -156,7 +156,7 @@ public class SystemMenuCache
 
 	/**
 	 * load menu tree by parent id
-	 * 
+	 * 递归查询菜单
 	 * @param parentID
 	 * @return
 	 */

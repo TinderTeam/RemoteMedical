@@ -19,6 +19,11 @@ import java.util.List;
  */
 public interface MISPShortMessageService
 {
+	/**
+	 * 给多个手机号码发送短信
+	 * @param phoneNumList
+	 * @param content
+	 */
 	public void sendMessage(List<String> phoneNumList,String content);
 
 }

@@ -151,10 +151,9 @@ $(function()
 		</div>
 
 	</div>
-
- 
-	<div id="footer"> &copy; 2014  <a href="http://fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
-
+	<div id="footer">
+ <jsp:include page="include/footer.jsp" ></jsp:include>
+</div>
 <script type="text/javascript">
 // 进入首页准备
  $(document).ready(function(){
@@ -239,7 +238,7 @@ $(function()
 		   
 		     //create path
 		      createPath(imageURL[nowCnt]);
-		     //ReYoWebDownLoad.debug = true;
+		    // ReYoWebDownLoad.debug = true;
              ReYoWebDownLoad.url= hostURL+ "/"+imageURL[nowCnt] + imageFileName[nowCnt];
             
              ReYoWebDownLoad.md5Code = imageCode[nowCnt];
@@ -338,10 +337,9 @@ $(function()
             }
             else
            {
-              cmd += "|" + path;
+              cmd += "|" + imageNumber[i];
             };
-            
-            
+             
         };
         window.location.href = cmd;
 

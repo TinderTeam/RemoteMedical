@@ -26,6 +26,7 @@ public class ReportFilterModel
 	private String exReportState;
 	private String modality;
 	private String expertName;
+	private String expertID;
 	private String hospitalName;
 	private String startDate;
 	private String endDate;
@@ -35,6 +36,8 @@ public class ReportFilterModel
 	
 	private String[] deviceTypeList = new String[]{"DX","CR","CT","MR"};
 	private List<String> hospitalNameList;
+	
+	private List<String> expertIDList;
 	
 	private ReportStatusEnum[] reportStatusList = new ReportStatusEnum[]{ReportStatusEnum.SAVE,ReportStatusEnum.SUBMIT};
 	
@@ -142,6 +145,22 @@ public class ReportFilterModel
 	public void setDeviceTypeList(String[] deviceTypeList)
 	{
 		this.deviceTypeList = deviceTypeList;
+	}
+	public String getExpertID()
+	{
+		return expertID;
+	}
+	public void setExpertID(String expertID)
+	{
+		this.expertID = expertID;
+	}
+	public List<String> getExpertIDList()
+	{
+		return expertIDList;
+	}
+	public void setExpertIDList(List<String> expertIDList)
+	{
+		this.expertIDList = expertIDList;
 	}
 	
 	
