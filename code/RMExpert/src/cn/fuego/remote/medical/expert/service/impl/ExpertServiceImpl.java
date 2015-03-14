@@ -156,7 +156,7 @@ public class ExpertServiceImpl implements ExpertService
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
-
+		conditionList.add(new QueryCondition(ConditionTypeEnum.ASC_ORDER, "seriesID"));
 		
 		/**查询图像列表**/
 		List<ImageArchiving> imageList = (List<ImageArchiving>) DaoContext.getInstance().getImageArchivingDao().getAll(conditionList);
@@ -168,7 +168,11 @@ public class ExpertServiceImpl implements ExpertService
 			reportModel.getImageList().add(imageModel);
 		}
 		
-		 Report report = (Report) repertDao.getUniRecord(conditionList);
+		List<QueryCondition> repertCondition = new ArrayList<QueryCondition>();
+		repertCondition.add(new QueryCondition(ConditionTypeEnum.EQUAL, "hospitalID",reportModel.getReportView().getHospitalID()));
+		repertCondition.add(new QueryCondition(ConditionTypeEnum.EQUAL, "serialNo",String.valueOf(reportModel.getReportView().getSerialNo())));
+		
+		 Report report = (Report) repertDao.getUniRecord(repertCondition);
 		 
 		 /**每次查询之后，要更新报告的获取时间**/
 		 if(null != report)
