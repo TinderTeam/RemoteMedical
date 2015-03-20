@@ -1,0 +1,6 @@
+E:\Fuego\code\develop\VS\Downloader\Downloader\bin\Debug\Downloader.dll
+E:\Fuego\code\develop\VS\Downloader\Downloader\bin\Debug\Downloader.pdb
+E:\Fuego\code\develop\VS\Downloader\Downloader\obj\Debug\Downloader.dll
+E:\Fuego\code\develop\VS\Downloader\Downloader\obj\Debug\Downloader.pdb
+E:\Fuego\code\develop\VS\Downloader\Downloader\bin\Debug\Downloader.tlb
+E:\Fuego\code\develop\VS\Downloader\Downloader\obj\Debug\Downloader.csprojResolveAssemblyReference.cache

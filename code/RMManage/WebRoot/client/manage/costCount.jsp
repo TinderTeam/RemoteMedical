@@ -80,9 +80,26 @@
 				<td>
 					<c:choose>
 				    
-				  <c:when test="${loginUser.accountType == 99 || loginUser.accountType==2}">  
+				  <c:when test="${loginUser.accountType == 99}">  
 				     
 				    远程请求医院：<input type="text" name="filter.hospitalName" value="${filter.hospitalName}"/>
+                  </c:when>
+                  <c:when test="${loginUser.accountType==2}">
+		            专家： 
+							<select name="filter.expertID"  >
+							  <option value="">默认所有专家</option>
+							  
+							  <c:forEach var="name" items="${filter.expertIDList}">
+							    <c:choose>
+							        <c:when test="${name == filter.expertID}">  
+			                             <option value="${name}" selected="selected">${name}</option>
+									   </c:when>
+									   <c:otherwise>  
+									      <option value="${name}">${name}</option>
+									</c:otherwise>
+								 </c:choose>
+		 					  </c:forEach>
+							</select>
                   </c:when>
 				   <c:otherwise> 
 					远程请求医院： 

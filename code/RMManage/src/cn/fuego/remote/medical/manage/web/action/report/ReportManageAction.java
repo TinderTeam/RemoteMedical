@@ -37,6 +37,8 @@ public class ReportManageAction extends DWZTableAction
 		reportList.setPage(this.getPage());
 		reportList.setDataSource(expertService.getMedicalList(this.getLoginUser().getUserName(), filter));
 		filter.setHospitalNameList(expertService.getLinkHosptialByExpert(this.getLoginUser().getUserName()));
+		filter.setExpertIDList(expertService.getLinkExpertByHosptial(this.getLoginUser().getUserName()));
+
 		return SUCCESS;
 	}
 	

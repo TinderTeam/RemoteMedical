@@ -24,12 +24,12 @@ import cn.fuego.remote.medical.constant.ReportStatusEnum;
 public class ReportFilterModel
 {
 	private String patientName;
-	private String exReportState;
+	private String exReportState = ReportStatusEnum.SAVE.getStatus();
 	private String modality;
 	private String hospitalName;
 	private String startDate;
 	private String endDate;
-	private String days;
+	private String days = DayNumEnum.LAST7.getDay();
 	private int mode =  0;
 	private DayNumEnum[] dayList = DayNumEnum.values();
 	

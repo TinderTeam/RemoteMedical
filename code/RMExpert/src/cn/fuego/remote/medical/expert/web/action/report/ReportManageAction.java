@@ -62,7 +62,7 @@ public class ReportManageAction extends DWZTableAction
 	private ExpertService expertService = ServiceContext.getInstance().getExpertService();
 	private TableDataModel<ReportView> reportList = new TableDataModel<ReportView>();
 	private MedicalReportModel medicalReport = new MedicalReportModel();
-	private ReportFilterModel filter = new ReportFilterModel(); 
+	private static ReportFilterModel filter = new ReportFilterModel(); 
     //转换专家
 	private ExpertModel expertModel;
 	private ExpertModel expertFilter;
